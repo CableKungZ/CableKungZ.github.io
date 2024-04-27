@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DaoBuddy - TaoMeme Status</title>
+    <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/DaoBuddy.th.png">
+
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Moonhouse&display=swap');
+
+        body {
+            background-image: url('https://bafybeidlzwhqtdrt4dnymhtf3v5vbhfwaczn6i3676iqr2aymrwbqbtw4m.ipfs.nftstorage.link/');
+            background-size: cover; /* This property ensures that the background image covers the entire background */
+            background-repeat: no-repeat; /* This property prevents the background image from repeating */
+            font-family: 'Moonhouse', sans-serif; /* Applying 'Moonhouse' font to the body */
+
+        }
+    
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 80px;
+        }
+    
+        .pricebox {
+            background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent white with 80% opacity */
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            width: calc(30% - 20px); /* ให้กล่องใช้พื้นที่ 30% ของ container และลบพื้นที่ระหว่างกล่องออกด้วย */
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+    
+        .pricebox:hover {
+            transform: scale(1.05);
+        }
+    
+        .Header {
+            font-size: 38px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .tao{
+          font-size: 40px;
+          color: green;
+          font-weight: bold;
+        }
+    
+        .Details {
+            font-size: 16px;
+            color: #555;
+            text-align: right;
+        }
+        .Details2 {
+            font-size: 16px;
+            color: #555;
+            text-align: Left;
+        }
+        .low{
+            font-weight: bold;
+            color: Green;
+            font-size: 20px;
+        }
+        .danger{
+            color: red;
+            margin: 20px;
+        }
+        a,ul{
+            font-size: 18px;
+        }
+    
+        @media only screen and (max-width: 1024px) {
+            .pricebox {
+                width: calc(100% - 20px); /* ให้กล่องใช้พื้นที่ 100% ของ container และลบพื้นที่ระหว่างกล่องออกด้วย */
+            }
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin-top: 20px;
+                padding: 20px;
+            }
+            .Details {
+                font-size: 40px;
+                color: #555;
+                text-align: right;
+            }
+            .Details2 {
+                font-size: 35px;
+                color: #555;
+                text-align: Left;
+            }
+            .low{
+                font-weight: bold;
+                color: Green;
+                font-size: 40px;
+            }
+            .tao{
+          font-size: 40px;
+          color: green;
+          font-weight: bold;
+        }
+            
+        }
+        /* Media query for mobile devices */
+        @media only screen and (max-width: 768px) {
+            .pricebox {
+                width: calc(100% - 20px); /* ให้กล่องใช้พื้นที่ 100% ของ container และลบพื้นที่ระหว่างกล่องออกด้วย */
+            }
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin-top: 20px;
+                padding: 20px;
+            }
+            .Details {
+                font-size: 20px;
+                color: #555;
+                text-align: right;
+            }
+            .Details2 {
+                font-size: 24px;
+                color: #555;
+                text-align: Left;
+            }
+            .low{
+                font-weight: bold;
+                color: Green;
+                font-size: 26px;
+            }
+            .tao{
+          font-size: 30px;
+          color: green;
+          font-weight: bold;
+        }
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #3498db;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        /* Hover Effect */
+        .button:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        
+        /* Active Effect */
+        .button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Disabled Effect */
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        img{
+            margin-bottom: -5px;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <div id="countdown"></div>
+    <div id="updatedMessage"></div>
+
+    <!-- Token Price Section -->
+    <div class="container">
+        <!-- Row 1: KUB PRICE -->
+        
+        <div class="pricebox" style="width: 100%;"> <!-- กำหนดความกว้างเป็น 100% ในแถวที่ 1 -->
+            <div class="Header">Get More Tao With CommuDao <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"><button class="button" onclick="window.open('https://commudao.xyz/fields/mech-harvest-zone', '_blank')">JOIN</button></div>
+            <div class="Header">Bridge TaoDum/TaoMeme [JBC -> BKC , BKC -> JBC] <button class="button" onclick="window.open('https://commudao.xyz/tbridge', '_blank')">Bridge</button></div>
+        </div>
+        <div class="pricebox" style="width: 40%;"> <!-- กำหนดความกว้างเป็น 100% ในแถวที่ 1 -->
+            <div class="Header">KUB PRICE <a class="Details">~<span id="KUBTHB" class="low"></span> THB</a></div>
+        </div>
+        <div class="pricebox" style="width: 40%;"> <!-- กำหนดความกว้างเป็น 100% ในแถวที่ 1 -->
+            <div class="Header">USDT PRICE <a class="Details">~<span id="exchangeRate" class="low"></span> THB</a></div>
+        </div>
+        
+        
+        <!-- Row 2: Total Supply, Burned, in Liquidity Pool -->
+        <div class="pricebox">
+            <div class="Header">Total Supply</div>
+            <div class="Details"><a class="low">888,888,888 </a> TAO</div>
+        </div>
+        <div class="pricebox">
+            <div class="Header"><img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="40px"> Burned <img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="40px"></div>
+            <div class="Details">Officals    <span id="Burn_Off" class="low">..Loading</span> TAO</div>
+            <div class="Details">CommuDao    <span id="Burn_CMD" class="low">..Loading</span> TAO</div>
+            <div class="Details">TOTAL : <span id="Total_Burn" class="low">..Loading</span> TAO</div>
+        </div>
+        <div class="pricebox">
+            <div class="Header">Liquidity Pool</div>
+            <div class="Details">BKC POOL: <span id="Total_Tao_In_Liquidity"  class="low">..Loading</span> TAO</div>
+            <div class="Details">JBC POOL: <span id="Total_Tao_In_Liquidity_TAO"  class="low">..Loading</span> TAO</div>
+            <div class="Details">TOTAL : <span id="Total_LP" class="low">..Loading</span> TAO</div> 
+        </div>
+        
+        <!-- Row 3: Remaining in Ecosystem, Tao in BKC Chain, Tao in Jib Chain -->
+        <div class="pricebox">
+            <div class="Header">Ecosystem</div>
+            <div class="Details">Remaining : <span id="Total_Tao_Remaining" class="low">..Loading</span> TAO</div>
+            <div class="Details">Except LP : <span id="Total_Tao_ExceptLP" class="low">..Loading</span> TAO</div>
+            <div class="Details">Remaining : <span id="Totao_TaoDum_Remaining" class="low">..Loading</span> NFTs</div>
+        </div>
+        <div class="pricebox">
+            <div class="Header">BKC ECO</div>
+            <div class="Details">Remaining : <span id="Total_Tao_In_BKC"  class="low">..Loading</span> TAO</div>
+            <div class="Details">Except LP : <span id="Total_Tao_In_BKC_ExceptLP"  class="low">..Loading</span> TAO</div>
+            <div class="Details"><span id="Total_TaoDum_In_BKC"  class="low">..Loading</span> NFTs</div>
+        </div>
+        <div class="pricebox">
+            <div class="Header">JBC ECO</div>
+            <div class="Details">Remaining : <span id="Total_Tao_In_JBC"  class="low">..Loading</span> TAO</div>
+            <div class="Details">Except LP : <span id="Total_Tao_In_JBC_Except"  class="low">..Loading</span> TAO</div>
+            <div class="Details"><span id="Total_TaoDum_In_JBC"  class="low">..Loading</span> NFTs</div>
+        </div>
+        
+        <!-- Row 4: LP in DiamonFinance, LP in Baryon -->
+        <div class="pricebox">
+            <div class="Header"><a href="https://app.diamon.finance/#/swap?outputCurrency=0x6527d3D38a7Ff4E62f98fE27dd9242a36227FE23&inputCurrency=0x67eBD850304c70d983B2d1b93ea79c7CD6c3F6b5" target="_blank">LP DiamonFinance</a></div>
+            <div class="Details2">Volume 24H: <span id="Diamon_24H" class="low"></span> USD</div>
+            <div class="Details2">Liquidity: <span id="Diamon_Liquidity" class="low"></span> USD</div>
+            <div class="Details2">Amount Tao: <span id="Diamon_TAO" class="low"></span> TAO</div>
+            <div class="Details2">Amount KKUB: <span id="Diamon_KUB" class="low"></span> KKUB</div>
+            <div class="Details2">SWAP: <span id="Diamon_SWAP1" class="low"></span> TAO/KKUB</div>
+            <div class="Details2">SWAP: <span id="Diamon_SWAP2" class="low"></span> KKUB/TAO</div>
+            <div class="Details2">VALUE: <span id="Diamon_TAOTHB" class="low"></span> THB/TAO</div>
+            <div class="Details2">VALUE: <span id="Diamon_TAOUSD" class="low"></span> USD/TAO (<span id="Diamon_Change" class="Details2 low"></span>%)</div>
+            <!-- Add more details here if needed -->
+        </div>
+        <div class="pricebox">
+            <div class="Header"><a href="https://www.baryon.network/swap?chain=bitkub&base=0x67eBD850304c70d983B2d1b93ea79c7CD6c3F6b5&pair=0x6527d3D38a7Ff4E62f98fE27dd9242a36227FE23" target="_blank">LP in Baryon<a/></div>
+            <div class="Details2">Volume 24H: <span id="Baryon_24H" class="low"></span> USD</div>
+            <div class="Details2">Liquidity: <span id="Baryon_Liquidity" class="low"></span> USD</div>
+            <div class="Details2">Amount Tao: <span id="Baryon_TAO" class="low"></span> TAO</div>
+            <div class="Details2">Amount KKUB: <span id="Baryon_KUB" class="low"></span> KKUB</div>
+            <div class="Details2">SWAP: <span id="Baryon_SWAP1" class="low"></span> TAO/KKUB</div>
+            <div class="Details2">SWAP: <span id="Baryon_SWAP2" class="low"></span> KKUB/TAO</div>
+            <div class="Details2">VALUE: <span id="Baryon_TAOTHB" class="low"></span> THB/TAO</div>
+            <div class="Details2">VALUE: <span id="Baryon_TAOUSD" class="low"></span> USD/TAO (<span class="Details2 low" id="Baryon_Change"></span>%)</div>
+            <!-- Add more details here if needed -->
+        </div>
+        <div class="pricebox" style="width: 100%;"> <!-- กำหนดความกว้างเป็น 100% ในแถวที่ 1 -->
+            <div class="Header">Start Earn Tao From CommuDao</div>
+            <ul><div>JBC CHAIN :> <a href ="https://chainlist.org/chain/8899" target="_blank">https://chainlist.org/chain/8899</a></div></ul>
+            <ul><div>$JBC on BKC Address:> 0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9 <button onclick="copyTextToClipboard('0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9')" class="button">Copy</button></div></ul>
+            <ul><div>SWAP JBC : <a href="https://app.diamon.finance/#/swap?outputCurrency=0x4d51bb6a38ef573a38be56566562fb30464a40f9&inputCurrency=0x9B005000A10Ac871947D99001345b01C1cEf2790"  target="_blank">DiamonFiance Pair CMM/JBC</a></div></ul>
+            <ul><div>1. ต้องมี GasFee ฝั่ง JBC และ BKC [ หากไม่มี เลือกทำตามขั้นตอนด้านล่าง ]<br>  
+                - วิธีที่ 1 ซื้อ JBC ผ่าน <a href="https://app.diamon.finance/#/swap?outputCurrency=0x4d51bb6a38ef573a38be56566562fb30464a40f9&inputCurrency=0x9B005000A10Ac871947D99001345b01C1cEf2790" target="_blank">DiamonFinance</a> คู่ CMM/JBC หลังจากนั้นทำการ Bridge JBC ผ่าน <a href="https://bridge.jbcha.in" target="_blank">https://bridge.jbcha.in</a> มีค่าใช้จ่าย Bridge Fee 0.5 KUB/TX
+            <br>- วิธีที่ 2 ซื้อ JBC ผ่าน <a href="https://h5.coinstore.com/h5/signup?invitCode=tNzGfn" target="_blank">CoinStore</a>คู่ JBC/USDT หลังจากนั้นทำการโอนไปยัง Metamask Wallet โดยมีค่าโอนออก Wallet 5 JBC/TX</div></ul>
+            
+            <ul>2. หลังจากมี Gas ทำการ Bridge TAOMEME or TAODUM NFT ไปยัง JBC ผ่าน <a href="https://commudao.xyz/tbridge" target="_blank">https://commudao.xyz/tbridge</a> <br> <a class="danger">* [ Bridge Fee : Token 888 TAO ]</a> <br> <a class="danger">* [ Bridge Fee NFT : ฝั่งKUB->JBC 1KUB/TX , ฝั่งJBC->KUB 10JBC/TX ]</a> </ul>
+            <ul><div>3. ได้รับ JTAO or TAODUM NFT on JBC พร้อม Stake Field ที่  <a href="https://commudao.xyz/fields/mech-harvest-zone" target="_blank">https://commudao.xyz/fields/mech-harvest-zone</a> เพื่อรับ $GEAR</div></ul>
+            <ul><div>4. เมื่อได้รับ $GEAR ต้องนำไปคราฟ เป็น II โดยใช้ 888 $GEAR + 8 JTAO + 30 Minutes = 1 II โดยสามารถ<b>นำไปขายได้ที่</b> <a href="https://commudao.xyz/mall" target="_blank">CommuDao(Mall)</a> ราคา ณ วันที่ 16 มีนาคม 2567 อยู่ที่ 1 II = 17.6 JTAO หรือ<b>นำไปลง Dungeon CrypticCogs</b> โดยใช้ 7 II / Day, <b>นำไปอัพเกรดไอเทม Naruta Collection</b></div></ul>
+            <ul><div><h1 class="Header">การลงดันเจี้ยน CrypticCogs</h1></div></ul>
+            <ul><div>1.ต้องมี MainChar Collection : Naruta หรือ CommuDao Collection สำหรับการเป็นตัวละครลงดันเจี้ยน โดยผู้เล่นใหม่ที่ต้องการลงดันเฉพาะ CryptoCogs เพื่อรับ Jtao สามารถซื้อตัวละคร,ไอเทม พลัง 18,800 Pow ได้ในราคา 20 JUSDT (Bridge KUSDT มายัง JibChain ผ่าน <a href="https://commudao.xyz/tbridge" target="_blank">https://commudao.xyz/tbridge</a>)</div></ul>
+            <ul><div>2.ใช้งาน 7 II / Day สำหรับการลงดันเจี้ยน โดยสามารถคำนวนผลกำไร ตอบแทนได้ที่ DaoBuddy </div></ul>
+            <ul><div>3. เมื่อได้รับ $EE สามารถนำไปขายได้ที่ <a href="https://commudao.xyz/mall" target="_blank">CommuDao(Mall)</a> , นำไปคราฟเป็น Platinum ได้ในเกม Commudao , นำไปอัพเกรดไอเทม Naruta Collection</div></ul>
+            <ul><div><h1 class="Header">DaoBuddy TOOL สำหรับคำนวนต่างๆ ที่แนะนำ <button class="button" onclick="window.open('https://script.google.com/macros/s/AKfycbwnF6KSlKLN7CDBTWGC4yfmZGHP-Q8ohUxV_Jm-XD6g3890y-4DJikE8V9ag6SHANWi/exec', '_blank')">Access DaoBuddy</button></h1></div></ul>
+            <ul><div>CMM(BKC) :  0x9B005000A10Ac871947D99001345b01C1cEf2790  <button onclick="copyTextToClipboard('0x9B005000A10Ac871947D99001345b01C1cEf2790')" class="button">Copy</button></div></ul>
+            <ul><div>JBC(BKC) : 0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9  <button onclick="copyTextToClipboard('0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9')" class="button">Copy</button></div></ul>
+            <ul><div>KUSDT(BKC) : 0x7d984C24d2499D840eB3b7016077164e15E5faA6  <button onclick="copyTextToClipboard('0x7d984C24d2499D840eB3b7016077164e15E5faA6')" class="button">Copy</button></div></ul>
+            <ul><div>JUSDT(JBC) : 0x24599b658b57f91E7643f4F154B16bcd2884f9ac  <button onclick="copyTextToClipboard('0x24599b658b57f91E7643f4F154B16bcd2884f9ac')" class="button">Copy</button></div></ul>
+            <ul><div>JBC(BKC) : 0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9  <button onclick="copyTextToClipboard('0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9')" class="button">Copy</button></div></ul>
+            <ul><div>GEAR(JBC) : 0x0E2610730A3c42fd721B289BEe092D9AD1C76890  <button onclick="copyTextToClipboard('0x0E2610730A3c42fd721B289BEe092D9AD1C76890')" class="button">Copy</button></div></ul>
+            <ul><div>EE(JBC) : 0xF663c756b6D57724C3B41c8839aB9c7Af83c9751  <button onclick="copyTextToClipboard('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751')" class="button">Copy</button></div></ul>
+            <ul><div><h3>ผลกำไรจาก TaoDum CommuDao จะถูกแบ่งสัดส่วนบางส่วน ออกมา Burn TAO และ กลับมาเป็นรางวัลผู้เล่นต่อไป</h3></div></ul>
+            <ul><div><h3>ผู้ที่ต้องการลงทุน แนะนำให้ KYC ก่อนเริ่มใช้ JUSDT เพราะมี Top Spender ให้ผู้ KYC แจก CashBack เป็น CMJ สูงสุด 1,060.53 CMJ/คน</h3></div></ul>
+            <ul><div><h3>หากต้องการสนับสนุน สามารถกรอก Address : 0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1 <button onclick="copyTextToClipboard('0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1')" class="button">Copy</button> <br>ในเควส Invite Frinds(สุดท้าย) ในหน้า <button class="button" onclick="window.open('https://commudao.xyz/community/quester-oasis', '_blank')">Access CommuDAO</button></h3></div></ul>
+        </div>
+                <div class="pricebox" style="width: 100%;"> <!-- กำหนดความกว้างเป็น 100% ในแถวที่ 1 -->
+            <div class="Header"><img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="60px">Burning Tao Tx<img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="60px"> </div>
+            <ul>
+            <li><div>Round 1 Burn <span class="tao">1,413,932.17</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By Officals  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x36acd4c9af907f93cfaf0e078c16762a3c1af36bea6899d20228205e742418ac', '_blank')">BKC Scan</button></div></li>
+            <li><div>Round 2 Burn <span class="tao">484,991.887</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By Officals  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x7fead987f073cb6a6cf167bf6e4e99af54b104dfafba1a8c176388ad83928682', '_blank')">BKC Scan</button></div></li>
+             <li><div>Round 3 Burn <span class="tao">2,000,328.438</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0xd48fbecd36ed2e96eb729ed3babca19217b332fde80ca12d94ad5ef56239a9b0', '_blank')">BKC Scan</button></div></li>
+             <li><div>Round 4 Burn <span class="tao">3,550,725.087</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x495c27ecdfe761131bd0b70cab519f13d184630fd42704871a5e190d8b2a3c28', '_blank')">BKC Scan</button></div></li>
+          </ul>
+          <span id="countdown"></span>
+    </div>
+
+<!-- Bootstrap JS (optional, only needed if you want to use Bootstrap JavaScript components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Your existing script for updating prices
+
+
+    function updateData() {
+      // Show the updated message
+      document.getElementById('updatedMessage').style.display = 'block';
+      setTimeout(function() {
+        // Hide the updated message after 3 seconds
+        document.getElementById('updatedMessage').style.display = 'none';
+      }, 200); // 3000 milliseconds = 3 seconds
+    }
+
+    // Countdown Timer
+    var countdownElement = document.getElementById('countdown');
+    var countdownTime = 10; // seconds
+
+
+    function updateCountdown() {
+      countdownElement.textContent = 'Refreshing in ' + countdownTime + ' seconds';
+      countdownTime--;
+
+      if (countdownTime < 0) {
+        // Call the updateData function when the countdown reaches 0
+        setUSD();
+        console.log("Refreshing")
+        countdownTime = 30; // Reset the countdown time
+      }
+    }
+
+    // Initial call to start the countdown
+    updateCountdown();
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+  <script>
+function setUSD(){
+      // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+    const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+    
+    fetch(exchangeRateUrl)
+      .then(response => response.json())
+      .then(data => {
+        // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+        const exchangeRate = data.rates.THB;
+    
+        // ทำ HTTP GET request เพื่อดึงข้อมูล price_usd จาก API ที่กำหนด
+        const tokenUrl = "https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5";
+    
+        return fetch(tokenUrl)
+          .then(response => response.json())
+          .then(data => {
+            // ดึงข้อมูล price_usd และแปลงเป็นบาท
+            const priceUsd = parseFloat(data.data.attributes.price_usd);
+            const priceThb = priceUsd * exchangeRate;
+    
+            // แสดงผลลัพธ์ใน HTML
+            document.getElementById("KUBTHB").textContent = priceThb.toFixed(2);
+            document.getElementById("exchangeRate").textContent = exchangeRate.toFixed(2);
+          });
+      })
+      .catch(error => {
+        console.error('เกิดข้อผิดพลาด:', error);
+        document.getElementById("KUBTHB").textContent = "ไม่สามารถดึงข้อมูลได้";
+      });
+
+    // เรียกใช้งาน API
+    fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d3d38a7ff4e62f98fe27dd9242a36227fe23/pools?include=base_token_price_usd&page=1')
+        .then(response => response.json())
+        .then(data => {
+            // ค้นหาข้อมูลที่ต้องการและแสดงผล
+            const pools = data.data;
+            pools.forEach(pool => {
+                if (pool.id === 'bitkub_chain_0x4c70eb20e07f27627698b7e80cb4f56ed9a6365d') {
+                  /// DiamonFiannce
+                    document.getElementById('Diamon_TAOUSD').innerText = `${parseFloat(pool.attributes.token_price_usd).toFixed(8)}`;
+                    document.getElementById('Diamon_24H').innerText = ` ${parseFloat(pool.attributes.volume_usd.h24).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                    document.getElementById('Diamon_Change').innerText = ` ${parseFloat(pool.attributes.price_change_percentage.h24).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                    document.getElementById('Diamon_SWAP1').innerText = ` ${parseFloat(pool.attributes.quote_token_price_base_token).toLocaleString(undefined, { minimumFractionDigits: 4 })}`;
+                    document.getElementById('Diamon_SWAP2').innerText = ` ${parseFloat(pool.attributes.base_token_price_quote_token).toLocaleString(undefined, { minimumFractionDigits: 8 })}`;
+                    document.getElementById('Diamon_Liquidity').innerText = ` ${parseFloat(pool.attributes.reserve_in_usd).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                }
+                if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
+                    document.getElementById('Baryon_TAOUSD').innerText = ` ${parseFloat(pool.attributes.token_price_usd).toFixed(8)}`;
+                    document.getElementById('Baryon_24H').innerText = ` ${parseFloat(pool.attributes.volume_usd.h24).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                    document.getElementById('Baryon_Change').innerText = ` ${parseFloat(pool.attributes.price_change_percentage.h24).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                    document.getElementById('Baryon_SWAP1').innerText = ` ${parseFloat(pool.attributes.quote_token_price_base_token).toLocaleString(undefined, { minimumFractionDigits: 4 })}`;
+                    document.getElementById('Baryon_SWAP2').innerText = ` ${parseFloat(pool.attributes.base_token_price_quote_token).toLocaleString(undefined, { minimumFractionDigits: 8 })}`;
+                    document.getElementById('Baryon_Liquidity').innerText = ` ${parseFloat(pool.attributes.reserve_in_usd).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+  setTimeout(function() {
+        JBC();
+        BKC();
+    }, 2000); // 1000 milliseconds = 1 วินาที
+}
+
+window.addEventListener('load', function() {
+    setUSD();
+});
+
+    async function JBC() {
+        const divider = 10 ** 18;
+
+        const web3 = new Web3('https://rpc-l1.jibchain.net');
+
+        const contractABI = [
+        {
+            "constant": true,
+            "inputs": [{"name": "_owner", "type": "address"}],
+            "name": "balanceOf",
+            "outputs": [{"name": "balance", "type": "uint256"}],
+            "type": "function"
+        }
+    ];
+        const JTAO_Address = '0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd';
+
+        // สร้างออบเจ็กต์สัญญา
+        const JTAO = new web3.eth.Contract(contractABI,JTAO_Address);
+        const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+        const EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+        const Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+        try {
+            address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60';
+            const JTAO_inEEJTAO = await call_SC(address,Jtao,18);
+            address = '0xbD5bFF1fBbD83FECD749a328D98F860f7F343c10';
+            const JTAO_inIIJTAO = await call_SC(address,Jtao,18);
+            TotalTao_in_JBC_LP = JTAO_inEEJTAO + JTAO_inIIJTAO;
+            document.getElementById("Total_Tao_In_Liquidity_TAO").innerHTML = TotalTao_in_JBC_LP.toLocaleString();
+        
+            address = '0xc5F389ba93CF37F3Eed6C3C7107e0f869FCb27aB';
+            const Jtao_in_Tbridge = await call_SC(address, JTAO, 18);
+
+            const formattedJtao = (888888888 - Jtao_in_Tbridge - TotalTao_in_JBC_LP).toLocaleString(); // เพิ่มการใช้ toLocaleString()
+            const formattedJtao2 = (888888888 - Jtao_in_Tbridge).toLocaleString(); // เพิ่มการใช้ toLocaleString()
+            document.getElementById("Total_Tao_In_JBC").innerHTML = formattedJtao2;
+            document.getElementById("Total_Tao_In_JBC_Except").innerHTML = formattedJtao;
+
+        } catch (error) {
+            console.error('Error:', error);
+            console.log('An error occurred while fetching contract information.');
+        }
+    }
+
+
+async function call_SC(address, contract, divider) {
+    try {
+      const result = await contract.methods.balanceOf(address).call();
+      return result / (10 ** divider); // เลื่อนการหารออกจากการเรียกใช้เพื่อความชัดเจน
+    } catch (error) {
+      console.error("Error calling contract method:", error);
+      return null;
+    }
+  }
+async function BKC() {
+    const divider = 10 ** 18;
+
+    const web3 = new Web3('https://rpc.bitkubchain.io');
+
+    const contractABI = [
+    {
+        "constant": true,
+        "inputs": [{"name": "_owner", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"name": "balance", "type": "uint256"}],
+        "type": "function"
+    }
+];
+const ERC721ABI = [
+// ABI ของ balanceOf function
+{
+  "constant": true,
+  "inputs": [{"name": "_owner", "type": "address"}],
+  "name": "balanceOf",
+  "outputs": [{"name": "", "type": "uint256"}],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}
+];
+    const TAO_Address = '0x6527d3D38a7Ff4E62f98fE27dd9242a36227FE23';
+    const KKUB_Address = '0x67eBD850304c70d983B2d1b93ea79c7CD6c3F6b5';
+
+    // สร้างออบเจ็กต์สัญญา
+    const TAO = new web3.eth.Contract(contractABI,TAO_Address);
+    const KKUB = new web3.eth.Contract(contractABI,KKUB_Address);
+    const Taodum = new web3.eth.Contract(ERC721ABI,'0x165DCCB59F0aaE80a0C20c8CF2b536BE6E120be9');
+
+    KUBPRICE = parseFloat(document.getElementById("KUBTHB").innerText); // แปลงข้อความจาก element เป็นตัวเลข
+    USDPRICE = parseFloat(document.getElementById("exchangeRate").innerText); // แปลงข้อความจาก element เป็นตัวเลข
+    try {
+
+        // TAO in Diamon LP
+        address = '0x4C70eb20e07f27627698b7e80cb4f56eD9A6365d';
+        const Get_Amount_TAO = await call_SC(address, TAO, 18);
+        const Format_Get_Amount_TAO = Get_Amount_TAO.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+        const Get_Amount_KKUB = await call_SC(address, KKUB, 18);
+        const Format_Get_Amount_KKUB = Get_Amount_KKUB.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+        console.log(Get_Amount_KKUB)
+        Swap1 = Get_Amount_TAO/Get_Amount_KKUB;
+        F_Swap1 = Swap1.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+        Swap2 = Get_Amount_KKUB/Get_Amount_TAO;
+        F_Swap2 = Swap2.toLocaleString(undefined, { minimumFractionDigits: 7 });
+    
+
+        TAOTHB_Diamon = Swap2 * KUBPRICE;
+
+        RATE = KUBPRICE/USDPRICE;
+        VALUE_KUB = Get_Amount_KKUB*RATE;
+
+        // TAO in Baryon LP
+        address = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
+      // เรียกฟังก์ชัน call_SC() เพื่อรับข้อมูล TAO
+      const Get_Amount_TAO2 = await call_SC(address, TAO, 18);
+      // รอจนกว่าข้อมูลจะถูกรับและ Format เลขที่ได้รับ
+      const Format_Get_Amount_TAO2 = Get_Amount_TAO2.toLocaleString();
+
+      // เรียกฟังก์ชัน call_SC() เพื่อรับข้อมูล KKUB
+      const Get_Amount_KKUB2 = await call_SC(address, KKUB, 18);
+      // รอจนกว่าข้อมูลจะถูกรับและ Format เลขที่ได้รับ
+      const Format_Get_Amount_KKUB2 = Get_Amount_KKUB2.toLocaleString();
+
+
+        console.log(Get_Amount_KKUB)
+        Swap1 = Get_Amount_TAO2/Get_Amount_KKUB2;
+        F_Swap1_bar = Swap1.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+        Swap2 = Get_Amount_KKUB2/Get_Amount_TAO2;
+        F_Swap2_bar = Swap2.toLocaleString(undefined, { minimumFractionDigits: 7 });
+        TAOTHB_Baryon = Swap2 * KUBPRICE;
+        
+        RATE = KUBPRICE/USDPRICE;
+        VALUE_KUB = Get_Amount_KKUB2*RATE;
+
+        
+         // TAO in CM LP
+         address = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
+         Get_Amount_TAO3 = await call_SC(address, TAO, 18);
+         Get_Amount_KKUB3 = await call_SC(address, KKUB, 18);
+
+         // TOTAL TAO in LP
+         total_Tao_IN_LP = Get_Amount_TAO+Get_Amount_TAO2+Get_Amount_TAO3;
+         F_total_Tao_IN_LP = total_Tao_IN_LP.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+         document.getElementById("Total_Tao_In_Liquidity").innerHTML = F_total_Tao_IN_LP;
+         JBCLP_TEXT = document.getElementById("Total_Tao_In_Liquidity_TAO").innerText;
+         const JBCLP = parseFloat(JBCLP_TEXT.replace(/,/g, "")); // ลบ comma และแปลงเป็นตัวเลข
+         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         // TOTAL TAO in ECO
+         BurnOff = 1898924.057;
+         BurnCmdao = 3550725.087+2000328.438;
+         TaoBurned = BurnOff+BurnCmdao;
+         document.getElementById("Burn_Off").innerHTML = BurnOff.toLocaleString();
+         document.getElementById("Burn_CMD").innerHTML = BurnCmdao.toLocaleString();
+         document.getElementById("Total_Burn").innerHTML = TaoBurned.toLocaleString();
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         Total_Tao_Remaining = 888888888-TaoBurned;
+         Total_Tao_IN_ECO = 888888888-total_Tao_IN_LP-JBCLP-TaoBurned;
+         F_Total_Tao_Remaining = Total_Tao_Remaining.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+         F_Total_Tao_IN_ECO = Total_Tao_IN_ECO.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+         document.getElementById("Total_Tao_Remaining").innerHTML = F_Total_Tao_Remaining;
+         document.getElementById("Total_Tao_ExceptLP").innerHTML = F_Total_Tao_IN_ECO;
+         // TOTAL TAO in JBC ECO
+        // อ่านค่าจาก element และแปลงเป็นตัวเลข
+        const TAO_INJBC_Text = document.getElementById("Total_Tao_In_JBC").innerText;
+        const TAO_INJBC = parseFloat(TAO_INJBC_Text.replace(/,/g, "")); // ลบ comma และแปลงเป็นตัวเลข
+        const TAO_INJBC2_Text = document.getElementById("Total_Tao_In_JBC_Except").innerText;
+        const TAO_INJBC2 = parseFloat(TAO_INJBC2_Text.replace(/,/g, "")); // ลบ comma และแปลงเป็นตัวเลข
+
+        // ทำการคำนวณ Total_Tao_In_BKC
+        const Total_Tao_In_BKC = Total_Tao_Remaining-TAO_INJBC;
+        const Total_Tao_In_BKC_ExceptLP = Total_Tao_IN_ECO - TAO_INJBC2;
+        F_Total_Tao_IN_BKC = Total_Tao_In_BKC.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+        F_Total_Tao_In_BKC_ExceptLP = Total_Tao_In_BKC_ExceptLP.toLocaleString(); // เพิ่มการใช้ toLocaleString()
+        document.getElementById("Total_Tao_In_BKC").innerHTML = F_Total_Tao_IN_BKC;
+        document.getElementById("Total_Tao_In_BKC_ExceptLP").innerHTML = F_Total_Tao_In_BKC_ExceptLP;
+
+        // Get Taodum on TBridge
+        Taodum.methods.balanceOf('0x519fF534E58A226c11566b0546f900766664B705').call((error, balance) => {
+            if (error) {
+                document.getElementById("Total_TaoDum_In_JBC").innerHTML = "Error";
+            } else {
+                document.getElementById("Total_TaoDum_In_JBC").innerHTML = balance;
+                document.getElementById("Total_TaoDum_In_BKC").innerHTML = 300-balance;
+                
+                console.log(balance)
+            }
+          });
+        document.getElementById("Totao_TaoDum_Remaining").innerHTML = 300;
+
+        // Display All
+        document.getElementById("Diamon_TAO").innerHTML = Format_Get_Amount_TAO;    
+        document.getElementById("Diamon_KUB").innerHTML = Format_Get_Amount_KKUB;    
+        document.getElementById("Diamon_TAOTHB").innerHTML = TAOTHB_Diamon.toLocaleString(undefined, { minimumFractionDigits: 7 });
+
+        //document.getElementById("Swap1_Diamon").innerHTML = F_Swap1;    
+        //document.getElementById("Swap2_Diamon").innerHTML = F_Swap2;
+        document.getElementById("Baryon_KUB").innerHTML = Format_Get_Amount_KKUB2;    
+        document.getElementById("Baryon_TAO").innerHTML = Format_Get_Amount_TAO2;    
+        //document.getElementById("Swap1_Baryon").innerHTML = F_Swap1_bar;    
+        //document.getElementById("Swap2_Amn_Baryon").innerHTML = F_Swap2_bar;
+        document.getElementById("Baryon_TAOTHB").innerHTML = TAOTHB_Baryon.toLocaleString(undefined, { minimumFractionDigits: 7 });
+
+        // TOTAL 
+        const LP_Amount_inBKC = document.getElementById("Total_Tao_In_Liquidity").innerText;
+        const F_LPBKC = parseFloat(LP_Amount_inBKC.replace(/,/g, "")); // ลบ comma และแปลงเป็นตัวเลข
+        const LP_Amount_inJBC = document.getElementById("Total_Tao_In_Liquidity_TAO").innerText;
+        const F_LPJBC = parseFloat(LP_Amount_inJBC.replace(/,/g, "")); // ลบ comma และแปลงเป็นตัวเลข
+        const TotalLP = F_LPBKC+F_LPJBC;
+        document.getElementById("Total_LP").innerHTML = TotalLP.toLocaleString(undefined, { minimumFractionDigits: 3 });
+
+    } catch (error) {
+        console.error('Error:', error);
+        console.log('An error occurred while fetching contract information.');
+    }
+}
+
+
+    function copyTextToClipboard(text) {
+        var textField = document.createElement('textarea');
+        textField.innerText = text;
+        document.body.appendChild(textField);
+        textField.select();
+        document.execCommand('copy');
+        textField.remove();
+
+    }
+</script>
+</body>
+</html>
