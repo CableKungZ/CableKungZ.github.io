@@ -387,6 +387,7 @@ function setUSD(){
                     document.getElementById('Diamon_SWAP1').innerText = ` ${parseFloat(pool.attributes.quote_token_price_base_token).toLocaleString(undefined, { minimumFractionDigits: 4 })}`;
                     document.getElementById('Diamon_SWAP2').innerText = ` ${parseFloat(pool.attributes.base_token_price_quote_token).toLocaleString(undefined, { minimumFractionDigits: 8 })}`;
                     document.getElementById('Diamon_Liquidity').innerText = ` ${parseFloat(pool.attributes.reserve_in_usd).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                    document.getElementById("Diamon_TAOUSD").innerText = ` ${parseFloat(pool.attributes.token_price_usd*exchangeRate).toFixed(8)}`;
                 }
                 if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
                     document.getElementById('Baryon_TAOUSD').innerText = ` ${parseFloat(pool.attributes.token_price_usd).toFixed(8)}`;
@@ -395,6 +396,7 @@ function setUSD(){
                     document.getElementById('Baryon_SWAP1').innerText = ` ${parseFloat(pool.attributes.quote_token_price_base_token).toLocaleString(undefined, { minimumFractionDigits: 4 })}`;
                     document.getElementById('Baryon_SWAP2').innerText = ` ${parseFloat(pool.attributes.base_token_price_quote_token).toLocaleString(undefined, { minimumFractionDigits: 8 })}`;
                     document.getElementById('Baryon_Liquidity').innerText = ` ${parseFloat(pool.attributes.reserve_in_usd).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+                    document.getElementById("Baryon_TAOTHB").innerText = ` ${parseFloat(pool.attributes.token_price_usd*exchangeRate).toFixed(8)}`;
                 }
             });
         })
@@ -494,6 +496,7 @@ const ERC721ABI = [
     // สร้างออบเจ็กต์สัญญา
     const TAO = new web3.eth.Contract(contractABI,TAO_Address);
     const KKUB = new web3.eth.Contract(contractABI,KKUB_Address);
+    const CMM = new web3.eth.Contract(contractABI,'0x9B005000A10Ac871947D99001345b01C1cEf2790');
     const Taodum = new web3.eth.Contract(ERC721ABI,'0x165DCCB59F0aaE80a0C20c8CF2b536BE6E120be9');
 
     KUBPRICE = parseFloat(document.getElementById("KUBTHB").innerText); // แปลงข้อความจาก element เป็นตัวเลข
@@ -502,40 +505,26 @@ const ERC721ABI = [
 
         // TAO in Diamon LP
         address = '0x4C70eb20e07f27627698b7e80cb4f56eD9A6365d';
+        address2 = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
+        address3 = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
+        
         const Get_Amount_TAO = await call_SC(address, TAO, 18);
         const Format_Get_Amount_TAO = Get_Amount_TAO.toLocaleString(); // เพิ่มการใช้ toLocaleString()
         const Get_Amount_KKUB = await call_SC(address, KKUB, 18);
         const Format_Get_Amount_KKUB = Get_Amount_KKUB.toLocaleString(); // เพิ่มการใช้ toLocaleString()
-        console.log(Get_Amount_KKUB)
-        Swap1 = Get_Amount_TAO/Get_Amount_KKUB;
-        F_Swap1 = Swap1.toLocaleString(); // เพิ่มการใช้ toLocaleString()
-        Swap2 = Get_Amount_KKUB/Get_Amount_TAO;
-        F_Swap2 = Swap2.toLocaleString(undefined, { minimumFractionDigits: 7 });
-        TAOTHB_Diamon = Swap2 * KUBPRICE;
-        RATE = KUBPRICE/USDPRICE;
-        VALUE_KUB = Get_Amount_KKUB*RATE;
+
 
         // TAO in Baryon LP
-        address2 = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
       const Get_Amount_TAO2 = await call_SC(address2, TAO, 18);
       const Format_Get_Amount_TAO2 = Get_Amount_TAO2.toLocaleString();
       const Get_Amount_KKUB2 = await call_SC(address2, KKUB, 18);
       const Format_Get_Amount_KKUB2 = Get_Amount_KKUB2.toLocaleString();
-        console.log(Get_Amount_KKUB)
-        Swap1 = Get_Amount_TAO2/Get_Amount_KKUB2;
-        F_Swap1_bar = Swap1.toLocaleString(); // เพิ่มการใช้ toLocaleString()
-        Swap2 = Get_Amount_KKUB2/Get_Amount_TAO2;
-        F_Swap2_bar = Swap2.toLocaleString(undefined, { minimumFractionDigits: 7 });
-        TAOTHB_Baryon = Swap2 * KUBPRICE;
-        RATE = KUBPRICE/USDPRICE;
-        VALUE_KUB = Get_Amount_KKUB2*RATE;
-
+           console.log("Baryon LP : ",Format_Get_Amount_KKUB2," KKUB , ",Format_Get_Amount_TAO2" TAO");
         
          // TAO in CM LP
-         address = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
-         Get_Amount_TAO3 = await call_SC(address, TAO, 18);
-         Get_Amount_KKUB3 = await call_SC(address, KKUB, 18);
-
+         Get_Amount_TAO3 = await call_SC(address3, TAO, 18);
+         Get_Amount_CMM3 = await call_SC(address3, CMM, 18);
+            console.log("CMM LP : ",Get_Amount_CMM3," CMM , ",Get_Amount_TAO3" TAO");
          // TOTAL TAO in LP
          total_Tao_IN_LP = Get_Amount_TAO+Get_Amount_TAO2+Get_Amount_TAO3;
          F_total_Tao_IN_LP = total_Tao_IN_LP.toLocaleString(); // เพิ่มการใช้ toLocaleString()
@@ -594,9 +583,8 @@ const ERC721ABI = [
         //document.getElementById("Swap2_Diamon").innerHTML = F_Swap2;
         document.getElementById("Baryon_KUB").innerHTML = Format_Get_Amount_KKUB2;    
         document.getElementById("Baryon_TAO").innerHTML = Format_Get_Amount_TAO2;    
-        //document.getElementById("Swap1_Baryon").innerHTML = F_Swap1_bar;    
-        //document.getElementById("Swap2_Amn_Baryon").innerHTML = F_Swap2_bar;
-        document.getElementById("Baryon_TAOTHB").innerHTML = TAOTHB_Baryon.toLocaleString(undefined, { minimumFractionDigits: 7 });
+
+        
 
         // TOTAL 
         const LP_Amount_inBKC = document.getElementById("Total_Tao_In_Liquidity").innerText;
