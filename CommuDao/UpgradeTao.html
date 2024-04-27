@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaoBuddy - TaoDum Upgrade Information</title>
+    <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/DaoBuddy.th.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+</style>
+<style>
+body {
+  font-family: "Kanit", sans-serif;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  background-color: #f0f0f0;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header span {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.card p {
+  font-size: 20px;
+} 
+.card li {
+  font-size: 20px;
+}
+.card b {
+  font-size: 18px;
+}
+.center{
+  text-align: center;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <h1>Upgrade Information
+    <br>◽ All items can be upgraded.
+    <br>◽ Main Characters Upgrade Chance 100% Every Level
+  </h1>
+  <div>
+    JTAO: <span id="JTAOUSDT">XX</span> USDT <br>
+    CMJ: <span id="CMJUSDT"> XX</span> USDT , <span id="CMJJTAO">XX</span> JTAO<br>
+    II: <span id="IIJTAO">XX</span> JTAO, <span id="IIUSDT">XX</span> USDT<br>
+    EE: <span id="EEJTAO">XX</span> JTAO, <span id="EEUSDT">XX</span> USDT<br>
+  </div>
+</div>
+
+<div class="card-container">
+  <div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 1" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.0 → Lv.1</b></h4>
+      <p><b>Item Upgrade Chance:</b> 100%</p>
+      <p><b>Power:</b> 18,800 → 22,800</p>
+      <p><b>Increase:</b> 4,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj1">XX</span> JTAO)</li>
+        <li>888 II (~ <span id="cost_ii1">XX</span> JTAO)</li>
+        <li>18,800 EE (~ <span id="cost_ee1">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost1">XX</span> JTAO (~<span id="total_costusdt1"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost1">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_1"></span> CMJ (~ <span id="sumCMJ2_1">XX</span> JTAO)</li>
+        <li><span id="SumII1_1"></span> II (~ <span id="sumII2_1">XX</span> JTAO)</li>
+        <li><span id="SumEE1_1"></span> EE (~ <span id="sumEE2_1">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_1">XX</span> JTAO (~<span id="sumCostUsdt_1"> XX</span> USDT)</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 2" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.1 → Lv.2</b></h4>
+      <p><b>Item Upgrade Chance:</b> 100%</p>
+      <p><b>Power:</b> 22,800 → 26,800</p>
+      <p><b>Increase:</b> 4,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj2">XX</span> JTAO)</li>
+        <li>1,888 II (~ <span id="cost_ii2">XX</span> JTAO)</li>
+        <li>28,800 EE (~ <span id="cost_ee2">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost2">XX</span> JTAO (~<span id="total_costusdt2"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost2">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_2"></span> CMJ (~ <span id="sumCMJ2_2">XX</span> JTAO)</li>
+        <li><span id="SumII1_2"></span> II (~ <span id="sumII2_2">XX</span> JTAO)</li>
+        <li><span id="SumEE1_2"></span> EE (~ <span id="sumEE2_2">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_2">XX</span> JTAO (~<span id="sumCostUsdt_2"> XX</span> USDT)</p></div>
+  </div>
+
+  <div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.2 → Lv.3*EVO</b></h4>
+      <p><b>Item Upgrade Chance:</b> 100%</p>
+      <p><b>Power:</b> 26,800 → 30,800</p>
+      <p><b>Increase:</b> 4,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj3">XX</span> JTAO)</li>
+        <li>2,888 II (~ <span id="cost_ii3">XX</span> JTAO)</li>
+        <li>42,800 EE (~ <span id="cost_ee3">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost3">XX</span> JTAO (~<span id="total_costusdt3"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost3">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_3"></span> CMJ (~ <span id="sumCMJ2_3">XX</span> JTAO)</li>
+        <li><span id="SumII1_3"></span> II (~ <span id="sumII2_3">XX</span> JTAO)</li>
+        <li><span id="SumEE1_3"></span> EE (~ <span id="sumEE2_3">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_3">XX</span> JTAO (~<span id="sumCostUsdt_3"> XX</span> USDT)</p>
+    </div>
+    
+  </div>
+  <div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.3 → Lv.4</b></h4>
+      <p><b>Item Upgrade Chance:</b> 50%</p>
+      <p><b>Power:</b> 30,800 → 36,800</p>
+      <p><b>Increase:</b> 6,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj4">XX</span> JTAO)</li>
+        <li>3,888 II (~ <span id="cost_ii4">XX</span> JTAO)</li>
+        <li>63,800 EE (~ <span id="cost_ee4">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost4">XX</span> JTAO (~<span id="total_costusdt4"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost4">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_4"></span> CMJ (~ <span id="sumCMJ2_4">XX</span> JTAO)</li>
+        <li><span id="SumII1_4"></span> II (~ <span id="sumII2_4">XX</span> JTAO)</li>
+        <li><span id="SumEE1_4"></span> EE (~ <span id="sumEE2_4">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_4">XX</span> JTAO (~<span id="sumCostUsdt_4"> XX</span> USDT)</p>
+    </div>
+</div>
+<div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.4 → Lv.5</b></h4>
+      <p><b >Item Upgrade Chance:</b> 50%</p>
+      <p><b>Power:</b> 36,800 → 42,800</p>
+      <p><b>Increase:</b> 6,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj5">XX</span> JTAO)</li>
+        <li>4,888 II(~ <span id="cost_ii5">XX</span> JTAO)</li>
+        <li>95,800 EE (~ <span id="cost_ee5">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost5">XX</span> JTAO (~<span id="total_costusdt5"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost5">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_5"></span> CMJ (~ <span id="sumCMJ2_5">XX</span> JTAO)</li>
+        <li><span id="SumII1_5"></span> II (~ <span id="sumII2_5">XX</span> JTAO)</li>
+        <li><span id="SumEE1_5"></span> EE (~ <span id="sumEE2_5">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_5">XX</span> JTAO (~<span id="sumCostUsdt_5"> XX</span> USDT)</p>
+    </div>
+</div>
+<div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.5 → Lv.6*EVO</b></h4>
+      <p><b>Item Upgrade Chance:</b> 50%</p>
+      <p><b>Power:</b> 42,800 → 48,800</p>
+      <p><b>Increase:</b> 6,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj6">XX</span> JTAO)</li>
+        <li>5,888 II (~ <span id="cost_ii6">XX</span> JTAO)</li>
+        <li>142,800 EE (~ <span id="cost_ee6">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost6">XX</span> JTAO (~<span id="total_costusdt6"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost6">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_6"></span> CMJ (~ <span id="sumCMJ2_6">XX</span> JTAO)</li>
+        <li><span id="SumII1_6"></span> II (~ <span id="sumII2_6">XX</span> JTAO)</li>
+        <li><span id="SumEE1_6"></span> EE (~ <span id="sumEE2_6">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_6">XX</span> JTAO (~<span id="sumCostUsdt_6"> XX</span> USDT)</p>
+    </div>
+</div>
+<div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.6 → Lv.7</b></h4>
+      <p><b>Item Upgrade Chance:</b> 33.3%</p>
+      <p><b>Power:</b> 48,800 → 56,800</p>
+      <p><b>Increase:</b> 8,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj7">XX</span> JTAO)</li>
+        <li>6,888 II (~ <span id="cost_ii7">XX</span> JTAO)</li>
+        <li>214,800 EE (~ <span id="cost_ee7">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost7">XX</span> JTAO (~<span id="total_costusdt7"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost7">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_7"></span> CMJ (~ <span id="sumCMJ2_7">XX</span> JTAO)</li>
+        <li><span id="SumII1_7"></span> II (~ <span id="sumII2_7">XX</span> JTAO)</li>
+        <li><span id="SumEE1_7"></span> EE (~ <span id="sumEE2_7">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_7">XX</span> JTAO (~<span id="sumCostUsdt_7"> XX</span> USDT)</p>
+    </div>
+</div>
+<div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.7 → Lv.8</b></h4>
+      <p><b>Item Upgrade Chance:</b> 33.3%</p>
+      <p><b>Power:</b> 56,800 → 64,800</p>
+      <p><b>Increase:</b> 8,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj8">XX</span> JTAO)</li>
+        <li>7,888 II (~ <span id="cost_ii8">XX</span> JTAO)</li>
+        <li>321,800 EE (~ <span id="cost_ee8">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost8">XX</span> JTAO (~<span id="total_costusdt8"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost8">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_8"></span> CMJ (~ <span id="sumCMJ2_8">XX</span> JTAO)</li>
+        <li><span id="SumII1_8"></span> II (~ <span id="sumII2_8">XX</span> JTAO)</li>
+        <li><span id="SumEE1_8"></span> EE (~ <span id="sumEE2_8">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_8">XX</span> JTAO (~<span id="sumCostUsdt_8"> XX</span> USDT)</p>
+    </div>
+</div>
+<div class="card">
+    <img src="https://s12.gifyu.com/images/SVq1M.gif" alt="Upgrade Image 3" style="width:100%">
+    <div class="container">
+      <div class="center"><h1>Cost/Upgrade</h1></div>
+      <h4><b>Upgrade: Lv.8 → Lv.9*MAX</b></h4>
+      <p><b>Item Upgrade Chance:</b> 25%</p>
+      <p><b>Power:</b> 64,800 → 72,800</p>
+      <p><b>Increase:</b> 8,000</p>
+      <p><b>Cost:</b></p>
+      <ul>
+        <li>1 CMJ (~ <span id="cost_cmj9">XX</span> JTAO)</li>
+        <li>8,888 II (~ <span id="cost_ii9">XX</span> JTAO)</li>
+        <li>481,800 EE (~ <span id="cost_ee9">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="total_cost9">XX</span> JTAO (~<span id="total_costusdt9"> XX</span> USDT)</p>
+      <p><b>Pow/Cost:</b> <span id="pow_cost9">xx pow / JTAO</span></p>
+      <div class="center"><h1>Sum Cost/Item</h1></div>
+      <ul>
+        <li><span id="SumCMJ1_9"></span> CMJ (~ <span id="sumCMJ2_9">XX</span> JTAO)</li>
+        <li><span id="SumII1_9"></span> II (~ <span id="sumII2_9">XX</span> JTAO)</li>
+        <li><span id="SumEE1_9"></span> EE (~ <span id="sumEE2_9">XX</span> JTAO)</li>
+      </ul>
+      <p><b>Total:</b> ~ <span id="sumCost_9">XX</span> JTAO (~<span id="sumCostUsdt_9"> XX</span> USDT)</p>
+    </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+
+<script>
+function setUSD(){
+  // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+
+fetch(exchangeRateUrl)
+  .then(response => response.json())
+  .then(data => {
+    // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+    const exchangeRate = data.rates.THB;
+
+    // ทำ HTTP GET request เพื่อดึงข้อมูล price_usd จาก API ที่กำหนด
+    const tokenUrl = "https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5";
+
+    return fetch(tokenUrl)
+      .then(response => response.json())
+      .then(data => {
+        // ดึงข้อมูล price_usd และแปลงเป็นบาท
+        const priceUsd = parseFloat(data.data.attributes.price_usd);
+        const priceThb = priceUsd * exchangeRate;
+
+      });
+  })
+  .catch(error => {
+    console.error('เกิดข้อผิดพลาด:', error);
+    document.getElementById("KUBTHB").textContent = "ไม่สามารถดึงข้อมูลได้";
+  });
+
+// เรียกใช้งาน API
+fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d3d38a7ff4e62f98fe27dd9242a36227fe23/pools?include=base_token_price_usd&page=1')
+    .then(response => response.json())
+    .then(data => {
+        // ค้นหาข้อมูลที่ต้องการและแสดงผล
+        const pools = data.data;
+        pools.forEach(pool => {
+            if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
+                TaoPrice = parseFloat(pool.attributes.token_price_usd)
+                document.getElementById('JTAOUSDT').innerText = `${TaoPrice.toFixed(8)}`;
+                main(TaoPrice);
+            }
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+window.addEventListener('load', function() {
+setUSD()
+});
+
+async function main(TaoPrice) {
+    const web3 = new Web3('https://rpc-l1.jibchain.net	');
+    const divider = 10 ** 18;
+    console.log(" Access RPC Success")
+    const contractABI = [{"constant": true,"inputs": [{"name": "_owner", "type": "address"}],"name": "balanceOf","outputs": [{"name": "balance", "type": "uint256"}],"type": "function"}];
+    const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+    const EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+    const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+    const Jusdt = new web3.eth.Contract(contractABI,'0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+    const Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+    const JTAO_Price = TaoPrice;
+    
+    try {
+        address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41'; // JBC-CMJ
+        const JBC_inJCLP = await web3.eth.getBalance(address) / divider; 
+        const CMJ_inJCLP = await call_SC(address, CMJ, 18);
+        address = '0x280608DD7712a5675041b95d0000B9089903B569'; // JBC-JUSDT
+        const JBC_inJULP = await web3.eth.getBalance(address) / divider; 
+        const JDUST_inJULP = await call_SC(address, Jusdt, 18);
+        address = '0xbD5bFF1fBbD83FECD749a328D98F860f7F343c10'; // II-JTAO
+        const II_inIIJTAO = await call_SC(address,II,18);
+        const JTAO_inIIJTAO = await call_SC(address,Jtao,18);
+        address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60'; // EE-JTAO
+        const EE_inEEJTAO = await call_SC(address,EE,18);
+        const JTAO_inEEJTAO = await call_SC(address,Jtao,18);
+
+        const JBC_to_JUSDT = (JDUST_inJULP/JBC_inJULP).toFixed(4); // JUSDT = x JBC  1:10
+        const JBC_to_CMJ = (CMJ_inJCLP/JBC_inJCLP).toFixed(4); // CMJ = x JBC 1:2
+        const CMJ_to_JUSDT = setLocal(JBC_to_JUSDT/JBC_to_CMJ,8);
+        console.log("CMJ TO JUSDT = ",CMJ_to_JUSDT);
+        const JTAO_to_II = (JTAO_inIIJTAO/II_inIIJTAO).toLocaleString(undefined,{maximumFractionDigits:4}); // II = x JTAO
+        const JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4}); // EE = x JTAO
+        
+        const CMJ_to_JTAO = CMJ_to_JUSDT/JTAO_Price;// JTAO = x CMJ
+        // Display
+        document.getElementById("CMJUSDT").textContent = setLocal(CMJ_to_JUSDT,3);
+        document.getElementById("CMJJTAO").textContent = setLocal(CMJ_to_JTAO,4);
+        document.getElementById("IIJTAO").textContent = JTAO_to_II;
+        document.getElementById("EEJTAO").textContent = JTAO_to_EE;
+        document.getElementById("IIUSDT").textContent = setLocal(JTAO_to_II*JTAO_Price,6);
+        document.getElementById("EEUSDT").textContent = setLocal(JTAO_to_EE*JTAO_Price,6);
+
+
+        display(CMJ_to_JTAO,JTAO_to_II,JTAO_to_EE,JTAO_Price);
+    } catch (error) {
+        console.error('Error:', error);
+        console.log('An error occurred while fetching contract information.');
+    }
+
+}
+function setLocal(number,maximumFractionDigits){
+    return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
+  }
+  async function call_SC(address, contract, divider) {
+      try {
+        const result = await contract.methods.balanceOf(address).call();
+        return result / (10 ** divider); // เลื่อนการหารออกจากการเรียกใช้เพื่อความชัดเจน
+      } catch (error) {
+        console.error("Error calling contract method:", error);
+        return null;
+      }
+    }
+
+
+function display(CMJ_to_JTAO,JTAO_to_II,JTAO_to_EE,JTAO_Price){
+    // Calculate and display costs
+CMJ = CMJ_to_JTAO;
+II_JTAO = parseFloat(JTAO_to_II);
+EE_JTAO = parseFloat(JTAO_to_EE);
+const II_COST1 = 888;
+const II_COST2 = 1888;
+const II_COST3 = 2888;
+const II_COST4 = 3888;
+const II_COST5 = 4888;
+const II_COST6 = 5888;
+const II_COST7 = 6888;
+const II_COST8 = 7888;
+const II_COST9 = 8888;
+const EE_COST1 = 18800;
+const EE_COST2 = 28800;
+const EE_COST3 = 42800;
+const EE_COST4 = 63800;
+const EE_COST5 = 95800;
+const EE_COST6 = 142800;
+const EE_COST7 = 214800;
+const EE_COST8 = 321800;
+const EE_COST9 = 481800;
+
+const totalCost1 = ((II_COST1*II_JTAO)+(EE_COST1*EE_JTAO)+CMJ);
+const powCost1 = 4000 / totalCost1;
+document.getElementById('cost_cmj1').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii1').textContent = (II_COST1*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee1').textContent = (EE_COST1*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost1').textContent = totalCost1.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt1').textContent = (totalCost1*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost1').textContent = powCost1.toFixed(2) + ' pow / JTAO';
+
+const totalCost2 = ((II_COST2*II_JTAO)+(EE_COST2*EE_JTAO)+CMJ);
+const powCost2 = 4000 / totalCost2;
+document.getElementById('cost_cmj2').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii2').textContent = (II_COST2*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee2').textContent = (EE_COST2*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost2').textContent = totalCost2.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt2').textContent = (totalCost2*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost2').textContent = powCost2.toFixed(2) + ' pow / JTAO';
+
+const totalCost3 = ((II_COST3*II_JTAO)+(EE_COST3*EE_JTAO)+CMJ);
+const powCost3 = 4000 / totalCost3;
+document.getElementById('cost_cmj3').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii3').textContent = (II_COST3*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee3').textContent = (EE_COST3*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost3').textContent = totalCost3.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt3').textContent = (totalCost3*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost3').textContent = powCost3.toFixed(2) + ' pow / JTAO';
+
+const totalCost4 = ((II_COST4*II_JTAO)+(EE_COST4*EE_JTAO)+CMJ);
+const powCost4 = 6000 / totalCost4;
+document.getElementById('cost_cmj4').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii4').textContent = (II_COST4*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee4').textContent = (EE_COST4*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost4').textContent = totalCost4.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt4').textContent = (totalCost4*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost4').textContent = powCost4.toFixed(2) + ' pow / JTAO';
+
+const totalCost5 = ((II_COST5*II_JTAO)+(EE_COST5*EE_JTAO)+CMJ);
+const powCost5 = 6000 / totalCost5;
+document.getElementById('cost_cmj5').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii5').textContent = (II_COST5*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee5').textContent = (EE_COST5*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost5').textContent = totalCost5.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt5').textContent = (totalCost5*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost5').textContent = powCost5.toFixed(2) + ' pow / JTAO';
+
+const totalCost6 = ((II_COST6*II_JTAO)+(EE_COST6*EE_JTAO)+CMJ);
+const powCost6 = 6000 / totalCost6;
+document.getElementById('cost_cmj6').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii6').textContent = (II_COST6*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee6').textContent = (EE_COST6*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost6').textContent = totalCost6.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt6').textContent = (totalCost6*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost6').textContent = powCost6.toFixed(2) + ' pow / JTAO';
+
+const totalCost7 = ((II_COST7*II_JTAO)+(EE_COST7*EE_JTAO)+CMJ);
+const powCost7 = 8000 / totalCost7;
+document.getElementById('cost_cmj7').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii7').textContent = (II_COST7*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee7').textContent = (EE_COST7*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost7').textContent = totalCost7.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt7').textContent = (totalCost7*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost7').textContent = powCost7.toFixed(2) + ' pow / JTAO';
+
+const totalCost8 = ((II_COST8*II_JTAO)+(EE_COST8*EE_JTAO)+CMJ);
+const powCost8 = 8000 / totalCost8;
+document.getElementById('cost_cmj8').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii8').textContent = (II_COST8*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee8').textContent = (EE_COST8*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost8').textContent = totalCost8.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt8').textContent = (totalCost8*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost8').textContent = powCost8.toFixed(2) + ' pow / JTAO';
+
+const totalCost9 = ((II_COST9*II_JTAO)+(EE_COST9*EE_JTAO)+CMJ);
+const powCost9 = 8000 / totalCost9;
+document.getElementById('cost_cmj9').textContent = (CMJ).toLocaleString(undefined,{maximumFractionDigits: 3,minimumFractionDigits:2});
+document.getElementById('cost_ii9').textContent = (II_COST9*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('cost_ee9').textContent = (EE_COST9*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 8,minimumFractionDigits:2});
+document.getElementById('total_cost9').textContent = totalCost9.toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('total_costusdt9').textContent = (totalCost9*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 2,minimumFractionDigits:2});
+document.getElementById('pow_cost9').textContent = powCost9.toFixed(2) + ' pow / JTAO';
+
+/////// Sumary Cost
+
+sumII = 888;
+document.getElementById('SumII1_1').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_1').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack1 = (sumII*II_JTAO);
+sumII = sumII+II_COST2;
+document.getElementById('SumII1_2').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_2').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack2 = (sumII*II_JTAO);
+
+sumII = sumII+II_COST3;
+document.getElementById('SumII1_3').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_3').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack3 = (sumII*II_JTAO);
+sumII = sumII+II_COST4;
+document.getElementById('SumII1_4').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_4').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack4 = (sumII*II_JTAO);
+sumII = sumII+II_COST5;
+document.getElementById('SumII1_5').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_5').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack5 = (sumII*II_JTAO);
+sumII = sumII+II_COST6;
+document.getElementById('SumII1_6').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_6').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack6 = (sumII*II_JTAO);
+sumII = sumII+II_COST7;
+document.getElementById('SumII1_7').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_7').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack7 = (sumII*II_JTAO);
+sumII = sumII+II_COST8;
+document.getElementById('SumII1_8').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_8').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack8 = (sumII*II_JTAO);
+sumII = sumII+II_COST9;
+document.getElementById('SumII1_9').textContent = (sumII).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumII2_9').textContent = (sumII*II_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack9 = (sumII*II_JTAO);
+
+sumEE = 18800;
+document.getElementById('SumEE1_1').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_1').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack1 = TotalStack1+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST2;
+document.getElementById('SumEE1_2').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_2').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack2 = TotalStack2+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST3;
+document.getElementById('SumEE1_3').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_3').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack3 = TotalStack3+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST4;
+document.getElementById('SumEE1_4').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_4').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack4 = TotalStack4+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST5;
+document.getElementById('SumEE1_5').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_5').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack5 = TotalStack5+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST6;
+document.getElementById('SumEE1_6').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_6').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack6 = TotalStack6+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST7;
+document.getElementById('SumEE1_7').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_7').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack7 = TotalStack7+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST8;
+document.getElementById('SumEE1_8').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_8').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack8 = TotalStack8+(sumEE*EE_JTAO)
+sumEE = sumEE+EE_COST9;
+document.getElementById('SumEE1_9').textContent = (sumEE).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumEE2_9').textContent = (sumEE*EE_JTAO).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack9 = TotalStack9+(sumEE*EE_JTAO)
+
+
+sumCMJ = 1;
+document.getElementById('SumCMJ1_1').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_1').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack1 = TotalStack1+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_2').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_2').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack2 = TotalStack2+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_3').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_3').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack3 = TotalStack3+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_4').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_4').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack4 = TotalStack4+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_5').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_5').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack5 = TotalStack5+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_6').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_6').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack6 = TotalStack6+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1
+document.getElementById('SumCMJ1_7').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_7').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack7 = TotalStack7+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_8').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_8').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack8 = TotalStack8+sumCMJ*CMJ;
+sumCMJ = sumCMJ+1;
+document.getElementById('SumCMJ1_9').textContent = (sumCMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+document.getElementById('sumCMJ2_9').textContent = (sumCMJ*CMJ).toLocaleString(undefined,{maximumFractionDigits: 0});
+TotalStack9 = TotalStack9+sumCMJ*CMJ;
+
+document.getElementById('sumCost_1').textContent = (TotalStack1).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_1').textContent = (TotalStack1*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_2').textContent = (TotalStack2).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_2').textContent = (TotalStack2*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_3').textContent = (TotalStack3).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_3').textContent = (TotalStack3*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_4').textContent = (TotalStack4).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_4').textContent = (TotalStack4*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_5').textContent = (TotalStack5).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_5').textContent = (TotalStack5*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_6').textContent = (TotalStack6).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_6').textContent = (TotalStack6*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_7').textContent = (TotalStack7).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_7').textContent = (TotalStack7*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_8').textContent = (TotalStack8).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_8').textContent = (TotalStack8*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+document.getElementById('sumCost_9').textContent = (TotalStack9).toLocaleString(undefined,{maximumFractionDigits: 2});
+document.getElementById('sumCostUsdt_9').textContent = (TotalStack9*JTAO_Price).toLocaleString(undefined,{maximumFractionDigits: 4});
+
+
+
+}
+
+display()
+</script>
+
+</body>
+</html>
