@@ -511,33 +511,22 @@ const ERC721ABI = [
         F_Swap1 = Swap1.toLocaleString(); // เพิ่มการใช้ toLocaleString()
         Swap2 = Get_Amount_KKUB/Get_Amount_TAO;
         F_Swap2 = Swap2.toLocaleString(undefined, { minimumFractionDigits: 7 });
-    
-
         TAOTHB_Diamon = Swap2 * KUBPRICE;
-
         RATE = KUBPRICE/USDPRICE;
         VALUE_KUB = Get_Amount_KKUB*RATE;
 
         // TAO in Baryon LP
-        address = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
-      // เรียกฟังก์ชัน call_SC() เพื่อรับข้อมูล TAO
-      const Get_Amount_TAO2 = await call_SC(address, TAO, 18);
-      // รอจนกว่าข้อมูลจะถูกรับและ Format เลขที่ได้รับ
+        address2 = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
+      const Get_Amount_TAO2 = await call_SC(address2, TAO, 18);
       const Format_Get_Amount_TAO2 = Get_Amount_TAO2.toLocaleString();
-
-      // เรียกฟังก์ชัน call_SC() เพื่อรับข้อมูล KKUB
-      const Get_Amount_KKUB2 = await call_SC(address, KKUB, 18);
-      // รอจนกว่าข้อมูลจะถูกรับและ Format เลขที่ได้รับ
+      const Get_Amount_KKUB2 = await call_SC(address2, KKUB, 18);
       const Format_Get_Amount_KKUB2 = Get_Amount_KKUB2.toLocaleString();
-
-
         console.log(Get_Amount_KKUB)
         Swap1 = Get_Amount_TAO2/Get_Amount_KKUB2;
         F_Swap1_bar = Swap1.toLocaleString(); // เพิ่มการใช้ toLocaleString()
         Swap2 = Get_Amount_KKUB2/Get_Amount_TAO2;
         F_Swap2_bar = Swap2.toLocaleString(undefined, { minimumFractionDigits: 7 });
         TAOTHB_Baryon = Swap2 * KUBPRICE;
-        
         RATE = KUBPRICE/USDPRICE;
         VALUE_KUB = Get_Amount_KKUB2*RATE;
 
