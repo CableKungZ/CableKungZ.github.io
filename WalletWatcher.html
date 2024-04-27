@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ERC20 Token Viewer</title>
+<title>DaoBuddy Wallet Watcher</title>
+    <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/DaoBuddy.th.png">
+
 <style>
   
   body {
     font-family: Arial, sans-serif;
     font-size: 18px;
+    padding-bottom: 400px;
   }
   
   .products-container {
@@ -114,6 +117,14 @@
     font-family: 'Open Sans', Arial, sans-serif;
     background: #f7f7f7; /* Light grey background for contrast */
   }
+  .content {
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto; /* จะทำให้ content อยู่กึ่งกลางในหน้าจอ */
+    border: 2px solid #ccc; /* เพิ่มเส้นขอบสีเทา */
+    border-radius: 5px; /* เพิ่มมุมโค้งให้กับพื้นที่ content */
+  }
   
   .card {
     border: none;
@@ -212,13 +223,15 @@
       grid-template-columns: repeat(4, 1fr); /* 4 columns per row by default */
       gap: 20px;
     }
-  #networth{
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  #networth p{
-    margin-left: 30px;
-  }
+    #networth {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    
+    #networth p {
+      margin-left: 30px;
+    }
+    
   p{
     display: block;
     margin: 0px;
@@ -258,6 +271,93 @@
     font-size: 22px;
     font-weight: bold;
   }
+  .navbar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow items to wrap */
+}
+.button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 16px 35px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+  #transferHistory{
+    display: none;
+  }
+/* Style the select box */
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the selected item */
+.select-selected {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Style the arrow icon */
+.select-selected::after {
+  content: "";
+  background-color: #555;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: 5px;
+}
+
+/* Style the items (options) */
+.select-items div {
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Hide the items when the select box is closed */
+.select-hide {
+  display: none;
+}
+
+/* Show the dropdown container (default hidden) */
+.select-items {
+  position: absolute;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 5px;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: none;
+  flex-direction: column;
+}
+
+/* Show the items when the select box is clicked */
+.select-selected:hover + .select-items,
+.select-items:hover {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style the selected item when hovering over the dropdown container */
+.select-items div:hover {
+  background-color: #ddd;
+}
 
 </style>
 </head>
@@ -336,160 +436,310 @@
   
     <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
   </div>
-<div class="center">
-  <h5 class="card-title center">ERC20 Token Balance Viewer</h5>
-  <label for="wallet_address" class="center">Enter Wallet Address:</label>
-  <input type="text" class="center" id="wallet_address" placeholder="Enter Wallet Address" style="width: 400px;">
-  <button onclick="getBalance()">Get Balance</button>
-  <div id="networth"class="center">
-    <p>Total Networth</p>
-    <p>~<span id="networth_CMJ"></span> CMJ</p>
-    <p>~<span id="networth_JBC"></span> JBC,</p>
-    <p>~<span id="networth_USD"></span> USD,</p>
-    <p>~<span id="networth_THB"></span> THB,</p>
+  <div class="navbar">
+    <h1 onclick="toggleCards('walletViewer')" class="button">Wallet Viewer</h1>
+    <h1 onclick="alert('The Feature will release in 2027'),toggleCards('#transferHistory')" class="button">Transfer History *Not Update Yet</h1> 
   </div>
+  <div class="content">
+    <div class="walletViewer" style="display: none;"> <!-- เพิ่ม style="display: none;" เพื่อซ่อนตั้งแต่เริ่มต้น -->
+      <h5 class="card-title center">ERC20 Token Balance Viewer</h5>
+      <div id="networth"class="center">
+        <p>Total Networth</p>
+        <p>~<span id="networth_CMJ"></span> CMJ</p>
+        <p>~<span id="networth_JBC"></span> JBC,</p>
+        <p>~<span id="networth_USD"></span> USD,</p>
+        <p>~<span id="networth_THB"></span> THB,</p>
+        </div>
+      <label for="wallet_address" class="center">Enter Wallet Address:</label>
+      <input type="text" class="center" id="wallet_address" placeholder="Enter Wallet Address" style="width: 400px;">
+      <button onclick="getBalance()">Get Balance</button>
+      
+        <div class="products-container">
+          <h2 class="center">Holding Token</h2>
+          <div class="card-row">
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">JBC (gas): <span id="jbc_bal"></span><p>Worth: <span id="worth1"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="JUSDT" width="20" height="20">JUSDT: <span id="jusdt_bal"></span><p>Worth: <span id="worth28"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20">CMJ: <span id="cmj_bal"></span><p>Worth: <span id="worth2"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20">Meow: <span id="Meow_bal"></span><p>Worth: <span id="worth3"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">WJBC (MEOW): <span id="WJBC_bal"></span><p>Worth: <span id="worth4"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">WJBC (JIB): <span id="WJBCJIB_bal"></span><p>Worth: <span id="worth5"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20">Jtao: <span id="Jtao_bal"></span><p>Worth: <span id="worth6"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20">Wood: <span id="Wood_bal"></span><p>Worth: <span id="worth7"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20">Tuna: <span id="Tuna_bal"></span><p>Worth: <span id="worth8"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20">Mice: <span id="Mice_bal"></span><p>Worth: <span id="worth9"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20">Cu: <span id="Cu_bal"></span><p>Worth: <span id="worth10"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20">Jasp: <span id="Jasp_bal"></span><p>Worth: <span id="worth11"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20">Os: <span id="Os_bal"></span><p>Worth: <span id="worth12"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20">Jdao: <span id="Jdao_bal"></span><p>Worth: <span id="worth13"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20">Mt: <span id="Mt_bal"></span><p>Worth: <span id="worth14"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia6rbj3o47qbw7o3vqd6ogylwjcjay5phsve5pixfvmw7nexwx3re" alt="$Vbag" width="20" height="20">Vabag: <span id="Vabag_bal"></span><p>Worth: <span id="worth15"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20">Bbq: <span id="Bbq_bal"></span><p>Worth: <span id="worth16"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20">Pza: <span id="Pza_bal"></span><p>Worth: <span id="worth17"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20">Ctuna: <span id="Ctuna_bal"></span><p>Worth: <span id="worth18"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20">Sx31: <span id="Sx31_bal"></span><p>Worth: <span id="worth19"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20">Sil: <span id="Sil_bal"></span><p>Worth: <span id="worth20"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20">Gold: <span id="Gold_bal"></span><p>Worth: <span id="worth21"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20">Plat: <span id="Plat_bal"></span><p>Worth: <span id="worth22"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20">Swar: <span id="Swar_bal"></span><p>Worth: <span id="worth23"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20">Angb: <span id="Angb_bal"></span><p>Worth: <span id="worth24"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafybeiegwsyuqu5d47hobxpnuj5zdsy2fgzautcobr6imm3soc4r6uibg4" alt="$Gear" width="20" height="20">Gear: <span id="Gear_bal"></span><p>Worth: <span id="worth25"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20">II: <span id="II_bal"></span><p>Worth: <span id="worth26"></span> CMJ</p></div>
+            <div class="token"><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20">EE: <span id="EE_bal"></span><p>Worth: <span id="worth27"></span> CMJ</p></div>
+          </div>
+    
+          <h2 class="center">Pending Reward</h2>
+          <h2 class="center">Staking</h2>
+          <div class="card-row">
+              <div class="tokenPending">
+                <p class="header">LP: Farmining Pool JBC-CMJ</p>
+                <span>Total Stake : <span id="stakeJBCCMJ"></span> </span>
+                <span>Pending Reward : <span id="pendingJBCCMJ"></span> JDAO</span>
+              </div>
+              <div class="tokenPending">
+                <p class="header">LP: Farmining Pool CMJ</p>
+                <span>Total Stake : <span id="stakeCMJ"></span> </span>
+                <span>Pending Reward : <span id="pendingCMJ"></span> JDAO</span>
+              </div>
+              <div class="tokenPending">
+                <p class="header">LP: Farmining Pool JBC-JUSDT</p>
+                <span>Total Stake : <span id="stakeJBCJUSDT"></span> </span>
+                <span>Pending Reward : <span id="pendingJBCJUSDT"></span> JDAO</span>
+              </div>
+              <div class="tokenPending">
+                <p class="header">Field : Tuna Lake</p>
+                <span>Total Stake : <span id="stakeTuna"></span> </span>
+                <span>Pending Reward : <span id="pendingTuna"></span> Tuna</span>
+              </div>
+              <div class="tokenPending">
+                <p class="header">Field : Old WareHouse</p>
+                <span>Total Stake : <span id="stakeMice"></span> </span>
+                <span>Pending Reward : <span id="pendingMice"></span> Mice</span>
+              </div>
+              <div class="tokenPending">
+                <p class="header">Field : The Heaven Land</p>
+                <span>Total Stake : <span id="stakeMHL"></span> </span>
+                <span>Pending Reward : <span id="pendingMHL"></span> Gold</span>
+              </div>
+              <div class="tokenPending">
+                <p class="header">Field : Mech Harvest Zone</p>
+                <span>Total Stake(JTAO) : <span id="staketokenMHZ"></span> </span>
+                <span>Total Stake(NFT) : <span id="stakeMHZ"></span> </span>
+                <span>Pending Reward : <span id="pendingMHZ"></span> $Gear</span>
+              </div>
+          </div>
+          <h2 class="center">Dungeon</h2>
+          <div class="card-row">
+          <div class="tokenPending">
+              <p class="header">Dungeon: Copper Mine</p>
+              <span>Status: <span id="CUM_Status">..Loading</span></span>
+              <span>Power: <span id="CUM_Pow">0</span></span>
+              <span>Reward/Day: <span id="CUM_reward"></span> $CU</span>
+              <span>Pending: <span id="CUM_Pending"></span> $CU</span>
+              <span>End At: <span id="CUM_End"></span></span>
+            </div>
+            <div class="tokenPending">
+              <p class="header">Dungeon: Jasper Cave</p>
+              <span>Status: <span id="JAC_Status">..Loading</span></span>
+              <span>Power: <span id="JAC_Pow">0</span></span>
+              <span>Reward/Day: <span id="JAC_reward"></span> $JASP</span>
+              <span>Pending: <span id="JAC_Pending"></span> $JASP</span>
+              <span>End At: <span id="JAC_END"></span></span>
+            </div>
+            <div class="tokenPending">
+              <p class="header">Dungeon: Deamon World</p>
+              <span>Status: <span id="DW_Status">..Loading</span></span>
+              <span>Power: <span id="DW_Pow">0</span></span>
+              <span>Reward/Day: <span id="DW_reward"></span> $ANGB</span>
+              <span>Pending: <span id="DW_Pending"></span> $ANGB</span>
+              <span>End At: <span id="DW_END"></span></span>
+            </div>
+            <div class="tokenPending">
+              <p class="header">Dungeon: Cryptic Cogs</p>
+              <span>Status: <span id="CC_Status">..Loading</span></span>
+              <span>Power: <span id="CC_Pow">0</span></span>
+              <span>Reward/Day: <span id="CC_reward"></span> $EE</span>
+              <span>Pending: <span id="CC_Pending"></span> $EE</span>
+              <span>End At: <span id="CC_END"></span></span>
+            </div>
+          </div>
+        </div>
+        <div id="Purchasehistory" class="center">
+          <h1>Purchase/Redeem History</h1>
+          <div id="totalRedeem"class="center">
+            <h2>Total Spent</h2>
+          </div>
+          <h4 style="color: blue;" onclick="downloadExcel()">Download xlsx (bug for txhash fix later)</h4>
+          <table id="purchaseTable" width="100%" border="1">
+              <thead>
+                  <tr>
+                      <th>Tx Hash</th>
+                      <th>Item Name</th>
+                      <th>ID</th>
+                      <th>Method</th>
+                      <th>Price</th>
+                  </tr>
+              </thead>
+              <tbody id="purchaseTableBody">
+                  <!-- Table rows will be dynamically added here -->
+              </tbody>
+          </table>
+      </div>
+      </div>
+
+      <div class="transferHistory" style="display: none;">
+        <h1>Transfer History</h1>
+        <div class="center">
+          <label for="wallet_address">Enter Wallet Address:</label>
+
+          <input type="text" id="wallet_address" placeholder="Enter Wallet Address" style="width: 400px;">
+        </div>
+        <div class="center">
+          <label for="more">Not Less Than:</label>
+          <input type="text" id="more" placeholder="0" style="width: 40px;">
+          <label for="select_token">Select Token:</label>
+          <div class="custom-select" style="width: 120px;">
+            <select id="select_token" style="display: none;">
+              <option value="token1">JUSDT</option>
+              <option value="token2">CMJ</option>
+              <option value="token3">JBC</option>
+            </select>
+            <div class="select-selected" onclick="openSelect(event)" style="height: 40px; padding-right:20px;">
+            </div>
+            <div class="select-items">
+              <div onclick="selectOption(this)"><img src="https://nftstorage.link/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="JUSDT" style="width: 40px; height: 40px;margin-right:10px;"> JUSDT</div>
+              <div onclick="selectOption(this)"><img src="token2.png" alt="Token 2" style="width: 40px; height: 40px;"> Token 2</div>
+              <div onclick="selectOption(this)"><img src="token3.png" alt="Token 3" style="width: 40px; height: 40px;"> Token 3</div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="center">
+          <button onclick="getBalance()">Get Balance</button>
+          <button onclick="fetchTransferHistory()">Get Transfer History</button>
+        </div>
+        <p>Transfer in : <span id="in"></span></p>
+        <p>Transfer out : <span id="out"></span></p>
+        <p>Pnl : <span id="PNL"></span> </p>
+        <div id="Purchasehistory" class="center">
+          <table id="purchaseTable" width="100%" border="1">
+              <thead>
+                  <tr>
+                      <th>Tx Hash</th>
+                      <th>From</th>
+                      <th>To</th>
+                      <th>Value</th>
+                      <th>Token</th>
+                  </tr>
+              </thead>
+              <tbody id="purchaseTableBody">
+              </tbody>
+          </table>
+      </div>
+    </div>
+      
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
-
-  <div>
-    <div class="products-container">
-      <h2 class="center">Holding Token</h2>
-      <div class="card-row">
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">JBC (gas): <span id="jbc_bal"></span><p>Worth: <span id="worth1"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="JUSDT" width="20" height="20">JUSDT: <span id="jusdt_bal"></span><p>Worth: <span id="worth28"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20">CMJ: <span id="cmj_bal"></span><p>Worth: <span id="worth2"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20">Meow: <span id="Meow_bal"></span><p>Worth: <span id="worth3"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">WJBC (MEOW): <span id="WJBC_bal"></span><p>Worth: <span id="worth4"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">WJBC (JIB): <span id="WJBCJIB_bal"></span><p>Worth: <span id="worth5"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20">Jtao: <span id="Jtao_bal"></span><p>Worth: <span id="worth6"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20">Wood: <span id="Wood_bal"></span><p>Worth: <span id="worth7"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20">Tuna: <span id="Tuna_bal"></span><p>Worth: <span id="worth8"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20">Mice: <span id="Mice_bal"></span><p>Worth: <span id="worth9"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20">Cu: <span id="Cu_bal"></span><p>Worth: <span id="worth10"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20">Jasp: <span id="Jasp_bal"></span><p>Worth: <span id="worth11"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20">Os: <span id="Os_bal"></span><p>Worth: <span id="worth12"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20">Jdao: <span id="Jdao_bal"></span><p>Worth: <span id="worth13"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20">Mt: <span id="Mt_bal"></span><p>Worth: <span id="worth14"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia6rbj3o47qbw7o3vqd6ogylwjcjay5phsve5pixfvmw7nexwx3re" alt="$Vbag" width="20" height="20">Vabag: <span id="Vabag_bal"></span><p>Worth: <span id="worth15"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20">Bbq: <span id="Bbq_bal"></span><p>Worth: <span id="worth16"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20">Pza: <span id="Pza_bal"></span><p>Worth: <span id="worth17"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20">Ctuna: <span id="Ctuna_bal"></span><p>Worth: <span id="worth18"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20">Sx31: <span id="Sx31_bal"></span><p>Worth: <span id="worth19"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20">Sil: <span id="Sil_bal"></span><p>Worth: <span id="worth20"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20">Gold: <span id="Gold_bal"></span><p>Worth: <span id="worth21"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20">Plat: <span id="Plat_bal"></span><p>Worth: <span id="worth22"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20">Swar: <span id="Swar_bal"></span><p>Worth: <span id="worth23"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20">Angb: <span id="Angb_bal"></span><p>Worth: <span id="worth24"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafybeiegwsyuqu5d47hobxpnuj5zdsy2fgzautcobr6imm3soc4r6uibg4" alt="$Gear" width="20" height="20">Gear: <span id="Gear_bal"></span><p>Worth: <span id="worth25"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20">II: <span id="II_bal"></span><p>Worth: <span id="worth26"></span> CMJ</p></div>
-        <div class="token"><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20">EE: <span id="EE_bal"></span><p>Worth: <span id="worth27"></span> CMJ</p></div>
-      </div>
-
-      <h2 class="center">Pending Reward</h2>
-      <h2 class="center">Staking</h2>
-      <div class="card-row">
-          <div class="tokenPending">
-            <p class="header">LP: Farmining Pool JBC-CMJ</p>
-            <span>Total Stake : <span id="stakeJBCCMJ"></span> </span>
-            <span>Pending Reward : <span id="pendingJBCCMJ"></span> JDAO</span>
-          </div>
-          <div class="tokenPending">
-            <p class="header">LP: Farmining Pool CMJ</p>
-            <span>Total Stake : <span id="stakeCMJ"></span> </span>
-            <span>Pending Reward : <span id="pendingCMJ"></span> JDAO</span>
-          </div>
-          <div class="tokenPending">
-            <p class="header">LP: Farmining Pool JBC-JUSDT</p>
-            <span>Total Stake : <span id="stakeJBCJUSDT"></span> </span>
-            <span>Pending Reward : <span id="pendingJBCJUSDT"></span> JDAO</span>
-          </div>
-          <div class="tokenPending">
-            <p class="header">Field : Tuna Lake</p>
-            <span>Total Stake : <span id="stakeTuna"></span> </span>
-            <span>Pending Reward : <span id="pendingTuna"></span> Tuna</span>
-          </div>
-          <div class="tokenPending">
-            <p class="header">Field : Old WareHouse</p>
-            <span>Total Stake : <span id="stakeMice"></span> </span>
-            <span>Pending Reward : <span id="pendingMice"></span> Mice</span>
-          </div>
-          <div class="tokenPending">
-            <p class="header">Field : The Heaven Land</p>
-            <span>Total Stake : <span id="stakeMHL"></span> </span>
-            <span>Pending Reward : <span id="pendingMHL"></span> Gold</span>
-          </div>
-          <div class="tokenPending">
-            <p class="header">Field : Mech Harvest Zone</p>
-            <span>Total Stake(JTAO) : <span id="staketokenMHZ"></span> </span>
-            <span>Total Stake(NFT) : <span id="stakeMHZ"></span> </span>
-            <span>Pending Reward : <span id="pendingMHZ"></span> $Gear</span>
-          </div>
-      </div>
-      <h2 class="center">Dungeon</h2>
-      <div class="card-row">
-      <div class="tokenPending">
-          <p class="header">Dungeon: Copper Mine</p>
-          <span>Status: <span id="CUM_Status">..Loading</span></span>
-          <span>Power: <span id="CUM_Pow">0</span></span>
-          <span>Reward/Day: <span id="CUM_reward"></span> $CU</span>
-          <span>Pending: <span id="CUM_Pending"></span> $CU</span>
-          <span>End At: <span id="CUM_End"></span></span>
-        </div>
-        <div class="tokenPending">
-          <p class="header">Dungeon: Jasper Cave</p>
-          <span>Status: <span id="JAC_Status">..Loading</span></span>
-          <span>Power: <span id="JAC_Pow">0</span></span>
-          <span>Reward/Day: <span id="JAC_reward"></span> $JASP</span>
-          <span>Pending: <span id="JAC_Pending"></span> $JASP</span>
-          <span>End At: <span id="JAC_END"></span></span>
-        </div>
-        <div class="tokenPending">
-          <p class="header">Dungeon: Deamon World</p>
-          <span>Status: <span id="DW_Status">..Loading</span></span>
-          <span>Power: <span id="DW_Pow">0</span></span>
-          <span>Reward/Day: <span id="DW_reward"></span> $ANGB</span>
-          <span>Pending: <span id="DW_Pending"></span> $ANGB</span>
-          <span>End At: <span id="DW_END"></span></span>
-        </div>
-        <div class="tokenPending">
-          <p class="header">Dungeon: Cryptic Cogs</p>
-          <span>Status: <span id="CC_Status">..Loading</span></span>
-          <span>Power: <span id="CC_Pow">0</span></span>
-          <span>Reward/Day: <span id="CC_reward"></span> $EE</span>
-          <span>Pending: <span id="CC_Pending"></span> $EE</span>
-          <span>End At: <span id="CC_END"></span></span>
-        </div>
-      </div>
-    </div>
-      <div id="Purchasehistory" class="center">
-        <h1>Purchase/Redeem History</h1>
-        <div id="totalRedeem"class="center">
-          <h2>Total Spent</h2>
-        </div>
-        <h4 style="color: blue;" onclick="downloadExcel()">Download xlsx (bug for txhash fix later)</h4>
-        <table id="purchaseTable" width="100%" border="1">
-            <thead>
-                <tr>
-                    <th>Tx Hash</th>
-                    <th>Item Name</th>
-                    <th>ID</th>
-                    <th>Method</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody id="purchaseTableBody">
-                <!-- Table rows will be dynamically added here -->
-            </tbody>
-        </table>
-    </div>
-
-    
-    
-    </div>
-  </div>
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+        function fetchTransferHistory() {
+            var walletAddress = document.getElementById("wallet_address").value;
+            var token_address = '0x0E2610730A3c42fd721B289BEe092D9AD1C76890';
+            var transfers_promises = [];
+
+            transfers_promises.push(getTokenTransfers(walletAddress, token_address));
+
+            Promise.all(transfers_promises)
+                .then(function(transfers) {
+                    var transfers_from = transfers[0][0]; 
+                    var transfers_to = transfers[0][1]; 
+
+                    processTransfers(transfers_from, 'from', 'purchaseTableBody');
+                    processTransfers(transfers_to, 'to', 'purchaseTableBody');
+                })
+                .catch(function(error) {
+                    console.error("Error fetching token transfers:", error);
+                });
+        }
+
+        function processTransfers(transfers, direction, tableid) {
+            var totalAmount = 0;
+
+            transfers.forEach(function(transfer) {
+                var value = parseInt(transfer.data);
+                totalAmount += value;
+            });
+
+            var directionText = (direction === 'from') ? 'Transfer out' : 'Transfer in';
+            var newRow = `<tr><td>${directionText}</td><td>${totalAmount.toLocaleString()}</td></tr>`;
+            document.getElementById(tableid).insertAdjacentHTML('beforeend', newRow);
+        }
+
+        function getTokenTransfers(walletAddress, token_address) {
+            var event_filter = {
+                'fromBlock': 'earliest',
+                'toBlock': 'latest',
+                'address': token_address,
+                'topics': [
+                    web3.utils.keccak256('Transfer(address,address,uint256)'),
+                    '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase(),
+                    null 
+                ]
+            };
+
+            var event_filter_reverse = {
+                'fromBlock': 'earliest',
+                'toBlock': 'latest',
+                'address': token_address,
+                'topics': [
+                    web3.utils.keccak256('Transfer(address,address,uint256)'),
+                    null,
+                    '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase()
+                ]
+            };
+
+            var transfers_from = web3.eth.getPastLogs(event_filter);
+            var transfers_to = web3.eth.getPastLogs(event_filter_reverse);
+
+            return Promise.all([transfers_from, transfers_to]); 
+        }
+    </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var allCards = document.querySelectorAll('.walletViewer,.transferHistory');
+    for (var i = 0; i < allCards.length; i++) {
+      allCards[i].style.display = 'none';
+    }
+  });
+
+  function toggleCards(showType) {
+    // Hide all cards first
+    var allCards = document.querySelectorAll('.walletViewer,.transferHistory');
+    for (var i = 0; i < allCards.length; i++) {
+      allCards[i].style.display = 'none';
+    }
+
+    var showCards = document.querySelectorAll('.' + showType);
+    for (var i = 0; i < showCards.length; i++) {
+      showCards[i].style.display = 'block';
+    }
+  }
+  function openSelect(event) {
+    var selectElement = event.target.parentElement.querySelector('select');
+    selectElement.classList.toggle("select-hide");
+  }
+  
+  function selectOption(option) {
+    var selectElement = option.parentElement.parentElement.querySelector('select');
+    var selectedOption = option.innerText;
+    var selectedIndex = Array.prototype.indexOf.call(option.parentElement.children, option);
+    selectElement.selectedIndex = selectedIndex;
+    selectElement.dispatchEvent(new Event('change'));
+    option.parentElement.previousElementSibling.innerHTML = option.innerHTML;
+    option.parentElement.classList.add("select-hide");
+  }
+  
+</script>
 <script>
   function setUSD(){
   const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
@@ -542,6 +792,7 @@ fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d
       return new web3.eth.Contract(abi, contractAddress);
     } catch (error) {
       console.error('Error loading contract:', error);
+      alert("คุณถูก Block จาก API โปรดกลับมาใช้งานในอีก 1 ชั่วโมง")
     }
   }
 
@@ -1318,7 +1569,10 @@ async function call_SC(address, contract, divider) {
                     // Get the reward for the current index
                     const getReward = await TunaField.methods.calculateRewards(i).call();
                     totalTuna += parseInt(getReward); // Assuming getReward is in integer format
-                }
+                    
+                  }
+                  document.getElementById("stakeTuna").innerHTML = indicesToCollect.length.toLocaleString();
+                    document.getElementById("pendingTuna").innerHTML = (totalTuna/10**18).toLocaleString();
             } catch (error) {
                 console.error(`Error fetching data for index ${i}:`, error);
                 // Handle the error if needed
@@ -1326,10 +1580,7 @@ async function call_SC(address, contract, divider) {
         }
     
         // Now you have the totalTuna and the indices to collect
-        console.log("Indices to collect:", indicesToCollect);
-        console.log("Total Tuna rewards to collect:", totalTuna);
-        document.getElementById("stakeTuna").innerHTML = indicesToCollect.length.toLocaleString();
-        document.getElementById("pendingTuna").innerHTML = (totalTuna/10**18).toLocaleString();
+        
     }
     async function collectMiceRewards() {
       let totalMice = 0;
@@ -1343,17 +1594,18 @@ async function call_SC(address, contract, divider) {
                 MiceindicesToCollect.push(i);
                   const getReward = await MiceField.methods.calculateRewards(i).call();
                   totalMice += parseInt(getReward); // Assuming getReward is in integer format
-              }
+                  
+                }
+                document.getElementById("stakeMice").innerHTML = (MiceindicesToCollect.length).toLocaleString();
+                  document.getElementById("pendingMice").innerHTML = (totalMice/10**18).toLocaleString();
           } catch (error) {
               console.error(`Error fetching data for index ${i}:`, error);
           }
       }
   
       // Now you have the totalTuna and the indices to collect
-      console.log("Indices to collect:", MiceindicesToCollect);
-      console.log("Total Tuna rewards to collect:", totalMice);
-      document.getElementById("stakeMice").innerHTML = (MiceindicesToCollect.length).toLocaleString();
-      document.getElementById("pendingMice").innerHTML = (totalMice/10**18).toLocaleString();
+      
+      
   }
   async function collectTHLRewards() {
     let totalGold = 0;
@@ -1368,45 +1620,41 @@ async function call_SC(address, contract, divider) {
                 const getReward = await FieldTHL.methods.calculateRewards1(i).call();
                 totalGold += parseInt(getReward); // Assuming getReward is in integer format
             }
+            document.getElementById("stakeMHL").innerHTML = (GoldindicesToCollect.length).toLocaleString();
+              document.getElementById("pendingMHL").innerHTML = (totalGold/10**18).toLocaleString();
         } catch (error) {
             console.error(`Error fetching data for index ${i}:`, error);
         }
     }
-    console.log("Indices to collect:", GoldindicesToCollect);
-    console.log("Total Gold rewards to collect:", totalGold);
-    document.getElementById("stakeMHL").innerHTML = (GoldindicesToCollect.length).toLocaleString();
-    document.getElementById("pendingMHL").innerHTML = (totalGold/10**18).toLocaleString();
 }
 async function collectGearRewards(){
   TDMID = [39190528,39059456,38928384,38797312,38666240,38535168,38404096,38273024,38141952,38010880,37879808,37748736,37617664,37486592,37355520,37224448,37093376,36962304,36831232,36700160,36569088,36438016,36306944,36175872,36044800,35913728,35782656,35651584,35520512,35389440,35258368,35127296,34996224,34865152,34734080,34603008,34471936,34340864,34209792,34078720,33947648,33816576,33685504,33554432,33423360,33292288,33161216,33030144,32899072,32768000,32636928,32505856,32374784,32243712,32112640,31981568,31850496,31719424,31588352,31457280,31326208,31195136,31064064,30932992,30801920,30670848,30539776,30408704,30277632,30146560,30015488,29884416,29753344,29622272,29491200,29360128,29229056,29097984,28966912,28835840,28704768,28573696,28442624,28311552,28180480,28049408,27918336,27787264,27656192,27525120,27394048,27262976,27131904,27000832,26869760,26738688,26607616,26476544,26345472,26214400,26083328,25952256,25821184,25690112,25559040,25427968,25296896,25165824,25034752,24903680,24772608,24641536,24510464,24379392,24248320,24117248,23986176,23855104,23724032,23592960,23461888,23330816,23199744,23068672,22937600,22806528,22675456,22544384,22413312,22282240,22151168,22020096,21889024,21757952,21626880,21495808,21364736,21233664,21102592,20971520,20840448,20709376,20578304,20447232,20316160,20185088,20054016,19922944,19791872,19660800,19529728,19398656,19267584,19136512,19005440,18874368,18743296,18612224,18481152,18350080,18219008,18087936,17956864,17825792,17694720,17563648,17432576,17301504,17170432,17039360,16908288,16777216,16646144,16515072,16384000,16252928,16121856,15990784,15859712,15728640,15597568,15466496,15335424,15204352,15073280,14942208,14811136,14680064,14548992,14417920,14286848,14155776,14024704,13893632,13762560,13631488,13500416,13369344,13238272,13107200,12976128,12845056,12713984,12582912,12451840,12320768,12189696,12058624,11927552,11796480,11665408,11534336,11403264,11272192,11141120,11010048,10878976,10747904,10616832,10485760,10354688,10223616,10092544,9961472,9830400,9699328,9568256,9437184,9306112,9175040,9043968,8912896,8781824,8650752,8519680,8388608,8257536,8126464,7995392,7864320,7733248,7602176,7471104,7340032,7208960,7077888,6946816,6815744,6684672,6553600,6422528,6291456,6160384,6029312,5898240,5767168,5636096,5505024,5373952,5242880,5111808,4980736,4849664,4718592,4587520,4456448,4325376,4194304,4063232,3932160,3801088,3670016,3538944,3407872,3276800,3145728,3014656,2883584,2752512,2621440,2490368,2359296,2228224,2097152,1966080,1835008,1703936,1572864,1441792,1310720,1179648,1048576,917504,786432,655360,524288,393216,262144,131072,0];
-  console.log(TDMID.length)
   let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
   document.getElementById("staketokenMHZ").innerHTML = (stakeJTAO[0]/10**18).toLocaleString();
-  penndingGear = await MHZField.methods.calculateRewards(0, walletAddress, false).call();
-  document.getElementById("pendingMHZ").innerHTML = (penndingGear/10**18).toLocaleString();
-  let TaodumOwnerID = []; // เริ่มต้นพร้อมแก้ไข
+  penndingGear = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
+  document.getElementById("pendingMHZ").innerHTML = (penndingGear).toLocaleString();
+  let TaodumOwnerID = []; 
 
-  // ลองใช้ try-catch เพื่อจัดการข้อผิดพลาดที่เกิดขึ้น
   try {
-      let TaodumOwnerID = []; // เริ่มต้นพร้อมแก้ไข
+      let TaodumOwnerID = [];
       for (let i = 0; i <= 299; i++){
-          console.log("Call ID ",TDMID[i])
           const data = await MHZField.methods.nftStake(TDMID[i]).call();
-          console.log("Data", data);
           if (data[0] === walletAddress){
               TaodumOwnerID.push(TDMID[i]);
-              const getReward = await MHZField.methods.calculateRewards(TDMID[i], 0, true).call();
-              console.log(getReward/10**18);
-              penndingGear += parseInt(getReward);
-          }
+              const getReward = await MHZField.methods.calculateRewards(TDMID[i],walletAddress, "true").call();
+              penndingGear += getReward/10**18;
+              
+            }
+            document.getElementById("pendingMHZ").innerText = (penndingGear).toLocaleString();
+              document.getElementById("stakeMHZ").innerText = (TaodumOwnerID.length).toLocaleString();
       }
+      
   } catch(error) {
       console.error('Error fetching data:', error);
   }
 
   // แสดงผลลัพธ์ที่ได้
-  document.getElementById("pendingMHZ").innerHTML = (penndingGear/10**18).toLocaleString();
-  document.getElementById("stakeMHZ").innerHTML = (TaodumOwnerID.length).toLocaleString();
+  
 }
 
 
@@ -1772,6 +2020,68 @@ function convertColumnsToString(sheet, columns, excludeColumns) {
 
 function resetPurchaseTable() {
   document.getElementById("purchaseTableBody").innerHTML = '';
+}
+
+function fetchTransferHistory() {
+  var walletAddress = document.getElementById("wallet_address").value;
+  var token_address = '0x0E2610730A3c42fd721B289BEe092D9AD1C76890';
+  var transfers_promises = [];
+
+  transfers_promises.push(getTokenTransfers(walletAddress, token_address));
+
+  Promise.all(transfers_promises)
+      .then(function(transfers) {
+          var transfers_from = transfers[0][0]; 
+          var transfers_to = transfers[0][1]; 
+
+          processTransfers(transfers_from, 'from', 'purchaseTableBody');
+          processTransfers(transfers_to, 'to', 'purchaseTableBody');
+      })
+      .catch(function(error) {
+          console.error("Error fetching token transfers:", error);
+      });
+}
+
+function processTransfers(transfers, direction, tableid) {
+  var totalAmount = 0;
+
+  transfers.forEach(function(transfer) {
+      var value = parseInt(transfer.data);
+      totalAmount += value;
+  });
+
+  var directionText = (direction === 'from') ? 'Transfer out' : 'Transfer in';
+  var newRow = `<tr><td>${directionText}</td><td>${totalAmount.toLocaleString()}</td></tr>`;
+  document.getElementById(tableid).insertAdjacentHTML('beforeend', newRow);
+}
+
+function getTokenTransfers(walletAddress, token_address) {
+  var event_filter = {
+      'fromBlock': 'earliest',
+      'toBlock': 'latest',
+      'address': token_address,
+      'topics': [
+          web3.utils.keccak256('Transfer(address,address,uint256)'),
+          '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase(),
+          null 
+      ]
+  };
+
+  var event_filter_reverse = {
+      'fromBlock': 'earliest',
+      'toBlock': 'latest',
+      'address': token_address,
+      'topics': [
+          web3.utils.keccak256('Transfer(address,address,uint256)'),
+          null,
+          '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase()
+      ]
+  };
+
+  var transfers_from = web3.eth.getPastLogs(event_filter);
+  var transfers_to = web3.eth.getPastLogs(event_filter_reverse);
+
+  return Promise.all([transfers_from, transfers_to]); 
 }
 </script>
 </body>
