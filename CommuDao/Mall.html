@@ -221,21 +221,33 @@
           display: flex; /* ใช้ Flexbox เพื่อจัดวาง */
           justify-content: space-between; /* ให้โลโก้อยู่ซ้ายสุดและข้อความอยู่ขวาสุด */
           align-items: center; /* จัดวางพื้นที่ด้านในของ footer ให้อยู่ตรงกลาง */
-          padding: 5px;
+          padding-top: 10px;
           z-index: 1000; /* ทำให้ footer อยู่ข้างบน */
       }
       /* ขนาดโลโก้ */
       .logo {
-          width: 25px;
-          height: 25px;
+          width: 40px;
+          height: 40px;
           display: inline-block;
           vertical-align: middle;
       }
-      /* ขนาดข้อความ Donation */
-      .donation {
-          display: inline-block;
-          vertical-align: middle;
-      }
+      /* ข้อความอนิเมชัน */
+@keyframes textAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ข้อความ Donation */
+.donation {
+  display: inline-block;
+  vertical-align: middle;
+  color:red;
+  font-size: 40px;
+  margin-right: 40px;
+  animation: textAnimation 2s infinite; /* ทำให้ข้อความทรงขยายและย่อกลับ */
+  
+}
       /* ข้อความ Wallet Address */
       .wallet-address {
         display: flex;
