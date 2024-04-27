@@ -1201,7 +1201,6 @@ Materials in Cost are subject to a reduced tax plus a 5% SwapFee. Conversely, Re
     // Your existing script for updating prices
 
     function updateData(data) {
-      google.script.run.withSuccessHandler(updateData).getData();
 
       for (var label in data) {
         var element = document.getElementById(label);
@@ -1221,7 +1220,7 @@ Materials in Cost are subject to a reduced tax plus a 5% SwapFee. Conversely, Re
     // Countdown Timer
     var countdownElement = document.getElementById('countdown');
     var countdownTime = 15; // seconds
-    google.script.run.withSuccessHandler(updateData).getData();
+     
 
     function updateCountdown() {
       countdownElement.textContent = 'Refreshing in ' + countdownTime + ' seconds';
@@ -1229,7 +1228,7 @@ Materials in Cost are subject to a reduced tax plus a 5% SwapFee. Conversely, Re
 
       if (countdownTime < 0) {
         // Call the updateData function when the countdown reaches 0
-        google.script.run.withSuccessHandler(updateData).getData();
+         
         main();
         countdownTime = 15; // Reset the countdown time
       }
