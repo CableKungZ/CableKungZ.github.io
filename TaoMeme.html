@@ -512,7 +512,7 @@ const ERC721ABI = [
         const Format_Get_Amount_TAO = Get_Amount_TAO.toLocaleString(); // เพิ่มการใช้ toLocaleString()
         const Get_Amount_KKUB = await call_SC(address, KKUB, 18);
         const Format_Get_Amount_KKUB = Get_Amount_KKUB.toLocaleString(); // เพิ่มการใช้ toLocaleString()
-
+                console.log("Baryon LP : ",Format_Get_Amount_KKUB," KKUB , ",Format_Get_Amount_TAO," TAO");
 
         // TAO in Baryon LP
       const Get_Amount_TAO2 = await call_SC(address2, TAO, 18);
@@ -524,7 +524,9 @@ const ERC721ABI = [
          // TAO in CM LP
          Get_Amount_TAO3 = await call_SC(address3, TAO, 18);
          Get_Amount_CMM3 = await call_SC(address3, CMM, 18);
-            console.log("CMM LP : ",Get_Amount_CMM3," CMM , ",Get_Amount_TAO3" TAO");
+        const Format_Get_Amount_TAO3 = Get_Amount_TAO3.toLocaleString();
+        const Format_Get_Amount_CMM3 = Get_Amount_CMM3.toLocaleString();
+            console.log("CMM LP : ",Format_Get_Amount_CMM3," CMM , ",Format_Get_Amount_TAO3," TAO");
          // TOTAL TAO in LP
          total_Tao_IN_LP = Get_Amount_TAO+Get_Amount_TAO2+Get_Amount_TAO3;
          F_total_Tao_IN_LP = total_Tao_IN_LP.toLocaleString(); // เพิ่มการใช้ toLocaleString()
