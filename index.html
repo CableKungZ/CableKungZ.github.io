@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sapien Upgrade</title>
+<style>
+    body{
+        font-size: 18px;
+    }
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 400px;
+        margin-bottom: 10px;
+        padding: 5px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+        flex-direction: row;
+        
+      }
+    #cardContainer{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    .center{
+        text-align: center;
+    }
+    p{
+        padding-left: 15px;
+    }
+    #Price{
+        display: flex;
+        flex-wrap: warp;
+        margin-top: 10px;
+    }
+    .ft-18{
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <div id="Price">
+        <p class="ft-18">Price</p>
+        <p>Pza = <span id="pza"></span> CMJ</p>
+        <p>Cu = <span id="cu"></span> CMJ</p>
+        <p>Sil = <span id="sil"></span> CMJ</p>
+        <p>Gold = <span id="gold"></span> CMJ</p>
+        <p>Plat = <span id="plat"></span> CMJ</p>
+        <p>Jdao = <span id="jdao"></span> CMJ</p>
+    </div>
+<div>
+    <form id="levelForm">
+        <label for="fromLevel">From Level:</label>
+        <select id="fromLevel">
+            <!-- Options for selecting starting level -->
+            <!-- Populate options using JavaScript -->
+        </select>
+        <label for="toLevel">To Level:</label>
+        <select id="toLevel">
+            <!-- Options for selecting ending level -->
+            <!-- Populate options using JavaScript -->
+        </select>
+        <button type="button" onclick="calculateResources()">Calculate</button>
+    </form>
+</div>
+<div id="calculate"></div>
+<div id="output"></div>
+<!-- Your existing HTML content -->
+
+<div id="cardContainer"></div>
+
+<!-- Your existing HTML content -->
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+<script>
+
+    var power = [500,540,580,660,740,860,980,1140,1300,1500,1700,1940,2180,2460,2740,3060,3380,3740,4100,4500,4900,5340,5780,6260,6740,7260,7780,8340,8900,9500,10100,10740,11380,12060,12740,13460,14180,14940,15700,16500]
+    var usePza = [250, 300, 360, 432, 518, 622, 746, 895, 1074, 12890, 1547, 1857, 2229, 2674, 3209, 3851, 4622, 5546, 6655, 79860, 11501, 13801, 16561, 19874, 23849, 28618, 34342, 41211, 49453, 593440,71212,85455,102546,123055,147667,177200,212640,255168,306202];
+    var useCu = [0,500, 1000, 2000, 4000, 8000, 16000, 32000, 64000]; // IF Level 1 - 9 Use This
+    var useJdao = [50, 150, 450]; // use Jdao Every 10 Level
+    var useSil = [1500, 3000, 6000, 12000, 24000, 48000, 96000, 192000, 384000]; // IF Level 11 - 19 Use This
+    var useGold = [19200, 28800, 43200, 64800, 97200, 145800, 218700, 328050, 492075]; // IF Level 21 - 29 use This
+    var usePlat = [240000, 360000, 540000, 810000, 1215000, 1822500, 2733750, 4100625, 6150937];
+
+    // Function to create a card element
+function createCard(level,pza,cu,sil,gold,plat,jdao) {
+    var card = document.createElement("div");
+    card.classList.add("card");
+
+    var cardContent = `<hr>
+        <h2 class="center">Level ${(level).toLocaleString(undefined,{maximumFractionDigits:0})} Power : ${(power[level]).toLocaleString(undefined,{maximumFractionDigits:0})} (+<span id="inc">${(power[level]-power[level-1]).toLocaleString(undefined,{maximumFractionDigits:0})}</span>)</h2>
+    `;
+    if (level<=9){
+        cardContent += `<p class="center"><img src="https://docs.commudao.xyz/~gitbook/image?url=https%3A%2F%2F3234540731-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FKRfp86SF30KCpRo85oD7%252Fuploads%252FTl0jr01dXoRRljODQW3s%252Fdownload.png%3Falt%3Dmedia%26token%3D6a7c9b5f-d86c-4384-988d-d2c825485d9f&width=245&dpr=1&quality=100&sign=7793ecdb6fbc59597d4810eaa60ac9ddca4050b095b03bab3214366a037a2ed2" width="250px" height="250px"></p>`
+    }else if(level<=19){
+        cardContent += `<p class="center"><img src="https://docs.commudao.xyz/~gitbook/image?url=https%3A%2F%2F3234540731-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FKRfp86SF30KCpRo85oD7%252Fuploads%252FhBl3AVauUiBPJHaOf0QX%252Fdownload%2520%281%29.png%3Falt%3Dmedia%26token%3D771506a8-6ca9-476b-9814-a70b56885c92&width=376&dpr=1&quality=100&sign=2df719ff17436cc866bf971358bcbd3919f9c77ddb693679c10f0f73bfc519ad" width="250px" height="250px"></p>`
+    }else if(level<=29){
+        cardContent += `<p class="center"><img src="https://docs.commudao.xyz/~gitbook/image?url=https%3A%2F%2F3234540731-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FKRfp86SF30KCpRo85oD7%252Fuploads%252FdrVnjek9gl5e8piZPlju%252Fdownload%2520%282%29.png%3Falt%3Dmedia%26token%3D64f64fe9-0e77-4ceb-9304-0307d72c6407&width=376&dpr=1&quality=100&sign=0493d80c4c16a5df3f77546802b1d7d1d6a5ab57b3580ef0eb3a98cac9a0fc34" width="250px" height="250px"></p>`
+    }else if(level<=39){
+        cardContent += `<p class="center"><img src="https://docs.commudao.xyz/~gitbook/image?url=https%3A%2F%2F3234540731-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FKRfp86SF30KCpRo85oD7%252Fuploads%252F2U64NO4FZV3x9L9qy7Lh%252Fdownload%2520%283%29.png%3Falt%3Dmedia%26token%3D9910e268-a60e-4a39-bcde-951ac604a0ea&width=376&dpr=1&quality=100&sign=8bda604e5f71d54f18e13c897f673c943cfe6741ff727bdb2132c9b1b59de3a5" width="250px" height="250px"></p>`
+    }
+    var totalPza = usePza.slice(0, level).reduce((a, b) => a + b, 0);
+        cardContent += `<p class="center">Cost: </p>
+        <p>Use Pza: ${(usePza[level - 1]).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" width="15px" height="15px"> (~${((usePza[level - 1])*pza).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p>`;
+    if (level <= 9) {
+        cardContent += `<p>Use Cu: ${(useCu[level - 1]).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${(useCu[level - 1]*cu).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+        <p class="center">Total Cost:</p>`;
+    } else if (level % 10 === 0) {
+        if(level == 10){
+            cardContent += `<p>Use Jdao: ${useJdao[(level / 10) - 1]}
+                <img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" width="15px" height="15px"> (~${(useJdao[level / 10]*jdao).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+            <p class="center">Total Cost:</p>
+            <p>🔶 Total Cu: ${(useCu.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+                <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${((useCu.slice(0, 9).reduce((a, b) => a + b, 0))*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`;
+        }else if(level == 20){
+            cardContent += `<p>Use Jdao: ${useJdao[(level / 10) - 1]}
+                <img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" width="15px" height="15px"> (~${(useJdao[level / 10]*jdao).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+            <p class="center">Total Cost:</p>
+            <p>🔶 Total Cu: ${(useCu.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+                <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${((useCu.slice(0, 9).reduce((a, b) => a + b, 0))*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>
+            <p>🔶 Total Sil: ${(useSil.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+                <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" width="15px" height="15px"> (~${((useSil.slice(0, 9).reduce((a, b) => a + b, 0))*sil).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)
+            </p>`;
+        }else if(level == 30){
+            cardContent += `<p>Use Jdao: ${useJdao[(level / 10) - 1]}
+                <img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" width="15px" height="15px"> (~${(useJdao[level / 10]*jdao).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+            <p class="center">Total Cost:</p>
+            <p>🔶 Total Cu: ${(useCu.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+                <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${((useCu.slice(0, 9).reduce((a, b) => a + b, 0))*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>
+            <p>🔶 Total Sil: ${(useSil.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+                <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" width="15px" height="15px"> (~${((useSil.slice(0, 9).reduce((a, b) => a + b, 0))*sil).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>
+            <p>🔶 Total Gold: ${(useGold.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})} 
+                <img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" width="15px" height="15px"> (~${(useGold.slice(0, 9).reduce((a, b) => a + b, 0)*gold).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ)</p>`;
+    }
+    } else if (level >= 11 && level <= 19) {
+        cardContent += `
+        <p>Use Sil: ${(useSil[level - 11]).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" width="15px" height="15px"> (~${(useSil[level - 11]*sil).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+        <p class="center">Total Cost:</p>
+        <p>🔶 Total Cu: ${(useCu.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${((useCu.slice(0, 9).reduce((a, b) => a + b, 0))*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`;
+    } else if (level >= 21 && level <= 29) {
+        cardContent += `<p>
+        Use Gold: ${(useGold[level - 21]).toLocaleString(undefined,{maximumFractionDigits:0})}
+        <img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" width="15px" height="15px"> (~${(useGold[level - 21]*gold).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+        <p class="center">Total Cost:</p>
+        <p>🔶 Total Cu: ${(useCu.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${((useCu.slice(0, 9).reduce((a, b) => a + b, 0))*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>
+        <p>🔶 Total Sil: ${(useSil.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" width="15px" height="15px"> (~${((useSil.slice(0, 9).reduce((a, b) => a + b, 0))*sil).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`;
+    } else if (level >= 31 && level <= 39) {
+        cardContent += `
+        <p>Use Plat: ${(usePlat[level - 31]).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" width="15px" height="15px"> (~${(usePlat[level - 31]*plat).toLocaleString(undefined,{maximumFractionDigits:4})} CMJ)</p><hr>
+        <p class="center">Total Cost:</p>
+        <p>🔶 Total Cu: ${(useCu.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${((useCu.slice(0, 9).reduce((a, b) => a + b, 0))*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>
+        <p>🔶 Total Sil: ${(useSil.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})} 
+            <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" width="15px" height="15px"> (~${((useSil.slice(0, 9).reduce((a, b) => a + b, 0))*sil).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>
+        <p>🔶 Total Gold: ${(useGold.slice(0, 9).reduce((a, b) => a + b, 0)).toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" width="15px" height="15px"> (~${((useGold.slice(0, 9).reduce((a, b) => a + b, 0))*gold).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ)</p>
+        `;
+    }
+
+    
+    var totalCu = (level <= 9) ? useCu.slice(0, level).reduce((a, b) => a + b, 0) : 0;
+    var totalJdao = (level > 9) ? useJdao.slice(0, Math.floor(level / 10)).reduce((a, b) => a + b, 0) : 0;
+    var totalSil = (level >= 11 && level <= 19) ? useSil.slice(0, level - 10).reduce((a, b) => a + b, 0) : 0;
+    var totalGold = (level >= 21 && level <= 29) ? useGold.slice(0, level - 20).reduce((a, b) => a + b, 0) : 0;
+    var totalPlat = (level >= 31 && level <= 39) ? usePlat.slice(0, level - 30).reduce((a, b) => a + b, 0) : 0;
+
+    var totalContent = `
+        <p>🔶 Total Pza : ${totalPza.toLocaleString(undefined,{maximumFractionDigits:0})}
+            <img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" width="15px" height="15px"> (~${(totalPza*pza).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`;
+
+    if (totalCu > 0) {
+        totalContent += `<p>🔶 Total Cu: ${totalCu.toLocaleString(undefined,{maximumFractionDigits:0})}  
+            <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" width="15px" height="15px"> (~${(totalCu*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`;
+    }
+    if (totalJdao > 0) {
+        totalContent += `<p>🔶 Total Jdao: ${totalJdao.toLocaleString(undefined,{maximumFractionDigits:0})} 
+            <img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" width="15px" height="15px"> (~${(totalJdao*jdao).toLocaleString(undefined,{maximumFractionDigits:3})}  CMJ)</p>`;
+    }
+    if (totalSil > 0) {
+        totalContent += `<p>🔶 Total Sil: ${totalSil.toLocaleString(undefined,{maximumFractionDigits:0})} 
+            <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" width="15px" height="15px"> (~${(totalSil*sil).toLocaleString(undefined,{maximumFractionDigits:3})}  CMJ)</p>`;
+    }
+    if (totalGold > 0) {
+        totalContent += `<p>🔶 Total Gold: ${totalGold.toLocaleString(undefined,{maximumFractionDigits:0})} 
+            <img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" width="15px" height="15px"> (~${(totalGold*gold).toLocaleString(undefined,{maximumFractionDigits:0})}  CMJ)</p>`;
+    }
+    if (totalPlat > 0) {
+        totalContent += `<p>🔶 Total Plat: ${totalPlat.toLocaleString(undefined,{maximumFractionDigits:0})} 
+            <img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" width="15px" height="15px"> (~${(totalPlat*plat).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ)</p>`;
+    }
+
+    card.innerHTML = cardContent + totalContent;
+    return card;
+}
+async function call_SC(address, contract, divider) {
+    try {
+      const result = await contract.methods.balanceOf(address).call();
+      return result / (10 ** divider); // เลื่อนการหารออกจากการเรียกใช้เพื่อความชัดเจน
+    } catch (error) {
+      console.error("Error calling contract method:", error);
+      return null;
+    }
+  }
+        async function main() {
+            const divider = 10 ** 18;
+            const jaspdivider = 10 **9;
+    
+            const web3 = new Web3('https://rpc-l1.jibchain.net	');
+            console.log(" Access RPC Success")
+    
+            const contractABI = [
+            // ABI ของ contract ERC-20
+            {
+                "constant": true,
+                "inputs": [{"name": "_owner", "type": "address"}],
+                "name": "balanceOf",
+                "outputs": [{"name": "balance", "type": "uint256"}],
+                "type": "function"
+            }
+        ];
+        const ERC721ABI = [
+        // ABI ของ balanceOf function
+        {
+          "constant": true,
+          "inputs": [{"name": "_owner", "type": "address"}],
+          "name": "balanceOf",
+          "outputs": [{"name": "", "type": "uint256"}],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ];
+    
+            // สร้างออบเจ็กต์สัญญา
+            const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+            const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+            const Jib_WJBC = new web3.eth.Contract(contractABI,'0x99999999990FC47611b74827486218f3398A4abD');
+            const Meow = new web3.eth.Contract(contractABI,'0x04052384166fC30D03929eE328805eC084776843');
+            const Wood = new web3.eth.Contract(contractABI,'0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+            const Tuna = new web3.eth.Contract(contractABI,'0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+            const Mice = new web3.eth.Contract(contractABI,'0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+            const Cu = new web3.eth.Contract(contractABI,'0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+            const Jasp = new web3.eth.Contract(contractABI,'0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+            const Os = new web3.eth.Contract(contractABI,'0xAc5299D92373E9352636559cca497d7683A47655');
+            const Jdao = new web3.eth.Contract(contractABI,'0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+            const Mt = new web3.eth.Contract(contractABI,'0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+            const Vabag = new web3.eth.Contract(contractABI,'0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+            const Bbq = new web3.eth.Contract(contractABI,'0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+            const Pza = new web3.eth.Contract(contractABI,'0x09DcdCFc6C48803681a3422997c679E773656763');
+            const Ctuna = new web3.eth.Contract(contractABI,'0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+            const Sx31 = new web3.eth.Contract(contractABI,'0xd431d826d7a4380b9259612176f00528b88840a7');
+            const Sil = new web3.eth.Contract(contractABI,'0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+            const Gold = new web3.eth.Contract(contractABI,'0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+            const Plat = new web3.eth.Contract(contractABI,'0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+            const Swar = new web3.eth.Contract(contractABI,'0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+            const Jusdt = new web3.eth.Contract(contractABI,'0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+            const stOPT = new web3.eth.Contract(contractABI,'0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+            const Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+            const Angb = new web3.eth.Contract(contractABI,'0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+            const Taodum = new web3.eth.Contract(ERC721ABI,'0x2036186F6d5287FcB05C56C38374AC5236d8A61d');
+            const EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+            const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+    
+            try {
+                
+                
+                // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
+                address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
+                const JBC_inJCLP = await web3.eth.getBalance(address) / divider; 
+                const CMJ_inJCLP = await call_SC(address, CMJ, 18);
+                const JBC_to_CMJ = (CMJ_inJCLP/JBC_inJCLP).toFixed(4);
+                const CMJ_to_JBC = (JBC_inJCLP/CMJ_inJCLP).toFixed(4);
+                // Bal of JU-LP  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+                address = '0x280608DD7712a5675041b95d0000B9089903B569';
+                const JBC_inJULP = await web3.eth.getBalance(address) / divider; 
+                const JDUST_inJULP = await call_SC(address, Jusdt, 18);
+                const JBC_to_JUSDT = (JDUST_inJULP/JBC_inJULP).toFixed(4);
+                const JUSDT_to_JBC = (JBC_inJULP/JDUST_inJULP).toFixed(4);
+
+                const CMJ_inJUST = (CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+                const JBC_inJUST = (JBC_to_JUSDT*1).toFixed(6);
+                console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
+                console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
+
+                // Bal of BBQ  , JBC/  0x6F93F16cF86205C5BB9145078d584c354758D6DB
+                address = '0x6F93F16cF86205C5BB9145078d584c354758D6DB';
+                const BBQ_inBBQCMJ = await call_SC(address, Bbq, 18);
+                const CMJ_inBBQCMJ = await call_SC(address, CMJ, 18);
+                const BBQ_to_CMJ = (BBQ_inBBQCMJ/CMJ_inBBQCMJ).toFixed(4); 
+                const CMJ_to_BBQ = (CMJ_inBBQCMJ/BBQ_inBBQCMJ).toFixed(10); // Ptice BBQ in CMJ
+
+                // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+                address = '0x1b70c95fD4EbF8920A624bd2ce22b6905eFBdF60';
+                const Cu_inCuCMJ = await call_SC(address, Cu, 18);
+                const CMJ_inCuCMJ = await call_SC(address, CMJ, 18);
+                const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
+                const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10); // Price Cu in CMJ
+    
+                // Bal of Jdao  , JBC/  0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0
+                address = '0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0';
+                const Jdao_inJdaoCMJ = await call_SC(address, Jdao, 18);
+                const CMJ_inJdaoCMJ = await call_SC(address, CMJ, 18);
+                const Jdao_to_CMJ = (Jdao_inJdaoCMJ/CMJ_inJdaoCMJ).toFixed(4);
+                const CMJ_to_Jdao = (CMJ_inJdaoCMJ/Jdao_inJdaoCMJ).toFixed(10); // Price Jdao in CMJ
+    
+                // Bal of Pizza(Pza)  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+                address = '0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70';
+                const Pza_inPzaCMJ = await call_SC(address, Pza, 18);
+                const CMJ_inPzaCMJ = await call_SC(address, CMJ, 18);
+                const Pza_to_CMJ = (Pza_inPzaCMJ/CMJ_inPzaCMJ).toFixed(4);
+                const CMJ_to_Pza = (CMJ_inPzaCMJ/Pza_inPzaCMJ).toFixed(10); // Price Pza in CMJ
+
+                // Bal of Gold  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+                address = '0x7086EC7ED5D94ef503bE324B0aE8A3748A15fAE5';
+                const Gold_inGoldCMJ = await call_SC(address, Gold, 18);
+                const CMJ_inGoldCMJ = await call_SC(address, CMJ, 18);
+                const Gold_to_CMJ = (Gold_inGoldCMJ/CMJ_inGoldCMJ).toFixed(4);
+                const CMJ_to_Gold = (CMJ_inGoldCMJ/Gold_inGoldCMJ).toFixed(10); // Price Gold in CMJ
+
+                // Bal of CMJ , SIL 
+                address = '0xf189c5B03694b70e5DFD8e8CAE84118Ed7616F19';
+                const SIL_inSILCMJ = await call_SC(address, Sil, 18);
+                const CMJ_inSILCMJ = await call_SC(address, CMJ, 18);
+                const SIL_to_CMJ = (SIL_inSILCMJ/CMJ_inSILCMJ).toFixed(6);
+                const CMJ_to_SIL = (CMJ_inSILCMJ/SIL_inSILCMJ).toFixed(10); // Price Sil in CMJ
+
+                const pza = CMJ_to_Pza;
+                const bbq = CMJ_to_BBQ;
+                const cu = CMJ_to_Cu;
+                const sil = CMJ_to_SIL;
+                const gold = CMJ_to_Gold;
+                const jdao = CMJ_to_Jdao;
+                const plat = 0.001045;
+
+                document.getElementById("pza").innerHTML = pza;
+                document.getElementById("cu").innerHTML = cu;
+                document.getElementById("sil").innerHTML = sil;
+                document.getElementById("gold").innerHTML = gold;
+                document.getElementById("jdao").innerHTML = jdao;
+                document.getElementById("plat").innerHTML = plat;
+
+
+                var cardContainer = document.getElementById("cardContainer");
+                for (var i = 1; i <= 39; i++) {
+                    var card = createCard(i,pza,cu,sil,gold,plat,jdao);
+                    cardContainer.appendChild(card);
+        }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                console.log('An error occurred while fetching contract information.');
+            }
+            // Create cards for levels 1 to 39
+        }
+    window.onload = main;
+
+
+
+// Function to calculate resources based on selected levels
+function calculateResources() {
+    var fromLevel = parseInt(document.getElementById("fromLevel").value);
+    var toLevel = parseInt(document.getElementById("toLevel").value);
+    if (fromLevel>toLevel){
+        alert("เลเวลช่องที่ 1 ไม่สามารถมากกว่า เลเวลช่องที่ 2 ได้")
+    }else{
+
+
+    // token Price
+    pza = parseFloat(document.getElementById("pza").textContent) || 0;
+    cu = parseFloat(document.getElementById("cu").textContent) || 0;
+    sil = parseFloat(document.getElementById("sil").textContent) || 0;
+    gold = parseFloat(document.getElementById("gold").textContent) || 0;
+    plat = parseFloat(document.getElementById("plat").textContent) || 0;
+    jdao = parseFloat(document.getElementById("jdao").textContent) || 0;
+        
+    var totalPza = usePza.slice(fromLevel - 1, toLevel).reduce((a, b) => a + b, 0);
+    var totalCu = useCu.slice(0, Math.min(toLevel, 9)).reduce((a, b) => a + b, 0);
+    var totalJdao = (Math.floor(toLevel / 10) > 0) ? useJdao.slice(0, Math.floor(toLevel / 10)).reduce((a, b) => a + b, 0) : 0;
+    var totalSil = (toLevel >= 11 && toLevel <= 19) ? useSil.slice(0, toLevel - 10).reduce((a, b) => a + b, 0) : 0;
+    var totalGold = (toLevel >= 21 && toLevel <= 29) ? useGold.slice(0, toLevel - 20).reduce((a, b) => a + b, 0) : 0;
+    var totalPlat = (toLevel >= 31 && toLevel <= 39) ? usePlat.slice(0, toLevel - 30).reduce((a, b) => a + b, 0) : 0;
+
+    if (toLevel <= 19) {
+        var totalCu = useCu.slice(fromLevel - 1, toLevel).reduce((a, b) => a + b, 0);
+    } else if (toLevel <= 29) {
+        var totalCu = useCu.slice(fromLevel - 1, Math.min(toLevel, 10)).reduce((a, b) => a + b, 0);
+        var totalSil = useSil.slice(fromLevel - 10, toLevel - 10).reduce((a, b) => a + b, 0);
+    } else if (toLevel <= 39) {
+        var totalCu = useCu.slice(fromLevel - 1, Math.min(toLevel, 10)).reduce((a, b) => a + b, 0);
+        var totalSil = useSil.slice(fromLevel - 10, Math.min(toLevel, 20) - 10).reduce((a, b) => a + b, 0);
+        var totalGold = useGold.slice(fromLevel - 20, toLevel - 20).reduce((a, b) => a + b, 0);
+    }
+    // Display total resources
+    document.getElementById("calculate").innerHTML = `<p>Calculate Resource</p>`
+    document.getElementById("calculate").innerHTML += `<p>Total Pza ${totalPza.toLocaleString()} (~${(totalPza*pza).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`
+    document.getElementById("calculate").innerHTML += `<p>Total Cu ${totalCu.toLocaleString()} (~${(totalCu*cu).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`
+    document.getElementById("calculate").innerHTML += `<p>Total Jdao ${totalJdao.toLocaleString()} (~${(totalJdao*jdao).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`
+    document.getElementById("calculate").innerHTML += `<p>Total Sil ${totalSil.toLocaleString()} (~${(totalSil*sil).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`
+    document.getElementById("calculate").innerHTML += `<p>Total Gold ${totalGold.toLocaleString()} (~${(totalGold*gold).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`
+    document.getElementById("calculate").innerHTML += `<p>Total Plat ${totalPlat.toLocaleString()} (~${(totalPlat*plat).toLocaleString(undefined,{maximumFractionDigits:3})} CMJ)</p>`
+    total = (totalPza*pza)+(totalCu*cu)+(totalJdao*jdao)+(totalSil*sil)+(totalGold*gold)+(totalPlat*plat);
+    document.getElementById("calculate").innerHTML += `<p>Total Cost in CMJ : ~${total.toLocaleString(undefined,{maximumFractionDigits:2})} CMJ</p>`
+    }
+}
+
+// Populate options for selecting levels
+var fromLevelSelect = document.getElementById("fromLevel");
+var toLevelSelect = document.getElementById("toLevel");
+
+for (var i = 1; i <= 39; i++) {
+    var option = document.createElement("option");
+    option.text = "Level " + i;
+    option.value = i;
+    fromLevelSelect.add(option);
+    toLevelSelect.add(option.cloneNode(true));
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERC20 Token Viewer</title>
+<style>
+  
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+  }
+  
+  .products-container {
+    width: 100%;
+    max-width: 1700px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: start;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
+    width: 150px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 8px;
+  }
+  
+  h2 {
+    padding-left: 10px;
+  }
+  
+  a{
+    font-size: 16px;
+    font-weight: lighter;
+  }
+  .token {
+    border: 2px solid #ccc;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 10px;
+    width: 250px;
+    height: 90px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+  }
+  .tokenPending {
+    border: 2px solid #6e6e6e;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-left: 60px;
+    margin-bottom: 40px;
+    width: 500px;
+    height: 150px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+  }
+  .token:hover,.tokenPending {
+    transform: scale(1.1);
+  }
+  
+  .token a,.tokenPending a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .token-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .token-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: #f7f7f7; /* Light grey background for contrast */
+  }
+  
+  .card {
+    border: none;
+    border-radius: 20px;
+    padding: 15px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* Subtle gradient */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1); /* Soft shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Update font sizes and colors */
+  .card h2 {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .card a {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+  }
+  
+  /* Token class enhancements */
+  .token {
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff; /* Solid color for tokens */
+    margin-top: 10px;
+  }
+  
+  .token:hover, .tokenPending:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  .token a, .tokenPending a {
+    color: #007bff; /* Bootstrap's primary blue for links */
+  }
+  span {
+    display: inline; /* This is the default value for span */
+  }
+  .container {
+    white-space: nowrap;
+  }
+  .tokenPending span {
+    display: inline-block; /* This makes the span behave like a block but flow inline */
+    margin-right: 5px; /* Add some space between the spans if necessary */
+  }
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .card-row, .token-row {
+      justify-content: space-around;
+    }
+    .card, .token, .tokenPending {
+      width: 100%;
+      max-width: 500px; /* Full width on small screens with a max-width */
+    }
+  }
+  .container {
+    white-space: nowrap;
+  }
+  .token-price h1, .token-price h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    grid-column: 1 / -1; /* Full width across all columns */
+  }
+  .token-price h4 {font-size: 16px;margin-bottom: 10px;}
+  .token-price h6 {
+    font-size: 12px;
+    color: #777;
+    margin-top: 15px;
+    grid-column: 1 / -1; /* Full width across all columns */
+  }
+  .token-price a {color: #3498db;font-size: 12px;}
+  .token-price img {margin-right: 5px;}
+
+  @media screen and (max-width: 1199.98px) {
+    .token-price {grid-template-columns: repeat(4, 1fr);}}
+  @media screen and (max-width: 991.98px) {
+    .token-price {grid-template-columns: repeat(2, 1fr);}}
+  @media screen and (max-width: 575.98px) {
+    .token-price {grid-template-columns: repeat(1, 1fr);}}
+    .token-price {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns per row by default */
+      gap: 20px;
+    }
+  #networth{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  #networth p{
+    margin-left: 30px;
+  }
+  p{
+    display: block;
+    margin: 0px;
+  }
+  .center {
+    text-align: center;
+    margin-bottom: 10px; /* Adjust margin as needed */
+  }
+  
+  #wallet_address {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Add a border for clarity */
+  }
+  
+  button {
+    padding: 10px 40px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  th{
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+  table{
+    text-align: center;
+  }
+  .header{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+</style>
+</head>
+<body>
+  <div class="token-price">
+
+    <h2>PROJECT TOKEN <span>[USD = <span id="THB"></span>THB</span>]</h2>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
+      <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
+      Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
+      <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD<br>
+      Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
+      <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD<br>
+      Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
+      <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
+  
+    <h2>MATERIALS </h2>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20"><a href="https://meowneon.app/swapmeowwood"  target="_blank">Wood</a>*0%   : 
+      <br>Buy/Sell <span id="priceB4">..Loading</span> CMJ<br>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20"><a href="https://meowneon.app/swapmeowtuna"  target="_blank">Tuna</a>*0%  : 
+      <br>Buy/Sell <span id="priceB5">..Loading</span> CMJ<br>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20"><a href="https://meowneon.app/swapmeowmice"  target="_blank">Mice</a>*0%  : 
+      <br>Buy/Sell <span id="priceB6">..Loading</span> CMJ<br>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Copper</a>*5%  : 
+      <br>Buy <span id="priceB7">..Loading</span> CMJ<br>
+      Sell  <span id="Sell_CuinCMJ">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JASPER</a>*5%  : 
+      <br>Buy <span id="priceB17">..Loading</span> CMJ<br>
+      Sell  <span id="priceB17_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">OS</a>*5%  : 
+      <br>Buy <span id="priceB18">..Loading</span> CMJ<br>
+      Sell  <span id="priceB18_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JDAO</a>*5%  : 
+      <br>Buy <span id="priceB15">..Loading</span> CMJ<br>
+      Sell  <span id="priceB15_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20"><a href="https://meowneon.app/swapmeowmt"  target="_blank">MT</a>*0%  : 
+      <br>Buy/Sell <span id="priceB16">..Loading</span> CMJ<br>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">ANGB</a>*5%  : 
+      <br>Buy <span id="priceB23">..Loading</span> CMJ,<span id="priceD23">..Loading</span> WJBC<br>
+      Sell  <span id="priceB23_2">..Loading</span> CMJ,<span id="priceD23_2">..Loading</span> WJBC</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">II</a>*5%  : 
+      <br>Buy <span id="IIPrice_CMJ">..Loading</span> CMJ,<span id="IIPrice_JTAO">..Loading</span> JTAO<br>
+      Sell  <span id="IIPrice_CMJ_2">..Loading</span> CMJ,<span id="IIPrice_JTAO_2">..Loading</span> JTAO</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">EE</a>*5%  : 
+      <br>Buy <span id="EEPrice_CMJ">..Loading</span> CMJ,<span id="EEPrice_JTAO">..Loading</span> JTAO<br>
+      Sell  <span id="EEPrice_CMJ_2">..Loading</span> CMJ,<span id="EEPrice_JTAO_2">..Loading</span> JTAO</h4>
+  
+    <h2>PRODUCT</h2>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">BBQ</a>*5%  : 
+      <br>Buy <span id="priceB8">..Loading</span> CMJ<br>
+      Sell  <span id="priceB8_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Pizza</a>*5%  : 
+      <br>Buy <span id="priceB9">..Loading</span> CMJ<br>
+      Sell  <span id="priceB9_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">CTUNA</a>*5%  : 
+      <br>Buy <span id="priceB10">..Loading</span> CMJ<br>
+      Sell  <span id="priceB10_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SX31</a>*5%  : 
+      <br>Buy <span id="priceB11">..Loading</span> CMJ<br>
+      Sell  <span id="priceB11_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20"><a href="https://meowneon.app/swapmeowsil"  target="_blank">Silver</a>*5%  : 
+      <br>Buy <span id="priceB12">..Loading</span> CMJ<br>
+      Sell  <span id="priceB12_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20"><a href="https://meowneon.app/swapmeowgold"  target="_blank">Gold</a>*5%  : 
+      <br>Buy <span id="priceB13">..Loading</span> CMJ<br>
+      Sell  <span id="priceB13_2">..Loading</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :
+      <br>Buy [คาดเดา] <span id="priceB19">0.001155</span> CMJ<br>
+      Sell [คาดเดา]  <span id="">0.001045</span> CMJ</h4>
+    <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : 
+      <br>Buy <span id="priceB21">..Loading</span> CMJ, <span id="priceD21">..Loading</span> JBC<br>
+      Sell  <span id="priceB21_2">..Loading</span> CMJ,<span id="priceD21_2">..Loading</span> JBC</h4>
+  
+    <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
+  </div>
+<div class="center">
+  <h5 class="card-title center">ERC20 Token Balance Viewer</h5>
+  <label for="wallet_address" class="center">Enter Wallet Address:</label>
+  <input type="text" class="center" id="wallet_address" placeholder="Enter Wallet Address" style="width: 400px;">
+  <button onclick="getBalance()">Get Balance</button>
+  <div id="networth"class="center">
+    <p>Total Networth</p>
+    <p>~<span id="networth_CMJ"></span> CMJ</p>
+    <p>~<span id="networth_JBC"></span> JBC,</p>
+    <p>~<span id="networth_USD"></span> USD,</p>
+    <p>~<span id="networth_THB"></span> THB,</p>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+
+  <div>
+    <div class="products-container">
+      <h2 class="center">Holding Token</h2>
+      <div class="card-row">
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">JBC (gas): <span id="jbc_bal"></span><p>Worth: <span id="worth1"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="JUSDT" width="20" height="20">JUSDT: <span id="jusdt_bal"></span><p>Worth: <span id="worth28"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20">CMJ: <span id="cmj_bal"></span><p>Worth: <span id="worth2"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20">Meow: <span id="Meow_bal"></span><p>Worth: <span id="worth3"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">WJBC (MEOW): <span id="WJBC_bal"></span><p>Worth: <span id="worth4"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20">WJBC (JIB): <span id="WJBCJIB_bal"></span><p>Worth: <span id="worth5"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20">Jtao: <span id="Jtao_bal"></span><p>Worth: <span id="worth6"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20">Wood: <span id="Wood_bal"></span><p>Worth: <span id="worth7"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20">Tuna: <span id="Tuna_bal"></span><p>Worth: <span id="worth8"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20">Mice: <span id="Mice_bal"></span><p>Worth: <span id="worth9"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20">Cu: <span id="Cu_bal"></span><p>Worth: <span id="worth10"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20">Jasp: <span id="Jasp_bal"></span><p>Worth: <span id="worth11"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20">Os: <span id="Os_bal"></span><p>Worth: <span id="worth12"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20">Jdao: <span id="Jdao_bal"></span><p>Worth: <span id="worth13"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20">Mt: <span id="Mt_bal"></span><p>Worth: <span id="worth14"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia6rbj3o47qbw7o3vqd6ogylwjcjay5phsve5pixfvmw7nexwx3re" alt="$Vbag" width="20" height="20">Vabag: <span id="Vabag_bal"></span><p>Worth: <span id="worth15"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20">Bbq: <span id="Bbq_bal"></span><p>Worth: <span id="worth16"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20">Pza: <span id="Pza_bal"></span><p>Worth: <span id="worth17"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20">Ctuna: <span id="Ctuna_bal"></span><p>Worth: <span id="worth18"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20">Sx31: <span id="Sx31_bal"></span><p>Worth: <span id="worth19"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20">Sil: <span id="Sil_bal"></span><p>Worth: <span id="worth20"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20">Gold: <span id="Gold_bal"></span><p>Worth: <span id="worth21"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20">Plat: <span id="Plat_bal"></span><p>Worth: <span id="worth22"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20">Swar: <span id="Swar_bal"></span><p>Worth: <span id="worth23"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20">Angb: <span id="Angb_bal"></span><p>Worth: <span id="worth24"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafybeiegwsyuqu5d47hobxpnuj5zdsy2fgzautcobr6imm3soc4r6uibg4" alt="$Gear" width="20" height="20">Gear: <span id="Gear_bal"></span><p>Worth: <span id="worth25"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20">II: <span id="II_bal"></span><p>Worth: <span id="worth26"></span> CMJ</p></div>
+        <div class="token"><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20">EE: <span id="EE_bal"></span><p>Worth: <span id="worth27"></span> CMJ</p></div>
+      </div>
+
+      <h2 class="center">Pending Reward</h2>
+      <h2 class="center">Staking</h2>
+      <div class="card-row">
+          <div class="tokenPending">
+            <p class="header">LP: Farmining Pool JBC-CMJ</p>
+            <span>Total Stake : <span id="stakeJBCCMJ"></span> </span>
+            <span>Pending Reward : <span id="pendingJBCCMJ"></span> JDAO</span>
+          </div>
+          <div class="tokenPending">
+            <p class="header">LP: Farmining Pool CMJ</p>
+            <span>Total Stake : <span id="stakeCMJ"></span> </span>
+            <span>Pending Reward : <span id="pendingCMJ"></span> JDAO</span>
+          </div>
+          <div class="tokenPending">
+            <p class="header">LP: Farmining Pool JBC-JUSDT</p>
+            <span>Total Stake : <span id="stakeJBCJUSDT"></span> </span>
+            <span>Pending Reward : <span id="pendingJBCJUSDT"></span> JDAO</span>
+          </div>
+          <div class="tokenPending">
+            <p class="header">Field : Tuna Lake</p>
+            <span>Total Stake : <span id="stakeTuna"></span> </span>
+            <span>Pending Reward : <span id="pendingTuna"></span> Tuna</span>
+          </div>
+          <div class="tokenPending">
+            <p class="header">Field : Old WareHouse</p>
+            <span>Total Stake : <span id="stakeMice"></span> </span>
+            <span>Pending Reward : <span id="pendingMice"></span> Mice</span>
+          </div>
+          <div class="tokenPending">
+            <p class="header">Field : The Heaven Land</p>
+            <span>Total Stake : <span id="stakeMHL"></span> </span>
+            <span>Pending Reward : <span id="pendingMHL"></span> Gold</span>
+          </div>
+          <div class="tokenPending">
+            <p class="header">Field : Mech Harvest Zone</p>
+            <span>Total Stake(JTAO) : <span id="staketokenMHZ"></span> </span>
+            <span>Total Stake(NFT) : <span id="stakeMHZ"></span> </span>
+            <span>Pending Reward : <span id="pendingMHZ"></span> $Gear</span>
+          </div>
+      </div>
+      <h2 class="center">Dungeon</h2>
+      <div class="card-row">
+      <div class="tokenPending">
+          <p class="header">Dungeon: Copper Mine</p>
+          <span>Status: <span id="CUM_Status">..Loading</span></span>
+          <span>Power: <span id="CUM_Pow">0</span></span>
+          <span>Reward/Day: <span id="CUM_reward"></span> $CU</span>
+          <span>Pending: <span id="CUM_Pending"></span> $CU</span>
+          <span>End At: <span id="CUM_End"></span></span>
+        </div>
+        <div class="tokenPending">
+          <p class="header">Dungeon: Jasper Cave</p>
+          <span>Status: <span id="JAC_Status">..Loading</span></span>
+          <span>Power: <span id="JAC_Pow">0</span></span>
+          <span>Reward/Day: <span id="JAC_reward"></span> $JASP</span>
+          <span>Pending: <span id="JAC_Pending"></span> $JASP</span>
+          <span>End At: <span id="JAC_END"></span></span>
+        </div>
+        <div class="tokenPending">
+          <p class="header">Dungeon: Deamon World</p>
+          <span>Status: <span id="DW_Status">..Loading</span></span>
+          <span>Power: <span id="DW_Pow">0</span></span>
+          <span>Reward/Day: <span id="DW_reward"></span> $ANGB</span>
+          <span>Pending: <span id="DW_Pending"></span> $ANGB</span>
+          <span>End At: <span id="DW_END"></span></span>
+        </div>
+        <div class="tokenPending">
+          <p class="header">Dungeon: Cryptic Cogs</p>
+          <span>Status: <span id="CC_Status">..Loading</span></span>
+          <span>Power: <span id="CC_Pow">0</span></span>
+          <span>Reward/Day: <span id="CC_reward"></span> $EE</span>
+          <span>Pending: <span id="CC_Pending"></span> $EE</span>
+          <span>End At: <span id="CC_END"></span></span>
+        </div>
+      </div>
+    </div>
+      <div id="Purchasehistory" class="center">
+        <h1>Purchase/Redeem History</h1>
+        <div id="totalRedeem"class="center">
+          <h2>Total Spent</h2>
+        </div>
+        <h4 style="color: blue;" onclick="downloadExcel()">Download xlsx (bug for txhash fix later)</h4>
+        <table id="purchaseTable" width="100%" border="1">
+            <thead>
+                <tr>
+                    <th>Tx Hash</th>
+                    <th>Item Name</th>
+                    <th>ID</th>
+                    <th>Method</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody id="purchaseTableBody">
+                <!-- Table rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    
+    
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+<script>
+  function setUSD(){
+  const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+  fetch(exchangeRateUrl)
+    .then(response => response.json())
+    .then(data => {
+      // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+      const exchangeRate = data.rates.THB;
+      document.getElementById("THB").textContent = exchangeRate.toFixed(2);
+
+    })
+    .catch(error => {
+      console.error('เกิดข้อผิดพลาด:', error);
+    
+    })
+
+    // เรียกใช้งาน API
+fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d3d38a7ff4e62f98fe27dd9242a36227fe23/pools?include=base_token_price_usd&page=1')
+.then(response => response.json())
+.then(data => {
+    // ค้นหาข้อมูลที่ต้องการและแสดงผล
+    const pools = data.data;
+    pools.forEach(pool => {
+        if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
+            TaoPrice = parseFloat(pool.attributes.token_price_usd)
+            document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
+        }
+    });
+})
+.catch(error => console.error('Error fetching data:', error));
+    ;}
+    setUSD();
+  </script>
+<script>
+  
+  const web3 = new Web3('https://rpc-l1.jibchain.net');
+  console.log("Connected")
+  const tokenABI = [
+    // ERC20 Token ABI
+    {"constant": true,"inputs": [{"name": "_owner", "type": "address"}],"name": "balanceOf","outputs": [{"name": "balance", "type": "uint256"}],"type": "function"}
+  ];
+  function setContract(contractAddress){
+    return new web3.eth.Contract(tokenABI, contractAddress); 
+  }
+  async function loadContract(contractAddress) {
+    try {
+      const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
+      const data = await response.json();
+      const abi = JSON.parse(data.result);
+      return new web3.eth.Contract(abi, contractAddress);
+    } catch (error) {
+      console.error('Error loading contract:', error);
+    }
+  }
+
+  async function main() {
+    const divider = 10 ** 18;
+    const jaspdivider = 10 **9;
+
+    const web3 = new Web3('https://rpc-l1.jibchain.net	');
+    console.log(" Access RPC Success")
+
+    const contractABI = [
+    // ABI ของ contract ERC-20
+    {
+        "constant": true,
+        "inputs": [{"name": "_owner", "type": "address"}],
+        "name": "balanceOf",
+        "outputs": [{"name": "balance", "type": "uint256"}],
+        "type": "function"
+    }
+];
+const ERC721ABI = [
+// ABI ของ balanceOf function
+{
+  "constant": true,
+  "inputs": [{"name": "_owner", "type": "address"}],
+  "name": "balanceOf",
+  "outputs": [{"name": "", "type": "uint256"}],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+}
+];
+
+    // สร้างออบเจ็กต์สัญญา
+    const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+    const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+    const Jib_WJBC = new web3.eth.Contract(contractABI,'0x99999999990FC47611b74827486218f3398A4abD');
+    const Meow = new web3.eth.Contract(contractABI,'0x04052384166fC30D03929eE328805eC084776843');
+    const Wood = new web3.eth.Contract(contractABI,'0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+    const Tuna = new web3.eth.Contract(contractABI,'0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+    const Mice = new web3.eth.Contract(contractABI,'0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+    const Cu = new web3.eth.Contract(contractABI,'0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+    const Jasp = new web3.eth.Contract(contractABI,'0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+    const Os = new web3.eth.Contract(contractABI,'0xAc5299D92373E9352636559cca497d7683A47655');
+    const Jdao = new web3.eth.Contract(contractABI,'0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+    const Mt = new web3.eth.Contract(contractABI,'0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+    const Vabag = new web3.eth.Contract(contractABI,'0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+    const Bbq = new web3.eth.Contract(contractABI,'0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+    const Pza = new web3.eth.Contract(contractABI,'0x09DcdCFc6C48803681a3422997c679E773656763');
+    const Ctuna = new web3.eth.Contract(contractABI,'0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+    const Sx31 = new web3.eth.Contract(contractABI,'0xd431d826d7a4380b9259612176f00528b88840a7');
+    const Sil = new web3.eth.Contract(contractABI,'0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+    const Gold = new web3.eth.Contract(contractABI,'0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+    const Plat = new web3.eth.Contract(contractABI,'0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+    const Swar = new web3.eth.Contract(contractABI,'0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+    const Jusdt = new web3.eth.Contract(contractABI,'0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+    const stOPT = new web3.eth.Contract(contractABI,'0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+    const Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+    const Angb = new web3.eth.Contract(contractABI,'0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+    const Taodum = new web3.eth.Contract(ERC721ABI,'0x2036186F6d5287FcB05C56C38374AC5236d8A61d');
+    const EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+    const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+    const CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
+    JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
+
+    try {
+        
+        
+        // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
+        address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
+        const JBC_inJCLP = await web3.eth.getBalance(address) / divider; 
+        const CMJ_inJCLP = await call_SC(address, CMJ, 18);
+        const JBC_to_CMJ = (CMJ_inJCLP/JBC_inJCLP).toFixed(4);
+        const CMJ_to_JBC = (JBC_inJCLP/CMJ_inJCLP).toFixed(4);
+        // Bal of JU-LP  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0x280608DD7712a5675041b95d0000B9089903B569';
+        const JBC_inJULP = await web3.eth.getBalance(address) / divider; 
+        const JDUST_inJULP = await call_SC(address, Jusdt, 18);
+        const JBC_to_JUSDT = (JDUST_inJULP/JBC_inJULP).toFixed(4);
+        const JUSDT_to_JBC = (JBC_inJULP/JDUST_inJULP).toFixed(4);
+        // Bal of Meow-CMJ
+        address = '0xdB16eCc5d2c27F67B4a4dc1e25f1e6e20BAcAFD0';
+        const Meow_inMeowCMJ = await call_SC(address, Meow, 18);
+        const CMJ_inMeowCMJ = await call_SC(address, CMJ, 18);
+        const Meow_to_CMJ = (Meow_inMeowCMJ/CMJ_inMeowCMJ).toFixed(4);
+        const CMJ_to_Meow = (CMJ_inMeowCMJ/Meow_inMeowCMJ).toFixed(10);
+        const CMJ_to_Meowmes = (CMJ_inMeowCMJ/Meow_inMeowCMJ).toFixed(6);
+
+        const Meow_inJUST = (CMJ_to_Meowmes*CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+        const CMJ_inJUST = (CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+        const JBC_inJUST = (JBC_to_JUSDT*1).toFixed(6);
+        console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
+        console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
+        console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
+        // Buy Token
+        document.getElementById("priceB2").innerHTML = (CMJ_to_JBC*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("priceD2").innerHTML = (CMJ_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
+        document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+
+        // Sell Token
+        document.getElementById("Sell_CMJinJBC").innerHTML = (CMJ_to_JBC*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("Sell_CMJinUSD").innerHTML = (CMJ_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
+        document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+        document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+        const TAOPriceUSD = parseFloat(document.getElementById("priceD22").textContent) || 0;
+        const CMJPriceUSD = parseFloat(document.getElementById("priceD2").textContent) || 0;
+        
+
+        // Bal of BBQ  , JBC/  0x6F93F16cF86205C5BB9145078d584c354758D6DB
+        address = '0x6F93F16cF86205C5BB9145078d584c354758D6DB';
+        const BBQ_inBBQCMJ = await call_SC(address, Bbq, 18);
+        const CMJ_inBBQCMJ = await call_SC(address, CMJ, 18);
+        const BBQ_to_CMJ = (BBQ_inBBQCMJ/CMJ_inBBQCMJ).toFixed(4);
+        const CMJ_to_BBQ = (CMJ_inBBQCMJ/BBQ_inBBQCMJ).toFixed(10);
+                document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+        // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0x1b70c95fD4EbF8920A624bd2ce22b6905eFBdF60';
+        const Cu_inCuCMJ = await call_SC(address, Cu, 18);
+        const CMJ_inCuCMJ = await call_SC(address, CMJ, 18);
+        const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
+        const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
+                document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+        // Bal of Jasp CMJ
+        address = '0xc19DE37d5e14b387BCda8e62aB4934591315901D';
+        const Jasp_inJaspCMJ = await call_SC(address, Jasp, 9);
+        const CMJ_inJaspCMJ = await call_SC(address, CMJ, 18);
+        const Jasp_to_CMJ = (Jasp_inJaspCMJ/CMJ_inJaspCMJ).toFixed(4);
+        const CMJ_to_Jasp = (CMJ_inJaspCMJ/Jasp_inJaspCMJ).toFixed(10);
+                document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+
+        // Bal of Jdao  , JBC/  0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0
+        address = '0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0';
+        const Jdao_inJdaoCMJ = await call_SC(address, Jdao, 18);
+        const CMJ_inJdaoCMJ = await call_SC(address, CMJ, 18);
+        const Jdao_to_CMJ = (Jdao_inJdaoCMJ/CMJ_inJdaoCMJ).toFixed(4);
+        const CMJ_to_Jdao = (CMJ_inJdaoCMJ/Jdao_inJdaoCMJ).toFixed(10);
+                // display 
+                document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+        // Bal of Pizza(Pza)  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70';
+        const Pza_inPzaCMJ = await call_SC(address, Pza, 18);
+        const CMJ_inPzaCMJ = await call_SC(address, CMJ, 18);
+        const Pza_to_CMJ = (Pza_inPzaCMJ/CMJ_inPzaCMJ).toFixed(4);
+        const CMJ_to_Pza = (CMJ_inPzaCMJ/Pza_inPzaCMJ).toFixed(10);
+                document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+        // Bal of Sx31  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0xda558EE93B466aEb4F59fBf95D25d410318be43A';
+        const Sx31_inSx31CMJ = await call_SC(address, Sx31, 18);
+        const CMJ_inSx31CMJ = await call_SC(address, CMJ, 18);
+        const Sx31_to_CMJ = (Sx31_inSx31CMJ/CMJ_inSx31CMJ).toFixed(4);
+        const CMJ_to_Sx31 = (CMJ_inSx31CMJ/Sx31_inSx31CMJ).toFixed(10);
+                document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+        // Bal of Ctuna  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0x7801F8cdBABE6999331d1Bf37d74aAf713C3722F';
+        const Ctuna_inCtunaCMJ = await call_SC(address, Ctuna, 18);
+        const CMJ_inCtunaCMJ = await call_SC(address, CMJ, 18);
+        const Ctuna_to_CMJ = (Ctuna_inCtunaCMJ/CMJ_inCtunaCMJ).toFixed(4);
+        const CMJ_to_Ctuna = (CMJ_inCtunaCMJ/Ctuna_inCtunaCMJ).toFixed(10);
+            document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+        // Bal of Gold  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0x7086EC7ED5D94ef503bE324B0aE8A3748A15fAE5';
+        const Gold_inGoldCMJ = await call_SC(address, Gold, 18);
+        const CMJ_inGoldCMJ = await call_SC(address, CMJ, 18);
+        const Gold_to_CMJ = (Gold_inGoldCMJ/CMJ_inGoldCMJ).toFixed(4);
+        const CMJ_to_Gold = (CMJ_inGoldCMJ/Gold_inGoldCMJ).toFixed(10);
+            document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+        
+
+        // Bal of Os  , JBC/  0x329889325A555b217C41A4c2EADD529a0CfA4231
+        address = '0x329889325A555b217C41A4c2EADD529a0CfA4231';
+        const Os_inOsCMJ = await call_SC(address, Os, 18);
+        const CMJ_inOsCMJ = await call_SC(address, CMJ, 18);
+        const Os_to_CMJ = (Os_inOsCMJ/CMJ_inOsCMJ).toFixed(4);
+        const CMJ_to_Os = (CMJ_inOsCMJ/Os_inOsCMJ).toFixed(10);
+            document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+
+        // Bal of Swar  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+        address = '0x5a9E35fC4Afc21B9Fc74bE18015D4D3B002A83A3';
+        const Swar_inSwarWJBC = await call_SC(address, Swar, 18);
+        const WJBC_inSwarWJBC = await call_SC(address, WJBC, 18);
+        const Swar_to_WJBC = (Swar_inSwarWJBC/WJBC_inSwarWJBC).toFixed(4);
+        const WJBC_to_Swar = (WJBC_inSwarWJBC/Swar_inSwarWJBC).toFixed(10);
+        const SWAR_in_CMJ = (WJBC_to_Swar*JBC_to_CMJ).toFixed(6)
+            document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+            document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+            document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+
+        // Bal of ANGB , WJBC 
+        address = '0xDd35db1a731CD86C01d74A8a4bA4354ca1CDE24d';
+        const ANGB_inANGBWJBC = await call_SC(address, Angb, 18);
+        const WJBC_inANGBWJBC = await call_SC(address, WJBC, 18);
+        const ANGB_to_WJBC = (ANGB_inANGBWJBC/WJBC_inANGBWJBC).toFixed(4);
+        const WJBC_to_ANGB = (WJBC_inANGBWJBC/ANGB_inANGBWJBC).toFixed(4);
+        const ANGB_in_CMJ = (WJBC_to_ANGB*JBC_to_CMJ).toFixed(6)
+            document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+            document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+            document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+
+        // Bal of CMJ , SIL 
+        address = '0xf189c5B03694b70e5DFD8e8CAE84118Ed7616F19';
+        const SIL_inSILCMJ = await call_SC(address, Sil, 18);
+        const CMJ_inSILCMJ = await call_SC(address, CMJ, 18);
+        const SIL_to_CMJ = (SIL_inSILCMJ/CMJ_inSILCMJ).toFixed(6);
+        const CMJ_to_SIL = (CMJ_inSILCMJ/SIL_inSILCMJ).toFixed(10);
+            document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+        
+            Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+        document.getElementById('priceB22').innerText = `${Tao_CMJ.toFixed(8)}`;
+        
+
+        // BAL of II , JTAO
+        address = '0xbD5bFF1fBbD83FECD749a328D98F860f7F343c10';
+        const II_inIIJTAO = await call_SC(address,II,18);
+        const JTAO_inIIJTAO = await call_SC(address,Jtao,18);
+        const II_to_JTAO = setLocal((II_inIIJTAO/JTAO_inIIJTAO),4);
+        const JTAO_to_II = (JTAO_inIIJTAO/II_inIIJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
+        JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+        CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
+        document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+        document.getElementById("IIPrice_JTAO_2").innerHTML = (JTAO_to_II*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+        JTAO_to_CMJ = (JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2;
+        II_to_CMJ = ((JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
+        document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+        document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+        
+        // BAL of EE , JTAO
+        address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60';
+        const EE_inEEJTAO = await call_SC(address,EE,18);
+        const JTAO_inEEJTAO = await call_SC(address,Jtao,18);
+        const EE_to_JTAO = setLocal((EE_inEEJTAO/JTAO_inEEJTAO),4);
+        const JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
+        JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+        CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
+        document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+        document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+        JTAO_to_CMJ = (JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2;
+        EEPrice_CMJ = ((JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
+        document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+        document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+        
+
+////////////////////////////////////////////////////////////////////////////////////// MEOW NEON////////////////////////////////////////////////////////////////////////////////
+        // Bal of Meow-BBQ
+        address = '0xd332E9387dC0CbC4A850F23418fC98a47bBE8739';
+        const BBQ_inBBQMEOW = await call_SC(address, Bbq, 18);
+        const MEOW_inBBQMEOW = await call_SC(address, Meow, 18);
+        const BBQ_to_Meow = (BBQ_inBBQMEOW/MEOW_inBBQMEOW).toFixed(4);
+        const Meow_to_BBQ = (MEOW_inBBQMEOW/BBQ_inBBQMEOW).toFixed(10);
+        const BBQ_in_CMJ = (Meow_to_BBQ*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-Wood
+        address = '0x538AE35F6618fc5Ac6d42c781d6Bd6C9E977866D';
+        const Wood_inWoodMEOW = await call_SC(address, Wood, 18);
+        const MEOW_inWoodMEOW = await call_SC(address, Meow, 18);
+        const Wood_to_Meow = (Wood_inWoodMEOW/MEOW_inWoodMEOW).toFixed(4);
+        const Meow_to_Wood = (MEOW_inWoodMEOW/Wood_inWoodMEOW).toFixed(10);
+        const Wood_in_CMJ = (Meow_to_Wood*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-Mt
+        address = '0x6314939709ae79E66a2dD9810202448e27afD70E';
+        const Mt_inMtMEOW = await call_SC(address, Mt, 18);
+        const MEOW_inMtMEOW = await call_SC(address, Meow, 18);
+        const Mt_to_Meow = (Mt_inMtMEOW/MEOW_inMtMEOW).toFixed(4);
+        const Meow_to_Mt = (MEOW_inMtMEOW/Mt_inMtMEOW).toFixed(10);
+        const Mt_in_CMJ = (Meow_to_Mt*CMJ_to_Meow).toFixed(10);
+
+
+        // Bal of Meow-Gold
+        address = '0xCf3b8D974A68dFE026b91C3664B8c7d9Da569924';
+        const Gold_inGoldMEOW = await call_SC(address, Gold, 18);
+        const MEOW_inGoldMEOW = await call_SC(address, Meow, 18);
+        const Gold_to_Meow = (Gold_inGoldMEOW/MEOW_inGoldMEOW).toFixed(4);
+        const Meow_to_Gold = (MEOW_inGoldMEOW/Gold_inGoldMEOW).toFixed(10);
+        const Gold_in_CMJ = (Meow_to_Gold*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-WJBC
+        address = '0xc8B5DB8c8D6707c8F7e565cDfF9a61fd6e7427B6';
+        const WJBC_inWJBCMEOW = await call_SC(address, WJBC, 18);
+        const MEOW_inWJBCMEOW = await call_SC(address, Meow, 18);
+        const WJBC_to_Meow = (WJBC_inWJBCMEOW/MEOW_inWJBCMEOW).toFixed(4);
+        const Meow_to_WJBC = (MEOW_inWJBCMEOW/WJBC_inWJBCMEOW).toFixed(10);
+        const WJBC_in_CMJ = (Meow_to_WJBC*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-Mice
+        address = '0xd21fb03ae67958ce28600350e1Df84Ef90196107';
+        const Mice_inMiceMEOW = await call_SC(address, Mice, 18);
+        const MEOW_inMiceMEOW = await call_SC(address, Meow, 18);
+        const Mice_to_Meow = (Mice_inMiceMEOW/MEOW_inMiceMEOW).toFixed(4);
+        const Meow_to_Mice = (MEOW_inMiceMEOW/Mice_inMiceMEOW).toFixed(10);
+        const Mice_in_CMJ = (Meow_to_Mice*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-Tuna
+        address = '0xA86c548E4eB41c4b7752213c8f8dCf94c50354B0';
+        const Tuna_inTunaMEOW = await call_SC(address, Tuna, 18);
+        const MEOW_inTunaMEOW = await call_SC(address, Meow, 18);
+        const Tuna_to_Meow = (Tuna_inTunaMEOW/MEOW_inTunaMEOW).toFixed(4);
+        const Meow_to_Tuna = (MEOW_inTunaMEOW/Tuna_inTunaMEOW).toFixed(10);
+        const Tuna_in_CMJ = (Meow_to_Tuna*CMJ_to_Meow).toFixed(10);
+                document.getElementById("priceB5").innerHTML = Tuna_in_CMJ;
+
+        // Bal of Meow-Jusdt
+        address = '0x8F04C3d6eb9E744b56f5D89d75Be5e9B466aCE25';
+        const Jusdt_inJusdtMEOW = await call_SC(address, Jusdt, 18);
+        const MEOW_inJusdtMEOW = await call_SC(address, Meow, 18);
+        const Jusdt_to_Meow = (Jusdt_inJusdtMEOW/MEOW_inJusdtMEOW).toFixed(4);
+        const Meow_to_Jusdt = (MEOW_inJusdtMEOW/Jusdt_inJusdtMEOW).toFixed(10);
+        const Jusdt_in_CMJ = (Meow_to_Jusdt*CMJ_to_Meow).toFixed(10);
+       // Bal of Meow-SIL
+        address = '0xacb0465e3dedb9333ae9ddd6fafa95d5b6fa4c49';
+        const SIL_inSILMEOW = await call_SC(address, Sil, 18);
+        const MEOW_inSILMEOW = await call_SC(address, Meow, 18);
+        const SIL_to_Meow = (SIL_inSILMEOW/MEOW_inSILMEOW).toFixed(4);
+        const Meow_to_SIL = (MEOW_inSILMEOW/SIL_inSILMEOW).toFixed(10);
+        const SIL_in_CMJ = (Meow_to_SIL*CMJ_to_Meow).toFixed(10);
+        // Bal of Meow-MT
+        address = '0x6314939709ae79e66a2dd9810202448e27afd70e';
+        const MT_inMTMEOW = await call_SC(address, Mt, 18);
+        const MEOW_inMTMEOW = await call_SC(address, Meow, 18);
+        const MT_to_Meow = (MT_inMTMEOW/MEOW_inMTMEOW).toFixed(4);
+        const Meow_to_MT = (MEOW_inMTMEOW/MT_inMTMEOW).toFixed(10);
+        const MT_in_CMJ = (Meow_to_MT*CMJ_to_Meow).toFixed(10);
+
+/////////////////////////////////////////////////////////////////////////////////// JIBSWAP /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // Bal of Meow-WJBC
+        address = '0x04C106B2E51a307D3c69d2a72c5A24dcF7c35731';
+        const Jib_WJBC_inWJBCMEOW = await call_SC(address, Jib_WJBC, 18);
+        const Jib_MEOW_inWJBCMEOW = await call_SC(address, Meow, 18);
+        const Jib_WJBC_to_Meow = (Jib_WJBC_inWJBCMEOW/Jib_MEOW_inWJBCMEOW).toFixed(4);
+        const Jib_Meow_to_WJBC = (Jib_MEOW_inWJBCMEOW/Jib_WJBC_inWJBCMEOW).toFixed(10);
+        const Jib_WJBC_in_CMJ = (Jib_Meow_to_WJBC*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-SIL
+        address = '0x2038F97Fe5199a473726016c6B755C71A1d02fa0';
+        const Jib_SIL_inSILMEOW = await call_SC(address, Sil, 18);
+        const Jib_MEOW_inSILMEOW = await call_SC(address, Meow, 18);
+        const Jib_SIL_to_Meow = (Jib_SIL_inSILMEOW/Jib_MEOW_inSILMEOW).toFixed(4);
+        const Jib_Meow_to_SIL = (Jib_MEOW_inSILMEOW/Jib_SIL_inSILMEOW).toFixed(10);
+        const Jib_SIL_in_CMJ = (Jib_Meow_to_SIL*CMJ_to_Meow).toFixed(10);
+            
+        // Bal of Meow-Gold
+        address = '0x1a2a8039c4b685d47B9ef6e2C9D3aCB5aB83BCAC';
+        const Jib_Gold_inGoldMEOW = await call_SC(address, Gold, 18);
+        const Jib_MEOW_inGoldMEOW = await call_SC(address, Meow, 18);
+        const Jib_Gold_to_Meow = (Jib_Gold_inGoldMEOW/Jib_MEOW_inGoldMEOW).toFixed(4);
+        const Jib_Meow_to_Gold = (Jib_MEOW_inGoldMEOW/Jib_Gold_inGoldMEOW).toFixed(10);
+        const Jib_Gold_in_CMJ = (Jib_Meow_to_Gold*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-Wood
+        address = '0x0E2302D286778B70F59451036207Aec484C15198';
+        const Jib_Wood_inWoodMEOW = await call_SC(address, Wood, 18);
+        const Jib_MEOW_inWoodMEOW = await call_SC(address, Meow, 18);
+        const Jib_Wood_to_Meow = (Jib_Wood_inWoodMEOW/Jib_MEOW_inWoodMEOW).toFixed(4);
+        const Jib_Meow_to_Wood = (Jib_MEOW_inWoodMEOW/Jib_Wood_inWoodMEOW).toFixed(10);
+        const Jib_Wood_in_CMJ = (Jib_Meow_to_Wood*CMJ_to_Meow).toFixed(10);
+                document.getElementById("priceB4").innerHTML = Jib_Wood_in_CMJ;
+
+       // Bal of Meow-Mice
+        address = '0xcc59B348085384C1B8e4D310e53a4823aCd38653';
+        const Jib_Mice_inMiceMEOW = await call_SC(address, Mice, 18);
+        const Jib_MEOW_inMiceMEOW = await call_SC(address, Meow, 18);
+        const Jib_Mice_to_Meow = (Jib_Mice_inMiceMEOW/Jib_MEOW_inMiceMEOW).toFixed(4);
+        const Jib_Meow_to_Mice = (Jib_MEOW_inMiceMEOW/Jib_Mice_inMiceMEOW).toFixed(10);
+        const Jib_Mice_in_CMJ = (Jib_Meow_to_Mice*CMJ_to_Meow).toFixed(10);
+                document.getElementById("priceB6").innerHTML = Jib_Mice_in_CMJ;
+        // Bal of Meow-Tuna
+        address = '0xF9C16D28E8113D0966cE060a4F8c4cFad6D87467';
+        const Jib_Tuna_inTunaMEOW = await call_SC(address, Tuna, 18);
+        const Jib_MEOW_inTunaMEOW = await call_SC(address, Meow, 18);
+        const Jib_Tuna_to_Meow = (Jib_Tuna_inTunaMEOW/Jib_MEOW_inTunaMEOW).toFixed(4);
+        const Jib_Meow_to_Tuna = (Jib_MEOW_inTunaMEOW/Jib_Tuna_inTunaMEOW).toFixed(10);
+        const Jib_Tuna_in_CMJ = (Jib_Meow_to_Tuna*CMJ_to_Meow).toFixed(10);
+        // Bal of Meow-Os
+        address = '0x7400281C02259436CA6bbf2bcD6624E7E497ee96';
+        const Jib_Os_inOsMEOW = await call_SC(address, Os, 18);
+        const Jib_MEOW_inOsMEOW = await call_SC(address, Meow, 18);
+        const Jib_Os_to_Meow = (Jib_Os_inOsMEOW/Jib_MEOW_inOsMEOW).toFixed(4);
+        const Jib_Meow_to_Os = (Jib_MEOW_inOsMEOW/Jib_Os_inOsMEOW).toFixed(10);
+        const Jib_Os_in_CMJ = (Jib_Meow_to_Os*CMJ_to_Meow).toFixed(10);
+
+        // Bal of Meow-Mt
+        address = '0xb882C5Ec427De3085127C89De4fe3ceE12b345bb';
+        const Jib_Mt_inMtMEOW = await call_SC(address, Mt, 18);
+        const Jib_MEOW_inMtMEOW = await call_SC(address, Meow, 18);
+        const Jib_Mt_to_Meow = (Jib_Mt_inMtMEOW/Jib_MEOW_inMtMEOW).toFixed(4);
+        const Jib_Meow_to_Mt = (Jib_MEOW_inMtMEOW/Jib_Mt_inMtMEOW).toFixed(10);
+        const Jib_Mt_in_CMJ = (Jib_Meow_to_Mt*CMJ_to_Meow).toFixed(10);
+        document.getElementById("priceB16").innerHTML = Jib_Mt_in_CMJ;
+
+        // Bal of Meow-stOPT
+        address = '0xc33ED5700B34DF55c925b4ca1791Aa0F61c6bcEd';
+        const Jib_stOPT_instOPTMEOW = await call_SC(address, stOPT, 18);
+        const Jib_MEOW_instOPTMEOW = await call_SC(address, Meow, 18);
+        const Jib_stOPT_to_Meow = (Jib_stOPT_instOPTMEOW/Jib_MEOW_instOPTMEOW).toFixed(4);
+        const Jib_Meow_to_stOPT = (Jib_MEOW_instOPTMEOW/Jib_stOPT_instOPTMEOW).toFixed(10);
+        const Jib_stOPT_in_CMJ = (Jib_Meow_to_stOPT*CMJ_to_Meow).toFixed(10);
+
+            // Token Value in CMJ
+        const Bbq_Price = CMJ_to_BBQ;
+        const Pza_Price = CMJ_to_Pza;
+        const Swar_Price = SWAR_in_CMJ;
+        const Wood_Price = Jib_Wood_in_CMJ;
+        const Tuna_Price = Tuna_in_CMJ;
+        const Mice_Price = Jib_Mice_in_CMJ;
+        const Cu_Price = CMJ_to_Cu;
+        const Jasp_Price = CMJ_to_Jasp;
+        const Os_Price = CMJ_to_Os;
+        const Jdao_Price = CMJ_to_Jdao;
+        const Mt_Price = Jib_Mt_in_CMJ;
+        const Gold_Price = CMJ_to_Gold;
+        const Silver_Price = Jib_SIL_in_CMJ;
+        const Ctuna_Price = CMJ_to_Ctuna;
+        const Sx31_Price = CMJ_to_Sx31;
+        const stOPT_Price = Jib_stOPT_in_CMJ;
+        const Jbc_Price = JBC_to_CMJ;
+        const Plat_Price = 0.0011;
+
+    } catch (error) {
+        console.error('Error:', error);
+        console.log('An error occurred while fetching contract information.');
+    }
+}
+main();
+function setLocal(number,maximumFractionDigits){
+  return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
+}
+    
+async function call_SC(address, contract, divider) {
+    try {
+      const result = await contract.methods.balanceOf(address).call();
+      return result / (10 ** divider); // เลื่อนการหารออกจากการเรียกใช้เพื่อความชัดเจน
+    } catch (error) {
+      console.error("Error calling contract method:", error);
+      return null;
+    }
+  }
+
+  async function getBalance() {
+    resetPurchaseTable()
+    startHistory()
+    THB_to_USD = parseFloat(document.getElementById("THB").textContent) || 36.5;
+    console.log("THB"+THB_to_USD);
+    CMJ_to_JBC = parseFloat(document.getElementById("Sell_CMJinJBC").textContent) || 0;
+    JBC_to_CMJ = parseFloat(document.getElementById("Sell_JBCinCMJ").textContent) || 0;
+    CMJ_to_USD = parseFloat(document.getElementById("Sell_CMJinUSD").textContent) || 0;
+    USD_to_CMJ = (1/parseFloat(document.getElementById("priceD2").textContent)) || 0;
+    Meow_to_CMJ = parseFloat(document.getElementById("Sell_MeowinCMJ").textContent) || 0;
+    Jtao_to_CMJ = parseFloat(document.getElementById("priceB22").textContent) || 0;
+    Wood_to_CMJ = parseFloat(document.getElementById("priceB4").textContent) || 0;
+    Tuna_to_CMJ = parseFloat(document.getElementById("priceB5").textContent) || 0;
+    Mice_to_CMJ = parseFloat(document.getElementById("priceB6").textContent) || 0;
+    Cu_to_CMJ = parseFloat(document.getElementById("priceB7").textContent) || 0;
+    Jasper_to_CMJ = parseFloat(document.getElementById("priceB17").textContent) || 0;
+    Os_to_CMJ = parseFloat(document.getElementById("priceB18").textContent) || 0;
+    Jdao_to_CMJ = parseFloat(document.getElementById("priceB15").textContent) || 0;
+    Mt_to_CMJ = parseFloat(document.getElementById("priceB16").textContent) || 0;
+    Angb_to_CMJ = parseFloat(document.getElementById("priceB23").textContent) || 0;
+    II_to_CMJ = parseFloat(document.getElementById("IIPrice_CMJ").textContent) || 0;
+    EE_to_CMJ = parseFloat(document.getElementById("EEPrice_CMJ").textContent) || 0;
+    Bbq_to_CMJ = parseFloat(document.getElementById("priceB8").textContent) || 0;
+    Pza_to_CMJ = parseFloat(document.getElementById("priceB9").textContent) || 0;
+    Ctuna_to_CMJ = parseFloat(document.getElementById("priceB10").textContent) || 0;
+    Sx31_to_CMJ = parseFloat(document.getElementById("priceB11").textContent) || 0;
+    Silver_to_CMJ = parseFloat(document.getElementById("priceB12").textContent) || 0;
+    Gold_to_CMJ = parseFloat(document.getElementById("priceB13").textContent) || 0;
+    Platinum_to_CMJ = parseFloat(document.getElementById("priceB19").textContent) || 0;
+    Swar_to_CMJ = parseFloat(document.getElementById("priceB21").textContent) || 0;
+    Gear_to_CMJ = 0;
+    Vabag_to_CMJ = 0;
+    
+    const walletAddress = document.getElementById("wallet_address").value;
+    const CMJ_ERC20 = setContract('0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+    const Wood_ERC20 = setContract('0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+    const WJBC_ERC20 = setContract('0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+    const WJBCJIB_ERC20 = setContract('0x99999999990FC47611b74827486218f3398A4abD');
+    const Meow_ERC20 = setContract('0x04052384166fC30D03929eE328805eC084776843');
+    const Tuna_ERC20 = setContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+    const Mice_ERC20 = setContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+    const Cu_ERC20 = setContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+    const Jasp_ERC20 = setContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+    const Os_ERC20 = setContract('0xAc5299D92373E9352636559cca497d7683A47655');
+    const Jdao_ERC20 = setContract('0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+    const Mt_ERC20 = setContract('0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+    const Vabag_ERC20 = setContract('0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+    const Bbq_ERC20 = setContract('0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+    const Pza_ERC20 = setContract('0x09DcdCFc6C48803681a3422997c679E773656763');
+    const Ctuna_ERC20 = setContract('0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+    const Sx31_ERC20 = setContract('0xd431d826d7a4380b9259612176f00528b88840a7');
+    const Sil_ERC20 = setContract('0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+    const Gold_ERC20 = setContract('0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+    const Plat_ERC20 = setContract('0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+    const Swar_ERC20 = setContract('0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+    const Jusdt_ERC20 = setContract('0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+    const stOPT_ERC20 = setContract('0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+    const Jtao_ERC20 = setContract('0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+    const Angb_ERC20 = setContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+    const GEAR_ERC20 = setContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+    const II_ERC20 = setContract('0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+    const EE_ERC20 = setContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+    const MHZ = loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+    const CU = loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+    const JASP = loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+    
+
+    const CMDAO_NFT = loadContract('0x20724DC1D37E67B7B69B52300fDbA85E558d8F9A');
+    const NRT_NFT = loadContract('0x5E620D8980335167d9eF36cEf5d9A6Ea6607a8Cb');
+    //** TOKEN 
+
+
+    try {
+      const jbcBalWei = await web3.eth.getBalance(walletAddress) / (10**18);
+      const cmjBalWei = await CMJ_ERC20.methods.balanceOf(walletAddress).call();
+      const cmjBal = web3.utils.fromWei(cmjBalWei, 'ether');
+      const jusdtBalWei = await Jusdt_ERC20.methods.balanceOf(walletAddress).call();
+      const jusdtBal = web3.utils.fromWei(jusdtBalWei,'ether');
+      const WoodBalWei = await Wood_ERC20.methods.balanceOf(walletAddress).call();
+      const WoodBal = web3.utils.fromWei(WoodBalWei, 'ether');
+      const WJBCBalWei = await WJBC_ERC20.methods.balanceOf(walletAddress).call();
+      const WJBCBal = web3.utils.fromWei(WJBCBalWei, 'ether');
+      const WJBCJIBBalWei = await WJBCJIB_ERC20.methods.balanceOf(walletAddress).call();
+      const WJBCJIBBal = web3.utils.fromWei(WJBCJIBBalWei, 'ether');
+      const MeowBalWei = await Meow_ERC20.methods.balanceOf(walletAddress).call();
+      const MeowBal = web3.utils.fromWei(MeowBalWei, 'ether');
+      const TunaBalWei = await Tuna_ERC20.methods.balanceOf(walletAddress).call();
+      const TunaBal = web3.utils.fromWei(TunaBalWei, 'ether');
+      const MiceBalWei = await Mice_ERC20.methods.balanceOf(walletAddress).call();
+      const MiceBal = web3.utils.fromWei(MiceBalWei, 'ether');
+      const CuBalWei = await Cu_ERC20.methods.balanceOf(walletAddress).call();
+      const CuBal = web3.utils.fromWei(CuBalWei, 'ether');
+      const JdaoBalWei = await Jdao_ERC20.methods.balanceOf(walletAddress).call();
+      const JdaoBal = web3.utils.fromWei(JdaoBalWei, 'ether');
+      const MtBalWei = await Mt_ERC20.methods.balanceOf(walletAddress).call();
+      const MtBal = web3.utils.fromWei(MtBalWei, 'ether');
+      const VabagBalWei = await Vabag_ERC20.methods.balanceOf(walletAddress).call();
+      const VabagBal = web3.utils.fromWei(VabagBalWei, 'ether');
+      const BbqBalWei = await Bbq_ERC20.methods.balanceOf(walletAddress).call();
+      const BbqBal = web3.utils.fromWei(BbqBalWei, 'ether');
+      const PzaBalWei = await Pza_ERC20.methods.balanceOf(walletAddress).call();
+      const PzaBal = web3.utils.fromWei(PzaBalWei, 'ether');
+      const CtunaBalWei = await Ctuna_ERC20.methods.balanceOf(walletAddress).call();
+      const CtunaBal = web3.utils.fromWei(CtunaBalWei, 'ether');
+      const Sx31BalWei = await Sx31_ERC20.methods.balanceOf(walletAddress).call();
+      const Sx31Bal = web3.utils.fromWei(Sx31BalWei, 'ether');
+      const SilBalWei = await Sil_ERC20.methods.balanceOf(walletAddress).call();
+      const SilBal = web3.utils.fromWei(SilBalWei, 'ether');
+      const GoldBalWei = await Gold_ERC20.methods.balanceOf(walletAddress).call();
+      const GoldBal = web3.utils.fromWei(GoldBalWei, 'ether');
+      const PlatBalWei = await Plat_ERC20.methods.balanceOf(walletAddress).call();
+      const PlatBal = web3.utils.fromWei(PlatBalWei, 'ether');
+      const SwarBalWei = await Swar_ERC20.methods.balanceOf(walletAddress).call();
+      const SwarBal = web3.utils.fromWei(SwarBalWei, 'ether');
+      const JtaoBalWei = await Jtao_ERC20.methods.balanceOf(walletAddress).call();
+      const JtaoBal = web3.utils.fromWei(JtaoBalWei, 'ether');
+      const AngbBalWei = await Angb_ERC20.methods.balanceOf(walletAddress).call();
+      const AngbBal = web3.utils.fromWei(AngbBalWei, 'ether');
+      const GearBalWei = await GEAR_ERC20.methods.balanceOf(walletAddress).call();
+      const GearBal = web3.utils.fromWei(GearBalWei, 'ether');
+      const IIBalWei = await II_ERC20.methods.balanceOf(walletAddress).call();
+      const IIBal = web3.utils.fromWei(IIBalWei, 'ether');
+      const EEBalWei = await EE_ERC20.methods.balanceOf(walletAddress).call();
+      const EEBal = web3.utils.fromWei(EEBalWei, 'ether');
+      const JaspBalWei = await Jasp_ERC20.methods.balanceOf(walletAddress).call();
+      const JaspBal = web3.utils.fromWei(JaspBalWei, 'gwei');
+      const OsBalWei = await Os_ERC20.methods.balanceOf(walletAddress).call();
+      const OsBal = web3.utils.fromWei(OsBalWei, 'ether');
+      const CUContract = await loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+      const JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+      const DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+      const CCContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+      const LPFarming = await loadContract('0x6B25033c2B4F5594809cBEf9F625771a2574C1a6'); 
+      const TunaField = await loadContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+      const MiceField = await loadContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+      const FieldTHL = await loadContract('0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9');
+      const MHZField = await loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+
+      async function processCUMData() {
+        console.log('DUNGEON CUPPER');
+        try {
+          const block = await web3.eth.getBlock('latest');
+          const currentTimeStamp = block.timestamp;
+          console.log('Current timestamp:', currentTimeStamp);
+      
+          const CUM_pending = await CUContract.methods.calculateRewards(walletAddress).call() / (10**18);
+          document.getElementById("CUM_Pending").innerHTML = parseFloat(CUM_pending).toLocaleString(undefined, {maximumFractionDigits: 7});
+      
+          const CUdata = await CUContract.methods.nftEquip(walletAddress).call();
+          const date = new Date((parseFloat(CUdata[4]) + 86400) * 1000); // เพิ่มเวลาในหนึ่งวัน (86400 วินาที) โดยไม่ต้องคูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
+          const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
+          document.getElementById("CUM_End").innerHTML = formattedDate;
+          console.log(date);
+          console.log((parseFloat(CUdata[4]) + 86400) * 1000); // แสดงผลลัพธ์ที่ถูกต้องหลังจากการคำนวณ
+          console.log(CUdata);
+          
+          if (parseFloat(CUdata[0]) == 0){
+            document.getElementById("CUM_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
+          }
+          else if (parseFloat(CUdata[4]) + 3600 < currentTimeStamp) {
+            document.getElementById("CUM_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
+          } else if (parseFloat(CUdata[4]) + 3600 > currentTimeStamp) {
+            document.getElementById("CUM_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
+          }
+            document.getElementById("CUM_Pow").innerHTML = CUdata[3].toLocaleString(undefined,{maximumFractionDigits:0});
+            document.getElementById("CUM_reward").innerHTML = parseFloat(CUdata[3]*0.36*24).toLocaleString(undefined,{maximumFractionDigits:2});
+          } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+      async function getFarming(){
+        console.log('Get Farming Details');
+        try{
+          const Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
+          const Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
+          console.log(Info1);
+          console.log(Pending1);
+                document.getElementById("stakeJBCCMJ").innerHTML = parseFloat(Info1[0]/10**18).toLocaleString();
+                document.getElementById("pendingJBCCMJ").innerHTML = (parseFloat(Pending1)/10**18).toLocaleString();
+
+          const Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
+          const Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
+                document.getElementById("stakeCMJ").innerHTML = parseFloat(Info2[0]/10**18).toLocaleString();
+                document.getElementById("pendingCMJ").innerHTML = (parseFloat(Pending2)/10**18).toLocaleString();
+
+          const Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
+          const Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
+                document.getElementById("stakeJBCJUSDT").innerHTML = parseFloat(Info3[0]/10**18).toLocaleString();
+                document.getElementById("pendingJBCJUSDT").innerHTML = (parseFloat(Pending3)/10**18).toLocaleString();
+        }catch (error){
+          console.error('Error:', error);
+        }
+      }
+
+      
+    
+      async function processJASPERData() {
+        console.log('DUNGEON JASPER');
+        try {
+          const block = await web3.eth.getBlock('latest');
+          const currentTimeStamp = block.timestamp;
+          console.log('Current timestamp:', currentTimeStamp);
+      
+          const JAC_pending = await JASPContract.methods.calculateRewards(walletAddress).call() / (10**9);
+          document.getElementById("JAC_Pending").innerHTML = parseFloat(JAC_pending).toLocaleString(undefined, {maximumFractionDigits: 3});
+      
+          const JASPdata = await JASPContract.methods.nftEquip(walletAddress).call();
+          const date = new Date((parseFloat(JASPdata[8])+86400) * 1000); // ให้คูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
+          const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
+          document.getElementById("JAC_END").innerHTML = formattedDate;
+
+          console.log(JASPdata);  
+          if (parseFloat(JASPdata[0]) == 0){
+            document.getElementById("JAC_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
+          }
+          else if (parseFloat(JASPdata[8]) + 86400 < currentTimeStamp) {
+            document.getElementById("JAC_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
+            
+          } else if (parseFloat(JASPdata[8]) + 86400 > currentTimeStamp) {
+            document.getElementById("JAC_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
+          }
+            document.getElementById("JAC_reward").innerHTML = parseFloat(JASPdata[7]*0.0000864).toLocaleString(undefined,{maximumFractionDigits:6});
+            document.getElementById("JAC_Pow").innerHTML = parseFloat(JASPdata[7]).toLocaleString(undefined,{maximumFractionDigits:0});
+          } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      async function processDWData() {
+        console.log('DUNGEON DEAMONWORLDS');
+        try {
+          const block = await web3.eth.getBlock('latest');
+          const currentTimeStamp = block.timestamp;
+          console.log('Current timestamp:', currentTimeStamp);
+      
+          const DW_pending = await DWContract.methods.calculateRewards(walletAddress).call() / (10**18);
+          document.getElementById("DW_Pending").innerHTML = parseFloat(DW_pending).toLocaleString(undefined, {maximumFractionDigits: 3});
+      
+          const DWdata = await DWContract.methods.nftEquip(walletAddress).call();
+          const date = new Date((parseFloat(DWdata[9]) + 86400) * 1000); // เพิ่มเวลาในหนึ่งวัน (86400 วินาที) โดยไม่ต้องคูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
+          const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
+          document.getElementById("DW_END").innerHTML = formattedDate;
+          console.log(date);
+          console.log((parseFloat(DWdata[9]) + 86400) * 1000); // แสดงผลลัพธ์ที่ถูกต้องหลังจากการคำนวณ
+          console.log(DWdata);
+          
+          if (parseFloat(DWdata[0]) == 0){
+            document.getElementById("DW_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
+          }
+          else if (parseFloat(DWdata[9]) + 86400 < currentTimeStamp) {
+            document.getElementById("DW_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
+          } else if (parseFloat(DWdata[9]) + 86400 > currentTimeStamp) {
+            document.getElementById("DW_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
+          }
+            document.getElementById("DW_Pow").innerHTML = (parseFloat(DWdata[8])).toLocaleString(undefined,{maximumFractionDigits:3});
+            document.getElementById("DW_reward").innerHTML = parseFloat(DWdata[8]*0.000012096).toLocaleString(undefined,{maximumFractionDigits:6});
+          } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      async function processCCData() {
+        console.log('DUNGEON CRYPTICCOGS');
+        try {
+          const block = await web3.eth.getBlock('latest');
+          const currentTimeStamp = block.timestamp;
+          console.log('Current timestamp:', currentTimeStamp);
+      
+          const CC_Pending = await CCContract.methods.calculateRewards(walletAddress).call() / (10**18);
+          document.getElementById("CC_Pending").innerHTML = parseFloat(CC_Pending).toLocaleString(undefined, {maximumFractionDigits: 3});
+      
+          const data = await CCContract.methods.nftStatus(walletAddress).call();
+          const date = new Date((parseFloat(data[8]) + 86400) * 1000); // เพิ่มเวลาในหนึ่งวัน (86400 วินาที) โดยไม่ต้องคูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
+          const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
+          document.getElementById("CC_END").innerHTML = formattedDate;
+          console.log(date);
+          console.log((parseFloat(data[8]) + 86400) * 1000); // แสดงผลลัพธ์ที่ถูกต้องหลังจากการคำนวณ
+          console.log(data);
+          
+          if (parseFloat(data[0]) == 0){
+            document.getElementById("CC_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
+          }
+          else if (parseFloat(data[8]) + 86400 < currentTimeStamp) {
+            document.getElementById("CC_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
+          } else if (parseFloat(data[8]) + 86400 > currentTimeStamp) {
+            document.getElementById("CC_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
+          }
+            document.getElementById("CC_Pow").innerHTML = parseFloat(data[7]).toLocaleString(undefined,{maximumFractionDigits:0});
+            document.getElementById("CC_reward").innerHTML = parseFloat(data[7]*0.0767232).toLocaleString(undefined,{maximumFractionDigits:6});
+          } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+      async function collectTunaRewards() {
+        let totalTuna = 0;
+        let indicesToCollect = [];
+        document.getElementById("stakeTuna").innerHTML = "Loading Estimate ~1 Min";
+        document.getElementById("pendingTuna").innerHTML = "";
+        // Iterate through indices from 0 to 100
+        for (let i = 0; i <= 100; i++) {
+            try {
+                // Call the contract method to get data for the current index
+                const data = await TunaField.methods.nftStake(i).call();
+    
+                // Check if the walletAddress matches data[0]
+                if (data[0] === walletAddress) {
+                    // If matched, collect the index
+                    indicesToCollect.push(i);
+    
+                    // Get the reward for the current index
+                    const getReward = await TunaField.methods.calculateRewards(i).call();
+                    totalTuna += parseInt(getReward); // Assuming getReward is in integer format
+                }
+            } catch (error) {
+                console.error(`Error fetching data for index ${i}:`, error);
+                // Handle the error if needed
+            }
+        }
+    
+        // Now you have the totalTuna and the indices to collect
+        console.log("Indices to collect:", indicesToCollect);
+        console.log("Total Tuna rewards to collect:", totalTuna);
+        document.getElementById("stakeTuna").innerHTML = indicesToCollect.length.toLocaleString();
+        document.getElementById("pendingTuna").innerHTML = (totalTuna/10**18).toLocaleString();
+    }
+    async function collectMiceRewards() {
+      let totalMice = 0;
+      let MiceindicesToCollect = [];
+      document.getElementById("stakeMice").innerHTML = "Loading Estimate ~2 Min";
+      document.getElementById("pendingMice").innerHTML = ""
+      for (let i = 0; i <= 1000; i++) {
+          try {
+              const data = await MiceField.methods.nftStake(i).call();
+              if (data[0] === walletAddress) {
+                MiceindicesToCollect.push(i);
+                  const getReward = await MiceField.methods.calculateRewards(i).call();
+                  totalMice += parseInt(getReward); // Assuming getReward is in integer format
+              }
+          } catch (error) {
+              console.error(`Error fetching data for index ${i}:`, error);
+          }
+      }
+  
+      // Now you have the totalTuna and the indices to collect
+      console.log("Indices to collect:", MiceindicesToCollect);
+      console.log("Total Tuna rewards to collect:", totalMice);
+      document.getElementById("stakeMice").innerHTML = (MiceindicesToCollect.length).toLocaleString();
+      document.getElementById("pendingMice").innerHTML = (totalMice/10**18).toLocaleString();
+  }
+  async function collectTHLRewards() {
+    let totalGold = 0;
+    let GoldindicesToCollect = [];
+    document.getElementById("stakeMHL").innerHTML = "Loading Estimate ~2 Min";
+    document.getElementById("pendingMHL").innerHTML = "";
+    for (let i = 0; i <= 1000; i++) {
+        try {
+            const data = await FieldTHL.methods.nftStake(i).call();
+            if (data[0] === walletAddress) {
+              GoldindicesToCollect.push(i);
+                const getReward = await FieldTHL.methods.calculateRewards1(i).call();
+                totalGold += parseInt(getReward); // Assuming getReward is in integer format
+            }
+        } catch (error) {
+            console.error(`Error fetching data for index ${i}:`, error);
+        }
+    }
+    console.log("Indices to collect:", GoldindicesToCollect);
+    console.log("Total Gold rewards to collect:", totalGold);
+    document.getElementById("stakeMHL").innerHTML = (GoldindicesToCollect.length).toLocaleString();
+    document.getElementById("pendingMHL").innerHTML = (totalGold/10**18).toLocaleString();
+}
+async function collectGearRewards(){
+  TDMID = [39190528,39059456,38928384,38797312,38666240,38535168,38404096,38273024,38141952,38010880,37879808,37748736,37617664,37486592,37355520,37224448,37093376,36962304,36831232,36700160,36569088,36438016,36306944,36175872,36044800,35913728,35782656,35651584,35520512,35389440,35258368,35127296,34996224,34865152,34734080,34603008,34471936,34340864,34209792,34078720,33947648,33816576,33685504,33554432,33423360,33292288,33161216,33030144,32899072,32768000,32636928,32505856,32374784,32243712,32112640,31981568,31850496,31719424,31588352,31457280,31326208,31195136,31064064,30932992,30801920,30670848,30539776,30408704,30277632,30146560,30015488,29884416,29753344,29622272,29491200,29360128,29229056,29097984,28966912,28835840,28704768,28573696,28442624,28311552,28180480,28049408,27918336,27787264,27656192,27525120,27394048,27262976,27131904,27000832,26869760,26738688,26607616,26476544,26345472,26214400,26083328,25952256,25821184,25690112,25559040,25427968,25296896,25165824,25034752,24903680,24772608,24641536,24510464,24379392,24248320,24117248,23986176,23855104,23724032,23592960,23461888,23330816,23199744,23068672,22937600,22806528,22675456,22544384,22413312,22282240,22151168,22020096,21889024,21757952,21626880,21495808,21364736,21233664,21102592,20971520,20840448,20709376,20578304,20447232,20316160,20185088,20054016,19922944,19791872,19660800,19529728,19398656,19267584,19136512,19005440,18874368,18743296,18612224,18481152,18350080,18219008,18087936,17956864,17825792,17694720,17563648,17432576,17301504,17170432,17039360,16908288,16777216,16646144,16515072,16384000,16252928,16121856,15990784,15859712,15728640,15597568,15466496,15335424,15204352,15073280,14942208,14811136,14680064,14548992,14417920,14286848,14155776,14024704,13893632,13762560,13631488,13500416,13369344,13238272,13107200,12976128,12845056,12713984,12582912,12451840,12320768,12189696,12058624,11927552,11796480,11665408,11534336,11403264,11272192,11141120,11010048,10878976,10747904,10616832,10485760,10354688,10223616,10092544,9961472,9830400,9699328,9568256,9437184,9306112,9175040,9043968,8912896,8781824,8650752,8519680,8388608,8257536,8126464,7995392,7864320,7733248,7602176,7471104,7340032,7208960,7077888,6946816,6815744,6684672,6553600,6422528,6291456,6160384,6029312,5898240,5767168,5636096,5505024,5373952,5242880,5111808,4980736,4849664,4718592,4587520,4456448,4325376,4194304,4063232,3932160,3801088,3670016,3538944,3407872,3276800,3145728,3014656,2883584,2752512,2621440,2490368,2359296,2228224,2097152,1966080,1835008,1703936,1572864,1441792,1310720,1179648,1048576,917504,786432,655360,524288,393216,262144,131072,0];
+  console.log(TDMID.length)
+  let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
+  document.getElementById("staketokenMHZ").innerHTML = (stakeJTAO[0]/10**18).toLocaleString();
+  penndingGear = await MHZField.methods.calculateRewards(0, walletAddress, false).call();
+  document.getElementById("pendingMHZ").innerHTML = (penndingGear/10**18).toLocaleString();
+  let TaodumOwnerID = []; // เริ่มต้นพร้อมแก้ไข
+
+  // ลองใช้ try-catch เพื่อจัดการข้อผิดพลาดที่เกิดขึ้น
+  try {
+      let TaodumOwnerID = []; // เริ่มต้นพร้อมแก้ไข
+      for (let i = 0; i <= 299; i++){
+          console.log("Call ID ",TDMID[i])
+          const data = await MHZField.methods.nftStake(TDMID[i]).call();
+          console.log("Data", data);
+          if (data[0] === walletAddress){
+              TaodumOwnerID.push(TDMID[i]);
+              const getReward = await MHZField.methods.calculateRewards(TDMID[i], 0, true).call();
+              console.log(getReward/10**18);
+              penndingGear += parseInt(getReward);
+          }
+      }
+  } catch(error) {
+      console.error('Error fetching data:', error);
+  }
+
+  // แสดงผลลัพธ์ที่ได้
+  document.getElementById("pendingMHZ").innerHTML = (penndingGear/10**18).toLocaleString();
+  document.getElementById("stakeMHZ").innerHTML = (TaodumOwnerID.length).toLocaleString();
+}
+
+
+      // Call the function
+      processCUMData();
+      processJASPERData(); 
+      processDWData();
+      processCCData();
+      getFarming();
+      collectTunaRewards();
+      collectMiceRewards();
+      collectTHLRewards();
+      collectGearRewards();
+
+    
+      function setValue(id,Token){
+        return document.getElementById(id).innerText = parseFloat(Token).toLocaleString(undefined,{maximumFractionDigits:7});
+      }
+      // Display
+      setValue("jbc_bal",jbcBalWei);
+      setValue("cmj_bal",cmjBal);
+      setValue("Wood_bal",WoodBal);
+      setValue("WJBC_bal",WJBCBal);
+      setValue("WJBCJIB_bal",WJBCJIBBal);
+      setValue("Meow_bal",MeowBal);
+      setValue("Tuna_bal",TunaBal);
+      setValue("Mice_bal",MiceBal);
+      setValue("Cu_bal",CuBal);
+      setValue("Jasp_bal",JaspBal);
+      setValue("Os_bal",OsBal);
+      setValue("Jdao_bal",JdaoBal);
+      setValue("Mt_bal",MtBal);
+      setValue("Vabag_bal",VabagBal);
+      setValue("Bbq_bal",BbqBal);
+      setValue("Pza_bal",PzaBal);
+      setValue("Ctuna_bal",CtunaBal);
+      setValue("Sx31_bal",Sx31Bal);
+      setValue("Sil_bal",SilBal);
+      setValue("Vabag_bal",VabagBal);
+      setValue("Gold_bal",GoldBal);
+      setValue("Plat_bal",PlatBal);
+      setValue("Swar_bal",SwarBal);
+      setValue("Angb_bal",AngbBal);
+      setValue("Gear_bal",GearBal);
+      setValue("II_bal",IIBal);
+      setValue("EE_bal",EEBal);
+      setValue("Jtao_bal",JtaoBal);
+      setValue("jusdt_bal",jusdtBal);
+
+      function calculateWorth(balance, conversionRate) {
+        return parseFloat(balance * conversionRate);
+    }
+      function displayWorth(elementId, value) {
+        document.getElementById(elementId).innerText = (value).toLocaleString(undefined, { maximumFractionDigits: 3 });
+    }    
+      // Display Worth and total worth
+      CMJtotalworth = 0;
+      worth = []
+      worth.push(calculateWorth(jbcBalWei,JBC_to_CMJ));
+      worth.push(calculateWorth(cmjBal,1));
+      worth.push(calculateWorth(MeowBal,Meow_to_CMJ))
+      worth.push(calculateWorth(WJBCBal,JBC_to_CMJ));
+      worth.push(calculateWorth(WJBCJIBBal,JBC_to_CMJ));
+      worth.push(calculateWorth(JtaoBal, Jtao_to_CMJ));
+      worth.push(calculateWorth(WoodBal, Wood_to_CMJ));
+      worth.push(calculateWorth(TunaBal, Tuna_to_CMJ));
+      worth.push(calculateWorth(MiceBal, Mice_to_CMJ));
+      worth.push(calculateWorth(CuBal, Cu_to_CMJ));
+      worth.push(calculateWorth(JaspBal, Jasper_to_CMJ));
+      worth.push(calculateWorth(OsBal, Os_to_CMJ));
+      worth.push(calculateWorth(JdaoBal, Jdao_to_CMJ));
+      worth.push(calculateWorth(MtBal, Mt_to_CMJ));
+      worth.push(calculateWorth(VabagBal, ((1/3)*USD_to_CMJ)));
+      worth.push(calculateWorth(BbqBal, Bbq_to_CMJ));
+      worth.push(calculateWorth(PzaBal, Pza_to_CMJ));
+      worth.push(calculateWorth(CtunaBal, Ctuna_to_CMJ));
+      worth.push(calculateWorth(Sx31Bal, Sx31_to_CMJ));
+      worth.push(calculateWorth(SilBal, Silver_to_CMJ));
+      worth.push(calculateWorth(GoldBal, Gold_to_CMJ));
+      worth.push(calculateWorth(PlatBal, Platinum_to_CMJ));
+      worth.push(calculateWorth(SwarBal, Swar_to_CMJ));
+      worth.push(calculateWorth(AngbBal, Angb_to_CMJ));
+      worth.push(calculateWorth(GearBal, ((2/30000000)*USD_to_CMJ)));
+      worth.push(calculateWorth(IIBal, II_to_CMJ));
+      worth.push(calculateWorth(EEBal, EE_to_CMJ));
+      worth.push(calculateWorth(jusdtBal, USD_to_CMJ));
+
+      totalworth = 0;
+      for (let i = 0; i < worth.length; i++) {
+        displayWorth(`worth${i+1}`, worth[i]);
+        totalworth += parseFloat(worth[i]);
+    }
+    displayWorth('networth_CMJ',totalworth);
+    displayWorth('networth_JBC',(totalworth*JBC_to_CMJ));
+    displayWorth('networth_USD',(totalworth*CMJ_to_USD));
+    displayWorth('networth_THB',(totalworth*CMJ_to_USD*THB_to_USD));
+
+
+    } catch (error) {
+      console.error('Error:', error);
+
+    }
+  };
+
+
+
+  function startHistory(){
+    var from_address = document.getElementById("wallet_address").value;
+    var Merchant1 = '0xa4b53A4DD8277Dd2E506cb8692A492B1Dc6b255D';
+    var Marchant2 = '0x87BAC0BCBaadF9B7d24385b1AaaEbeDEb60a1A0a';
+    var Gashapon1 = '0x39C623C4B3f11D38f06Adca9B794CFb2d37581e3';
+    var Gashapon2 = '0x87A612709b36b575103C65a90cB3B16Cac2BC898';
+    var Naruta = '0x09e6a0A03afa27438c3f507de82b5f6061Ae1643';
+    var Redeem_TDM = '0x010EbE14315F976967E6aE408Af5881617b86E09';
+    var Market = '0xb8Cc909AD8245eD551bC359b721f3748dA814A33'
+    var token_address = [];
+    token_address.push('0x24599b658b57f91E7643f4F154B16bcd2884f9ac'); // JUSDT
+    token_address.push('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751'); // EE
+    token_address.push('0x523AA3aB2371A6360BeC4fEea7bE1293adb32241'); // II
+    token_address.push('0x0E2610730A3c42fd721B289BEe092D9AD1C76890'); // II
+    token_address.push('0xAc5299D92373E9352636559cca497d7683A47655'); // OS
+    token_address.push('0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88'); // JDAO
+    token_address.push('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860'); // JASP
+    token_address.push('0x7004757e595409568Bd728736e1b0c79FDc94e1c'); // BBQ
+    token_address.push('0x09DcdCFc6C48803681a3422997c679E773656763'); // PZA
+    token_address.push('0x7d5346E33889580528e6F79f48BdEE94D8A9E144'); // Gold
+    token_address.push('0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD'); // Plat
+    token_address.push('0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f'); // Sil
+    token_address.push('0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0'); // Ctuna
+
+    var token_transfers = [];
+
+    for (const address of token_address) {
+        token_transfers.push(get_token_transfers(from_address, Merchant1, address));
+        token_transfers.push(get_token_transfers(from_address, Marchant2, address));
+        token_transfers.push(get_token_transfers(from_address, Gashapon1, address));
+        token_transfers.push(get_token_transfers(from_address, Gashapon2, address));
+        token_transfers.push(get_token_transfers(from_address, Naruta, address));
+        token_transfers.push(get_token_transfers(from_address, Redeem_TDM, address));
+        token_transfers.push(get_token_transfers(from_address, Market, address));
+        
+    }
+
+    Promise.all(token_transfers)
+        .then(function(logsArray) {
+            var symbolSums = {}; // เลื่อนตัวแปร symbolSums ไปยังภายใน Promise.all เพื่อให้สามารถเข้าถึงได้
+            logsArray.forEach(function(logs) {
+                logs.forEach(function(log) {
+                    var tx_hash = log.transactionHash;
+                    var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                    fetch(transaction_url)
+                        .then(response => response.json())
+                        .then(data => process_token_transfers(data, tx_hash,'purchaseTableBody', symbolSums)) // ส่ง symbolSums เป็นอาร์กิวเมนต์ให้กับฟังก์ชั่น process_token_transfers
+                        .catch(error => console.error("Error fetching transaction data:", error));
+                });
+            });
+        })
+        .catch(function(error) {
+            console.error("Error fetching logs:", error);
+        });
+}
+
+function get_token_transfers(from_address, to_address, token_address) {
+    var event_filter = {
+        'fromBlock': 'earliest',
+        'toBlock': 'latest',
+        'address': token_address,
+        'topics': [
+            web3.utils.keccak256('Transfer(address,address,uint256)'),
+            '0x000000000000000000000000' + from_address.slice(2).toLowerCase(),
+            '0x000000000000000000000000' + to_address.slice(2).toLowerCase()
+        ]
+    };
+
+    return web3.eth.getPastLogs(event_filter);
+}
+symbolSums = [];
+function process_token_transfers(data, tx_hash, tableid, symbolSums) {
+    if (data.items) {
+        // รีเซ็ตค่าผลรวมของสัญลักษณ์ทุกครั้งที่เริ่มต้นประมวลผลข้อมูลใหม่
+      //console.log(data)
+        data.items.forEach(function(item) {
+            if (item.token.type === "ERC-721") {
+                var itemName = item.token.name;
+                var itemID = item.total.token_id || 'Unknown';
+                var price = 0;
+                var symbol = 'Unknown';
+                var shop = 'Unknown'
+                data.items.forEach(function(subItem) {
+                    if (subItem.token.type === "ERC-20") {
+                        symbol = String(subItem.token.symbol);
+                        var shop = String(subItem.to.name);
+                        if(shop == "COMMUDAO_MKP"){
+                          console.log(shop);
+                        }
+                        var value = parseInt(subItem.total.value);
+                        var decimals = parseInt(subItem.token.decimals);
+                        if (symbol != "JASP") {
+                            price += value / 10 ** decimals;
+                        } else {
+                            price += value / 10 ** 9;
+                        };
+
+                        // เพิ่มค่าของเหรียญที่ใช้ในผลรวม
+                        // ภายในลูปด้านใน
+                        if (symbolSums[symbol]) {
+                            symbolSums[symbol] += price;
+                        } else {
+                            symbolSums[symbol] = price;
+                        }
+                    }
+                });
+                if (symbol != "JUSDT") {
+                    type = "Redeem"
+                }else{
+                  type = "Buy/Roll"
+                }
+                if(shop === "COMMUDAO_MKP"){
+                  type = "Market"
+                }
+                
+                
+                // แสดงผลเฉพาะค่าที่มากกว่า 0
+                if (price > 0) {
+                    var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${tx_hash}</a>`;
+                    var newRow = `<tr><td>${txHashLink}</td><td>${itemName}</td><td>${itemID}</td><td>${type}</td><td>${price.toLocaleString()} ${symbol}</td></tr>`;
+                    document.getElementById(tableid).insertAdjacentHTML('beforeend', newRow);
+                }
+            }
+        });
+
+
+        // แสดงผลรวมของค่าของแต่ละสัญลักษณ์ในส่วนที่คุณต้องการของ HTML
+      displaySymbolSums(symbolSums);
+        
+    } else {
+        console.error("Invalid data structure:", data);
+    }
+}
+
+console.log(symbolSums);
+function displaySymbolSums(symbolSums) {
+  Object.keys(symbolSums).forEach(function(symbol) {
+      if (symbolSums[symbol] > 0) {
+          var totalRow = `<p>${symbolSums[symbol].toLocaleString(undefined)} ${symbol} </p>`;
+          var elementId = `sum${symbol}`;
+          var element = document.getElementById(elementId);
+          if (element) {
+              element.innerHTML = totalRow;
+          } else {
+              // สร้างองค์ประกอบใหม่หากไม่พบองค์ประกอบที่มี ID ที่กำหนด
+              var newElement = document.createElement('div');
+              newElement.id = elementId;
+              newElement.innerHTML = totalRow;
+              document.getElementById("totalRedeem").appendChild(newElement);
+          }
+      }
+  });
+}
+
+
+function downloadCSV() {
+  var table = document.getElementById("purchaseTable");
+  var rows = table.getElementsByTagName("tr");
+  var csv = [];
+
+  for (var i = 0; i < rows.length; i++) {
+      var row = [], cols = rows[i].getElementsByTagName("td");
+      for (var j = 0; j < cols.length; j++) {
+          row.push(cols[j].innerText);
+      }
+      csv.push(row.join(","));
+  }
+
+  // Join rows with newline character
+  var csvContent = csv.join("\n");
+
+  // Create a blob object with the CSV content
+  var blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+  // Create a temporary anchor element to download the CSV file
+  var link = document.createElement("a");
+  if (link.download !== undefined) { // Feature detection
+      // Set URL for the anchor element
+      var url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      // Set filename for the downloaded file
+      link.setAttribute("download", "purchase_data.csv");
+      // Append the anchor element to the body
+      document.body.appendChild(link);
+      // Click the link to trigger the download
+      link.click();
+      // Remove the anchor element from the body
+      document.body.removeChild(link);
+  } else {
+      console.log("Your browser does not support automatic download. Please right-click and save the link instead.");
+  }
+}
+
+function downloadExcel() {
+  // Initialize workbook
+  var wb = XLSX.utils.book_new();
+
+  // Get data from both tables and merge into one
+  var table1Data = XLSX.utils.table_to_sheet(document.getElementById("purchaseTable"));
+  var table2Data = XLSX.utils.table_to_sheet(document.getElementById("purchaseTableBody"));
+
+// Convert TxHash and ID columns to string format
+// Convert TxHash and ID columns to string format
+table1Data = convertColumnsToString(table1Data, [0, 2]);
+table2Data = convertColumnsToString(table2Data, [0, 2]);
+table2Data = convertColumnsToString(table2Data, [0, 0]);
+
+
+
+  // Merge data into one worksheet
+  var mergedData = mergeData(table1Data, table2Data);
+
+  // Add worksheet to workbook
+  XLSX.utils.book_append_sheet(wb, mergedData, "Purchase Data");
+
+  // Save workbook as Excel file
+  XLSX.writeFile(wb, "purchase_data.xlsx");
+}
+
+// Function to merge data from two worksheets into one
+function mergeData(sheet1, sheet2) {
+  var result = XLSX.utils.book_new();
+  XLSX.utils.sheet_add_json(result, XLSX.utils.sheet_to_json(sheet1), { origin: -1 });
+  XLSX.utils.sheet_add_json(result, XLSX.utils.sheet_to_json(sheet2), { origin: -1 });
+  return result;
+}
+
+// Function to convert specific columns to string format
+function convertColumnsToString(sheet, columns, excludeColumns) {
+  for (var i = 0; i < columns.length; i++) {
+    var colIndex = columns[i];
+    // Check if excludeColumns is defined and not empty
+    if (excludeColumns && excludeColumns.length > 0 && excludeColumns.includes(colIndex)) {
+      continue; // Skip this column if it's in the exclude list
+    }
+    var range = XLSX.utils.decode_range(sheet['!ref']);
+    for (var rowIndex = range.s.r + 1; rowIndex <= range.e.r; rowIndex++) {
+      var cellAddress = XLSX.utils.encode_cell({ r: rowIndex, c: colIndex });
+      var cell = sheet[cellAddress];
+      if (cell) {
+        if (colIndex === 0) {
+          // Convert numeric value to string and wrap with double quotes
+          cell.t = 's'; // Set cell type to string
+          cell.v = '"' + cell.v.toString() + '"';
+        } else if (cell.t !== 's' && isNaN(cell.v)) {
+          cell.t = 's'; // Set cell type to string
+          // Convert numeric value to string
+          cell.v = cell.v.toString();
+        }
+      }
+    }
+  }
+  return sheet;
+}
+
+
+
+function resetPurchaseTable() {
+  document.getElementById("purchaseTableBody").innerHTML = '';
+}
+</script>
+</body>
+</html>
