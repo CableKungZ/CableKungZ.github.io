@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaoBuddy - Mall Details</title>
+      <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/DaoBuddy.th.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* CSS for Token Price section */
+    .loss,.profit{
+      font-weight: bolder;
+      font-size: 18px;
+    }
+    .loss{
+      color: red;
+    }
+    .profit{
+      color: green;
+    }
+    .token-price {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns per row by default */
+      gap: 20px;
+    }
+    .join-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  
+    .join-btn:hover {
+      background-color: #0056b3;
+    }
+    .token-price h1, .token-price h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      grid-column: 1 / -1; /* Full width across all columns */
+    }
+    .token-price h4 {font-size: 16px;margin-bottom: 10px;}
+    .token-price h6 {
+      font-size: 12px;
+      color: #777;
+      margin-top: 15px;
+      grid-column: 1 / -1; /* Full width across all columns */
+    }
+    .token-price a {color: #3498db;font-size: 12px;}
+    .token-price img {margin-right: 5px;}
+
+    @media screen and (max-width: 1199.98px) {
+      .token-price {grid-template-columns: repeat(4, 1fr);}}
+    @media screen and (max-width: 991.98px) {
+      .token-price {grid-template-columns: repeat(2, 1fr);}}
+    @media screen and (max-width: 575.98px) {
+      .token-price {grid-template-columns: repeat(1, 1fr);}}
+
+    .navbar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap; /* Allow items to wrap */
+    }
+    .button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 16px 35px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 17px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+    .button:hover {background-color: #45a049;}
+    .center {align-items: center;}
+    .center label {margin-right: 10px;width: 150px;}
+    label{width: 150px;}
+
+          
+      .low{
+          color: blue;
+      }
+      .bg-gray{
+        background-color: gray;
+        margin-top: 2px;
+        margin-bottom: 3px;
+      }
+      .card-text{margin-right: -10px;}
+      /* CSS for the button */
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .button:hover {background-color: red;}
+    .center {text-align: center;}
+    .bg-gray {background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลัง */color: #333; /* เปลี่ยนสีข้อความ */}
+
+    .button-container {margin-top: 10px;padding-bottom: 30px;}
+    .button {cursor: pointer;}
+  
+      .content {
+        margin-top: 70px; /* Adjust this value based on the height of your navbar */
+        padding: 20px;
+      }
+  
+    
+      .dungeon-calculator,.gashpon,.noti {display: none; /* Hide the cards by default */}
+      .factory{display:block;}
+      #countdown {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: green;
+        padding: 5px;
+        border: 1px solid #ccc;
+        display: none;
+        font-size: 12px;
+      }
+  
+      #updatedMessage {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: green;
+        padding: 5px;
+        border: 1px solid #ccc;
+        display: none;
+        font-size: 12px;
+      }
+      .calc {width: 100%;}
+      #result,#boxType,#lootBox{
+        text-align: center;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        margin-bottom: 100px;
+    }
+    .section-board {
+        width: 80%;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+    th {background-color: #f2f2f2;}
+    tr:nth-child(even) {background-color: #f9f9f9;}
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {background-color: #45a049;}
+    .green-text {color: green;}
+    .tokenlogo{height: 30px;width: 30px;margin: auto;padding: auto;}
+  .header {
+    font-size: 30px;
+    padding: 30px;
+    background-image: linear-gradient(135deg, #FFB6C1, #FF69B4); /* สีชมพูสดใสในรูปแบบ gradient */
+    text-align: center;
+  }
+    .nftcol,.font-16{font-size: 16px;}
+    .font-12{font-size: 12px;}
+    .font-14{font-size: 14px;}
+    .tab{margin-left: 20px;margin-bottom: -20px;margin-top: -6px;}
+    .factory .header h6 {font-size: 14px;color: black;margin-top: 15px;grid-column: 1 / -1; }
+        /* เรียงลำดับขอบเขต footer และข้อความภายใน */
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: #333;
+          color: white;
+          display: flex; /* ใช้ Flexbox เพื่อจัดวาง */
+          justify-content: space-between; /* ให้โลโก้อยู่ซ้ายสุดและข้อความอยู่ขวาสุด */
+          align-items: center; /* จัดวางพื้นที่ด้านในของ footer ให้อยู่ตรงกลาง */
+          padding: 5px;
+          z-index: 1000; /* ทำให้ footer อยู่ข้างบน */
+      }
+      /* ขนาดโลโก้ */
+      .logo {
+          width: 25px;
+          height: 25px;
+          display: inline-block;
+          vertical-align: middle;
+      }
+      /* ขนาดข้อความ Donation */
+      .donation {
+          display: inline-block;
+          vertical-align: middle;
+      }
+      /* ข้อความ Wallet Address */
+      .wallet-address {
+        display: flex;
+        align-items: center;
+    }
+    /* ไอคอน Copy */
+    .copy-icon {
+        margin-left: 5px;
+        cursor: pointer;
+        height: 15px;
+    }
+    #qrImage{
+      height: 300px;
+      z-index: 1001;
+    }
+    #popup{
+      z-index: 1000;
+    }
+    .details,
+    .logs {
+      flex: 1;
+    }
+    .logs {margin-left: 20px; /* ให้ Logs มีระยะห่างด้านซ้ายกับ Details */}
+    .box {display: flex;}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 100px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    
+    .center {
+      text-align: center;
+    }
+    
+    .card, .card-short {
+      margin: 10px;
+      padding: 20px;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .card {z-index: 999;}
+    .card-short {z-index: 5;}
+    .card:hover, .card-short:hover {transform: scale(1.05);}
+    .card-body, .card-short-body {margin-top: -10px;}
+    .card-short-title{margin-top: 30px;}
+    .card-title,.card-text, .card-short-text {margin-bottom: 5px;}
+    
+    @media (max-width: 576px) {
+      .card, .card-short {width: 100%;}
+    }
+    @media (min-width: 577px) and (max-width: 768px) {
+      .card, .card-short {width: 80%;}
+    }
+    @media (min-width: 576px) {
+      .card {width: 100%;max-width: 350px;}
+      .card-short {width: 100%;max-width: 500px;}
+    }
+    
+    .bg-gray {
+      background-color: #f0f0f0;
+      color: #333;
+      margin-top: 2px;
+      margin-bottom: 3px;
+    }
+    
+    .button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .button:hover {background-color: #45a049;}
+    .button-container {margin-top: 10px;}
+    .content {margin-top: 70px;padding: 20px;}
+    
+    #countdown, #updatedMessage {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: green;
+      padding: 5px;
+      border: 1px solid #ccc;
+      display: none;
+      font-size: 12px;
+    }
+  .calc {width: 100%;}
+    
+    #result, #boxType, #lootBox {text-align: center;}
+    
+    .section-board {
+      width: 80%;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    
+    th {background-color: #f2f2f2;} 
+    tr:nth-child(even) {background-color: #f9f9f9;} 
+    .green-text {color: green;}
+    
+    .tokenlogo {
+      height: 30px;
+      width: 30px;
+      margin: auto;
+      padding: auto;
+    }
+    
+    .header {
+      font-size: 30px;
+      padding: 30px;
+      background-color: rgba(128, 128, 128, 0.123);
+      text-align: center;
+    }
+    
+    .nftcol {
+      font-size: 20px;
+    }
+    
+    ul {
+      margin: 1px;
+    }
+    .token-price {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns per row by default */
+      gap: 20px;
+    }
+
+    .token-price h1, .token-price h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      grid-column: 1 / -1; /* Full width across all columns */
+    }
+
+    .token-price h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .token-price h6 {
+      font-size: 12px;
+      color: #777;
+      margin-top: 15px;
+      grid-column: 1 / -1; /* Full width across all columns */
+    }
+
+    .token-price a {
+      color: #3498db; /* Change link color */
+      font-size: 12px;
+    }
+
+    .token-price img {
+      margin-right: 5px; /* Adjust spacing between image and text */
+    }
+
+    /* Media Query for screens smaller than 1200px */
+    @media screen and (max-width: 1199.98px) {
+      .token-price {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+      }
+    }
+
+    /* Media Query for screens smaller than 992px */
+    @media screen and (max-width: 991.98px) {
+      .token-price {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns per row */
+      }
+    }
+
+    /* Media Query for screens smaller than 576px */
+    @media screen and (max-width: 575.98px) {
+      .token-price {
+        grid-template-columns: repeat(1, 1fr); /* 1 column per row */
+      }
+    }
+        .factory .header h6 {font-size: 14px;color: black;margin-top: 15px;grid-column: 1 / -1; }
+        /* เรียงลำดับขอบเขต footer และข้อความภายใน */
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: #333;
+          color: white;
+          display: flex; /* ใช้ Flexbox เพื่อจัดวาง */
+          justify-content: space-between; /* ให้โลโก้อยู่ซ้ายสุดและข้อความอยู่ขวาสุด */
+          align-items: center; /* จัดวางพื้นที่ด้านในของ footer ให้อยู่ตรงกลาง */
+          padding: 5px;
+          z-index: 1000; /* ทำให้ footer อยู่ข้างบน */
+      }
+      /* ขนาดโลโก้ */
+      .logo {
+          width: 25px;
+          height: 25px;
+          display: inline-block;
+          vertical-align: middle;
+      }
+      /* ขนาดข้อความ Donation */
+      .donation {
+          display: inline-block;
+          vertical-align: middle;
+      }
+      /* ข้อความ Wallet Address */
+      .wallet-address {
+        display: flex;
+        align-items: center;
+    }
+    /* ไอคอน Copy */
+    .copy-icon {
+        margin-left: 5px;
+        cursor: pointer;
+        height: 15px;
+    }
+    #qrImage{
+      height: 300px;
+      z-index: 1001;
+    }
+    #popup{
+      z-index: 1000;
+    }
+    .details,
+    .logs {
+      flex: 1;
+    }
+
+    .logs {
+      margin-left: 20px; /* ให้ Logs มีระยะห่างด้านซ้ายกับ Details */
+    }
+    .box {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+    <div id="countdown">Countdown</div>
+    <div id="updatedMessage">Updated</div>
+<div class="token-price">
+
+  <h2>PROJECT TOKEN</h2>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
+    <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
+    Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
+    <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD<br>
+    Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
+    <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD<br>
+    Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
+    <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
+    <h4><img src="" alt="$USD" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank"> </a>*0%  : 
+      <br><span id="USD">..Loading</span> THB/USDT<br>
+  <h2>MATERIALS </h2>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20"><a href="https://meowneon.app/swapmeowwood"  target="_blank">Wood</a>*0%   : 
+    <br>Buy/Sell <span id="priceB4">..Loading</span> CMJ<br>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20"><a href="https://meowneon.app/swapmeowtuna"  target="_blank">Tuna</a>*0%  : 
+    <br>Buy/Sell <span id="priceB5">..Loading</span> CMJ<br>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20"><a href="https://meowneon.app/swapmeowmice"  target="_blank">Mice</a>*0%  : 
+    <br>Buy/Sell <span id="priceB6">..Loading</span> CMJ<br>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Copper</a>*5%  : 
+    <br>Buy <span id="priceB7">..Loading</span> CMJ<br>
+    Sell  <span id="Sell_CuinCMJ">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JASPER</a>*5%  : 
+    <br>Buy <span id="priceB17">..Loading</span> CMJ<br>
+    Sell  <span id="priceB17_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">OS</a>*5%  : 
+    <br>Buy <span id="priceB18">..Loading</span> CMJ<br>
+    Sell  <span id="priceB18_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JDAO</a>*5%  : 
+    <br>Buy <span id="priceB15">..Loading</span> CMJ<br>
+    Sell  <span id="priceB15_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20"><a href="https://meowneon.app/swapmeowmt"  target="_blank">MT</a>*0%  : 
+    <br>Buy/Sell <span id="priceB16">..Loading</span> CMJ<br>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">ANGB</a>*5%  : 
+    <br>Buy <span id="priceB23">..Loading</span> CMJ,<span id="priceD23">..Loading</span> WJBC<br>
+    Sell  <span id="priceB23_2">..Loading</span> CMJ,<span id="priceD23_2">..Loading</span> WJBC</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">II</a>*5%  : 
+    <br>Buy <span id="IIPrice_CMJ">..Loading</span> CMJ,<span id="IIPrice_JTAO">..Loading</span> JTAO<br>
+    Sell  <span id="IIPrice_CMJ_2">..Loading</span> CMJ,<span id="IIPrice_JTAO_2">..Loading</span> JTAO</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">EE</a>*5%  : 
+    <br>Buy <span id="EEPrice_CMJ">..Loading</span> CMJ,<span id="EEPrice_JTAO">..Loading</span> JTAO<br>
+    Sell  <span id="EEPrice_CMJ_2">..Loading</span> CMJ,<span id="EEPrice_JTAO_2">..Loading</span> JTAO</h4>
+
+  <h2>PRODUCT</h2>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">BBQ</a>*5%  : 
+    <br>Buy <span id="priceB8">..Loading</span> CMJ<br>
+    Sell  <span id="priceB8_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Pizza</a>*5%  : 
+    <br>Buy <span id="priceB9">..Loading</span> CMJ<br>
+    Sell  <span id="priceB9_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">CTUNA</a>*5%  : 
+    <br>Buy <span id="priceB10">..Loading</span> CMJ<br>
+    Sell  <span id="priceB10_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SX31</a>*5%  : 
+    <br>Buy <span id="priceB11">..Loading</span> CMJ<br>
+    Sell  <span id="priceB11_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20"><a href="https://meowneon.app/swapmeowsil"  target="_blank">Silver</a>*5%  : 
+    <br>Buy <span id="priceB12">..Loading</span> CMJ<br>
+    Sell  <span id="priceB12_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20"><a href="https://meowneon.app/swapmeowgold"  target="_blank">Gold</a>*5%  : 
+    <br>Buy <span id="priceB13">..Loading</span> CMJ<br>
+    Sell  <span id="priceB13_2">..Loading</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :
+    <br>Buy [คาดเดา] <span id="priceB19">0.001155</span> CMJ<br>
+    Sell [คาดเดา]  <span id="">0.001045</span> CMJ</h4>
+  <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : 
+    <br>Buy <span id="priceB21">..Loading</span> CMJ, <span id="priceD21">..Loading</span> JBC<br>
+    Sell  <span id="priceB21_2">..Loading</span> CMJ,<span id="priceD21_2">..Loading</span> JBC</h4>
+
+  <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
+</div>
+<footer class="footer">
+  <!-- โลโก้ Facebook -->
+  <a href="https://www.facebook.com/daobuddy.tool" target="_blank">
+    <img src="https://cdn-icons-png.freepik.com/512/15047/15047435.png?ga=GA1.1.1389809719.1710478416&" alt="Facebook Logo" class="logo">
+</a>
+  <!-- ข้อความ Donation -->
+  <div class="donation" onclick="showdPopup()">Donate Now!</div>
+</footer>
+    <!-- POPUP -->
+    <div id="dpopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
+      <div style="background-color: white; padding: 20px;">
+          <h2>Choose Donation Method</h2>
+          <button onclick="showQR('Crypto')">Crypto (ETH, BSC, BKC, JBC, SOL)</button>
+          
+          <div id="qrCode" style="padding:15px; display: none; text-align: center;">
+              <img id="qrImage" src="" alt="QR Code">
+              <div class="wallet-address">
+                <a id="cryptoAddress">0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1</a>
+                <img src="https://cdn-icons-png.freepik.com/512/54/54853.png?ga=GA1.1.1389809719.1710478416&" alt="Copy Icon" class="copy-icon" onclick="copyAddress()">
+            </div>
+          </div>
+          
+          <button onclick="closedPopup()">Close</button>
+      </div>
+  </div>
+
+  <!----------------------------------------------------------- LABS AND CRAFT --------------------------------->
+
+<div class="container mAbility : t-5 factory">
+  <div class="row">
+    
+    <p class="factory header">Ecosystem NFTs Premium Store</p>
+    <!-- Card Start -->
+    <div class="col-lg-4 col-sm-6 col-12">
+      <div class="card-short factory">
+        <img src="https://i.ibb.co/qddfL0M/ezgif-frame-001.png" class="card-img-top" alt="Angel Plus NFT ">
+        <div class="card-short-body">
+          <h5 class="card-short-title center">Angel Plus - Adventurer Card D +0 Vol.3</h5>
+          <p class="card-short-text">Ability : Staking in Fields: Eastern Front</p>
+          <p class="card-short-text">Price : <span id="Angel_AdvCard_SellPrice"></span> <b><span id="Angel_AdvCard_Token"></span></b></p>
+          <p class="card-short-text">* <span id="Angel_AdvCard_SellPrice_CMJ"></span> CMJ</span>, <span id="Angel_AdvCard_SellPrice_THB"></span> THB</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Card END -->
+    <!-- Card Start -->
+    <div class="col-lg-4 col-sm-6 col-12">
+      <div class="card-short factory">
+        <img src="https://nftstorage.link/ipfs/bafybeiafeumwvilddqiakxaabht5bcu2khkeyjr275jtbwyryd6upbh6bm" class="card-img-top" alt="Angel Plus NFT - Hero (Character)">
+          <div class="card-short-body">
+          <h5 class="card-short-title center">Angel Plus NFT - Hero (Character)</h5>
+          <p class="card-short-text">Ability : Use for Dungeon <b>DeamonWorld's</b> Only !! [Power : 100]</p>
+          <p class="card-short-text">Price : <span id="Angel_MainChar_SellPrice"></span> <b><span id="Angel_MainChar_Token"></span></b></p>
+          <p class="card-short-text">* <span id="Angel_MainChar_SellPrice_CMJ"></span> CMJ</span>, <span id="Angel_MainChar_SellPrice_THB"></span> THB</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Card END -->
+    <!-- Card Start -->
+    <div class="col-lg-4 col-sm-6 col-12">
+      <div class="card-short factory">
+        <img src="https://s9.gifyu.com/images/SFPhN.gif" class="card-img-top" alt="Angel Equipment">
+          <div class="card-short-body">
+          <h5 class="card-short-title center">Angel Plus NFT Equipment</h5>
+          <p class="card-short-text center"><b>Sword,Shield,Armor,Helmet,Boots,Ring</b></p>
+          <p class="card-short-text">Ability : Use for Dungeon <b>DeamonWorld's</b> Only !! [Power : 250]</p>
+          <p class="card-short-text">Price : <span id="Angel_Equip_SellPrice"></span> <b><span id="Angel_Equip_Token"></span></b></p>
+          <p class="card-short-text">* <span id="Angel_Equip_SellPrice_CMJ"></span> CMJ</span>, <span id="Angel_Equip_SellPrice_THB"></span> THB</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Card END -->
+    <!-- Card Start -->
+    <div class="col-lg-4 col-sm-6 col-12">
+      <div class="card-short factory">
+        <img src="https://s9.gifyu.com/images/SU0TF.gif"  class="card-img-top" alt="Naruta Equipment">
+          <div class="card-short-body">
+          <h5 class="card-short-title center">Naruta Taodum NFT MainChar&Equipment</h5>
+          <h6 class="card-short-title center">MainChar,Weapon,Armor<br>Back,Helm,Boots,Ring</h6>
+          <p class="card-short-text">Ability : Use for Dungeon <b>Cryptic Cogs</b> Only !! [Power : 18,800]</p>
+          <p class="card-short-text">Price : <span id="Naruta_Equip_SellPrice"></span> <b><span id="Naruta_Equip_Token"></span></b></p>
+          <p class="card-short-text">* <span id="Naruta_Equip_SellPrice_CMJ"></span> CMJ</span>, <span id="Naruta_Equip_SellPrice_THB"></span> THB</span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Card END -->
+
+
+    <p class="factory header">CommmuDAO NFTs Premium Store</p>
+    <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://bafkreifz2fgy43d4qigdwp35r3izgyvwip2rugswdvkkcj4xl5cytxs5ti.ipfs.nftstorage.link/" class="card-img-top" alt="Splasher">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>Songkran Splasher</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Weapon Slot <ul>N-<span id="Splasher_1"></span> Pow</ul><ul>R-<span id="Splasher_2"></span> Pow</ul><ul>SR-<span id="Splasher_3"></span> Pow</ul><ul>SSR-<span id="Splasher_4"></span> Pow</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="Splasher_Price1"></span> <b><span id="Splasher_Price2"></span></b></p>
+                <p class="card-text">* <span id="Splasher_CMJ"></span> CMJ</span>, <span id="Splasher_THB"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong>  <ul>N- <span id="Splasher_Os1"></span> CMJ</ul><ul>R- <span id="Splasher_Os2"></span> CMJ</ul><ul>SR- <span id="Splasher_Os3"></span> CMJ</ul><ul>SSR- <span id="Splasher_Os4"></span> CMJ</ul></p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreibgzv6zcq4yuj2n44dw6o7ydwllepwry5nulqzdx4s2c7poabxwxa" class="card-img-top" alt="Golden Dragon Armor">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>Golden Dragon Armor</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Shirt Slot <ul>N-<span id="mallI3"></span> Pow</ul><ul>R-<span id="mallJ3"></span> Pow</ul><ul>SR-<span id="mallK3"></span> Pow</ul><ul>SSR-<span id="mallL3"></span> Pow</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD3"></span> <b><span id="mallE3"></span></b></p>
+                <p class="card-text">* <span id="mallF3"></span> CMJ</span>, <span id="mallH3"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong>  <ul>N- <span id="mallM3"></span> CMJ</ul><ul>R- <span id="mallN3"></span> CMJ</ul><ul>SR- <span id="mallO3"></span> CMJ</ul><ul>SSR- <span id="mallP3"></span> CMJ</ul></p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreif4fk7tqca2vdovvtwufxyx2snoolbwofvdvjoqi35y6mvaahhkve" class="card-img-top" alt="Golden Dragon Boots">
+            <div class="card-body">
+              <h5 class="card-title center"><strong>Golden Dragon Boots</strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Boots Slot <ul>N-<span id="mallI4"></span> Pow</ul><ul>R-<span id="mallJ4"></span> Pow</ul><ul>SR-<span id="mallK4"></span> Pow</ul><ul>SSR-<span id="mallL4"></span> Pow</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD4"></span> <b><span id="mallE4"></span></b></p>
+                <p class="card-text">* <span id="mallF4"></span> CMJ</span>, <span id="mallH4"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong>  <ul>N- <span id="mallM4"></span> CMJ</ul><ul>R- <span id="mallN4"></span> CMJ</ul><ul>SR- <span id="mallO4"></span> CMJ</ul><ul>SSR- <span id="mallP4"></span> CMJ</ul></p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6  -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreiem7ixjm7xomcrhfkla73ye7ajah6d7xi7hw6a6seozclccaewipy" class="card-img-top" alt="Golden Dragon Accessory">
+            <div class="card-body">
+              <h5 class="card-title center"><strong>Golden Dragon Accessory</strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Accessory(Ring) Slot <ul>N-<span id="mallI5"></span> Pow</ul><ul>R-<span id="mallJ5"></span> Pow</ul><ul>SR-<span id="mallK5"></span> Pow</ul><ul>SSR-<span id="mallL5"></span> Pow</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD5"></span> <b><span id="mallE5"></span></b></p>
+                <p class="card-text">* <span id="mallF5"></span> CMJ</span>, <span id="mallH5"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong>  <ul>N- <span id="mallM5"></span> CMJ</ul><ul>R- <span id="mallN5"></span> CMJ</ul><ul>SR- <span id="mallO5"></span> CMJ</ul><ul>SSR- <span id="mallP5"></span> CMJ</ul></p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 7 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreia4kwbvcyynfxu77fpguwoogfqqe45kktalxylnad4wivnhqjtt2m" class="card-img-top" alt="SAPIENS">
+            <div class="card-body">
+              <h5 class="card-title center">SAPIENS #04</h5>
+              <p class="card-text"><strong>Ability:</strong> Main Charactor<ul>Pow : 500</ul><ul>Upgrade LV99+</ul><ul>Evolutionable</ul><ul>Salon System</ul><ul>Skill System</ul><ul>MiniGame Mode</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD6"></span> <b><span id="mallE6"></span></b></p>
+                <p class="card-text">* <span id="mallF6"></span> CMJ</span>, <span id="mallH6"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM6"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+
+
+    <p class="factory header">CommuDAO NFTs Redemption Store</p>
+        <!-- Card 7 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreigc4ivgjqocp7dh7bh3upl4tidhpe2w76muckmzyvulevbkoxdnce" class="card-img-top" alt="SAPIENS">
+            <div class="card-body">
+              <h5 class="card-title center"><strong>Multiverse Traveller Vol.4</strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Main Charactor<ul>Pow : 100</ul><ul>Upgrade N99</ul><ul>Can't Evolution</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD7"></span> <b><span id="mallE7"></span></b></p>
+                <p class="card-text">* <span id="mallF7"></span> CMJ</span>, <span id="mallH7"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM7"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Card 8 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://bafkreiha7rbdsni6hvok2rs546zeowge2mwbfh3y75awlqv2u74zorltse.ipfs.nftstorage.link/" class="card-img-top" alt="SAPIENS">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>Novice Sword Vol.2 [Sold Out]</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Swaord(Weapon) Slot<ul>Pow : 250</ul> </p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD8"></span> <b><span id="mallE8"></span></b></p>
+                <p class="card-text">* <span id="mallF8"></span> CMJ</span>, <span id="mallH8"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM8"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Card 9 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreiacm6fn5rjctuxyiirlmr7awp6ckesgffamingak4pif3kp6vgbri" class="card-img-top" alt="TSW Valentine Ring">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>TSW Valentine Ring</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong>  Equip Accessory(Ring) Slot<ul>Pow : 150</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD9"></span> <b><span id="mallE9"></span></b></p>
+                <p class="card-text">* <span id="mallF9"></span> CMJ</span>, <span id="mallH9"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM9"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Card 10 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreieoamtkrbgj3kd3cqrdcvwzoj7swmwegmoyvcs5gqv22psyzzhvre" class="card-img-top" alt="Prophet of JBC">
+            <div class="card-body">
+              <h5 class="card-title center"><strong>Prophet of JBC</strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Main Charactor<ul>Pow : 8,000</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD10"></span> <b><span id="mallE10"></span></b></p>
+                <p class="card-text">* <span id="mallF10"></span> CMJ</span>, <span id="mallH10"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM10"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Card 11 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreiayhubngbbxov2lyhxfziy7tr7pvdr5cwbi4fgn6rcdykpgnv3c4a" class="card-img-top" alt="Supreme God of JBC">
+            <div class="card-body">
+              <h5 class="card-title center"><strong>Supreme God of JBC</strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Main Charactor<ul>Pow : 19,000</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD11"></span> <b><span id="mallE11"></span></b></p>
+                <p class="card-text">* <span id="mallF11"></span> CMJ</span>, <span id="mallH11"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM11"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Card 11 -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://bafkreibl25he5u74rw2mi24xhjl4yurmhoe6upn4qcbi5kn75e5uaz2ksa.ipfs.nftstorage.link" class="card-img-top" alt="VK,King of Commu">
+            <div class="card-body">
+              <h5 class="card-title center"><strong>VK,King of Commu</strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Main Charactor<ul>Pow : 4,500</ul></p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD12"></span> <b><span id="mallE12"></span></b></p>
+                <p class="card-text">* <span id="mallF12"></span> CMJ</span>, <span id="mallH12"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM12"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Card Start -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreieywimw6rnkhwjckzeuqbbkkbdoy7tqfkv4gwgl36fqupiima65pu" class="card-img-top" alt="Golden Hour">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>Golden Hour</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Weapon Slot<ul>Pow : 10,400</ul> </p>
+                <p class="card-text"><strong>Price :</strong> <span id="mallD13"></span> <b><span id="mallE13"></span></b></p>
+                <p class="card-text">* <span id="mallF13"></span> CMJ</span>, <span id="mallH13"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="mallM13"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Crad ENDED-->
+        <!-- Card Start -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreibalc6if2y6qqp3kfxjkciabsdxxxpnx4djt6toap2c3n2bfcnfye" class="card-img-top" alt="ChainSwaProMax">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>Chainsaw Pro Max</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Weapon Slot<ul>Pow : 10,000</ul> </p>
+                <p class="card-text"><strong>Price :</strong> <span id="ChainSawPrice"></span> <b><span id="ChainSaw_Token"></span></b></p>
+                <p class="card-text">* <span id="ChainSaw_ValueCMJ"></span> CMJ</span>, <span id="ChainSaw_ValueTHB"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="ChainSaw_toOS"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Crad ENDED-->
+        <!-- Card Start -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card factory">
+            <img src="https://nftstorage.link/ipfs/bafkreia33b5b77t6hhmhnvlrnlooplurabhzeeuviv45vm6p4kja3z7dda" class="card-img-top" alt="To Infinity and Beyond            ">
+            <div class="card-body">
+              <h5 class="card-title center"><Strong>Director's Chair</Strong></h5>
+              <p class="card-text"><strong>Ability:</strong> Equip Accessory Slot<ul>Pow : 10,900</ul> </p>
+                <p class="card-text"><strong>Price :</strong> <span id="TIAB_Price"></span> <b><span id="TIAB_Token"></span></b></p>
+                <p class="card-text">* <span id="TIAB_ValueCMJ"></span> CMJ</span>, <span id="TIAB_ValueTHB"></span> THB</span></p>
+                <p class="card-text"><strong>OS/Sell:</strong> <span id="TIAB__toOS"></span> CMJ</p>
+              </div>
+          </div>
+        </div>
+        <!-- Crad ENDED-->
+
+</div>
+</div>
+<!-------------------------------------------------------- END LAB AND CRAFT------------------------------------------------------->
+
+
+
+<!-- Bootstrap JS (optional, only needed if you want to use Bootstrap JavaScript components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function showdPopup() {
+      document.getElementById('dpopup').style.display = 'flex';
+  }
+  function closedPopup() {
+    document.getElementById('dpopup').style.display = 'none';
+}
+  function showQR(method) {
+      if (method === 'PromptPay') {
+          document.getElementById('qrImage').src = 'promptpay_qr_code.png'; // ใส่ URL รูปภาพ QR Code ของ PromptPay ที่คุณมี
+      } else if (method === 'Crypto') {
+          document.getElementById('qrImage').src = 'https://i.ibb.co/q5Z3K9P/Metamask-Main-Wallet-Address.png'; // ใส่ URL รูปภาพ QR Code ของ Crypto Wallet ที่คุณมี
+      }
+      document.getElementById('qrCode').style.display = 'block';
+  }
+  function copyAddress() {
+    var address = document.getElementById('cryptoAddress');
+    var tempInput = document.createElement('input');
+    tempInput.value = address.innerText;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    alert('Copied to clipboard: ' + address.innerText);
+}
+</script>
+<script>
+    // Your existing script for updating prices
+
+    function updateData(data) {
+      google.script.run.withSuccessHandler(updateData).getData();
+
+      for (var label in data) {
+        var element = document.getElementById(label);
+        if (element) {
+          element.textContent = data[label];
+        }
+      }
+
+      // Show the updated message
+      document.getElementById('updatedMessage').style.display = 'block';
+      setTimeout(function() {
+        // Hide the updated message after 3 seconds
+        document.getElementById('updatedMessage').style.display = 'none';
+      }, 200); // 3000 milliseconds = 3 seconds
+    }
+
+    // Countdown Timer
+    var countdownElement = document.getElementById('countdown');
+    var countdownTime = 15; // seconds
+    google.script.run.withSuccessHandler(updateData).getData();
+
+    function updateCountdown() {
+      countdownElement.textContent = 'Refreshing in ' + countdownTime + ' seconds';
+      countdownTime--;
+
+      if (countdownTime < 0) {
+        // Call the updateData function when the countdown reaches 0
+        google.script.run.withSuccessHandler(updateData).getData();
+        main();
+        countdownTime = 15; // Reset the countdown time
+      }
+    }
+
+    // Initial call to start the countdown
+    updateCountdown();
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+
+
+  
+  </script>
+  
+<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+<script>
+
+    async function main() {
+        const divider = 10 ** 18;
+        const jaspdivider = 10 **9;
+
+        const web3 = new Web3('https://rpc-l1.jibchain.net	');
+        console.log(" Access RPC Success")
+
+        const contractABI = [
+        // ABI ของ contract ERC-20
+        {
+            "constant": true,
+            "inputs": [{"name": "_owner", "type": "address"}],
+            "name": "balanceOf",
+            "outputs": [{"name": "balance", "type": "uint256"}],
+            "type": "function"
+        }
+    ];
+    const ERC721ABI = [
+    // ABI ของ balanceOf function
+    {
+      "constant": true,
+      "inputs": [{"name": "_owner", "type": "address"}],
+      "name": "balanceOf",
+      "outputs": [{"name": "", "type": "uint256"}],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ];
+
+        // สร้างออบเจ็กต์สัญญา
+        const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+        const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+        const Jib_WJBC = new web3.eth.Contract(contractABI,'0x99999999990FC47611b74827486218f3398A4abD');
+        const Meow = new web3.eth.Contract(contractABI,'0x04052384166fC30D03929eE328805eC084776843');
+        const Wood = new web3.eth.Contract(contractABI,'0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+        const Tuna = new web3.eth.Contract(contractABI,'0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+        const Mice = new web3.eth.Contract(contractABI,'0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+        const Cu = new web3.eth.Contract(contractABI,'0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+        const Jasp = new web3.eth.Contract(contractABI,'0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+        const Os = new web3.eth.Contract(contractABI,'0xAc5299D92373E9352636559cca497d7683A47655');
+        const Jdao = new web3.eth.Contract(contractABI,'0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+        const Mt = new web3.eth.Contract(contractABI,'0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+        const Vabag = new web3.eth.Contract(contractABI,'0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+        const Bbq = new web3.eth.Contract(contractABI,'0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+        const Pza = new web3.eth.Contract(contractABI,'0x09DcdCFc6C48803681a3422997c679E773656763');
+        const Ctuna = new web3.eth.Contract(contractABI,'0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+        const Sx31 = new web3.eth.Contract(contractABI,'0xd431d826d7a4380b9259612176f00528b88840a7');
+        const Sil = new web3.eth.Contract(contractABI,'0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+        const Gold = new web3.eth.Contract(contractABI,'0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+        const Plat = new web3.eth.Contract(contractABI,'0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+        const Swar = new web3.eth.Contract(contractABI,'0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+        const Jusdt = new web3.eth.Contract(contractABI,'0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+        const stOPT = new web3.eth.Contract(contractABI,'0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+        const Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+        const Angb = new web3.eth.Contract(contractABI,'0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+        const Taodum = new web3.eth.Contract(ERC721ABI,'0x2036186F6d5287FcB05C56C38374AC5236d8A61d');
+        const EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+        const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+        const CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
+        JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
+
+        try {
+            
+            
+            // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
+            address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
+            const JBC_inJCLP = await web3.eth.getBalance(address) / divider; 
+            const CMJ_inJCLP = await call_SC(address, CMJ, 18);
+            const JBC_to_CMJ = (CMJ_inJCLP/JBC_inJCLP).toFixed(4);
+            const CMJ_to_JBC = (JBC_inJCLP/CMJ_inJCLP).toFixed(4);
+            // Bal of JU-LP  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0x280608DD7712a5675041b95d0000B9089903B569';
+            const JBC_inJULP = await web3.eth.getBalance(address) / divider; 
+            const JDUST_inJULP = await call_SC(address, Jusdt, 18);
+            const JBC_to_JUSDT = (JDUST_inJULP/JBC_inJULP).toFixed(4);
+            const JUSDT_to_JBC = (JBC_inJULP/JDUST_inJULP).toFixed(4);
+            // Bal of Meow-CMJ
+            address = '0xdB16eCc5d2c27F67B4a4dc1e25f1e6e20BAcAFD0';
+            const Meow_inMeowCMJ = await call_SC(address, Meow, 18);
+            const CMJ_inMeowCMJ = await call_SC(address, CMJ, 18);
+            const Meow_to_CMJ = (Meow_inMeowCMJ/CMJ_inMeowCMJ).toFixed(4);
+            const CMJ_to_Meow = (CMJ_inMeowCMJ/Meow_inMeowCMJ).toFixed(10);
+            const CMJ_to_Meowmes = (CMJ_inMeowCMJ/Meow_inMeowCMJ).toFixed(6);
+            // get bal of Jtao
+            address = '0x0E2610730A3c42fd721B289BEe092D9AD1C76890';
+            const getJtao = await call_SC(address, Jtao, 18);
+
+            const Meow_inJUST = (CMJ_to_Meowmes*CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+            const CMJ_inJUST = (CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+            const JBC_inJUST = (JBC_to_JUSDT*1).toFixed(6);
+            console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
+            console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
+            console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
+            // Buy Token
+            document.getElementById("priceB2").innerHTML = (CMJ_to_JBC*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("priceD2").innerHTML = (CMJ_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
+            document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+
+            // Sell Token
+            document.getElementById("Sell_CMJinJBC").innerHTML = (CMJ_to_JBC*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("Sell_CMJinUSD").innerHTML = (CMJ_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
+            document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+            const TAOPriceUSD = parseFloat(document.getElementById("priceD22").textContent) || 0;
+            const CMJPriceUSD = parseFloat(document.getElementById("priceD2").textContent) || 0;
+
+            // Bal of BBQ  , JBC/  0x6F93F16cF86205C5BB9145078d584c354758D6DB
+            address = '0x6F93F16cF86205C5BB9145078d584c354758D6DB';
+            const BBQ_inBBQCMJ = await call_SC(address, Bbq, 18);
+            const CMJ_inBBQCMJ = await call_SC(address, CMJ, 18);
+            const BBQ_to_CMJ = (BBQ_inBBQCMJ/CMJ_inBBQCMJ).toFixed(4);
+            const CMJ_to_BBQ = (CMJ_inBBQCMJ/BBQ_inBBQCMJ).toFixed(10);
+                    document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                    document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+            // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0x1b70c95fD4EbF8920A624bd2ce22b6905eFBdF60';
+            const Cu_inCuCMJ = await call_SC(address, Cu, 18);
+            const CMJ_inCuCMJ = await call_SC(address, CMJ, 18);
+            const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
+            const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
+                    document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                    document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+            // Bal of Jasp CMJ
+            address = '0xc19DE37d5e14b387BCda8e62aB4934591315901D';
+            const Jasp_inJaspCMJ = await call_SC(address, Jasp, 9);
+            const CMJ_inJaspCMJ = await call_SC(address, CMJ, 18);
+            const Jasp_to_CMJ = (Jasp_inJaspCMJ/CMJ_inJaspCMJ).toFixed(4);
+            const CMJ_to_Jasp = (CMJ_inJaspCMJ/Jasp_inJaspCMJ).toFixed(10);
+                    document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                    document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+
+            // Bal of Jdao  , JBC/  0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0
+            address = '0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0';
+            const Jdao_inJdaoCMJ = await call_SC(address, Jdao, 18);
+            const CMJ_inJdaoCMJ = await call_SC(address, CMJ, 18);
+            const Jdao_to_CMJ = (Jdao_inJdaoCMJ/CMJ_inJdaoCMJ).toFixed(4);
+            const CMJ_to_Jdao = (CMJ_inJdaoCMJ/Jdao_inJdaoCMJ).toFixed(10);
+                    // display 
+                    document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                    document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+            // Bal of Pizza(Pza)  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70';
+            const Pza_inPzaCMJ = await call_SC(address, Pza, 18);
+            const CMJ_inPzaCMJ = await call_SC(address, CMJ, 18);
+            const Pza_to_CMJ = (Pza_inPzaCMJ/CMJ_inPzaCMJ).toFixed(4);
+            const CMJ_to_Pza = (CMJ_inPzaCMJ/Pza_inPzaCMJ).toFixed(10);
+                    document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                    document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+            // Bal of Sx31  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0xda558EE93B466aEb4F59fBf95D25d410318be43A';
+            const Sx31_inSx31CMJ = await call_SC(address, Sx31, 18);
+            const CMJ_inSx31CMJ = await call_SC(address, CMJ, 18);
+            const Sx31_to_CMJ = (Sx31_inSx31CMJ/CMJ_inSx31CMJ).toFixed(4);
+            const CMJ_to_Sx31 = (CMJ_inSx31CMJ/Sx31_inSx31CMJ).toFixed(10);
+                    document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                    document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+            // Bal of Ctuna  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0x7801F8cdBABE6999331d1Bf37d74aAf713C3722F';
+            const Ctuna_inCtunaCMJ = await call_SC(address, Ctuna, 18);
+            const CMJ_inCtunaCMJ = await call_SC(address, CMJ, 18);
+            const Ctuna_to_CMJ = (Ctuna_inCtunaCMJ/CMJ_inCtunaCMJ).toFixed(4);
+            const CMJ_to_Ctuna = (CMJ_inCtunaCMJ/Ctuna_inCtunaCMJ).toFixed(10);
+                document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+            // Bal of Gold  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0x7086EC7ED5D94ef503bE324B0aE8A3748A15fAE5';
+            const Gold_inGoldCMJ = await call_SC(address, Gold, 18);
+            const CMJ_inGoldCMJ = await call_SC(address, CMJ, 18);
+            const Gold_to_CMJ = (Gold_inGoldCMJ/CMJ_inGoldCMJ).toFixed(4);
+            const CMJ_to_Gold = (CMJ_inGoldCMJ/Gold_inGoldCMJ).toFixed(10);
+                document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            
+
+            // Bal of Os  , JBC/  0x329889325A555b217C41A4c2EADD529a0CfA4231
+            address = '0x329889325A555b217C41A4c2EADD529a0CfA4231';
+            const Os_inOsCMJ = await call_SC(address, Os, 18);
+            const CMJ_inOsCMJ = await call_SC(address, CMJ, 18);
+            const Os_to_CMJ = (Os_inOsCMJ/CMJ_inOsCMJ).toFixed(4);
+            const CMJ_to_Os = (CMJ_inOsCMJ/Os_inOsCMJ).toFixed(10);
+                document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+
+            // Bal of Swar  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+            address = '0x5a9E35fC4Afc21B9Fc74bE18015D4D3B002A83A3';
+            const Swar_inSwarWJBC = await call_SC(address, Swar, 18);
+            const WJBC_inSwarWJBC = await call_SC(address, WJBC, 18);
+            const Swar_to_WJBC = (Swar_inSwarWJBC/WJBC_inSwarWJBC).toFixed(4);
+            const WJBC_to_Swar = (WJBC_inSwarWJBC/Swar_inSwarWJBC).toFixed(10);
+            const SWAR_in_CMJ = (WJBC_to_Swar*JBC_to_CMJ).toFixed(6)
+                document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+                document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+                document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+                document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+
+            // Bal of ANGB , WJBC 
+            address = '0xDd35db1a731CD86C01d74A8a4bA4354ca1CDE24d';
+            const ANGB_inANGBWJBC = await call_SC(address, Angb, 18);
+            const WJBC_inANGBWJBC = await call_SC(address, WJBC, 18);
+            const ANGB_to_WJBC = (ANGB_inANGBWJBC/WJBC_inANGBWJBC).toFixed(4);
+            const WJBC_to_ANGB = (WJBC_inANGBWJBC/ANGB_inANGBWJBC).toFixed(4);
+            const ANGB_in_CMJ = (WJBC_to_ANGB*JBC_to_CMJ).toFixed(6)
+                document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+                document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+                document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+                document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+
+            // Bal of CMJ , SIL 
+            address = '0xf189c5B03694b70e5DFD8e8CAE84118Ed7616F19';
+            const SIL_inSILCMJ = await call_SC(address, Sil, 18);
+            const CMJ_inSILCMJ = await call_SC(address, CMJ, 18);
+            const SIL_to_CMJ = (SIL_inSILCMJ/CMJ_inSILCMJ).toFixed(6);
+            const CMJ_to_SIL = (CMJ_inSILCMJ/SIL_inSILCMJ).toFixed(10);
+                document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+                document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            
+                Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+            document.getElementById('priceB22').innerText = `${Tao_CMJ.toFixed(8)}`;
+            
+
+            // BAL of II , JTAO
+            address = '0xbD5bFF1fBbD83FECD749a328D98F860f7F343c10';
+            const II_inIIJTAO = await call_SC(address,II,18);
+            const JTAO_inIIJTAO = await call_SC(address,Jtao,18);
+            const II_to_JTAO = setLocal((II_inIIJTAO/JTAO_inIIJTAO),4);
+            const JTAO_to_II = (JTAO_inIIJTAO/II_inIIJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
+            JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+            CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
+            document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("IIPrice_JTAO_2").innerHTML = (JTAO_to_II*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            JTAO_to_CMJ = (JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2;
+            II_to_CMJ = ((JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
+            document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            
+            // BAL of EE , JTAO
+            address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60';
+            const EE_inEEJTAO = await call_SC(address,EE,18);
+            const JTAO_inEEJTAO = await call_SC(address,Jtao,18);
+            const EE_to_JTAO = setLocal((EE_inEEJTAO/JTAO_inEEJTAO),4);
+            const JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
+            JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+            CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
+            document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            JTAO_to_CMJ = (JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2;
+            EEPrice_CMJ = ((JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
+            document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            
+
+////////////////////////////////////////////////////////////////////////////////////// MEOW NEON////////////////////////////////////////////////////////////////////////////////
+            // Bal of Meow-BBQ
+            address = '0xd332E9387dC0CbC4A850F23418fC98a47bBE8739';
+            const BBQ_inBBQMEOW = await call_SC(address, Bbq, 18);
+            const MEOW_inBBQMEOW = await call_SC(address, Meow, 18);
+            const BBQ_to_Meow = (BBQ_inBBQMEOW/MEOW_inBBQMEOW).toFixed(4);
+            const Meow_to_BBQ = (MEOW_inBBQMEOW/BBQ_inBBQMEOW).toFixed(10);
+            const BBQ_in_CMJ = (Meow_to_BBQ*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-Wood
+            address = '0x538AE35F6618fc5Ac6d42c781d6Bd6C9E977866D';
+            const Wood_inWoodMEOW = await call_SC(address, Wood, 18);
+            const MEOW_inWoodMEOW = await call_SC(address, Meow, 18);
+            const Wood_to_Meow = (Wood_inWoodMEOW/MEOW_inWoodMEOW).toFixed(4);
+            const Meow_to_Wood = (MEOW_inWoodMEOW/Wood_inWoodMEOW).toFixed(10);
+            const Wood_in_CMJ = (Meow_to_Wood*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-Mt
+            address = '0x6314939709ae79E66a2dD9810202448e27afD70E';
+            const Mt_inMtMEOW = await call_SC(address, Mt, 18);
+            const MEOW_inMtMEOW = await call_SC(address, Meow, 18);
+            const Mt_to_Meow = (Mt_inMtMEOW/MEOW_inMtMEOW).toFixed(4);
+            const Meow_to_Mt = (MEOW_inMtMEOW/Mt_inMtMEOW).toFixed(10);
+            const Mt_in_CMJ = (Meow_to_Mt*CMJ_to_Meow).toFixed(10);
+
+
+            // Bal of Meow-Gold
+            address = '0xCf3b8D974A68dFE026b91C3664B8c7d9Da569924';
+            const Gold_inGoldMEOW = await call_SC(address, Gold, 18);
+            const MEOW_inGoldMEOW = await call_SC(address, Meow, 18);
+            const Gold_to_Meow = (Gold_inGoldMEOW/MEOW_inGoldMEOW).toFixed(4);
+            const Meow_to_Gold = (MEOW_inGoldMEOW/Gold_inGoldMEOW).toFixed(10);
+            const Gold_in_CMJ = (Meow_to_Gold*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-WJBC
+            address = '0xc8B5DB8c8D6707c8F7e565cDfF9a61fd6e7427B6';
+            const WJBC_inWJBCMEOW = await call_SC(address, WJBC, 18);
+            const MEOW_inWJBCMEOW = await call_SC(address, Meow, 18);
+            const WJBC_to_Meow = (WJBC_inWJBCMEOW/MEOW_inWJBCMEOW).toFixed(4);
+            const Meow_to_WJBC = (MEOW_inWJBCMEOW/WJBC_inWJBCMEOW).toFixed(10);
+            const WJBC_in_CMJ = (Meow_to_WJBC*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-Mice
+            address = '0xd21fb03ae67958ce28600350e1Df84Ef90196107';
+            const Mice_inMiceMEOW = await call_SC(address, Mice, 18);
+            const MEOW_inMiceMEOW = await call_SC(address, Meow, 18);
+            const Mice_to_Meow = (Mice_inMiceMEOW/MEOW_inMiceMEOW).toFixed(4);
+            const Meow_to_Mice = (MEOW_inMiceMEOW/Mice_inMiceMEOW).toFixed(10);
+            const Mice_in_CMJ = (Meow_to_Mice*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-Tuna
+            address = '0xA86c548E4eB41c4b7752213c8f8dCf94c50354B0';
+            const Tuna_inTunaMEOW = await call_SC(address, Tuna, 18);
+            const MEOW_inTunaMEOW = await call_SC(address, Meow, 18);
+            const Tuna_to_Meow = (Tuna_inTunaMEOW/MEOW_inTunaMEOW).toFixed(4);
+            const Meow_to_Tuna = (MEOW_inTunaMEOW/Tuna_inTunaMEOW).toFixed(10);
+            const Tuna_in_CMJ = (Meow_to_Tuna*CMJ_to_Meow).toFixed(10);
+                    document.getElementById("priceB5").innerHTML = Tuna_in_CMJ;
+
+            // Bal of Meow-Jusdt
+            address = '0x8F04C3d6eb9E744b56f5D89d75Be5e9B466aCE25';
+            const Jusdt_inJusdtMEOW = await call_SC(address, Jusdt, 18);
+            const MEOW_inJusdtMEOW = await call_SC(address, Meow, 18);
+            const Jusdt_to_Meow = (Jusdt_inJusdtMEOW/MEOW_inJusdtMEOW).toFixed(4);
+            const Meow_to_Jusdt = (MEOW_inJusdtMEOW/Jusdt_inJusdtMEOW).toFixed(10);
+            const Jusdt_in_CMJ = (Meow_to_Jusdt*CMJ_to_Meow).toFixed(10);
+           // Bal of Meow-SIL
+            address = '0xacb0465e3dedb9333ae9ddd6fafa95d5b6fa4c49';
+            const SIL_inSILMEOW = await call_SC(address, Sil, 18);
+            const MEOW_inSILMEOW = await call_SC(address, Meow, 18);
+            const SIL_to_Meow = (SIL_inSILMEOW/MEOW_inSILMEOW).toFixed(4);
+            const Meow_to_SIL = (MEOW_inSILMEOW/SIL_inSILMEOW).toFixed(10);
+            const SIL_in_CMJ = (Meow_to_SIL*CMJ_to_Meow).toFixed(10);
+            // Bal of Meow-MT
+            address = '0x6314939709ae79e66a2dd9810202448e27afd70e';
+            const MT_inMTMEOW = await call_SC(address, Mt, 18);
+            const MEOW_inMTMEOW = await call_SC(address, Meow, 18);
+            const MT_to_Meow = (MT_inMTMEOW/MEOW_inMTMEOW).toFixed(4);
+            const Meow_to_MT = (MEOW_inMTMEOW/MT_inMTMEOW).toFixed(10);
+            const MT_in_CMJ = (Meow_to_MT*CMJ_to_Meow).toFixed(10);
+
+/////////////////////////////////////////////////////////////////////////////////// JIBSWAP /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Bal of Meow-WJBC
+            address = '0x04C106B2E51a307D3c69d2a72c5A24dcF7c35731';
+            const Jib_WJBC_inWJBCMEOW = await call_SC(address, Jib_WJBC, 18);
+            const Jib_MEOW_inWJBCMEOW = await call_SC(address, Meow, 18);
+            const Jib_WJBC_to_Meow = (Jib_WJBC_inWJBCMEOW/Jib_MEOW_inWJBCMEOW).toFixed(4);
+            const Jib_Meow_to_WJBC = (Jib_MEOW_inWJBCMEOW/Jib_WJBC_inWJBCMEOW).toFixed(10);
+            const Jib_WJBC_in_CMJ = (Jib_Meow_to_WJBC*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-SIL
+            address = '0x2038F97Fe5199a473726016c6B755C71A1d02fa0';
+            const Jib_SIL_inSILMEOW = await call_SC(address, Sil, 18);
+            const Jib_MEOW_inSILMEOW = await call_SC(address, Meow, 18);
+            const Jib_SIL_to_Meow = (Jib_SIL_inSILMEOW/Jib_MEOW_inSILMEOW).toFixed(4);
+            const Jib_Meow_to_SIL = (Jib_MEOW_inSILMEOW/Jib_SIL_inSILMEOW).toFixed(10);
+            const Jib_SIL_in_CMJ = (Jib_Meow_to_SIL*CMJ_to_Meow).toFixed(10);
+                
+
+
+            // Bal of Meow-Gold
+            address = '0x1a2a8039c4b685d47B9ef6e2C9D3aCB5aB83BCAC';
+            const Jib_Gold_inGoldMEOW = await call_SC(address, Gold, 18);
+            const Jib_MEOW_inGoldMEOW = await call_SC(address, Meow, 18);
+            const Jib_Gold_to_Meow = (Jib_Gold_inGoldMEOW/Jib_MEOW_inGoldMEOW).toFixed(4);
+            const Jib_Meow_to_Gold = (Jib_MEOW_inGoldMEOW/Jib_Gold_inGoldMEOW).toFixed(10);
+            const Jib_Gold_in_CMJ = (Jib_Meow_to_Gold*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-Wood
+            address = '0x0E2302D286778B70F59451036207Aec484C15198';
+            const Jib_Wood_inWoodMEOW = await call_SC(address, Wood, 18);
+            const Jib_MEOW_inWoodMEOW = await call_SC(address, Meow, 18);
+            const Jib_Wood_to_Meow = (Jib_Wood_inWoodMEOW/Jib_MEOW_inWoodMEOW).toFixed(4);
+            const Jib_Meow_to_Wood = (Jib_MEOW_inWoodMEOW/Jib_Wood_inWoodMEOW).toFixed(10);
+            const Jib_Wood_in_CMJ = (Jib_Meow_to_Wood*CMJ_to_Meow).toFixed(10);
+                    document.getElementById("priceB4").innerHTML = Jib_Wood_in_CMJ;
+
+           // Bal of Meow-Mice
+            address = '0xcc59B348085384C1B8e4D310e53a4823aCd38653';
+            const Jib_Mice_inMiceMEOW = await call_SC(address, Mice, 18);
+            const Jib_MEOW_inMiceMEOW = await call_SC(address, Meow, 18);
+            const Jib_Mice_to_Meow = (Jib_Mice_inMiceMEOW/Jib_MEOW_inMiceMEOW).toFixed(4);
+            const Jib_Meow_to_Mice = (Jib_MEOW_inMiceMEOW/Jib_Mice_inMiceMEOW).toFixed(10);
+            const Jib_Mice_in_CMJ = (Jib_Meow_to_Mice*CMJ_to_Meow).toFixed(10);
+                    document.getElementById("priceB6").innerHTML = Jib_Mice_in_CMJ;
+            // Bal of Meow-Tuna
+            address = '0xF9C16D28E8113D0966cE060a4F8c4cFad6D87467';
+            const Jib_Tuna_inTunaMEOW = await call_SC(address, Tuna, 18);
+            const Jib_MEOW_inTunaMEOW = await call_SC(address, Meow, 18);
+            const Jib_Tuna_to_Meow = (Jib_Tuna_inTunaMEOW/Jib_MEOW_inTunaMEOW).toFixed(4);
+            const Jib_Meow_to_Tuna = (Jib_MEOW_inTunaMEOW/Jib_Tuna_inTunaMEOW).toFixed(10);
+            const Jib_Tuna_in_CMJ = (Jib_Meow_to_Tuna*CMJ_to_Meow).toFixed(10);
+            // Bal of Meow-Os
+            address = '0x7400281C02259436CA6bbf2bcD6624E7E497ee96';
+            const Jib_Os_inOsMEOW = await call_SC(address, Os, 18);
+            const Jib_MEOW_inOsMEOW = await call_SC(address, Meow, 18);
+            const Jib_Os_to_Meow = (Jib_Os_inOsMEOW/Jib_MEOW_inOsMEOW).toFixed(4);
+            const Jib_Meow_to_Os = (Jib_MEOW_inOsMEOW/Jib_Os_inOsMEOW).toFixed(10);
+            const Jib_Os_in_CMJ = (Jib_Meow_to_Os*CMJ_to_Meow).toFixed(10);
+
+            // Bal of Meow-Mt
+            address = '0xb882C5Ec427De3085127C89De4fe3ceE12b345bb';
+            const Jib_Mt_inMtMEOW = await call_SC(address, Mt, 18);
+            const Jib_MEOW_inMtMEOW = await call_SC(address, Meow, 18);
+            const Jib_Mt_to_Meow = (Jib_Mt_inMtMEOW/Jib_MEOW_inMtMEOW).toFixed(4);
+            const Jib_Meow_to_Mt = (Jib_MEOW_inMtMEOW/Jib_Mt_inMtMEOW).toFixed(10);
+            const Jib_Mt_in_CMJ = (Jib_Meow_to_Mt*CMJ_to_Meow).toFixed(10);
+            document.getElementById("priceB16").innerHTML = Jib_Mt_in_CMJ;
+
+            // Bal of Meow-stOPT
+            address = '0xc33ED5700B34DF55c925b4ca1791Aa0F61c6bcEd';
+            const Jib_stOPT_instOPTMEOW = await call_SC(address, stOPT, 18);
+            const Jib_MEOW_instOPTMEOW = await call_SC(address, Meow, 18);
+            const Jib_stOPT_to_Meow = (Jib_stOPT_instOPTMEOW/Jib_MEOW_instOPTMEOW).toFixed(4);
+            const Jib_Meow_to_stOPT = (Jib_MEOW_instOPTMEOW/Jib_stOPT_instOPTMEOW).toFixed(10);
+            const Jib_stOPT_in_CMJ = (Jib_Meow_to_stOPT*CMJ_to_Meow).toFixed(10);
+
+                // Token Value in CMJ
+
+            const CMJ_USDT = CMJ_inJUST;
+            const Meow_USDT = Meow_inJUST;
+            const JBC_USDT = JBC_inJUST;
+            const Bbq_Price = CMJ_to_BBQ;
+            const Pza_Price = CMJ_to_Pza;
+            const Swar_Price = SWAR_in_CMJ;
+            const Wood_Price = Jib_Wood_in_CMJ;
+            const Tuna_Price = Tuna_in_CMJ;
+            const Mice_Price = Jib_Mice_in_CMJ;
+            const Cu_Price = CMJ_to_Cu;
+            const Jasp_Price = CMJ_to_Jasp;
+            const Os_Price = CMJ_to_Os;
+            const Jdao_Price = CMJ_to_Jdao;
+            const Mt_Price = Jib_Mt_in_CMJ;
+            const Gold_Price = CMJ_to_Gold;
+            const Silver_Price = Jib_SIL_in_CMJ;
+            const Ctuna_Price = CMJ_to_Ctuna;
+            const Sx31_Price = CMJ_to_Sx31;
+            const stOPT_Price = Jib_stOPT_in_CMJ;
+            const Jbc_Price = JBC_to_CMJ;
+            const Plat_Price = 0.0011;
+            setData(CMJ_USDT,Meow_USDT,JBC_USDT,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price,Plat_Price)
+        } catch (error) {
+            console.error('Error:', error);
+            console.log('An error occurred while fetching contract information.');
+        }
+    }
+main();
+function setData(CMJ_USDT,Meow_USDT,JBC_USDT,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price,Plat_Price){
+  /* GET TOKEN PRICE */
+    exchangeRate = parseFloat(document.getElementById("USD").textContent) || 0;
+    USDTHB = exchangeRate;
+    CMJ_inUSD = CMJ_USDT;
+	JBCe_inCMJ = CMJ_USDT/JBC_USDT;
+	
+
+  /* Angel Plus - ADV Card */
+    Sell_Token = "JUSDT";
+    Amount_Sell = 10;
+    Value_inCMJ = (Amount_Sell/CMJ_inUSD).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    Value_inTHB = Amount_Sell*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      /* Display Card */
+      document.getElementById("Angel_AdvCard_SellPrice").innerHTML = Amount_Sell;
+      document.getElementById("Angel_AdvCard_Token").innerHTML = Sell_Token;
+      document.getElementById("Angel_AdvCard_SellPrice_CMJ").innerHTML = Value_inCMJ;
+      document.getElementById("Angel_AdvCard_SellPrice_THB").innerHTML = Value_inTHB.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Angel Plus - HERO Card */
+  Sell_Token = "JUSDT";
+  Amount_Sell = 10;
+  Value_inCMJ = (Amount_Sell/CMJ_inUSD).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = Amount_Sell*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("Angel_MainChar_SellPrice").innerHTML = Amount_Sell;
+    document.getElementById("Angel_MainChar_Token").innerHTML = Sell_Token;
+    document.getElementById("Angel_MainChar_SellPrice_CMJ").innerHTML = Value_inCMJ;
+    document.getElementById("Angel_MainChar_SellPrice_THB").innerHTML = Value_inTHB.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Angel Plus - Equipment Card */
+  Sell_Token = "JUSDT";
+  Amount_Sell = 10;
+  Value_inCMJ = (Amount_Sell/CMJ_inUSD).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = Amount_Sell*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("Angel_Equip_SellPrice").innerHTML = Amount_Sell;
+    document.getElementById("Angel_Equip_Token").innerHTML = Sell_Token;
+    document.getElementById("Angel_Equip_SellPrice_CMJ").innerHTML = Value_inCMJ;
+    document.getElementById("Angel_Equip_SellPrice_THB").innerHTML = Value_inTHB.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Naruta - Equipment Card */
+  Sell_Token = "JUSDT";
+  Amount_Sell = 20;
+  Value_inCMJ = (Amount_Sell/CMJ_inUSD).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = Amount_Sell*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("Naruta_Equip_SellPrice").innerHTML = Amount_Sell;
+    document.getElementById("Naruta_Equip_Token").innerHTML = Sell_Token;
+    document.getElementById("Naruta_Equip_SellPrice_CMJ").innerHTML = Value_inCMJ;
+    document.getElementById("Naruta_Equip_SellPrice_THB").innerHTML = Value_inTHB.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+
+  /* Golden Dragon Armor */
+  Sell_Token = "JUSDT";
+  Amount_Sell = 15;
+  Value_inCMJ = (Amount_Sell/CMJ_inUSD).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = Amount_Sell*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Set Equp Dragon Set Power */
+      document.getElementById("mallI3").innerHTML = 250;
+      document.getElementById("mallJ3").innerHTML = 550;
+      document.getElementById("mallK3").innerHTML = 1050;
+      document.getElementById("mallL3").innerHTML = 2550;
+      document.getElementById("mallI4").innerHTML = 250;
+      document.getElementById("mallJ4").innerHTML = 550;
+      document.getElementById("mallK4").innerHTML = 1050;
+      document.getElementById("mallL4").innerHTML = 2550;
+      document.getElementById("mallI5").innerHTML = 250;
+      document.getElementById("mallJ5").innerHTML = 550;
+      document.getElementById("mallK5").innerHTML = 1050;
+      document.getElementById("mallL5").innerHTML = 2550;
+      document.getElementById("Splasher_1").innerHTML = 250;
+      document.getElementById("Splasher_2").innerHTML = 550;
+      document.getElementById("Splasher_3").innerHTML = 1050;
+      document.getElementById("Splasher_4").innerHTML = 2550;
+    /* Display Card */
+    document.getElementById("mallD3").innerHTML = setLocal(Amount_Sell,2,2);
+    document.getElementById("mallE3").innerHTML = Sell_Token;
+    document.getElementById("mallF3").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("mallH3").innerHTML = setLocal(Value_inTHB,2,2);
+
+    document.getElementById("mallD4").innerHTML = setLocal(Amount_Sell,2,2);
+    document.getElementById("mallE4").innerHTML = Sell_Token;
+    document.getElementById("mallF4").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("mallH4").innerHTML = setLocal(Value_inTHB,2,2);;
+
+    document.getElementById("mallD5").innerHTML = setLocal(Amount_Sell,2,2);
+    document.getElementById("mallE5").innerHTML = Sell_Token;
+    document.getElementById("mallF5").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("mallH5").innerHTML = setLocal(Value_inTHB,2,2);;
+
+    document.getElementById("Splasher_Price1").innerHTML = setLocal(Amount_Sell,2,2);
+    document.getElementById("Splasher_Price2").innerHTML = Sell_Token;
+    document.getElementById("Splasher_CMJ").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("Splasher_THB").innerHTML = setLocal(Value_inTHB,2,2);;
+
+    /* Change to os Price*/
+    document.getElementById("mallM3").innerHTML = setLocal((250*Os_Price),2,2);
+    document.getElementById("mallN3").innerHTML = setLocal((550*Os_Price),2,2);
+    document.getElementById("mallO3").innerHTML = setLocal((1050*Os_Price),2,2);
+    document.getElementById("mallP3").innerHTML = setLocal((2550*Os_Price),2,2);
+
+    document.getElementById("mallM4").innerHTML = setLocal((250*Os_Price),2,2);
+    document.getElementById("mallN4").innerHTML = setLocal((550*Os_Price),2,2);
+    document.getElementById("mallO4").innerHTML = setLocal((1050*Os_Price),2,2);
+    document.getElementById("mallP4").innerHTML = setLocal((2550*Os_Price),2,2);
+
+    document.getElementById("mallM5").innerHTML = setLocal((250*Os_Price),2,2);
+    document.getElementById("mallN5").innerHTML = setLocal((550*Os_Price),2,2);
+    document.getElementById("mallO5").innerHTML = setLocal((1050*Os_Price),2,2);
+    document.getElementById("mallP5").innerHTML = setLocal((2550*Os_Price),2,2);
+
+    document.getElementById("Splasher_Os1").innerHTML = setLocal((250*Os_Price),2,2);
+    document.getElementById("Splasher_Os2").innerHTML = setLocal((550*Os_Price),2,2);
+    document.getElementById("Splasher_Os3").innerHTML = setLocal((1050*Os_Price),2,2);
+    document.getElementById("Splasher_Os4").innerHTML = setLocal((2550*Os_Price),2,2);
+  /* Main Char SAPIEN */
+  Sell_Token = "JUSDT";
+  Amount_Sell = 20;
+  Value_inCMJ = (Amount_Sell/CMJ_inUSD).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = Amount_Sell*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("mallD6").innerHTML = Amount_Sell;
+    document.getElementById("mallE6").innerHTML = Sell_Token;
+    document.getElementById("mallF6").innerHTML = Value_inCMJ;
+    document.getElementById("mallH6").innerHTML = Value_inTHB.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById("mallM6").innerHTML = setLocal((500*Os_Price),2,2);
+  /* Multiverse Traveller Vol.4 */
+  Sell_Token = "BBQ";
+  Amount_Sell = 40000;
+  Value_inCMJ = (Amount_Sell*Bbq_Price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = (Value_inCMJ*CMJ_inUSD)*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("mallD7").innerHTML = setLocal(Amount_Sell);
+    document.getElementById("mallE7").innerHTML = Sell_Token;
+    document.getElementById("mallF7").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("mallH7").innerHTML = setLocal(Value_inTHB,2,2);
+    document.getElementById("mallM7").innerHTML = setLocal((100*Os_Price),2,2);
+  /* Novice Sword Vol.2 */
+  Sell_Token = "BBQ";
+  Amount_Sell = 40000;
+  Value_inCMJ = (Amount_Sell*Bbq_Price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = (Value_inCMJ*CMJ_inUSD)*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("mallD8").innerHTML = setLocal(Amount_Sell);
+    document.getElementById("mallE8").innerHTML = Sell_Token;
+    document.getElementById("mallF8").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("mallH8").innerHTML = setLocal(Value_inTHB,2,2);
+    document.getElementById("mallM8").innerHTML = setLocal((250*Os_Price),2,2);
+  /* TSW Valentine Ring */
+  Sell_Token = "CTuna";
+  Amount_Sell = 2500;
+  Value_inCMJ = (Amount_Sell*Ctuna_Price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  Value_inTHB = (Value_inCMJ*CMJ_inUSD)*exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    /* Display Card */
+    document.getElementById("mallD9").innerHTML = setLocal(Amount_Sell);
+    document.getElementById("mallE9").innerHTML = Sell_Token;
+    document.getElementById("mallF9").innerHTML = setLocal(Value_inCMJ,2,2);
+    document.getElementById("mallH9").innerHTML = setLocal(Value_inTHB,2,2);
+    document.getElementById("mallM9").innerHTML = setLocal((150*Os_Price),2,2);
+  /* Prophet of JBC*/
+  Sell_Token = "JBC";
+  Amount_Sell = 1000;
+  Value_inCMJ_int = parseInt(Amount_Sell * JBCe_inCMJ); // ใช้ parseInt ที่นี่เพื่อแปลงเป็น integer
+  Value_inCMJ = Value_inCMJ_int.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // แปลงเป็นสตริงที่มีรูปแบบ
+  Value_inTHB = (Value_inCMJ_int * CMJ_inUSD) * exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Display Card */
+  document.getElementById("mallD10").innerHTML = setLocal(Amount_Sell);
+  document.getElementById("mallE10").innerHTML = Sell_Token;
+  document.getElementById("mallF10").innerHTML = setLocal(Value_inCMJ, 2, 2);
+  document.getElementById("mallH10").innerHTML = setLocal(Value_inTHB, 2, 2);
+  document.getElementById("mallM10").innerHTML = setLocal((8000 * Os_Price), 2, 2); // ต้องกำหนดค่า Os_Price ให้ถูกต้อง
+  /* Supreme God of JBC*/
+  Sell_Token = "JASP";
+  Amount_Sell = 100;
+  Value_inCMJ_int = parseInt(Amount_Sell * Jasp_Price); // ใช้ parseInt ที่นี่เพื่อแปลงเป็น integer
+  Value_inCMJ = Value_inCMJ_int.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // แปลงเป็นสตริงที่มีรูปแบบ
+  Value_inTHB = (Value_inCMJ_int * CMJ_inUSD) * exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Display Card */
+  document.getElementById("mallD11").innerHTML = setLocal(Amount_Sell);
+  document.getElementById("mallE11").innerHTML = Sell_Token;
+  document.getElementById("mallF11").innerHTML = setLocal(Value_inCMJ, 2, 2);
+  document.getElementById("mallH11").innerHTML = setLocal(Value_inTHB, 2, 2);
+  document.getElementById("mallM11").innerHTML = setLocal((19000 * Os_Price), 2, 2); // ต้องกำหนดค่า Os_Price ให้ถูกต้อง
+  /* VK,King of Commu*/
+  Sell_Token = "OS";
+  Amount_Sell = 5500;
+  Value_inCMJ_int = parseInt(Amount_Sell * Os_Price); // ใช้ parseInt ที่นี่เพื่อแปลงเป็น integer
+  Value_inCMJ = Value_inCMJ_int.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // แปลงเป็นสตริงที่มีรูปแบบ
+  Value_inTHB = (Value_inCMJ_int * CMJ_inUSD) * exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Display Card */
+  document.getElementById("mallD12").innerHTML = setLocal(Amount_Sell);
+  document.getElementById("mallE12").innerHTML = Sell_Token;
+  document.getElementById("mallF12").innerHTML = setLocal(Value_inCMJ, 2, 2);
+  document.getElementById("mallH12").innerHTML = setLocal(Value_inTHB, 2, 2);
+  document.getElementById("mallM12").innerHTML = setLocal((4500 * Os_Price), 2, 2); // ต้องกำหนดค่า Os_Price ให้ถูกต้อง
+  /* Golden Hour */
+  Sell_Token = "GOLD";
+  Amount_Sell = 56000;
+  Value_inCMJ_int = parseInt(Amount_Sell * Gold_Price); // ใช้ parseInt ที่นี่เพื่อแปลงเป็น integer
+  Value_inCMJ = Value_inCMJ_int.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // แปลงเป็นสตริงที่มีรูปแบบ
+  Value_inTHB = (Value_inCMJ_int * CMJ_inUSD) * exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Display Card */
+  document.getElementById("mallD13").innerHTML = setLocal(Amount_Sell);
+  document.getElementById("mallE13").innerHTML = Sell_Token;
+  document.getElementById("mallF13").innerHTML = setLocal(Value_inCMJ, 2, 2);
+  document.getElementById("mallH13").innerHTML = setLocal(Value_inTHB, 2, 2);
+  document.getElementById("mallM13").innerHTML = setLocal((10400 * Os_Price), 2, 2); // ต้องกำหนดค่า Os_Price ให้ถูกต้อง
+  /* Chainsaw Pro Max*/
+  Sell_Token = "BBQ";
+  Amount_Sell = 100000000;
+  Value_inCMJ_int = parseInt(Amount_Sell * Bbq_Price); // ใช้ parseInt ที่นี่เพื่อแปลงเป็น integer
+  Value_inCMJ = Value_inCMJ_int.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // แปลงเป็นสตริงที่มีรูปแบบ
+  Value_inTHB = (Value_inCMJ_int * CMJ_inUSD) * exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Display Card */
+  document.getElementById("ChainSawPrice").innerHTML = setLocal(Amount_Sell,0,0);
+  document.getElementById("ChainSaw_Token").innerHTML = Sell_Token;
+  document.getElementById("ChainSaw_ValueCMJ").innerHTML = setLocal(Value_inCMJ, 2, 2);
+  document.getElementById("ChainSaw_ValueTHB").innerHTML = setLocal(Value_inTHB, 2, 2);
+  document.getElementById("ChainSaw_toOS").innerHTML = setLocal((10000 * Os_Price), 2, 2); // ต้องกำหนดค่า Os_Price ให้ถูกต้อง
+  /* To Infinity and Beyond*/
+  Sell_Token = "PLAT";
+  Amount_Sell = 180000;
+  Value_inCMJ_int = parseInt(Amount_Sell * Plat_Price); // ใช้ parseInt ที่นี่เพื่อแปลงเป็น integer
+  Value_inCMJ = Value_inCMJ_int.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // แปลงเป็นสตริงที่มีรูปแบบ
+  Value_inTHB = (Value_inCMJ_int * CMJ_inUSD) * exchangeRate.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  /* Display Card */
+  document.getElementById("TIAB_Price").innerHTML = setLocal(Amount_Sell);
+  document.getElementById("TIAB_Token").innerHTML = Sell_Token;
+  document.getElementById("TIAB_ValueCMJ").innerHTML = setLocal(Value_inCMJ, 2, 2);
+  document.getElementById("TIAB_ValueTHB").innerHTML = setLocal(Value_inTHB, 2, 2);
+  document.getElementById("TIAB__toOS").innerHTML = setLocal((10100 * Os_Price), 2, 2); // ต้องกำหนดค่า Os_Price ให้ถูกต้อง
+}
+function setLocal(number,maximumFractionDigits){
+  return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
+}
+async function call_SC(address, contract, divider) {
+    try {
+      const result = await contract.methods.balanceOf(address).call();
+      return result / (10 ** divider); // เลื่อนการหารออกจากการเรียกใช้เพื่อความชัดเจน
+    } catch (error) {
+      console.error("Error calling contract method:", error);
+      return null;
+    }
+  }
+
+function setUSD(){
+  // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+
+fetch(exchangeRateUrl)
+  .then(response => response.json())
+  .then(data => {
+    // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+    const exchangeRate = data.rates.THB;
+    
+    document.getElementById('USD').innerText = `${exchangeRate.toFixed(2)}`;
+
+    // ทำ HTTP GET request เพื่อดึงข้อมูล price_usd จาก API ที่กำหนด
+    const tokenUrl = "https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5";
+
+    return fetch(tokenUrl)
+      .then(response => response.json())
+      .then(data => {
+        // ดึงข้อมูล price_usd และแปลงเป็นบาท
+        const priceUsd = parseFloat(data.data.attributes.price_usd);
+        const priceThb = priceUsd * exchangeRate;
+      });
+  })
+  .catch(error => {
+    console.error('เกิดข้อผิดพลาด:', error);
+  });
+  return exchangeRateUrl
+
+// เรียกใช้งาน API
+fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d3d38a7ff4e62f98fe27dd9242a36227fe23/pools?include=base_token_price_usd&page=1')
+    .then(response => response.json())
+    .then(data => {
+        // ค้นหาข้อมูลที่ต้องการและแสดงผล
+        const pools = data.data;
+        pools.forEach(pool => {
+            if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
+                TaoPrice = parseFloat(pool.attributes.token_price_usd)
+                document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
+            }
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+window.addEventListener('load', function() {
+setUSD()
+});
+
+function setLocal(value,min,max){
+  return (value).toLocaleString(undefined, { minimumFractionDigits: min, maximumFractionDigits: max })
+}
+
+</script>
+</body>
+</html>
