@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/medabots" rel="stylesheet">
+
+    <title>HeroCat Card Layout</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/medabots');
+
+    body {
+        margin: 0;
+        padding: 20px;
+        background-image: url('https://www.herocat.xyz/assets/wallpapers/Background_PC.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+        .navbar {
+            width: 100%;
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-button {
+            background: #007bff;
+            color: black;
+            border: none;
+            padding: 22px 40px;
+            font-size: 26px;
+            font-weight: bolder;
+            margin: 0 10px;
+            font-family: 'Medabots', sans-serif;
+            cursor: pointer;
+        }
+
+        .container {
+            display: none;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.8);
+            margin: 2.5%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-body {
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 34px;
+            font-family: 'Medabots', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .card-title img {
+            vertical-align: middle;
+            width: 40px;
+            height: 40px;
+        }
+
+        .card-text {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .card-text img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+
+        #Calculate {
+            display: none;
+            /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 50px);
+            /* Adjust width based on body padding */
+            max-width: calc(100% - 50px);
+        }
+
+        #Calculate .title,#Calculate #status {
+            font-size: 60px;
+            color: #333;
+            font-family: 'Medabots', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        #Calculate input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+
+        #Calculate button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #Calculate button:hover {
+            background-color: #0056b3;
+        }
+
+        #Calculate table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #Calculate th,
+        #Calculate td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        #Calculate th {
+            background-color: #f4f4f4;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+                margin: 5%;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .card-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .card-text {
+                margin-bottom: 20px;
+                font-size: 12px;
+            }
+        }
+
+        #TokenPrice {
+            display: none;
+            /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 40px);
+            /* Adjust width based on body padding */
+        }
+
+        #TokenPrice table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #TokenPrice th,
+        #TokenPrice td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        #TokenPrice th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        #TokenPrice td img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            #TokenPrice {
+                width: 100%;
+                padding: 15px;
+            }
+
+            span {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .card-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <button class="nav-button" onclick="showSection('HeroData')">HeroData</button>
+        <button class="nav-button" onclick="showSection('Calculate')">Calculator</button>
+        <!-- Updated to 'Calculate' -->
+        <button class="nav-button" onclick="showSection('TokenPrice')">TokenPrice</button>
+    </div>
+
+    <!------------------------------------------------------------ HERODATA CONTAINER --------------------------------------------------->
+    <div id="HeroData" class="container" style="display: flex;"> <!-- Initially show HeroData -->
+
+        <!------------------------------------------------------------ Tower CARD --------------------------------------------------->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/towers/diamon.png" class="card-img-top" alt="DM Tower">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Diamond.png" alt="Diamond Icon">
+                    Diamon Tower <img src="https://herocat-website.vercel.app/assets/ui/new_icons/Hero.png"
+                        alt="Hero Icon">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HEROCAT</b></p>
+                <p class="card-text">Reward/Block: <span id="dmRewardMax">..Loading</span></p>
+                <p class="card-text">Total Farm: <span id="dmTotalFarmed">..Loading</span> NFT(s)</p>
+                <p class="card-text">Total Power: <span id="dmTotalPower">..Loading</span></p>
+                <a href="https://www.herocat.xyz/tower/diamon" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/towers/gold.png" class="card-img-top" alt="Gold Tower">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Gold.png" alt="Gold Icon">
+                    Gold Tower <img src="https://herocat-website.vercel.app/assets/ui/new_icons/Cat Meaw.png"
+                        alt="Cat Meaw Icon">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>CM NFT Every Collection</b></p>
+                <p class="card-text">Reward/Block: <span id="goldRewardMax">..Loading</span></p>
+                <p class="card-text">Total Farm: <span id="goldTotalFarmed">..Loading</span> NFT(s)</p>
+                <p class="card-text">Total Power: <span id="goldTotalPower">..Loading</span></p>
+                <a href="https://www.herocat.xyz/tower/gold" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!------------------------------------------------------------ Farm CARD --------------------------------------------------->
+        <!--- START CARD  -->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/farms/prontera.png" class="card-img-top"
+                alt="prontera Farm">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple"> Farm
+                    Prontera <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection , HERO CAT Every Collection</b></p>
+                <p class="card-text">Reward/1,000 Pow/Day: <span id="F_PRD">Loading</span></p>
+                <p class="card-text">GasFee Approximately: ~<span id="F_PRGAS1">Loading</span> KKUB [~ <span
+                        id="F_PRGAS2">Loading</span> HRC]</p>
+                <p class="card-text">Max Reward: 103.68 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple"> [~ <span
+                        id="F_PRSELL">Loading</span> HRC]</p>
+                <p class="card-text">Eliminate PNL: <span id="F_PRPNL1">Loading</span> HRC [~ <span
+                        id="F_PRPNL2">Loading</span> KKUB]</p>
+                <a href="https://www.herocat.xyz/farm/apple" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!--- END CARD  -->
+        <!--- START CARD  -->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/farms/geffen.png" class="card-img-top"
+                alt="geffen Farm">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Carrot.png" alt="Car"> Farm
+                    Geffen <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Carrot.png" alt="Car">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HERO CAT Every Collection</b></p>
+                <p class="card-text">Reward/1,000 Pow/Day: <span id="F_GFD">Loading</span></p>
+                <p class="card-text">GasFee Approximately: ~<span id="F_GFGAS1">Loading</span> KKUB [~ <span
+                        id="F_GFGAS2">Loading</span> HRC]</p>
+                <p class="card-text">Max Reward: 103.68 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Carrot.png" alt="Car"> [~ <span
+                        id="F_GFSELL">Loading</span> HRC]</p>
+                <p class="card-text">Eliminate PNL: <span id="F_GFPNL1">Loading</span> HRC [~ <span
+                        id="F_GFPNL2">Loading</span> KKUB]</p>
+                <a href="https://www.herocat.xyz/farm/carrot" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!--- END CARD  -->
+        <!------------------------------------------------------------ DUNGEON CARD --------------------------------------------------->
+        <!--- START CARD  -->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/dungeons/prontera.png" class="card-img-top"
+                alt="prontera Dungeon">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png" alt="RORI">
+                    Dungeon Prontera <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png" alt="RORI">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection , HERO CAT Every Collection</b></p>
+                <p class="card-text">Reward/1,000 Pow/Day: <span id="D_PRD">Loading</span></p>
+                <p class="card-text">Need: 100 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple"> + 1 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/CMM.png" alt="CMM"> (~ <span
+                        id="D_PRCO">Loading</span> HRC)</p>
+                <p class="card-text">GasFee Approximately: ~<span id="D_PRGAS1">Loading</span> KKUB [~ <span
+                        id="D_PRGAS2">Loading</span> HRC]</p>
+                <p class="card-text">Max Reward: 120 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png" alt="RORI">
+                    [~ <span id="D_PRSELL">Loading</span> HRC]</p>
+                <p class="card-text">Eliminate PNL: <span id="D_PRPNL1">Loading</span> HRC [~ <span
+                        id="D_PRPNL2">Loading</span> KKUB]</p>
+                <a href="https://www.herocat.xyz/dungeon/prontera" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!--- END CARD  -->
+        <!--- START CARD  -->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/dungeons/geffen.png" class="card-img-top"
+                alt="Geffen Dungeon">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Elunium.png" alt="RELU">
+                    Dungeon Geffen <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Elunium.png" alt="RELU">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HEROCAT Every Collection</b></p>
+                <p class="card-text">Reward/1,000 Pow/Day: <span id="D_GFD">Loading</span></p>
+                <p class="card-text">Need: 100 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Carrot.png" alt="Carr"> + 2 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/CMM.png" alt="CMM"> (~ <span
+                        id="D_GFCO">Loading</span> HRC)</p>
+                <p class="card-text">GasFee Approximately: ~<span id="D_GFGAS1">Loading</span> KKUB [~ <span
+                        id="D_GFGAS2">Loading</span> HRC]</p>
+                <p class="card-text">Max Reward: 150 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Elunium.png" alt="RELU"> [~
+                    <span id="D_GFSELL">Loading</span> HRC]</p>
+                <p class="card-text">Eliminate PNL: <span id="D_GFPNL1">Loading</span> HRC [~ <span
+                        id="D_GFPNL2">Loading</span> KKUB]</p>
+                <a href="https://www.herocat.xyz/dungeon/geffen" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!--- END CARD  -->
+
+        <!------------------------------------------------------------ Factory CARD --------------------------------------------------->
+        <!--- START CARD  -->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/smelteries/smeltery.png" class="card-img-top"
+                alt="prontera Dungeon">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Oridecon.png" alt="ORI"> Factory
+                    ORI <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Oridecon.png" alt="ORI">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection , HERO CAT Every Collection</b></p>
+                <p class="card-text">Reward/1,000 Pow/Day: <span id="Fa_PRD">Loading</span></p>
+                <p class="card-text">Need: 500 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png" alt="RORI">
+                    (~ <span id="Fa_PRCO">Loading</span> HRC)</p>
+                <p class="card-text">GasFee Approximately: ~<span id="Fa_PRGAS1">Loading</span> KKUB [~ <span
+                        id="Fa_PRGAS2">Loading</span> HRC]</p>
+                <p class="card-text">Max Reward: 30 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Oridecon.png" alt="ORI"> [~ <span
+                        id="Fa_PRSELL">Loading</span> HRC]</p>
+                <p class="card-text">Eliminate PNL: <span id="Fa_PRPNL1">Loading</span> HRC [~ <span
+                        id="Fa_PRPNL2">Loading</span> KKUB]</p>
+                <a href="https://www.herocat.xyz/factory/prontera" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!--- END CARD  -->
+        <!--- START CARD  -->
+        <div class="card">
+            <img src="https://herocat-website.vercel.app/assets/smelteries/smeltery.png" class="card-img-top"
+                alt="Geffen Dungeon">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Elunium.png" alt="ELU"> Factory
+                    ELU <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Elunium.png" alt="ELU">
+                </h5>
+                <p class="card-text">NFT AVAILABLE: <b>HEROCAT Every Collection</b></p>
+                <p class="card-text">Reward/1,000 Pow/Day: <span id="Fa_GFD">Loading</span></p>
+                <p class="card-text">Need: 500 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Elunium.png" alt="RELU"> (~
+                    <span id="Fa_GFCO">Loading</span> HRC)</p>
+                <p class="card-text">GasFee Approximately: ~<span id="Fa_GFGAS1">Loading</span> KKUB [~ <span
+                        id="Fa_GFGAS2">Loading</span> HRC]</p>
+                <p class="card-text">Max Reward: 75 <img
+                        src="https://herocat-website.vercel.app/assets/erc20/new_icons/Elunium.png" alt="ELU"> [~ <span
+                        id="Fa_GFSELL">Loading</span> HRC]</p>
+                <p class="card-text">Eliminate PNL: <span id="Fa_GFPNL1">Loading</span> HRC [~ <span
+                        id="Fa_GFPNL2">Loading</span> KKUB]</p>
+                <a href="https://www.herocat.xyz/factory/geffen" class="button" target="_blank">JOIN</a>
+            </div>
+        </div>
+        <!--- END CARD  -->
+    </div>
+    <!-- Calculator section -->
+    <div id="Calculate" class="container">
+        <div class="title">Hero Power Calculator</div>
+        <div class="title">[ Status : <span id="status">Waiting</span> ]</div>
+        <label for="power" class="center">Enter Power</label>
+        <input type="number" id="power" min="0" placeholder="Enter Power" value="3000">
+        <button onclick="calculateProfit()" id="calc">Calculate</button>
+        <div class="title">Tower ( Power Minimum 3000 )</div>
+        <table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tower</th>
+                        <th>DM</th>
+                        <th>GOLD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Block</td>
+                        <td><span id="DMBlock"></span></td>
+                        <td><span id="GOLDBlock"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Hourly</td>
+                        <td><span id="DMHour"></span></td>
+                        <td><span id="GOLDHour"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Daliy</td>
+                        <td><span id="DMDay"></span></td>
+                        <td><span id="GOLDDay"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly</td>
+                        <td><span id="DMMO"></span></td>
+                        <td><span id="GOLDMO"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="title">Farm/Dungeon/Factory</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Block Reward(1000Pow)</th>
+                        <th>Max Reward</th>
+                        <th>Gain/Day</th>
+                        <th>Full Product Time</th>
+                        <th>Total Power</th>
+                        <th>Global Rw/Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="Meda_Font">Farm - Prontera</td>
+                        <td><span id="Farm_Pron_BlockReward"></span></td>
+                        <td><span id="Farm_Pron_MaxReward"></span></td>
+                        <td><span id="Farm_Pron_GainDay"></span></td>
+                        <td><span id="Farm_Pron_FullTime"></span></td>
+                        <td><span id="Farm_Pron_TotalPower"></span></td>
+                        <td><span id="Farm_Pron_TotalReward"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="Meda_Font">Farm - Geffen</td>
+                        <td><span id="Farm_Geff_BlockReward"></span></td>
+                        <td><span id="Farm_Geff_MaxReward"></span></td>
+                        <td><span id="Farm_Geff_GainDay"></span></td>
+                        <td><span id="Farm_Geff_FullTime"></span></td>
+                        <td><span id="Farm_Geff_TotalPower"></span></td>
+                        <td><span id="Farm_Geff_TotalReward"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="Meda_Font">Dungeon - Prontera</td>
+                        <td><span id="Dungeon_Pron_BlockReward"></span></td>
+                        <td><span id="Dungeon_Pron_MaxReward"></span></td>
+                        <td><span id="Dungeon_Pron_GainDay"></span></td>
+                        <td><span id="Dungeon_Pron_FullTime"></span></td>
+                        <td><span id="Dungeon_Pron_TotalPower"></span></td>
+                        <td><span id="Dungeon_Pron_TotalReward"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="Meda_Font">Dungeon - Geffen</td>
+                        <td><span id="Dungeon_Geff_BlockReward"></span></td>
+                        <td><span id="Dungeon_Geff_MaxReward"></span></td>
+                        <td><span id="Dungeon_Geff_GainDay"></span></td>
+                        <td><span id="Dungeon_Geff_FullTime"></span></td>
+                        <td><span id="Dungeon_Geff_TotalPower"></span></td>
+                        <td><span id="Dungeon_Geff_TotalReward"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="Meda_Font">Factory - Prontera</td>
+                        <td><span id="Factory_Pron_BlockReward"></span></td>
+                        <td><span id="Factory_Pron_MaxReward"></span></td>
+                        <td><span id="Factory_Pron_GainDay"></span></td>
+                        <td><span id="Factory_Pron_FullTime"></span></td>
+                        <td><span id="Factory_Pron_TotalPower"></span></td>
+                        <td><span id="Factory_Pron_TotalReward"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="Meda_Font">Factory - Geffen</td>
+                        <td><span id="Factory_Geff_BlockReward"></span></td>
+                        <td><span id="Factory_Geff_MaxReward"></span></td>
+                        <td><span id="Factory_Geff_GainDay"></span></td>
+                        <td><span id="Factory_Geff_FullTime"></span></td>
+                        <td><span id="Factory_Geff_TotalPower"></span></td>
+                        <td><span id="Factory_Geff_TotalReward"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Additional content as needed -->
+    </div>
+
+    <div id="TokenPrice" class="container">
+        <table>
+            <tr>
+                <th>Icon</th>
+                <th>Symbol</th>
+                <th>Value in HRC</th>
+                <th>Value in CMM</th>
+                <th>Value in KKUB</th>
+                <th>Value in THB</th>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/KKUB.png"></td>
+                <td>KKUB</td>
+                <td><span id="KKUB_HRC">... Loading</span></td>
+                <td><span id="KKUB_CMM">... Loading</span></td>
+                <td><span id="KKUB_KKUB">1</span></td>
+                <td><span id="KUBTHB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/CMM.png"></td>
+                <td>CMM</td>
+                <td><span id="CMM_HRC">... Loading</span></td>
+                <td><span id="CMM_CMM">1</span></td>
+                <td><span id="CMM_KKUB">... Loading</span></td>
+                <td><span id="CMM_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/HRC.png"></td>
+                <td>HRC</td>
+                <td><span id="HRC_HRC">1</span></td>
+                <td><span id="HRC_CMM">... Loading</span></td>
+                <td><span id="HRC_KKUB">... Loading</span></td>
+                <td><span id="HRC_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/KDAO.png"></td>
+                <td>KDAO</td>
+                <td><span id="KDAO_HRC">... Loading</span></td>
+                <td><span id="KDAO_CMM">... Loading</span></td>
+                <td><span id="KDAO_KKUB">... Loading</span></td>
+                <td><span id="KDAO_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png"></td>
+                <td>APPL</td>
+                <td><span id="APPL_HRC">... Loading</span></td>
+                <td><span id="APPL_CMM">... Loading</span></td>
+                <td><span id="APPL_KKUB">... Loading</span></td>
+                <td><span id="APPL_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Carrot.png"></td>
+                <td>CARR</td>
+                <td><span id="CARR_HRC">... Loading</span></td>
+                <td><span id="CARR_CMM">... Loading</span></td>
+                <td><span id="CARR_KKUB">... Loading</span></td>
+                <td><span id="CARR_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png"></td>
+                <td>RORI</td>
+                <td><span id="RORI_HRC">... Loading</span></td>
+                <td><span id="RORI_CMM">... Loading</span></td>
+                <td><span id="RORI_KKUB">... Loading</span></td>
+                <td><span id="RORI_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Elunium.png"></td>
+                <td>RELU</td>
+                <td><span id="RELU_HRC">... Loading</span></td>
+                <td><span id="RELU_CMM">... Loading</span></td>
+                <td><span id="RELU_KKUB">... Loading</span></td>
+                <td><span id="RELU_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Oridecon.png"></td>
+                <td>ORI</td>
+                <td><span id="ORI_HRC">... Loading</span></td>
+                <td><span id="ORI_CMM">... Loading</span></td>
+                <td><span id="ORI_KKUB">... Loading</span></td>
+                <td><span id="ORI_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Elunium.png"></td>
+                <td>ELU</td>
+                <td><span id="ELU_HRC">... Loading</span></td>
+                <td><span id="ELU_CMM">... Loading</span></td>
+                <td><span id="ELU_KKUB">... Loading</span></td>
+                <td><span id="ELU_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Gold.png"></td>
+                <td>GOLD</td>
+                <td><span id="GOLD_HRC">... Loading</span></td>
+                <td><span id="GOLD_CMM">... Loading</span></td>
+                <td><span id="GOLD_KKUB">... Loading</span></td>
+                <td><span id="GOLD_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Diamond.png"></td>
+                <td>DM</td>
+                <td><span id="DM_HRC">... Loading</span></td>
+                <td><span id="DM_CMM">... Loading</span></td>
+                <td><span id="DM_KKUB">... Loading</span></td>
+                <td><span id="DM_THB">... Loading</span></td>
+            </tr>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.container').forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'flex'; // Use 'flex' to keep the layout
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script>
+        // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+        const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+
+        fetch(exchangeRateUrl)
+            .then(response => response.json())
+            .then(data => {
+                const exchangeRate = data.rates.THB;
+                const tokenUrl = "https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5";
+
+                return fetch(tokenUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const priceUsd = parseFloat(data.data.attributes.price_usd);
+                        const priceThb = priceUsd * exchangeRate;
+
+                        document.getElementById("KUBTHB").textContent = priceThb.toFixed(2);
+
+                        setTimeout(() => {
+                            main();
+                        }, 2000); // 2000 milliseconds = 2 วินาที
+                    });
+            })
+            .catch(error => {
+                console.error('เกิดข้อผิดพลาด:', error);
+                document.getElementById("KUBTHB").textContent = "ไม่สามารถดึงข้อมูลได้";
+            });
+
+        async function main() {
+            const divider = 10 ** 18;
+            const contractABI = [
+                {
+                    "constant": true,
+                    "inputs": [{ "name": "_owner", "type": "address" }],
+                    "name": "balanceOf",
+                    "outputs": [{ "name": "balance", "type": "uint256" }],
+                    "type": "function"
+                }
+            ];
+            const web3 = new Web3('https://rpc.bitkubchain.io');
+            console.log(" Access RPC Success")
+
+            const DMTower_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RevokeReward", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "addReward", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "revokeReward", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardClaimed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }]; // ใส่ ABI ของ Contract 1 ที่นี่
+            const DMTower_Address = '0x048D9Dd3cc4eaC71E4140eE5e8Cc297dB467a6fD';
+
+            const GoldTower_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RevokeReward", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "addReward", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "revokeReward", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardClaimed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }]; // ใส่ ABI ของ Contract 2 ที่นี่
+            const GoldTower_Address = '0x68fAE2E7bD14BD636Dffc57fBe23fA4c3DCBa21b';
+
+            const ELU_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_fuel", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "ReFuel", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "feeA", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "feeTo", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "fuel", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "reFuel", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeA", "inputs": [{ "type": "uint256", "name": "_a", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeTo", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
+            const ELU_Address = '0xC177c19fe5b4D1391721831e35Fc7CEac152ab21';
+
+            const ORI_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_fuel", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "ReFuel", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "feeA", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "feeTo", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "fuel", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "reFuel", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeA", "inputs": [{ "type": "uint256", "name": "_a", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeTo", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
+            const ORI_Address = '0x06C1994C92A5620C6EA82BdDC6fF358151D7eE6d';
+
+            const RORI_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_cmm", "internalType": "address" }, { "type": "address", "name": "_fuel", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "ReFuel", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "cmm", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "feeA", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "feeB", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "feeTo", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "fuel", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "reFuel", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeAB", "inputs": [{ "type": "uint256", "name": "_a", "internalType": "uint256" }, { "type": "uint256", "name": "_b", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeTo", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
+            const RORI_Address = '0x7E938dD50403EAE63E5A80aB1680A0f2164e3D2c';
+
+            const RELU_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_cmm", "internalType": "address" }, { "type": "address", "name": "_fuel", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "ReFuel", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "cmm", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "feeA", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "feeB", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "feeTo", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "fuel", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "reFuel", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeAB", "inputs": [{ "type": "uint256", "name": "_a", "internalType": "uint256" }, { "type": "uint256", "name": "_b", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setFeeTo", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
+            const RELU_Address = '0xed35c027bEceF974F6E82835a4F2DaB00c948e6b';
+
+            const APPL_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_rewardContract", "internalType": "address" }, { "type": "address", "name": "_platformerContract", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_DAY", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
+            const APPL_Address = '0x8620c0C622bD8bFDcfE20FaEf3684b76B5bFd256';
+
+            const CARR_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_rewardContract", "internalType": "address" }, { "type": "address", "name": "_platformerContract", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_DAY", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
+            const CARR_Address = '0x009b6A755eeb9dd38EE2D64D10285eBC62537eeE';
+
+            // สร้างออบเจ็กต์สัญญา
+            const Sc_DmTower = new web3.eth.Contract(DMTower_ABI, DMTower_Address);
+            const Sc_GoldTower = new web3.eth.Contract(GoldTower_ABI, GoldTower_Address);
+            const Sc_EluFac = new web3.eth.Contract(ELU_ABI, ELU_Address);
+            const Sc_OriFac = new web3.eth.Contract(ORI_ABI, ORI_Address);
+            const Sc_REluFac = new web3.eth.Contract(RELU_ABI, RELU_Address);
+            const Sc_ROriFac = new web3.eth.Contract(RORI_ABI, RORI_Address);
+            const Sc_Carr = new web3.eth.Contract(CARR_ABI, CARR_Address);
+            const Sc_Appl = new web3.eth.Contract(APPL_ABI, APPL_Address);
+            const KKUB = new web3.eth.Contract(contractABI, '0x67eBD850304c70d983B2d1b93ea79c7CD6c3F6b5');
+            const CMM = new web3.eth.Contract(contractABI, '0x9B005000A10Ac871947D99001345b01C1cEf2790');
+            const HRC = new web3.eth.Contract(contractABI, '0x9F442fa2d4BbD8a183e1EF69f8A7C990465361fe');
+            const KDAO = new web3.eth.Contract(contractABI, '0xF9Ef4d76A03cA810563E4bb5D89eAed0CEEAde83');
+            const APPL = new web3.eth.Contract(contractABI, '0xD84709b3AAceE72dE94f83984CD4DfD2F1FAB6B1');
+            const CARR = new web3.eth.Contract(contractABI, '0xCA0d5004D8D2D2907497fA0B89C19087A5e8fdC6');
+            const RORI = new web3.eth.Contract(contractABI, '0xF710417494370Aa3cB2c87305B4f9de2dD0853c9');
+            const RELU = new web3.eth.Contract(contractABI, '0x44E7943827A2fde483f0cCaf32476B44e7abfe80');
+            const ORI = new web3.eth.Contract(contractABI, '0xD0A7A4F8EF80b180b1da0aCd696312C6591ACbaF');
+            const ELU = new web3.eth.Contract(contractABI, '0xeE225Ef0647C503582321859E61FCFB4649C61Cf');
+            const GOLD = new web3.eth.Contract(contractABI, '0x794a7b0249eE38FCa6429DE90924113dc9566748');
+            const DM = new web3.eth.Contract(contractABI, '0x8AB1fcBe9f65b86a52c34FeE9b29679f70D8f6fA');
+
+            try {
+                // [CMM/KKUB]
+                currentAddress = '0x5Cced24E580586841f326d5088D288e6Ddd201dA'
+                amount_cmm = Number(await call_SC(currentAddress, CMM, 18)); // Convert to Number
+                amount_kkub = Number(await call_SC(currentAddress, KKUB, 18)); // Convert to Number
+                const kkub_cmm = amount_kkub / amount_cmm; // KKUB/CMM
+                const cmm_kkub = amount_cmm / amount_kkub; // CMM/KKUB
+                // [CMM/HRC]
+                currentAddress = '0x65E71B51e1EA9725E3405ce29b6e5bF3b351b581'
+                amount_hrc = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                amount_cmm = Number(await call_SC(currentAddress, CMM, 18)); // Convert to Number
+                const cmm_hrc = amount_hrc / amount_cmm; // CMM/HRC
+                const hrc_cmm = amount_cmm / amount_hrc; // HRC/CMM
+
+                const CMM_equlKKUB = kkub_cmm;
+                const HRC_equlCMM = cmm_hrc;
+                const HRC_equlKKUB = kkub_cmm * cmm_hrc;
+                const KKUB_equalHRC = cmm_kkub * cmm_hrc;
+                // [HRC/KDAO]
+                currentAddress = '0x3F337C66aEAf87D3486Fd3cC245540D7d72E5f02'
+                amount_kdao = Number(await call_SC(currentAddress, KDAO, 18)); // Convert to Number
+                amount_hrc = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_kdao = amount_hrc / amount_kdao; // HRC/KDAO
+                const kdao_hrc = amount_kdao / amount_hrc; // KDAO/HRC
+                // [HRC/ELU]
+                currentAddress = '0x666faD82947c4642D78e614A554856CB25f2A52b'
+                amount_elu = Number(await call_SC(currentAddress, ELU, 18)); // Convert to Number
+                amount_hrc = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_ELU = amount_elu / amount_hrc; // HRC/KDAO
+                const ELU_hrc = amount_hrc / amount_elu; // KDAO/HRC
+                // [HRC/ORI]
+                currentAddress = '0xE65740C74690E07f9a9e4d11Eea2bFBCe39f82e8'
+                amount_ori = Number(await call_SC(currentAddress, ORI, 18)); // Convert to Number
+                amount_hrc = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_ORI = amount_ori / amount_hrc; // HRC/KDAO
+                const ORI_hrc = amount_hrc / amount_ori; // KDAO/HRC
+                // [HRC/CARR]
+                currentAddress = '0x07705408dA7835732ee0656Cb5B11103C4033AD8'
+                amount_t1 = Number(await call_SC(currentAddress, CARR, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_CARR = amount_t1 / amount_t2; // HRC in CARR
+                const CARR_hrc = amount_t2 / amount_t1; // Carr in HRC
+                // [HRC/RORI]
+                currentAddress = '0x3277492B317e9cdDE67F83A7F66E5C59969df7D1'
+                amount_t1 = Number(await call_SC(currentAddress, RORI, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_RORI = amount_t1 / amount_t2; // HRC in CARR
+                const RORI_hrc = amount_t2 / amount_t1; // Carr in HRC
+                // [HRC/APPL]
+                currentAddress = '0x315aDFa1fF9f1bb2895Caa6Bc08799006461dD98'
+                amount_t1 = Number(await call_SC(currentAddress, APPL, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_APPL = amount_t1 / amount_t2; // HRC in CARR
+                const APPL_hrc = amount_t2 / amount_t1; // Carr in HRC
+                // [HRC/RELU]
+                currentAddress = '0x7342a9bf235786F44939c2fE03E64F9Fe777C97b'
+                amount_t1 = Number(await call_SC(currentAddress, RELU, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, HRC, 18)); // Convert to Number
+                const hrc_RELU = amount_t1 / amount_t2; // HRC in CARR
+                const RELU_hrc = amount_t2 / amount_t1; // Carr in HRC
+                // [KKUB/DM]
+                currentAddress = '0x5144A2858050a78B2a9C7641CCDcd5370DD550B3'
+                amount_t1 = Number(await call_SC(currentAddress, DM, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, KKUB, 18)); // Convert to Number
+                const DM_KKUB = amount_t1 / amount_t2; // HRC in CARR
+                const KKUB_DM = amount_t2 / amount_t1; // Carr in HRC
+                // [KKUB/GOLD]
+                currentAddress = '0x5CA9718b857369Ef5D581B20550781A59240E811'
+                amount_t1 = Number(await call_SC(currentAddress, GOLD, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, KKUB, 18)); // Convert to Number
+                const GOLD_KKUB = amount_t1 / amount_t2; // HRC in CARR
+                const KKUB_GOLD = amount_t2 / amount_t1; // Carr in HRC
+
+                hrc_inKKUB = 1 / KKUB_equalHRC; // SWAP KKUB to HRC
+                cmm_inHRC = hrc_cmm; // Swap HRC in to CMM
+                kkub_to_THB = parseFloat(document.getElementById("KUBTHB").textContent) || 0;
+                // DISPLAY ALL
+                document.getElementById("KKUB_HRC").innerHTML = setDecimal((cmm_kkub * cmm_hrc),7,7); // Display result with 4 decimal places
+                document.getElementById("KKUB_CMM").innerHTML = setDecimal(cmm_kkub,7,7); // Display result with 4 decimal places
+                document.getElementById("CMM_KKUB").innerHTML = setDecimal(kkub_cmm,7,7); // VALUE CMM in KKUB
+                document.getElementById("CMM_THB").innerHTML = setDecimal((kkub_cmm * kkub_to_THB),7,7); // VALUE CMM in KKUB
+                document.getElementById("HRC_CMM").innerHTML = setDecimal(hrc_cmm,7,7); // Display result with 4 decimal places
+                document.getElementById("CMM_HRC").innerHTML = setDecimal(cmm_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("HRC_KKUB").innerHTML = setDecimal(hrc_inKKUB,7,7); // Display result with 4 decimal places
+                document.getElementById("HRC_THB").innerHTML = setDecimal((hrc_inKKUB * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("KDAO_HRC").innerHTML =setDecimal( hrc_kdao,7,7); // Display result with 4 decimal places
+                document.getElementById("KDAO_CMM").innerHTML = setDecimal((hrc_kdao / cmm_hrc),7,7); // Display result with 4 decimal places
+                document.getElementById("KDAO_KKUB").innerHTML = setDecimal((hrc_kdao * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("KDAO_THB").innerHTML = setDecimal(((hrc_kdao * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("ELU_HRC").innerHTML = setDecimal(ELU_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("ELU_CMM").innerHTML = setDecimal((ELU_hrc * cmm_inHRC),7,7); // Display result with 4 decimal places
+                document.getElementById("ELU_KKUB").innerHTML = setDecimal((ELU_hrc * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("ELU_THB").innerHTML = setDecimal(((ELU_hrc * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("ORI_HRC").innerHTML = setDecimal(ORI_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("ORI_CMM").innerHTML = setDecimal((ORI_hrc * cmm_inHRC),7,7); // Display result with 4 decimal places
+                document.getElementById("ORI_KKUB").innerHTML = setDecimal((ORI_hrc * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("ORI_THB").innerHTML = setDecimal(((ORI_hrc * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("CARR_HRC").innerHTML = setDecimal(CARR_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("CARR_CMM").innerHTML = setDecimal((CARR_hrc * cmm_inHRC),7,7); // Display result with 4 decimal places
+                document.getElementById("CARR_KKUB").innerHTML = setDecimal((CARR_hrc * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("CARR_THB").innerHTML = setDecimal(((CARR_hrc * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("RORI_HRC").innerHTML = setDecimal(RORI_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("RORI_CMM").innerHTML = setDecimal((RORI_hrc * cmm_inHRC),7,7); // Display result with 4 decimal places
+                document.getElementById("RORI_KKUB").innerHTML = setDecimal((RORI_hrc * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("RORI_THB").innerHTML = setDecimal(((RORI_hrc * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("APPL_HRC").innerHTML = setDecimal(APPL_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("APPL_CMM").innerHTML = setDecimal((APPL_hrc * cmm_inHRC),7,7); // Display result with 4 decimal places
+                document.getElementById("APPL_KKUB").innerHTML = setDecimal((APPL_hrc * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("APPL_THB").innerHTML = setDecimal(((APPL_hrc * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("RELU_HRC").innerHTML = setDecimal(RELU_hrc,7,7); // Display result with 4 decimal places
+                document.getElementById("RELU_CMM").innerHTML = setDecimal((RELU_hrc * cmm_inHRC),7,7); // Display result with 4 decimal places
+                document.getElementById("RELU_KKUB").innerHTML = setDecimal((RELU_hrc * hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("RELU_THB").innerHTML = setDecimal(((RELU_hrc * hrc_inKKUB) * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("GOLD_KKUB").innerHTML = setDecimal((KKUB_GOLD),7,7); // Display result with 4 decimal places
+                document.getElementById("GOLD_HRC").innerHTML = setDecimal((KKUB_GOLD / hrc_inKKUB),7,7); // Display result with 4 decimal places
+                document.getElementById("GOLD_CMM").innerHTML = setDecimal((KKUB_GOLD / kkub_cmm),7,7); // Display result with 4 decimal places
+                document.getElementById("GOLD_THB").innerHTML = setDecimal((KKUB_GOLD * kkub_to_THB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("DM_KKUB").innerHTML = setDecimal(KKUB_DM,7,7); // Display result with 4 decimal places
+                document.getElementById("DM_CMM").innerHTML = setDecimal((KKUB_DM / kkub_cmm),7,7); // Display result with 4 decimal places
+                document.getElementById("DM_THB").innerHTML = setDecimal((KKUB_DM * kkub_to_THB),7,7); // Display result with 4 decimal places
+                document.getElementById("DM_HRC").innerHTML = setDecimal((KKUB_DM / hrc_inKKUB),7,7); // Display result with 4 decimal places
+
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ DMTower
+                const rewardMax1 = Number(await Sc_DmTower.methods.rewardMax().call());
+                const totalFarmed1 = Number(await Sc_DmTower.methods.totalFarmed().call());
+                const totalPower1 = Number(await Sc_DmTower.methods.totalPower().call());
+
+                document.getElementById('dmRewardMax').textContent = setDecimal((rewardMax1 / divider),8,8);
+                document.getElementById('dmTotalFarmed').textContent = setDecimal(totalFarmed1,0,0);
+                document.getElementById('dmTotalPower').textContent = setDecimal(totalPower1,0,0);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ GoldTower
+                const rewardMax2 = Number(await Sc_GoldTower.methods.rewardMax().call());
+                const totalFarmed2 = Number(await Sc_GoldTower.methods.totalFarmed().call());
+                const totalPower2 = Number(await Sc_GoldTower.methods.totalPower().call());
+
+                document.getElementById('goldRewardMax').textContent = setDecimal((rewardMax2 / divider),8,8);
+                document.getElementById('goldTotalFarmed').textContent = setDecimal(totalFarmed2,0,0);
+                document.getElementById('goldTotalPower').textContent = setDecimal(totalPower2,0,0);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ ELU
+                const ELU_rewardMax = Number(await Sc_EluFac.methods.rewardMax().call());
+                const ELU_rewardMultiply = Number(await Sc_EluFac.methods.rewardMultiply().call());
+                const ELU_totalPower = Number(await Sc_EluFac.methods.totalPower().call());
+                document.getElementById('Factory_Geff_MaxReward').textContent = ELU_rewardMax / divider;
+                document.getElementById('Factory_Geff_BlockReward').textContent = setDecimal(((ELU_rewardMultiply / divider) * 5000),8,8);
+                document.getElementById('Fa_GFD').textContent = setDecimal(((ELU_rewardMultiply / divider) * 86400000),4,4);
+                document.getElementById('Factory_Geff_TotalPower').textContent = ELU_totalPower;
+                document.getElementById('Factory_Geff_TotalReward').textContent = setDecimal((((ELU_totalPower * ELU_rewardMultiply) / divider) * 86400),4,4);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ ORI
+                const ORI_rewardMax = Number(await Sc_OriFac.methods.rewardMax().call());
+                const ORI_rewardMultiply = Number(await Sc_OriFac.methods.rewardMultiply().call());
+                const ORI_totalFarm = Number(await Sc_OriFac.methods.totalFarmed().call());
+                const ORI_totalPower = Number(await Sc_OriFac.methods.totalPower().call());
+                document.getElementById('Factory_Pron_MaxReward').textContent = ORI_rewardMax / divider;
+                document.getElementById('Fa_PRD').textContent = setDecimal(((ORI_rewardMultiply / divider) * 86400000),8,8);
+                document.getElementById('Factory_Pron_BlockReward').textContent = setDecimal(((ORI_rewardMultiply / divider) * 5000),8,8);
+                document.getElementById('Factory_Pron_TotalPower').textContent = ORI_totalPower;
+                document.getElementById('Factory_Pron_TotalReward').textContent = setDecimal((((ORI_totalPower * ORI_rewardMultiply) / divider) * 86400),4,4);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ RELU
+                const RELU_rewardMax = Number(await Sc_REluFac.methods.rewardMax().call());
+                const RELU_rewardMultiply = Number(await Sc_REluFac.methods.rewardMultiply().call());
+                const RELU_totalPower = Number(await Sc_REluFac.methods.totalPower().call());
+                document.getElementById('Dungeon_Geff_MaxReward').textContent = RELU_rewardMax / divider;
+                document.getElementById('Dungeon_Geff_BlockReward').textContent = setDecimal(((RELU_rewardMultiply / divider) * 5000),8,8);
+                document.getElementById('D_GFD').textContent = setDecimal(((RELU_rewardMultiply / divider) * 86400000),8,8);
+                document.getElementById('Dungeon_Geff_TotalPower').textContent = RELU_totalPower;
+                document.getElementById('Dungeon_Geff_TotalReward').textContent = setDecimal((((RELU_totalPower * RELU_rewardMultiply) / divider) * 86400),4,4);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ RORI
+                const RORI_rewardMax = Number(await Sc_ROriFac.methods.rewardMax().call());
+                const RORI_rewardMultiply = Number(await Sc_ROriFac.methods.rewardMultiply().call());
+                const RORI_totalPower = Number(await Sc_ROriFac.methods.totalPower().call());
+                document.getElementById('Dungeon_Pron_MaxReward').textContent = RORI_rewardMax / divider;
+                document.getElementById('Dungeon_Pron_BlockReward').textContent = setDecimal(((RORI_rewardMultiply / divider) * 5000),8,8);
+                document.getElementById('D_PRD').textContent = setDecimal(((RORI_rewardMultiply / divider) * 86400000),8,8);
+                document.getElementById('Dungeon_Pron_TotalPower').textContent = RORI_totalPower;
+                document.getElementById('Dungeon_Pron_TotalReward').textContent = setDecimal((((RORI_totalPower * RORI_rewardMultiply) / divider) * 86400),4,4);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ CARR
+                const CARR_rewardMax = Number(await Sc_Carr.methods.rewardMax().call());
+                const CARR_rewardMultiply = Number(await Sc_Carr.methods.rewardMultiply().call());
+                const CARR_totalPower = Number(await Sc_Carr.methods.totalPower().call());
+                document.getElementById('Farm_Geff_MaxReward').textContent = CARR_rewardMax / divider;
+                document.getElementById('F_GFD').textContent = setDecimal(((CARR_rewardMultiply / divider) * 86400000),8,8);
+                document.getElementById('Farm_Geff_BlockReward').textContent = setDecimal(((CARR_rewardMultiply / divider) * 5000),8,8);
+                document.getElementById('Farm_Geff_TotalPower').textContent = CARR_totalPower;
+                document.getElementById('Farm_Geff_TotalReward').textContent = setDecimal((((RELU_totalPower * CARR_rewardMultiply) / divider) * 86400),4,4);
+
+                // เรียกใช้งานเมธอดและแสดงผลสำหรับ APPL
+                const APPL_rewardMax = Number(await Sc_Appl.methods.rewardMax().call());
+                const APPL_rewardMultiply = Number(await Sc_Appl.methods.rewardMultiply().call());
+                const APPL_totalPower = Number(await Sc_Appl.methods.totalPower().call());
+                document.getElementById('Farm_Pron_MaxReward').textContent = APPL_rewardMax / divider;
+                document.getElementById('Farm_Pron_BlockReward').textContent = setDecimal(((APPL_rewardMultiply / divider) * 5000),8,8);
+                document.getElementById('F_PRD').textContent = setDecimal(((APPL_rewardMultiply / divider) * 86400000),8,8);
+                document.getElementById('Farm_Pron_TotalPower').textContent = APPL_totalPower;
+                document.getElementById('Farm_Pron_TotalReward').textContent = setDecimal((((APPL_totalPower * APPL_rewardMultiply) / divider) * 86400),4,4);
+                document.getElementById('status').innerHTML = "Ready";
+
+                kkub_to_hrc = (cmm_kkub * cmm_hrc);
+                /////////////// FARM PRONTERA /////////////////////
+                gasFeeKUB = 0.00147712;
+                gasFeeHRC = gasFeeKUB * kkub_to_hrc;
+                maxReward = 103.68;
+                sellReward = maxReward * APPL_hrc;
+                PNLHRC = sellReward - gasFeeHRC;
+                PNLKUB = PNLHRC / kkub_to_hrc;
+                document.getElementById('F_PRGAS1').innerHTML = gasFeeKUB;
+                document.getElementById('F_PRGAS2').innerHTML = setDecimal(gasFeeHRC,5,5);
+                document.getElementById('F_PRSELL').innerHTML = setDecimal(sellReward,5,5);
+                document.getElementById('F_PRPNL1').innerHTML = setDecimal(PNLHRC,5,5);
+                document.getElementById('F_PRPNL2').innerHTML = setDecimal(PNLKUB,5,5);
+                ////////////////// FARM GEFFEN ////////////////////////////////////
+                gasFeeKUB = 0.00147712;
+                gasFeeHRC = gasFeeKUB * kkub_to_hrc;
+                maxReward = 103.68;
+                sellReward = maxReward * CARR_hrc;
+                PNLHRC = sellReward - gasFeeHRC;
+                PNLKUB = PNLHRC / kkub_to_hrc;
+                document.getElementById('F_GFGAS1').innerHTML = gasFeeKUB;
+                document.getElementById('F_GFGAS2').innerHTML = setDecimal(gasFeeHRC,5,5);
+                document.getElementById('F_GFSELL').innerHTML = setDecimal(sellReward,5,5);
+                document.getElementById('F_GFPNL1').innerHTML = setDecimal(PNLHRC,5,5);
+                document.getElementById('F_GFPNL2').innerHTML = setDecimal(PNLKUB,5,5);
+                ///////////////////// DUNGEON PRONTERA ////////////////////////////////
+                gasFeeKUB = 0.00431157;
+                gasFeeHRC = gasFeeKUB * kkub_to_hrc;
+                maxReward = 120;
+                COST = (100 * APPL_hrc) + (1 * cmm_inHRC);
+                sellReward = maxReward * RORI_hrc;
+                PNLHRC = sellReward - gasFeeHRC;
+                PNLKUB = PNLHRC / kkub_to_hrc;
+
+                document.getElementById('D_PRGAS1').innerHTML = gasFeeKUB;
+                document.getElementById('D_PRCO').innerHTML = setDecimal(COST,5,5);
+                document.getElementById('D_PRGAS2').innerHTML = setDecimal(gasFeeHRC,5,5);
+                document.getElementById('D_PRSELL').innerHTML = setDecimal(sellReward,5,5);
+                document.getElementById('D_PRPNL1').innerHTML = setDecimal(PNLHRC,5,5);
+                document.getElementById('D_PRPNL2').innerHTML = setDecimal(PNLKUB,5,5);
+                ///////////////////// DUNGEON GEFFEN ////////////////////////////////
+                gasFeeKUB = 0.00431157;
+                gasFeeHRC = gasFeeKUB * kkub_to_hrc;
+                maxReward = 150;
+                COST = (100 * CARR_hrc) + (2 * cmm_inHRC);
+                sellReward = maxReward * RELU_hrc;
+                PNLHRC = sellReward - gasFeeHRC;
+                PNLKUB = PNLHRC / kkub_to_hrc;
+
+                document.getElementById('D_GFGAS1').innerHTML = gasFeeKUB;
+                document.getElementById('D_GFCO').innerHTML = setDecimal(COST,5,5);
+                document.getElementById('D_GFGAS2').innerHTML = setDecimal(gasFeeHRC,5,5);
+                document.getElementById('D_GFSELL').innerHTML = setDecimal(sellReward,5,5);
+                document.getElementById('D_GFPNL1').innerHTML = setDecimal(PNLHRC,5,5);
+                document.getElementById('D_GFPNL2').innerHTML = setDecimal(PNLKUB,5,5);
+                ///////////////////// FACTORY PRONTERA ////////////////////////////////
+                gasFeeKUB = 0.002804;
+                gasFeeHRC = gasFeeKUB * kkub_to_hrc;
+                maxReward = 30;
+                COST = (500 * RORI_hrc);
+                sellReward = maxReward * ORI_hrc;
+                PNLHRC = sellReward - gasFeeHRC - COST;
+                PNLKUB = PNLHRC / kkub_to_hrc;
+
+                document.getElementById('Fa_PRGAS1').innerHTML = gasFeeKUB;
+                document.getElementById('Fa_PRCO').innerHTML = setDecimal(COST,5,5);
+                document.getElementById('Fa_PRGAS2').innerHTML = setDecimal(gasFeeHRC,5,5);
+                document.getElementById('Fa_PRSELL').innerHTML = setDecimal(sellReward,5,5);
+                document.getElementById('Fa_PRPNL1').innerHTML = setDecimal(PNLHRC,5,5);
+                document.getElementById('Fa_PRPNL2').innerHTML = setDecimal(PNLKUB,5,5);
+                ///////////////////// FACTORY GEFFEN ////////////////////////////////
+                gasFeeKUB = 0.002804;
+                gasFeeHRC = gasFeeKUB * kkub_to_hrc;
+                maxReward = 75;
+                COST = (500 * RELU_hrc);
+                sellReward = maxReward * ELU_hrc;
+                PNLHRC = sellReward - gasFeeHRC - COST;
+                PNLKUB = PNLHRC / kkub_to_hrc;
+
+                document.getElementById('Fa_GFGAS1').innerHTML = gasFeeKUB;
+                document.getElementById('Fa_GFCO').innerHTML = setDecimal(COST,5,5);
+                document.getElementById('Fa_GFGAS2').innerHTML = setDecimal(gasFeeHRC,5,5);
+                document.getElementById('Fa_GFSELL').innerHTML = setDecimal(sellReward,5,5);
+                document.getElementById('Fa_GFPNL1').innerHTML = setDecimal(PNLHRC,5,5);
+                document.getElementById('Fa_GFPNL2').innerHTML = setDecimal(PNLKUB,5,5);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function call_SC(address, contract, divider) {
+            try {
+                const result = await contract.methods.balanceOf(address).call();
+                // Ensure both operands are BigInt
+                const divisor = BigInt(10) ** BigInt(divider); // Convert 10 to BigInt and raise it to the power of divider, also converted to BigInt
+                return result / divisor; // Now both operands are BigInt, so this should work
+            } catch (error) {
+                console.error("Error calling contract method:", error);
+                throw error; // Rethrow the error for calling function to handle
+            }
+        }
+
+        function calculateProfit() {
+            const power = document.getElementById("power").value;
+            const hour = 3600;
+            const day = hour * 24;
+            const mo = day * 30;
+            const DMrewardMax = parseFloat(document.getElementById("dmRewardMax").textContent.replace(/,/g, '')) || 0;
+            const GoldrewardMax = parseFloat(document.getElementById("goldRewardMax").textContent.replace(/,/g, '')) || 0;
+
+            const dmPower = parseFloat(document.getElementById("dmTotalPower").textContent.replace(/,/g, '')) || 0;
+            const goldPower = parseFloat(document.getElementById("goldTotalPower").textContent.replace(/,/g, '')) || 0;
+
+            const dmPrice = parseFloat(document.getElementById("DM_KKUB").textContent.replace(/,/g, '')) || 0;
+            const goldPrice = parseFloat(document.getElementById("GOLD_KKUB").textContent.replace(/,/g, '')) || 0;
+
+            const Farm_Pron_Reward = parseFloat(document.getElementById("Farm_Pron_BlockReward").textContent.replace(/,/g, '')) || 0;
+            const Farm_Geff_Reward = parseFloat(document.getElementById("Farm_Geff_BlockReward").textContent.replace(/,/g, '')) || 0;
+            const Dungeon_Pron_Reward = parseFloat(document.getElementById("Dungeon_Pron_BlockReward").textContent.replace(/,/g, '')) || 0;
+            const Dungeon_Geff_Reward = parseFloat(document.getElementById("Dungeon_Geff_BlockReward").textContent.replace(/,/g, '')) || 0;
+            const Factory_Pron_Reward = parseFloat(document.getElementById("Factory_Pron_BlockReward").textContent.replace(/,/g, '')) || 0;
+            const Factory_Geff_Reward = parseFloat(document.getElementById("Factory_Geff_BlockReward").textContent.replace(/,/g, '')) || 0;
+
+            const Farm_Pron_MaxReward = parseFloat(document.getElementById("Farm_Pron_MaxReward").textContent.replace(/,/g, '')) || 0;
+            const Farm_Geff_MaxReward = parseFloat(document.getElementById("Farm_Geff_MaxReward").textContent.replace(/,/g, '')) || 0;
+            const Dungeon_Pron_MaxReward = parseFloat(document.getElementById("Dungeon_Pron_MaxReward").textContent.replace(/,/g, '')) || 0;
+            const Dungeon_Geff_MaxReward = parseFloat(document.getElementById("Dungeon_Geff_MaxReward").textContent.replace(/,/g, '')) || 0;
+            const Factory_Pron_MaxReward = parseFloat(document.getElementById("Factory_Pron_MaxReward").textContent.replace(/,/g, '')) || 0;
+            const Factory_Geff_MaxReward = parseFloat(document.getElementById("Factory_Geff_MaxReward").textContent.replace(/,/g, '')) || 0;
+
+            const Hrc_inKKUB = parseFloat(document.getElementById("HRC_KKUB").textContent.replace(/,/g, '')) || 0;
+            const APPL_inHRC = parseFloat(document.getElementById("APPL_HRC").textContent.replace(/,/g, '')) || 0;
+            const CARR_inHRC = parseFloat(document.getElementById("CARR_HRC").textContent.replace(/,/g, '')) || 0;
+            const RORI_inHRC = parseFloat(document.getElementById("RORI_HRC").textContent.replace(/,/g, '')) || 0;
+            const RELU_inHRC = parseFloat(document.getElementById("RELU_HRC").textContent.replace(/,/g, '')) || 0;
+            const ORI_inHRC = parseFloat(document.getElementById("ORI_HRC").textContent.replace(/,/g, '')) || 0;
+            const ELU_inHRC = parseFloat(document.getElementById("ELU_HRC").textContent.replace(/,/g, '')) || 0;
+            console.log(Hrc_inKKUB);
+            console.log(APPL_inHRC);
+            console.log(CARR_inHRC);
+            console.log(RORI_inHRC);
+            console.log(RELU_inHRC);
+            console.log(ORI_inHRC);
+            console.log(ELU_inHRC);
+
+            const FarmPron_Fullin = formatSeconds(Farm_Pron_MaxReward / (power * (Farm_Pron_Reward / 5000)));
+            const FarmGeff_Fullin = formatSeconds(Farm_Geff_MaxReward / (power * (Farm_Geff_Reward / 5000)));
+            const DunPron_Fullin = formatSeconds(Dungeon_Pron_MaxReward / (power * (Dungeon_Pron_Reward / 5000)));
+            const DunGeff_Fullin = formatSeconds(Dungeon_Geff_MaxReward / (power * (Dungeon_Geff_Reward / 5000)));
+            const FacPron_Fullin = formatSeconds(Factory_Pron_MaxReward / (power * (Factory_Pron_Reward / 5000)));
+            const FacGeff_Fullin = formatSeconds(Factory_Geff_MaxReward / (power * (Factory_Geff_Reward / 5000)));
+
+            // Message For Display
+            const Farm_Pron_FMessage = `${FarmPron_Fullin}`;
+            const Farm_Geff_FMessage = `${FarmGeff_Fullin}`;
+            const Dun_Pron_FMessage = `${DunPron_Fullin}`;
+            const Dun_Geff_FMessage = `${DunGeff_Fullin}`;
+            const Fac_Pron_FMessage = `${FacPron_Fullin}`;
+            const Fac_Geff_FMessage = `${FacGeff_Fullin}`;
+
+            document.getElementById("Farm_Pron_FullTime").innerHTML = ` ${Farm_Pron_FMessage}`;
+            document.getElementById("Farm_Geff_FullTime").innerHTML = ` ${Farm_Geff_FMessage}`;
+            document.getElementById("Dungeon_Pron_FullTime").innerHTML = ` ${Dun_Pron_FMessage}`;
+            document.getElementById("Dungeon_Geff_FullTime").innerHTML = ` ${Dun_Geff_FMessage}`;
+            document.getElementById("Factory_Pron_FullTime").innerHTML = ` ${Fac_Pron_FMessage}`;
+            document.getElementById("Factory_Geff_FullTime").innerHTML = ` ${Fac_Geff_FMessage}`;
+            // คำนวณจำนวนรางวัล 
+            const Farm_Pron_Day = (power * (Farm_Pron_Reward / 5000)) * day;
+            const Farm_Geff_Day = (power * (Farm_Geff_Reward / 5000)) * day;
+            const Dun_Pron_Day = (power * (Dungeon_Pron_Reward / 5000)) * day;
+            const Dun_Geff_Day = (power * (Dungeon_Geff_Reward / 5000)) * day;
+            const Fac_Pron_Day = (power * (Factory_Pron_Reward / 5000)) * day;
+            const Fac_Geff_Day = (power * (Factory_Geff_Reward / 5000)) * day;
+
+
+            const Gain_APPL_inHRC = APPL_inHRC * Farm_Pron_Day;
+            const Gain_CARR_inHRC = CARR_inHRC * Farm_Geff_Day;
+            const Gain_RORI_inHRC = RORI_inHRC * Dun_Pron_Day;
+            const Gain_RELU_inHRC = RELU_inHRC * Dun_Geff_Day;
+            const Gain_ORI_inHRC = ORI_inHRC * Fac_Pron_Day;
+            const Gain_ELU_inHRC = ELU_inHRC * Fac_Geff_Day;
+
+            const Gain_APPL_inKKUB = Gain_APPL_inHRC * Hrc_inKKUB;
+            const Gain_CARR_inKKUB = Gain_CARR_inHRC * Hrc_inKKUB;
+            const Gain_RORI_inKKUB = Gain_RORI_inHRC * Hrc_inKKUB;
+            const Gain_RELU_inKKUB = Gain_RELU_inHRC * Hrc_inKKUB;
+            const Gain_ORI_inKKUB = Gain_ORI_inHRC * Hrc_inKKUB;
+            const Gain_ELU_inKKUB = Gain_ELU_inHRC * Hrc_inKKUB;
+            // Message For Display
+            const Farm_Pron_Message = `${Farm_Pron_Day} APPL/Day <br>(${Gain_APPL_inHRC} HRC)<br>(${Gain_APPL_inKKUB} KUB)`;
+            const Farm_Geff_Message = `${Farm_Geff_Day} CARR/Day <br>(${Gain_CARR_inHRC} HRC)<br>(${Gain_CARR_inKKUB} KUB)`;
+            const Dun_Pron_Message = `${Dun_Pron_Day} RORI/Day <br>(${Gain_RORI_inHRC} HRC)<br>(${Gain_RORI_inKKUB} KUB)`;
+            const Dun_Geff_Message = `${Dun_Geff_Day} RELU/Day <br>(${Gain_RELU_inHRC} HRC)<br>(${Gain_RELU_inKKUB} KUB)`;
+            const Fac_Pron_Message = `${Fac_Pron_Day} ORI/Day <br>(${Gain_ORI_inHRC} HRC)<br>(${Gain_ORI_inKKUB} KUB)`;
+            const Fac_Geff_Message = `${Fac_Geff_Day} ELU/Day <br>(${Gain_ELU_inHRC} HRC)<br>(${Gain_ELU_inKKUB} KUB)`;
+
+            document.getElementById("Farm_Pron_GainDay").innerHTML = ` ${Farm_Pron_Message}`;
+            document.getElementById("Farm_Geff_GainDay").innerHTML = ` ${Farm_Geff_Message}`;
+            document.getElementById("Dungeon_Pron_GainDay").innerHTML = ` ${Dun_Pron_Message}`;
+            document.getElementById("Dungeon_Geff_GainDay").innerHTML = ` ${Dun_Geff_Message}`;
+            document.getElementById("Factory_Pron_GainDay").innerHTML = ` ${Fac_Pron_Message}`;
+            document.getElementById("Factory_Geff_GainDay").innerHTML = ` ${Fac_Geff_Message}`;
+
+
+            // คำนวณจำนวน DM / GOLD
+
+            const DMBlock = (((5 * DMrewardMax) * power) / dmPower);
+            const GOLDBlock = (((5 * GoldrewardMax) * power) / goldPower);
+            const DMHour = (((hour * DMrewardMax) * power) / dmPower);
+            const GOLDHour = (((hour * GoldrewardMax) * power) / goldPower);
+            const DMDay = (((day * DMrewardMax) * power) / dmPower);
+            const GOLDDay = (((day * GoldrewardMax) * power) / goldPower);
+            const DMMO = (((mo * DMrewardMax) * power) / dmPower);
+            const GOLDMO = (((mo * GoldrewardMax) * power) / goldPower);
+
+            // คำนวนในมูลค่า KUB
+            const DM_Price_Block = DMBlock * dmPrice;
+            const DM_Price_Hour = DMHour * dmPrice;
+            const DM_Price_Day = DMDay * dmPrice;
+            const DM_Price_MO = DMMO * dmPrice;
+            const GOLD_Price_Block = GOLDBlock * goldPrice;
+            const GOLD_Price_Hour = GOLDHour * goldPrice;
+            const GOLD_Price_Day = GOLDDay * goldPrice;
+            const GOLD_Price_MO = GOLDMO * goldPrice;
+            // Message For Display
+            const DM_Block_Message = `${setDecimal(DMBlock,16,16)} DM/block , ~${setDecimal(DM_Price_Block,10,10)} KUB`;
+            const DM_Hour_Message = `${setDecimal(DMHour,10,10)} DM/Hour , ~${setDecimal(DM_Price_Hour,10,10)} KUB`;
+            const DM_Day_Message = `${setDecimal(DMDay,10,10)} DM/Day , ~${setDecimal(DM_Price_Day,10,10)} KUB`;
+            const DM_MO_Message = `${setDecimal(DMMO,10,10)} DM/MO , ~${setDecimal(DM_Price_MO,10,10)} KUB`;
+            const GOLD_Block_Message = `${setDecimal(GOLDBlock,16,16)} GOLD/block , ~${setDecimal(GOLD_Price_Block,10,10)} KUB`;
+            const GOLD_Hour_Message = `${setDecimal(GOLDHour,10,10)} GOLD/Hour , ~${setDecimal(GOLD_Price_Hour,10,10)} KUB`;
+            const GOLD_Day_Message = `${setDecimal(GOLDDay,10,10)} GOLD/Day , ~${setDecimal(GOLD_Price_Day,10,10)} KUB`;
+            const GOLD_MO_Message = `${setDecimal(GOLDMO,10,10)} GOLD/MO , ~${setDecimal(GOLD_Price_MO,10,10)} KUB`;
+
+            document.getElementById("DMBlock").innerHTML = ` (${DM_Block_Message})`;
+            document.getElementById("DMHour").innerHTML = ` (${DM_Hour_Message})`;
+            document.getElementById("DMDay").innerHTML = ` (${DM_Day_Message})`;
+            document.getElementById("DMMO").innerHTML = ` (${DM_MO_Message})`;
+            document.getElementById("GOLDBlock").innerHTML = ` (${GOLD_Block_Message})`;
+            document.getElementById("GOLDHour").innerHTML = ` (${GOLD_Hour_Message})`;
+            document.getElementById("GOLDDay").innerHTML = ` (${GOLD_Day_Message})`;
+            document.getElementById("GOLDMO").innerHTML = ` (${GOLD_MO_Message})`;
+
+
+        }
+        function formatSeconds(seconds) {
+            let days = Math.floor(seconds / (3600 * 24));
+            let hours = Math.floor((seconds % (3600 * 24)) / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let remainingSeconds = seconds % 60;
+
+            let result = "";
+            if (days > 0) {
+                result += days + "d ";
+            }
+            if (hours > 0) {
+                result += hours + "h ";
+            }
+            if (minutes > 0) {
+                result += minutes + "m ";
+            }
+            if (remainingSeconds > 0 || result === "") {
+                result += (remainingSeconds).toFixed(0) + "s";
+            }
+
+            return result.trim();
+        } 
+        function setDecimal(number,min,max){
+            return number.toLocaleString(undefined, { minimumFractionDigits: min },{ maximumFractionDigits: max});
+        }
+    </script>
+</body>
+
+</html>
