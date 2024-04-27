@@ -387,7 +387,7 @@ function setUSD(){
                     document.getElementById('Diamon_SWAP1').innerText = ` ${parseFloat(pool.attributes.quote_token_price_base_token).toLocaleString(undefined, { minimumFractionDigits: 4 })}`;
                     document.getElementById('Diamon_SWAP2').innerText = ` ${parseFloat(pool.attributes.base_token_price_quote_token).toLocaleString(undefined, { minimumFractionDigits: 8 })}`;
                     document.getElementById('Diamon_Liquidity').innerText = ` ${parseFloat(pool.attributes.reserve_in_usd).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-                    document.getElementById("Diamon_TAOUSD").innerText = ` ${parseFloat(pool.attributes.token_price_usd*exchangeRate).toFixed(8)}`;
+                    document.getElementById("Diamon_TAOUSD").innerText = ` ${parseFloat(pool.attributes.token_price_usd)*exchangeRate.toFixed(8)}`;
                 }
                 if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
                     document.getElementById('Baryon_TAOUSD').innerText = ` ${parseFloat(pool.attributes.token_price_usd).toFixed(8)}`;
@@ -396,7 +396,7 @@ function setUSD(){
                     document.getElementById('Baryon_SWAP1').innerText = ` ${parseFloat(pool.attributes.quote_token_price_base_token).toLocaleString(undefined, { minimumFractionDigits: 4 })}`;
                     document.getElementById('Baryon_SWAP2').innerText = ` ${parseFloat(pool.attributes.base_token_price_quote_token).toLocaleString(undefined, { minimumFractionDigits: 8 })}`;
                     document.getElementById('Baryon_Liquidity').innerText = ` ${parseFloat(pool.attributes.reserve_in_usd).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-                    document.getElementById("Baryon_TAOTHB").innerText = ` ${parseFloat(pool.attributes.token_price_usd*exchangeRate).toFixed(8)}`;
+                    document.getElementById("Baryon_TAOTHB").innerText = ` ${parseFloat(pool.attributes.token_price_usd)*exchangeRate.toFixed(8)}`;
                 }
             });
         })
