@@ -2041,7 +2041,6 @@ table2Data = convertColumnsToString(table2Data, [0, 0]);
 function mergeData(sheet1, sheet2) {
   var result = XLSX.utils.book_new();
   XLSX.utils.sheet_add_json(result, XLSX.utils.sheet_to_json(sheet1), { origin: -1 });
-  XLSX.utils.sheet_add_json(result, XLSX.utils.sheet_to_json(sheet2), { origin: -1 });
   return result;
 }
 
