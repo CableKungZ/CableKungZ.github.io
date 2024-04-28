@@ -1503,8 +1503,8 @@ async function call_SC(address, contract, divider) {
 
               document.getElementById("stakeJBCCMJ_W").innerHTML = stakeJBCCMJ_W.toLocaleString(undefined,{maximumFractionDigits:3});
               document.getElementById("stakeJBCJUSDT_W").innerHTML = stakeJBCJUSDT_W.toLocaleString(undefined,{maximumFractionDigits:3});
-    var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-    totalNew = parseFloat(stakeJBCJUSDT_W) + parseFloat(stakeCMJ_W) + parseFloat(stakeJBCCMJ_W) + networth_CMJ;
+              var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+              totalNew = parseFloat(stakeJBCJUSDT_W) + parseFloat(stakeCMJ_W) + parseFloat(stakeJBCCMJ_W) + parseFloat(networth_CMJ);
               updateWorth(totalNew);
               }catch (error){
           console.error('Error:', error);
@@ -1702,10 +1702,10 @@ async function collectGearRewards(){
 
   try {
     let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
-    stakeJTAO = stakeJTAO[0]/10**18
+    stakeJTAO = stakeJTAO[0]/10**18;
     var stakeValue = parseFloat(calculateWorth(stakeJTAO,Jtao_to_CMJ));
     document.getElementById("staketokenMHZ").innerHTML = (stakeJTAO).toLocaleString(undefined,{maximumFractionDigits:2});
-    document.getElementById("TDM_StakeValue").innerHTML = stakeValue.toLocaleString(undefined,{maximumFractionDigits:2});
+    document.getElementById("TDM_StakeValue").innerHTML = (stakeValue).toLocaleString(undefined,{maximumFractionDigits:2});
     penndingGear = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
     document.getElementById("pendingMHZ").innerHTML = (penndingGear).toLocaleString(undefined,{maximumFractionDigits:2});
       for (let i = 0; i <= 299; i++){
