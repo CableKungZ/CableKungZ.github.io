@@ -131,6 +131,7 @@
                     width: 100%;
                     border-collapse: collapse;
                     margin-top: 10px;
+                    font-size: 14px;
                 }
         
                 th, td {
@@ -248,11 +249,26 @@
 </head>
 <body>
     <header>
+          <!-- POPUP -->
+    <div id="dpopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
+      <div style="background-color: white; padding: 20px;">
+          <h2>Choose Donation Method</h2>
+          <p>Thank your for a coffee !!</p>
+          <p>Metamask Wallet : 0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1 <img src="https://cdn-icons-png.freepik.com/512/54/54853.png?ga=GA1.1.1389809719.1710478416&" style="margin:auto;padding:auto;" width="25px" alt="Copy Icon" class="copy-icon" onclick="copyAddress('0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1')"></p>
+          <p>Binance UserID : 132867186 <img src="https://cdn-icons-png.freepik.com/512/54/54853.png?ga=GA1.1.1389809719.1710478416&" style="margin:auto;padding:auto;" width="25px" alt="Copy Icon" class="copy-icon" onclick="copyAddress('132867186')"></p>
+          <br><button onclick='closedPopup("dpopup")'>Close</button>
+
+            </div>
+          </div>
+          
+      </div>
+  </div>
         <div class="logo">
             <img src="https://img5.pic.in.th/file/secure-sv1/DaoBuddy.th.png" alt="Company Logo" width="25px">
         </div>
         <nav>
             <ul>
+                <li><a onclick='showdPopup("dpopup")'>Donations</a></li>
                 <li><a onclick="toggleCards('dashboard')">Dashboard</a></li>
                 <li><a onclick="toggleCards('priceboard')">Price Board</a></li>
                 <li class="dropdown">
@@ -260,13 +276,12 @@
                     <div class="dropdown-content">
                         <a href="https://daobuddy.xyz/index" target="_blank">CommuDao</a>
                         <a href="https://daobuddy.xyz/TaoMeme" target="_blank">TaoMeme Status</a>
-                        <a href="#">Tool 3</a>
                     </div>
                 </li>
             </ul>
         </nav>
     </header>
-    <div class="main-container" id="dashboard" >
+    <div class="c main-container" id="dashboard" style="display: block;">
         <div class="center">
             <!-- ข้อความและ input text -->
             <label for="wallet_address" class="center">Enter Wallet Address:</label>
@@ -278,44 +293,44 @@
             <div class="overview-item">
                 <h2>Total Networth</h2>
                 <div class="overview-details">
-                    <div class="big-value">10,000 USD</div>
+                    <div class="big-value"><span id="nw_usd">0</span> USD</div>
                     <div class="small-values">
-                        <div>~5,000 JBC</div>
-                        <div>~3,000 CMJ</div>
-                        <div>~2,000 THB</div>
+                        <div>~<span id="nw_jbc">0</span> JBC</div>
+                        <div>~<span id="nw_cmj">0</span> CMJ</div>
+                        <div>~<span id="nw_thb">0</span> THB</div>
                     </div>
                 </div>
             </div>
             <div class="overview-item">
                 <h2>Pending Reward</h2>
                 <div class="overview-details">
-                    <div class="big-value">2,000 USD</div>
+                    <div class="big-value"><span id="pending_usd">0</span> USD</div>
                     <div class="small-values">
-                        <div>~1,000 JBC</div>
-                        <div>~500 CMJ</div>
-                        <div>~500 THB</div>
+                        <div>~<span id="pending_jbc">0</span> JBC</div>
+                        <div>~<span id="pending_cmj">0</span> CMJ</div>
+                        <div>~<span id="pending_thb">0</span> THB</div>
                     </div>
                 </div>
             </div>
             <div class="overview-item">
                 <h2>Wallet Worth</h2>
                 <div class="overview-details">
-                    <div class="big-value">8,000 USD</div>
+                    <div class="big-value"><span id="wallet_usd">0</span> USD</div>
                     <div class="small-values">
-                        <div>~4,000 JBC</div>
-                        <div>~2,000 CMJ</div>
-                        <div>~2,000 THB</div>
+                        <div>~<span id="wallet_jbc">0</span> JBC</div>
+                        <div>~<span id="wallet_cmj">0</span> CMJ</div>
+                        <div>~<span id="wallet_thb">0</span> THB</div>
                     </div>
                 </div>
             </div>
             <div class="overview-item">
                 <h2>Staking Worth</h2>
                 <div class="overview-details">
-                    <div class="big-value">$6,000</div>
+                    <div class="big-value"><span id="farm_usd">0</span> USD</div>
                     <div class="small-values">
-                        <div>JBC: $3,000</div>
-                        <div>CMJ: $2,000</div>
-                        <div>THB: $1,000</div>
+                        <div>~<span id="farm_jbc">0</span> JBC</div>
+                        <div>~<span id="farm_cmj">0</span> CMJ</div>
+                        <div>~<span id="farm_thb">0</span> THB</div>
                     </div>
                 </div>
             </div>
@@ -325,6 +340,7 @@
                 <!-- เริ่มต้นแสดงข้อมูล Asset in Wallet -->
                 <div class="overview-item">
                     <h2>Asset in Wallet</h2>
+                    <h6>Display only asset value greater than 1 CMJ</h6>
                     <table id="walletAsset">
                         <tr>
                             <th>Name</th>
@@ -333,93 +349,19 @@
                             <th>Value</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>4,000,000</td>
-                            <td>0.003 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>1,000,000</td>
-                            <td>1.000 CMJ</td>
-                            <td>1,000,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>5,000,000,000</td>
-                            <td>0.000004 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>5,000,000,000</td>
-                            <td>0.000004 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>5,000,000,000</td>
-                            <td>0.000004 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>5,000,000,000</td>
-                            <td>0.000004 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>5,000,000,000</td>
-                            <td>0.000004 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
-                        <tr>
-                            <td>MOCK</td>
-                            <td>5,000,000,000</td>
-                            <td>0.000004 CMJ</td>
-                            <td>12,000</td>
-                            <td>CMJ</td>
-                        </tr>
                     </table>
                 </div>
                 <!-- สิ้นสุดแสดงข้อมูล Asset in Wallet -->
-    
                 <!-- เริ่มต้นแสดงข้อมูล Asset in farms/pool/staking -->
                 <div class="overview-item">
-                    <h2>Asset in farms/pool/staking</h2>
-                    <table>
+                    <h2>Asset in Farms/Pool/Staking <span id="Status"></span></h2>
+                    <h6>Display only asset balance mininmum 1 </h6>
+                    <table id="farmingAsset">
                         <tr>
                             <th>Farm/Pool/Staking</th>
                             <th>Balance</th>
                             <th>Value</th>
                             <th>Reward</th>
-                        </tr>
-                        <tr>
-                            <td>TaoDum</td>
-                            <td>2,000,000</td>
-                            <td>8,000 USD</td>
-                            <td>4,000,000 Gear <br>(~ 50 USD)</td>
-                        </tr>
-                        <tr>
-                            <td>TaoDum</td>
-                            <td>2,000,000</td>
-                            <td>8,000 USD</td>
-                            <td>4,000,000 Gear <br>(~ 50 USD)</td>
-                        </tr>
-                        <tr>
-                            <td>TaoDum</td>
-                            <td>4,000,000</td>
-                            <td>8,000 USD</td>
-                            <td>4,000,000,000 Gear <br>(~ 50 USD)</td>
                         </tr>
                     </table>
                 </div>
@@ -427,7 +369,7 @@
             </section>
             <section class="overview-item">
                 <h1>Dungeon</h1>
-                <table>
+                <table id="dungeon">
                     <tr>
                         <th>Dungeon Name</th>
                         <th>Status</th>
@@ -436,44 +378,14 @@
                         <th>Pending</th>
                         <th>End At</th>
                     </tr>
-                    <tr>
-                        <td>CopperMine</td>
-                        <td>Out of Gas</td>
-                        <td>12,000 CmPow</td>
-                        <td>103,680 Cu/Day</td>
-                        <td>4,320 Cu<br> (~ USD)</td>
-                        <td>28/4/2567 16:57:59</td>
-                    </tr>
-                    <tr>
-                        <td>JasperCave</td>
-                        <td>On Staking</td>
-                        <td>48,000 CmPow</td>
-                        <td>4.1472 Jasp/Day</td>
-                        <td>2.1410 Jasp<br> (~ USD)</td>
-                        <td>28/4/2567 16:57:59</td>
-                    </tr>
-                    <tr>
-                        <td><del>DaemonWorld</del></td>
-                        <td>No MainChar</td>
-                        <td>* CmPow</td>
-                        <td>* Jasp/Day</td>
-                        <td>* Jasp</td>
-                        <td>*</td>
-                    </tr>
-                    <tr>
-                        <td>CrypticCogs</td>
-                        <td>On Staking</td>
-                        <td>488,000 CmPow</td>
-                        <td>40,000 EE/Day</td>
-                        <td>28,000 EE<br> (~ USD)</td>
-                        <td>28/4/2567 16:57:59</td>
-                    </tr>
                 </table>
             </section>
             <h1>Tx History</h1>
             <div id="totalRedeem" style="display:flex; ">Total Spent:</div>
-            <h4>Click here to download table.xlsx</h4>
-            <table id="purshaseTableHeader">
+            <h4 onclick="downloadExcel()">Click here to download table.xlsx</h4>
+
+            <table id="purchaseTableBody">
+                
                 <tr>
                     <th>TxHash</th>
                     <th>Item Name</th>
@@ -482,46 +394,11 @@
                     <th>Price</th>
                     <th>Symbol</th>
                 </tr>
-            </table>
-            <table id="purchaseTableBody">
                 
-                
-                <tr>
-                    <td style="font-size:10px;">https://exp-l1.jibchain.net/tx/0xae67554ecdee22f5e3c84aa80a1cb15f38be12d7e5d330107f1284fde18b3220</td>
-                    <td>CommuDAO NFT</td>
-                    <td>210008600250</td>
-                    <td>Buy/Roll</td>
-                    <td>3</td>
-                    <td>JUSDT</td>
-                </tr>
-                <tr>
-                    <td style="font-size:10px;">https://exp-l1.jibchain.net/tx/0x694a1a3c627ffdf7b31be8ff04b72399f862093953d0dcd1e7b474fd746177a5</td>
-                    <td>CommuDAO NFT</td>
-                    <td>130026300500</td>
-                    <td>Buy/Roll</td>
-                    <td>15</td>
-                    <td>JUSDT</td>
-                </tr>
-                <tr>
-                    <td style="font-size:10px;">https://exp-l1.jibchain.net/tx/0xba2a8cff1149508260bb7490a21659a9576fcc1c5488cfe8f38a5244a4cc5468</td>
-                    <td>Naruta NFT</td>
-                    <td>590000145555</td>
-                    <td>Redeem</td>
-                    <td>22,222</td>
-                    <td>TDM-II</td>
-                </tr>
-                <tr>
-                    <td style="font-size:10px;">https://exp-l1.jibchain.net/tx/0xba2a8cff1149508260bb7490a21659a9576fcc1c5488cfe8f38a5244a4cc5468</td>
-                    <td>Naruta NFT</td>
-                    <td>590000145555</td>
-                    <td>Redeem</td>
-                    <td>999,999,999</td>
-                    <td>GEAR</td>
-                </tr>
             </table>
         </div>
     </div>
-    <div class="main-container" id="priceboard">
+    <div class="c main-container" id="priceboard" style="display: none;">
         <div class="token-price">
             <div id="countdown">Countdown</div>
             <div id="updatedMessage" style="display:none;">Updated</div>
@@ -603,6 +480,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
     <script>
+        function formatTimestamp(timestamp) {
+            timestamp = parseInt(timestamp*1000);
+            const date = new Date(timestamp);
+            const day = ('0' + date.getDate()).slice(-2);
+            const month = ('0' + (date.getMonth() + 1)).slice(-2);
+            const year = date.getFullYear();
+            const hours = ('0' + date.getHours()).slice(-2);
+            const minutes = ('0' + date.getMinutes()).slice(-2);
+            
+            // ตรวจสอบว่ามีค่าที่เป็น NaN หรือไม่ และแทนที่ด้วยข้อความ "00"
+            const formattedDay = isNaN(day) ? '00' : day;
+            const formattedMonth = isNaN(month) ? '00' : month;
+            const formattedYear = isNaN(year) ? '0000' : year;
+            const formattedHours = isNaN(hours) ? '00' : hours;
+            const formattedMinutes = isNaN(minutes) ? '00' : minutes;
+            
+            return `${formattedDay}/${formattedMonth}/${formattedYear} ${formattedHours}:${formattedMinutes}`;
+        }
+        
+        
         function fetchTransferHistory() {
             var walletAddress = document.getElementById("wallet_address").value;
             var token_address = '0x0E2610730A3c42fd721B289BEe092D9AD1C76890';
@@ -664,56 +561,30 @@
 
             return Promise.all([transfers_from, transfers_to]); 
         }
-    </script>   
-<script>
-    // Your existing script for updating prices
-  
-    function updateData(data) {
-      document.getElementById('updatedMessage').style.display = 'block';
-      setTimeout(function() {
-        document.getElementById('updatedMessage').style.display = 'none';
-      }, 200); 
-    }
 
-    var countdownElement = document.getElementById('countdown');
-    var countdownTime = 300; 
-     
-    function updateCountdown() {
-      countdownElement.textContent = 'Price refreshing in ' + countdownTime + ' seconds';
-      countdownTime--;
-      if (countdownTime < 0) {
-        main();
-        countdownTime = 300; // Reset the countdown time
-      }
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  
-  
-  
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var allCards = document.querySelectorAll('.dashboard,.priceboard');
-      for (var i = 0; i < allCards.length; i++) {
-        allCards[i].style.display = 'none';
-      }
-    });
-  
-    function toggleCards(showType) {
-      // Hide all cards first
-      var allCards = document.querySelectorAll('.dashboard,.priceboard');
-      for (var i = 0; i < allCards.length; i++) {
-        allCards[i].style.display = 'none';
-      }
-  
-      var showCards = document.querySelectorAll('.' + showType);
-      for (var i = 0; i < showCards.length; i++) {
-        showCards[i].style.display = 'block';
-      }
-    }
-  </script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var allCards = document.querySelectorAll('.c');
+            for (var i = 0; i < allCards.length; i++) {
+                if (allCards[i].id !== 'dashboard') {
+                    allCards[i].style.display = 'none';
+                }
+            }
+        });
+        
+        function toggleCards(showType) {
+            // Hide all cards first
+            var allCards = document.querySelectorAll('.c');
+            for (var i = 0; i < allCards.length; i++) {
+                allCards[i].style.display = 'none';
+            }
+    
+            // Show the selected card
+            var showCard = document.getElementById(showType);
+            if (showCard) {
+                showCard.style.display = 'block';
+            }
+        }
+    </script>
   <script>
     function setUSD(){
     const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
@@ -765,7 +636,7 @@
         return new web3.eth.Contract(abi, contractAddress);
       } catch (error) {
         console.error('Error loading contract:', error);
-        alert("คุณถูก Block จาก API โปรดกลับมาใช้งานในอีก 1 ชั่วโมง")
+        alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง")
       }
     }
   
@@ -1235,7 +1106,7 @@
       resetPurchaseTable()
       startHistory()
       THB_to_USD = parseFloat(document.getElementById("THB").textContent) || 36.5;
-      console.log("THB"+THB_to_USD);
+      console.log("THB / USD : "+THB_to_USD);
       CMJ_to_JBC = parseFloat(document.getElementById("Sell_CMJinJBC").textContent) || 0;
       JBC_to_CMJ = parseFloat(document.getElementById("Sell_JBCinCMJ").textContent) || 0;
       CMJ_to_USD = parseFloat(document.getElementById("Sell_CMJinUSD").textContent) || 0;
@@ -1385,15 +1256,60 @@
             var amountCell = newRow.insertCell(1);
             var priceCell = newRow.insertCell(2);
             var valueCell = newRow.insertCell(3);
+            var worthCell = newRow.insertCell(4);
         
             // กำหนดข้อมูลให้กับแต่ละ cell
             nameCell.innerHTML = tokenName;
-            amountCell.innerHTML = tokenAmount.toLocaleString(undefined,{maximumFractionDigits:3});
-            priceCell.innerHTML = tokenPrice.toLocaleString(undefined,{maximumFractionDigits:3});
+            amountCell.innerHTML = (parseFloat(tokenAmount)).toLocaleString(undefined,{maximumFractionDigits:3});
+            priceCell.innerHTML = tokenPrice.toLocaleString(undefined,{maximumFractionDigits:8})+' CMJ';
             valueCell.innerHTML = tokenValue.toLocaleString(undefined,{maximumFractionDigits:3});
+            worthCell.innerHTML = 'CMJ';
             console.log("Add : token Name",tokenName," amount : ",tokenAmount,"\tprice:",tokenPrice,"\tValue:",tokenValue);
         }
-        }
+    }
+// เก็บข้อมูลไว้ในอาร์เรย์
+        var tokensData = [
+            { name: "JBC", amount: jbcBalWei, price: JBC_to_CMJ },
+            { name: "CMJ", amount: cmjBal, price: 1 },
+            { name: "MEOW", amount: MeowBal, price: Meow_to_CMJ },
+            { name: "WJBC", amount: WJBCBal, price: JBC_to_CMJ },
+            { name: "WJBC(JIB)", amount: WJBCJIBBal, price: JBC_to_CMJ },
+            { name: "JTAO", amount: JtaoBal, price: Jtao_to_CMJ },
+            { name: "WOOD", amount: WoodBal, price: Wood_to_CMJ },
+            { name: "TUNA", amount: TunaBal, price: Tuna_to_CMJ },
+            { name: "MICE", amount: MiceBal, price: Mice_to_CMJ },
+            { name: "CU", amount: CuBal, price: Cu_to_CMJ },
+            { name: "JASP", amount: JaspBal, price: Jasper_to_CMJ },
+            { name: "OS", amount: OsBal, price: Os_to_CMJ },
+            { name: "JDAO", amount: JdaoBal, price: Jdao_to_CMJ },
+            { name: "MT", amount: MtBal, price: Mt_to_CMJ },
+            { name: "VABAG", amount: VabagBal, price: ((1/3)*USD_to_CMJ) },
+            { name: "BBQ", amount: BbqBal, price: Bbq_to_CMJ },
+            { name: "PZA", amount: PzaBal, price: Pza_to_CMJ },
+            { name: "CTUNA", amount: CtunaBal, price: Ctuna_to_CMJ },
+            { name: "SX31", amount: Sx31Bal, price: Sx31_to_CMJ },
+            { name: "SILVER", amount: SilBal, price: Silver_to_CMJ },
+            { name: "GOLD", amount: GoldBal, price: Gold_to_CMJ },
+            { name: "PLATINUM", amount: PlatBal, price: Platinum_to_CMJ },
+            { name: "SWAR", amount: SwarBal, price: Swar_to_CMJ },
+            { name: "ANGB", amount: AngbBal, price: Angb_to_CMJ },
+            { name: "GEAR", amount: GearBal, price: ((2/30000000)*USD_to_CMJ) },
+            { name: "II", amount: IIBal, price: II_to_CMJ },
+            { name: "EE", amount: EEBal, price: EE_to_CMJ },
+            { name: "JUSDT", amount: jusdtBal, price: USD_to_CMJ }
+        ];
+
+
+        // จัดเรียงอาร์เรย์ตาม tokenValue จากมากไปน้อย
+        tokensData.sort(function(a, b) {
+            return calculateWorth(b.amount, b.price) - calculateWorth(a.amount, a.price);
+        });
+
+        // วนลูปเพื่อแทรกรายการลงในตาราง
+        tokensData.forEach(function(token) {
+            addToTable(token.name, token.amount, token.price);
+        });
+
 
         // Display Worth and total worth
         CMJtotalworth = 0;
@@ -1411,7 +1327,7 @@
         worth.push(calculateWorth(JaspBal, Jasper_to_CMJ));
         worth.push(calculateWorth(OsBal, Os_to_CMJ));
         worth.push(calculateWorth(JdaoBal, Jdao_to_CMJ));
-        worth.push(calculateWorth(MtBal, MtBal));
+        worth.push(calculateWorth(MtBal, Mt_to_CMJ));
         worth.push(calculateWorth(VabagBal, ((1/3)*USD_to_CMJ)));
         worth.push(calculateWorth(BbqBal, Bbq_to_CMJ));
         worth.push(calculateWorth(PzaBal, Pza_to_CMJ));
@@ -1426,351 +1342,317 @@
         worth.push(calculateWorth(IIBal, II_to_CMJ));
         worth.push(calculateWorth(EEBal, EE_to_CMJ));
         worth.push(calculateWorth(jusdtBal, USD_to_CMJ));
-        addToTable("JBC",jbcBalWei,JBC_to_CMJ);
-        addToTable("CMJ",cmjBal,1);
-  
-      function updateWorth(newNetworth){
-        console.log("Call function Update Worth")
-        //('networth_CMJ',newNetworth);
-        //('networth_JBC',(newNetworth*JBC_to_CMJ));
-        //('networth_USD',(newNetworth*CMJ_to_USD));
-        //('networth_THB',(newNetworth*CMJ_to_USD*THB_to_USD));
+        
+        tokenWorth = 0;
+        for (let i = 0; i < worth.length; i++) {
+            tokenWorth += parseFloat(worth[i]);
       }
-      
+      addWalletWorth(tokenWorth);
 
-    
-        async function processCUMData() {
-          console.log('DUNGEON CUPPER');
-          try {
-            const block = await web3.eth.getBlock('latest');
-            const currentTimeStamp = block.timestamp;
-            console.log('Current timestamp:', currentTimeStamp);
-        
-            const CUM_pending = await CUContract.methods.calculateRewards(walletAddress).call() / (10**18);
-            document.getElementById("CUM_Pending").innerHTML = parseFloat(CUM_pending).toLocaleString(undefined, {maximumFractionDigits: 7});
-        
-            const CUdata = await CUContract.methods.nftEquip(walletAddress).call();
-            const date = new Date((parseFloat(CUdata[4]) + 86400) * 1000); // เพิ่มเวลาในหนึ่งวัน (86400 วินาที) โดยไม่ต้องคูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
-            const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
-            document.getElementById("CUM_End").innerHTML = formattedDate;
-            console.log(date);
-            console.log((parseFloat(CUdata[4]) + 86400) * 1000); // แสดงผลลัพธ์ที่ถูกต้องหลังจากการคำนวณ
-            console.log(CUdata);
-            
-            if (parseFloat(CUdata[0]) == 0){
-              document.getElementById("CUM_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
-            }
-            else if (parseFloat(CUdata[4]) + 3600 < currentTimeStamp) {
-              document.getElementById("CUM_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
-            } else if (parseFloat(CUdata[4]) + 3600 > currentTimeStamp) {
-              document.getElementById("CUM_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
-            }
-              document.getElementById("CUM_Pow").innerHTML = CUdata[3].toLocaleString(undefined,{maximumFractionDigits:0});
-              document.getElementById("CUM_reward").innerHTML = parseFloat(CUdata[3]*0.36*24).toLocaleString(undefined,{maximumFractionDigits:2});
-            } catch (error) {
-            console.error('Error:', error);
-          }
-        }
-  
+
         async function getFarming(){
           console.log('Get Farming Details');
           try{
             const Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
             const Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
-            console.log(Info1);
-            console.log(Pending1);
-                  document.getElementById("stakeJBCCMJ").innerHTML = parseFloat(Info1[0]/10**18).toLocaleString();
-                  document.getElementById("pendingJBCCMJ").innerHTML = (parseFloat(Pending1)/10**18).toLocaleString();
-                  stakeJBCCMJ_W = parseFloat(Info1[0]/10**18)*16.88;
+            console.log(Info1)
             const Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
             const Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
-                  document.getElementById("stakeCMJ").innerHTML = parseFloat(Info2[0]/10**18).toLocaleString();
-                  document.getElementById("pendingCMJ").innerHTML = (parseFloat(Pending2)/10**18).toLocaleString();
-                  stakeCMJ_W = Info2[0]/10**18;
+            console.log(Info2)
             const Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
             const Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
-                  document.getElementById("stakeJBCJUSDT").innerHTML = parseFloat(Info3[0]/10**18).toLocaleString();
-                  document.getElementById("pendingJBCJUSDT").innerHTML = (parseFloat(Pending3)/10**18).toLocaleString();
-                  stakeJBCJUSDT_W = parseFloat(Info3[0]/10**18)*2.9; 
-  
-                document.getElementById("stakeJBCCMJ_W").innerHTML = stakeJBCCMJ_W.toLocaleString(undefined,{maximumFractionDigits:3});
-                document.getElementById("stakeJBCJUSDT_W").innerHTML = stakeJBCJUSDT_W.toLocaleString(undefined,{maximumFractionDigits:3});
-                var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-                totalNew = parseFloat(stakeJBCJUSDT_W) + parseFloat(stakeCMJ_W) + parseFloat(stakeJBCCMJ_W) + parseFloat(networth_CMJ);
-                updateWorth(totalNew);
+            console.log(Info3)
+
+
+            addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),16.88,(Pending1/10**18),Jdao_to_CMJ,"JDAO");
+            addtoStaking("Staking CMJ",(Info2[0]/10**18),1,Pending2/10**18,Jdao_to_CMJ,"JDAO");
+            addtoStaking("Farming LP JBC-JUSDT",(Info3[0]/10**18),2.9,(Pending3/10**18),Jdao_to_CMJ,"JDAO");
+
+            function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
+                // หา DOM element ของตารางโดยใช้ ID
+                var table = document.getElementById("farmingAsset");
+                var stakingValue = calculateWorth(tokenAmount,tokenPrice);
+                var pendingValue = calculateWorth(Pending,pendingPrice);
+                // สร้าง row ใหม่
+                if (stakingValue > 1){
+                    var newRow = table.insertRow(-1);
+                    // เพิ่มข้อมูลในแต่ละ column
+                    var nameCell = newRow.insertCell(0);
+                    var amountCell = newRow.insertCell(1);
+                    var valueCell = newRow.insertCell(2);
+                    var rewardCell = newRow.insertCell(3);
+                    
+                
+                    // กำหนดข้อมูลให้กับแต่ละ cell
+                    nameCell.innerHTML = stakingName;
+                    amountCell.innerHTML = (tokenAmount).toLocaleString();
+                    valueCell.innerHTML = `${(stakingValue).toLocaleString()} CMJ`;
+                    rewardCell.innerHTML = `${Pending.toLocaleString()} ${pendingToken} <br>(~${(pendingValue).toLocaleString({maximumFractionDigits:4})} CMJ)`;
+                    addFarmingWorth(stakingValue,pendingValue);
+                    console.log("Add : Staking LP ",stakingName," amount : ",tokenAmount,"\tValue:",stakingValue,"\Reward:",Pending);
+                }
+                }
+
                 }catch (error){
             console.error('Error:', error);
           }
         }
   
-        
-      
-        async function processJASPERData() {
-          console.log('DUNGEON JASPER');
-          try {
-            const block = await web3.eth.getBlock('latest');
-            const currentTimeStamp = block.timestamp;
-            console.log('Current timestamp:', currentTimeStamp);
-        
-            const JAC_pending = await JASPContract.methods.calculateRewards(walletAddress).call() / (10**9);
-            document.getElementById("JAC_Pending").innerHTML = parseFloat(JAC_pending).toLocaleString(undefined, {maximumFractionDigits: 3});
-        
-            const JASPdata = await JASPContract.methods.nftEquip(walletAddress).call();
-            const date = new Date((parseFloat(JASPdata[8])+86400) * 1000); // ให้คูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
-            const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
-            document.getElementById("JAC_END").innerHTML = formattedDate;
-  
-            console.log(JASPdata);  
-            if (parseFloat(JASPdata[0]) == 0){
-              document.getElementById("JAC_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
+
+        var DungeonList = [ // Note 1 = nftStatus , 2 = nftEqiup
+            { name: "Cryptic Cogs", contract: CCContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0767232,finishTimeStamp: 86400, rewardToken: "EE", methodsCall: 1,divider:18},
+            { name: "Daemon World", contract: DWContract, indexOfTimestamp: 9,indexOfPower: 8,rewardPerTimestamp: 0.000012096,finishTimeStamp: 86400, rewardToken: "ANGB", methodsCall: 2,divider:18},
+            { name: "Jasper Cave",contract: JASPContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0000864,finishTimeStamp: 86400, rewardToken: "JASP",methodsCall: 2,divider:9},
+            { name: "Copper Mine",contract: CUContract, indexOfTimestamp: 4,indexOfPower: 3,rewardPerTimestamp:0.36*24,finishTimeStamp:3600,rewardToken:"CU", methodsCall: 2,divider:18},
+        ]
+        DungeonList.forEach(function(dun) {
+            dungeonData(dun.name,dun.contract,dun.indexOfTimestamp,dun.indexOfPower,dun.rewardPerTimestamp,dun.finishTimeStamp,dun.rewardToken,dun.methodsCall,dun.divider);
+        });
+
+        async function dungeonData(dungeonName,contract,indexOfTimestamp,indexOfPower,rewardPerTimestamp,finishTimeStamp,rewardToken,methodsCall,divider){
+            console.log(" Access Dungeon Data Function")
+            try{
+                var getData = []; 
+                var Power = 0;
+                var MaxReward =0;
+                var Status = '';
+                var endTimestamp = 0;
+                var getPending = 0;
+                var date = new Date();
+
+                const block = await web3.eth.getBlock('latest');
+                const TimeStamp = block.timestamp;
+                if (methodsCall == 1){
+                    var getData = await contract.methods.nftStatus(walletAddress).call();
+                }else if(methodsCall == 2){
+                    var getData = await contract.methods.nftEquip(walletAddress).call();
+                }
+                console.log("data Table of ",dungeonName," ",getData);
+                if(parseFloat(getData[0]) != 0){
+                    var getPending = await contract.methods.calculateRewards(walletAddress).call() / (10**divider);
+                    var endTimestamp = parseFloat(getData[indexOfTimestamp]) + finishTimeStamp ;
+
+                    if(parseFloat(getData[indexOfTimestamp]) + 86400 < TimeStamp){
+                        Status = `<span style='color: red;'>Out of Gas</span>`
+                    }else if(parseFloat(getData[indexOfTimestamp]) + 86400 > TimeStamp){
+                        Status = `<span style='color: green;'>On Staking</span>`;
+                    }
+                        Power = parseFloat(getData[indexOfPower]);
+                        MaxReward = getData[indexOfPower] * rewardPerTimestamp;
+                }else if(parseFloat[getData[0]] == 0){
+                    Status = `<span style='color: red;'>No MainChar</span>`;
+                }
+                console.log(dungeonName," | Pendding =  ",getPending,"| Start ",getData[indexOfTimestamp]," END" ,getData[indexOfTimestamp] + finishTimeStamp);
+                addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending)
+
+                function addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending){
+                    var table = document.getElementById("dungeon");
+                    if (parseFloat(Power) > 0){
+                        var newRow = table.insertRow(-1);
+                        // เพิ่มข้อมูลในแต่ละ column
+                        var nameCell = newRow.insertCell(0);
+                        var StatusCell = newRow.insertCell(1);
+                        var PowerCell = newRow.insertCell(2);
+                        var MaxRewardCell = newRow.insertCell(3);
+                        var getPendingCell = newRow.insertCell(4);
+                        var dungeonEndCell = newRow.insertCell(5);
+
+                        nameCell.innerHTML = dungeonName;
+                        StatusCell.innerHTML = Status;
+                        PowerCell.innerHTML = `${(Power).toLocaleString()} CmPow`;
+                        MaxRewardCell.innerHTML = `${(MaxReward).toLocaleString()} ${rewardToken} /day`;
+                        getPendingCell.innerHTML = `${getPending.toLocaleString()} ${rewardToken}`;
+                        console.log(endTimestamp);
+                        dungeonEndCell.innerHTML = formatTimestamp(endTimestamp);
+                    }
+                }
+            }catch(error){
+                console.error('Error: ',error);
             }
-            else if (parseFloat(JASPdata[8]) + 86400 < currentTimeStamp) {
-              document.getElementById("JAC_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
-              
-            } else if (parseFloat(JASPdata[8]) + 86400 > currentTimeStamp) {
-              document.getElementById("JAC_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
-            }
-              document.getElementById("JAC_reward").innerHTML = parseFloat(JASPdata[7]*0.0000864).toLocaleString(undefined,{maximumFractionDigits:6});
-              document.getElementById("JAC_Pow").innerHTML = parseFloat(JASPdata[7]).toLocaleString(undefined,{maximumFractionDigits:0});
-            } catch (error) {
-            console.error('Error:', error);
-          }
         }
-        async function processDWData() {
-          console.log('DUNGEON DEAMONWORLDS');
-          try {
-            const block = await web3.eth.getBlock('latest');
-            const currentTimeStamp = block.timestamp;
-            console.log('Current timestamp:', currentTimeStamp);
-        
-            const DW_pending = await DWContract.methods.calculateRewards(walletAddress).call() / (10**18);
-            document.getElementById("DW_Pending").innerHTML = parseFloat(DW_pending).toLocaleString(undefined, {maximumFractionDigits: 3});
-        
-            const DWdata = await DWContract.methods.nftEquip(walletAddress).call();
-            const date = new Date((parseFloat(DWdata[9]) + 86400) * 1000); // เพิ่มเวลาในหนึ่งวัน (86400 วินาที) โดยไม่ต้องคูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
-            const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
-            document.getElementById("DW_END").innerHTML = formattedDate;
-            console.log(date);
-            console.log((parseFloat(DWdata[9]) + 86400) * 1000); // แสดงผลลัพธ์ที่ถูกต้องหลังจากการคำนวณ
-            console.log(DWdata);
+
+
+
+
+        // Staking Field
+        function addFieldtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
+            // หา DOM element ของตารางโดยใช้ ID
+            var table = document.getElementById("farmingAsset");
+            var stakingValue = calculateWorth(tokenAmount,tokenPrice);
+            var pendingValue = calculateWorth(Pending,pendingPrice);
+            // สร้าง row ใหม่
+            if (Pending > 1){
+                var newRow = table.insertRow(-1);
+                // เพิ่มข้อมูลในแต่ละ column
+                var nameCell = newRow.insertCell(0);
+                var amountCell = newRow.insertCell(1);
+                var valueCell = newRow.insertCell(2);
+                var rewardCell = newRow.insertCell(3);
+                
             
-            if (parseFloat(DWdata[0]) == 0){
-              document.getElementById("DW_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
+                // กำหนดข้อมูลให้กับแต่ละ cell
+                nameCell.innerHTML = stakingName;
+                amountCell.innerHTML = (tokenAmount).toLocaleString();
+                valueCell.innerHTML = `${(stakingValue).toLocaleString()} CMJ`;
+                rewardCell.innerHTML = `${Pending.toLocaleString()} ${pendingToken} <br>(~${(pendingValue).toLocaleString({maximumFractionDigits:4})} CMJ)`;
+                addFarmingWorth(stakingValue,pendingValue);
+                console.log("Add : Staking LP ",stakingName," amount : ",tokenAmount,"\tValue:",stakingValue,"\Reward:",Pending);
+                }
             }
-            else if (parseFloat(DWdata[9]) + 86400 < currentTimeStamp) {
-              document.getElementById("DW_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
-            } else if (parseFloat(DWdata[9]) + 86400 > currentTimeStamp) {
-              document.getElementById("DW_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
-            }
-              document.getElementById("DW_Pow").innerHTML = (parseFloat(DWdata[8])).toLocaleString(undefined,{maximumFractionDigits:3});
-              document.getElementById("DW_reward").innerHTML = parseFloat(DWdata[8]*0.000012096).toLocaleString(undefined,{maximumFractionDigits:6});
-            } catch (error) {
-            console.error('Error:', error);
-          }
-        }
-        async function processCCData() {
-          console.log('DUNGEON CRYPTICCOGS');
-          try {
-            const block = await web3.eth.getBlock('latest');
-            const currentTimeStamp = block.timestamp;
-            console.log('Current timestamp:', currentTimeStamp);
-        
-            const CC_Pending = await CCContract.methods.calculateRewards(walletAddress).call() / (10**18);
-            document.getElementById("CC_Pending").innerHTML = parseFloat(CC_Pending).toLocaleString(undefined, {maximumFractionDigits: 3});
-        
-            const data = await CCContract.methods.nftStatus(walletAddress).call();
-            const date = new Date((parseFloat(data[8]) + 86400) * 1000); // เพิ่มเวลาในหนึ่งวัน (86400 วินาที) โดยไม่ต้องคูณด้วย 1000 เพื่อแปลงเป็นมิลลิวินาที
-            const formattedDate = date.toLocaleString(); // ใช้ toLocaleString() เพื่อแปลงเป็นวันที่และเวลาในรูปแบบท้องถิ่น
-            document.getElementById("CC_END").innerHTML = formattedDate;
-            console.log(date);
-            console.log((parseFloat(data[8]) + 86400) * 1000); // แสดงผลลัพธ์ที่ถูกต้องหลังจากการคำนวณ
-            console.log(data);
-            
-            if (parseFloat(data[0]) == 0){
-              document.getElementById("CC_Status").innerHTML = `<span style='color: red;'>No MainChar</span>`;
-            }
-            else if (parseFloat(data[8]) + 86400 < currentTimeStamp) {
-              document.getElementById("CC_Status").innerHTML = `<span style='color: red;'>Out of Gas</span>`;
-            } else if (parseFloat(data[8]) + 86400 > currentTimeStamp) {
-              document.getElementById("CC_Status").innerHTML = `<span style='color: green;'>On Staking</span>`;
-            }
-              document.getElementById("CC_Pow").innerHTML = parseFloat(data[7]).toLocaleString(undefined,{maximumFractionDigits:0});
-              document.getElementById("CC_reward").innerHTML = parseFloat(data[7]*0.0767232).toLocaleString(undefined,{maximumFractionDigits:6});
-            } catch (error) {
-            console.error('Error:', error);
-          }
-        }
+
         async function collectTunaRewards() {
           let totalTuna = 0;
-          let indicesToCollect = [];
-          document.getElementById("stakeTuna").innerHTML = "Loading Estimate ~1 Min";
-          document.getElementById("pendingTuna").innerHTML = "";
-          // Iterate through indices from 0 to 100
+          let NftStakeID = [];
           for (let i = 0; i <= 100; i++) {
-            document.getElementById("Tuna_stats").innerHTML = '🔃';
               try {
-                  // Call the contract method to get data for the current index
                   const data = await TunaField.methods.nftStake(i).call();
-      
-                  // Check if the walletAddress matches data[0]
                   if (data[0] === walletAddress) {
-                      // If matched, collect the index
-                      indicesToCollect.push(i);
-      
-                      // Get the reward for the current index
+                      NftStakeID.push(i);
                       const getReward = await TunaField.methods.calculateRewards(i).call();
-                      totalTuna += parseInt(getReward); // Assuming getReward is in integer format
-                      
+                      totalTuna += parseInt(getReward); 
                     }
-              pendingTuna = calculateWorth(totalTuna,Tuna_to_CMJ);
-              document.getElementById('pendingTuna_W').innerHTML = pendingTuna.toLocaleString();
-              document.getElementById("stakeTuna").innerHTML = indicesToCollect.length.toLocaleString();
-              document.getElementById("pendingTuna").innerHTML = (totalTuna/10**18).toLocaleString();
-              var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-              newCMJ = parseFloat(pendingTuna) + parseFloat(networth_CMJ);
-              updateWorth(newCMJ);
-              document.getElementById("Tuna_stats").innerHTML = '✅';
               } catch (error) {
                   console.error(`Error fetching data for index ${i}:`, error);
-                  // Handle the error if needed
               }
           }
-      
-          // Now you have the totalTuna and the indices to collect
-          
+
+        addFieldtoStaking("Field | Tuna Lake",NftStakeID.length,0,(totalTuna/10**18),Tuna_to_CMJ,"TUNA")
       }
+
       async function collectMiceRewards() {
-      var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-      document.getElementById("Mice_stats").innerHTML = '🔃';
-  
         let totalMice = 0;
-        let MiceindicesToCollect = [];
-        document.getElementById("stakeMice").innerHTML = "Loading Estimate ~2 Min";
-        document.getElementById("pendingMice").innerHTML = ""
+        let StakeNFTID = [];
         for (let i = 0; i <= 1000; i++) {
             try {
                 const data = await MiceField.methods.nftStake(i).call();
                 if (data[0] === walletAddress) {
-                  MiceindicesToCollect.push(i);
+                    StakeNFTID.push(i);
                     const getReward = await MiceField.methods.calculateRewards(i).call();
                     totalMice += parseInt(getReward); // Assuming getReward is in integer format
-                    
                   }
-                  document.getElementById("stakeMice").innerHTML = (MiceindicesToCollect.length).toLocaleString();
-                    document.getElementById("pendingMice").innerHTML = (totalMice/10**18).toLocaleString();
-  
-              
     } catch (error) {
                 console.error(`Error fetching data for index ${i}:`, error);
             }
         }
-        pendingMice = calculateWorth(totalMice/10**18,Mice_to_CMJ);
-        document.getElementById('pendingMice_W').innerHTML = pendingMice.toLocaleString();
-        document.getElementById("Mice_stats").innerHTML = '✅';
-        var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-        newCMJ = parseFloat(pendingMice) + parseFloat(networth_CMJ);
-        updateWorth(newCMJ);
-        // Now you have the totalTuna and the indices to collect
-        
-        
+
+        addFieldtoStaking("Field | Ware Old House",StakeNFTID.length,0,(totalMice/10**18),Mice_to_CMJ,"Mice")
     }
+
     async function collectTHLRewards() {
       let totalGold = 0;
       let GoldindicesToCollect = [];
-      document.getElementById("stakeMHL").innerHTML = "Loading Estimate ~2 Min";
-      document.getElementById("pendingMHL").innerHTML = "";
-      var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-  
-  
       for (let i = 0; i <= 1000; i++) {
           try {
-            document.getElementById("THL_stats").innerHTML = '🔃';
               const data = await FieldTHL.methods.nftStake(i).call();
               if (data[0] === walletAddress) {
                 GoldindicesToCollect.push(i);
                   const getReward = await FieldTHL.methods.calculateRewards1(i).call();
                   totalGold += parseInt(getReward); // Assuming getReward is in integer format
               }
-              document.getElementById("stakeMHL").innerHTML = (GoldindicesToCollect.length).toLocaleString();
-              document.getElementById("pendingMHL").innerHTML = (totalGold/10**18).toLocaleString();
-              
               
           } catch (error) {
               console.error(`Error fetching data for index ${i}:`, error);
           }
       }
-      var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-              pendingGold = calculateWorth(totalGold/10**18,Gold_to_CMJ);
-              NFTValue = calculateWorth((GoldindicesToCollect.length*20),USD_to_CMJ);
-              document.getElementById("pendingMHLNFT_W").innerHTML = (NFTValue).toLocaleString();
-              document.getElementById("pendingMHL_W").innerHTML = (pendingGold).toLocaleString();
-              newCMJ = parseFloat(networth_CMJ) + parseFloat(pendingGold) + parseFloat(NFTValue);
-              updateWorth(newCMJ);
-              document.getElementById("THL_stats").innerHTML = '✅'
-            }
-  async function collectGearRewards(){
-    pendingWorth = 0;
-    stakeValue = 0;
-    TDMID = [39190528,39059456,38928384,38797312,38666240,38535168,38404096,38273024,38141952,38010880,37879808,37748736,37617664,37486592,37355520,37224448,37093376,36962304,36831232,36700160,36569088,36438016,36306944,36175872,36044800,35913728,35782656,35651584,35520512,35389440,35258368,35127296,34996224,34865152,34734080,34603008,34471936,34340864,34209792,34078720,33947648,33816576,33685504,33554432,33423360,33292288,33161216,33030144,32899072,32768000,32636928,32505856,32374784,32243712,32112640,31981568,31850496,31719424,31588352,31457280,31326208,31195136,31064064,30932992,30801920,30670848,30539776,30408704,30277632,30146560,30015488,29884416,29753344,29622272,29491200,29360128,29229056,29097984,28966912,28835840,28704768,28573696,28442624,28311552,28180480,28049408,27918336,27787264,27656192,27525120,27394048,27262976,27131904,27000832,26869760,26738688,26607616,26476544,26345472,26214400,26083328,25952256,25821184,25690112,25559040,25427968,25296896,25165824,25034752,24903680,24772608,24641536,24510464,24379392,24248320,24117248,23986176,23855104,23724032,23592960,23461888,23330816,23199744,23068672,22937600,22806528,22675456,22544384,22413312,22282240,22151168,22020096,21889024,21757952,21626880,21495808,21364736,21233664,21102592,20971520,20840448,20709376,20578304,20447232,20316160,20185088,20054016,19922944,19791872,19660800,19529728,19398656,19267584,19136512,19005440,18874368,18743296,18612224,18481152,18350080,18219008,18087936,17956864,17825792,17694720,17563648,17432576,17301504,17170432,17039360,16908288,16777216,16646144,16515072,16384000,16252928,16121856,15990784,15859712,15728640,15597568,15466496,15335424,15204352,15073280,14942208,14811136,14680064,14548992,14417920,14286848,14155776,14024704,13893632,13762560,13631488,13500416,13369344,13238272,13107200,12976128,12845056,12713984,12582912,12451840,12320768,12189696,12058624,11927552,11796480,11665408,11534336,11403264,11272192,11141120,11010048,10878976,10747904,10616832,10485760,10354688,10223616,10092544,9961472,9830400,9699328,9568256,9437184,9306112,9175040,9043968,8912896,8781824,8650752,8519680,8388608,8257536,8126464,7995392,7864320,7733248,7602176,7471104,7340032,7208960,7077888,6946816,6815744,6684672,6553600,6422528,6291456,6160384,6029312,5898240,5767168,5636096,5505024,5373952,5242880,5111808,4980736,4849664,4718592,4587520,4456448,4325376,4194304,4063232,3932160,3801088,3670016,3538944,3407872,3276800,3145728,3014656,2883584,2752512,2621440,2490368,2359296,2228224,2097152,1966080,1835008,1703936,1572864,1441792,1310720,1179648,1048576,917504,786432,655360,524288,393216,262144,131072,0];
-  
-    let TaodumOwnerID = []; 
-  
-    try {
-      document.getElementById("MHZ_stats").innerHTML = '🔃';
-      let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
-      stakeJTAO = stakeJTAO[0]/10**18;
-      var stakeValue = parseFloat(calculateWorth(stakeJTAO,Jtao_to_CMJ));
-      document.getElementById("staketokenMHZ").innerHTML = (stakeJTAO).toLocaleString(undefined,{maximumFractionDigits:2});
-      document.getElementById("TDM_StakeValue").innerHTML = (stakeValue).toLocaleString(undefined,{maximumFractionDigits:2});
-      penndingGear = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
-      document.getElementById("pendingMHZ").innerHTML = (penndingGear).toLocaleString(undefined,{maximumFractionDigits:2});
-        for (let i = 0; i <= 299; i++){
-            const data = await MHZField.methods.nftStake(TDMID[i]).call();
-            if (data[0] === walletAddress){
-                TaodumOwnerID.push(TDMID[i]);
-                const getReward = await MHZField.methods.calculateRewards(TDMID[i],walletAddress, "true").call();
-                penndingGear += getReward/10**18;
-                
-              }
-              document.getElementById("pendingMHZ").innerText = (penndingGear).toLocaleString(undefined,{maximumFractionDigits:2});
-              document.getElementById("stakeMHZ").innerText = (TaodumOwnerID.length).toLocaleString(undefined,{maximumFractionDigits:2});
-              pendingWorth = calculateWorth(penndingGear, ((2/30000000)*USD_to_CMJ));
-              document.getElementById("TDM_WorthStake").innerText = pendingWorth.toLocaleString(undefined,{maximumFractionDigits:2});
-        }
-        var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
-        console.log("Worth Pending : ",parseFloat(pendingWorth));
-        console.log("Stake Value ",parseFloat(stakeValue));
-        console.log("Old Networth",parseFloat(networth_CMJ));
-        newNetworth = parseFloat(pendingWorth) + parseFloat(networth_CMJ) + parseFloat(stakeValue);
-        updateWorth(newNetworth);
-        document.getElementById("MHZ_stats").innerHTML = '✅';
-        
-    } catch(error) {
-        console.error('Error fetching data:', error);
+      addFieldtoStaking("Field | The Heaven Land",GoldindicesToCollect.length,(20/CMJ_to_USD),(totalGold/10**18),Gold_to_CMJ,"GOLD")
+      document.getElementById('Status').innerHTML = '✅'
     }
-  
+
+        async function collectGearRewards(){
+            pendingWorth = 0;
+            stakeValue = 0;
+            penndingGear1 =0;
+            penndingGear =0;
+
+            TDMID = [39190528,39059456,38928384,38797312,38666240,38535168,38404096,38273024,38141952,38010880,37879808,37748736,37617664,37486592,37355520,37224448,37093376,36962304,36831232,36700160,36569088,36438016,36306944,36175872,36044800,35913728,35782656,35651584,35520512,35389440,35258368,35127296,34996224,34865152,34734080,34603008,34471936,34340864,34209792,34078720,33947648,33816576,33685504,33554432,33423360,33292288,33161216,33030144,32899072,32768000,32636928,32505856,32374784,32243712,32112640,31981568,31850496,31719424,31588352,31457280,31326208,31195136,31064064,30932992,30801920,30670848,30539776,30408704,30277632,30146560,30015488,29884416,29753344,29622272,29491200,29360128,29229056,29097984,28966912,28835840,28704768,28573696,28442624,28311552,28180480,28049408,27918336,27787264,27656192,27525120,27394048,27262976,27131904,27000832,26869760,26738688,26607616,26476544,26345472,26214400,26083328,25952256,25821184,25690112,25559040,25427968,25296896,25165824,25034752,24903680,24772608,24641536,24510464,24379392,24248320,24117248,23986176,23855104,23724032,23592960,23461888,23330816,23199744,23068672,22937600,22806528,22675456,22544384,22413312,22282240,22151168,22020096,21889024,21757952,21626880,21495808,21364736,21233664,21102592,20971520,20840448,20709376,20578304,20447232,20316160,20185088,20054016,19922944,19791872,19660800,19529728,19398656,19267584,19136512,19005440,18874368,18743296,18612224,18481152,18350080,18219008,18087936,17956864,17825792,17694720,17563648,17432576,17301504,17170432,17039360,16908288,16777216,16646144,16515072,16384000,16252928,16121856,15990784,15859712,15728640,15597568,15466496,15335424,15204352,15073280,14942208,14811136,14680064,14548992,14417920,14286848,14155776,14024704,13893632,13762560,13631488,13500416,13369344,13238272,13107200,12976128,12845056,12713984,12582912,12451840,12320768,12189696,12058624,11927552,11796480,11665408,11534336,11403264,11272192,11141120,11010048,10878976,10747904,10616832,10485760,10354688,10223616,10092544,9961472,9830400,9699328,9568256,9437184,9306112,9175040,9043968,8912896,8781824,8650752,8519680,8388608,8257536,8126464,7995392,7864320,7733248,7602176,7471104,7340032,7208960,7077888,6946816,6815744,6684672,6553600,6422528,6291456,6160384,6029312,5898240,5767168,5636096,5505024,5373952,5242880,5111808,4980736,4849664,4718592,4587520,4456448,4325376,4194304,4063232,3932160,3801088,3670016,3538944,3407872,3276800,3145728,3014656,2883584,2752512,2621440,2490368,2359296,2228224,2097152,1966080,1835008,1703936,1572864,1441792,1310720,1179648,1048576,917504,786432,655360,524288,393216,262144,131072,0];
+          
+            let TaodumOwnerID = []; 
+          
+            try {
+              let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
+              stakeJTAO = stakeJTAO[0]/10**18;
+              var stakeValue = parseFloat(calculateWorth(stakeJTAO,Jtao_to_CMJ));
+              penndingGear1 = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
+              addFieldtoStaking("Field | Mech Harvest Zone (JTAO)",stakeJTAO,(JTAO_to_CMJ),(penndingGear1),((2/30000000)*USD_to_CMJ),"GEAR")
+
+                for (let i = 0; i <= 299; i++){
+                    const data = await MHZField.methods.nftStake(TDMID[i]).call();
+                    if (data[0] === walletAddress){
+                        TaodumOwnerID.push(TDMID[i]);
+                        const getReward = await MHZField.methods.calculateRewards(TDMID[i],walletAddress, "true").call();
+                        penndingGear += getReward/10**18;
+                      }
+                }
+            } catch(error) {
+                console.error('Error fetching data:', error);
+            }
+            addFieldtoStaking("Field | Mech Harvest Zone (NFT)",TaodumOwnerID.length,(284.38*USD_to_CMJ),(penndingGear),((2/30000000)*USD_to_CMJ),"GEAR")
+        }
+
+        
+
+
     // แสดงผลลัพธ์ที่ได้
     
-  }
   
   
         // Call the function
-        processCUMData();
-        processJASPERData(); 
-        processDWData();
-        processCCData();
+        document.getElementById('Status').innerHTML = '🔃'
         getFarming();
         collectTunaRewards();
         collectMiceRewards();
         collectTHLRewards();
         collectGearRewards();
-  
+
+        function addWalletWorth(TokenValue){
+            var currentCMJ = parseFloat(document.getElementById("wallet_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            var newCMJ = parseFloat(TokenValue)+parseFloat(currentCMJ);
+            document.getElementById("wallet_cmj").innerHTML = newCMJ.toLocaleString();
+            updateValue();
+        }
+        function addFarmingWorth(FarmValue,PendingValue){
+            var current_stakingCMJ = parseFloat(document.getElementById("farm_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            var current_pendingCMJ = parseFloat(document.getElementById("pending_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            var new_stakingCMJ = parseFloat(FarmValue) + parseFloat(current_stakingCMJ);
+            var new_pendingCMJ = parseFloat(PendingValue) + parseFloat(current_pendingCMJ);
+            document.getElementById("farm_cmj").textContent = new_stakingCMJ.toLocaleString();
+            document.getElementById("pending_cmj").textContent = new_pendingCMJ.toLocaleString();
+
+            updateValue();
+        }
+
+        function updateValue(){
+            var current_walletCMJ = parseFloat(document.getElementById("wallet_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            var current_stakingCMJ = parseFloat(document.getElementById("farm_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            var current_pendingCMJ = parseFloat(document.getElementById("pending_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            
+            // Start Update Wallet Value
+            document.getElementById("wallet_jbc").innerHTML = (calculateWorth(current_walletCMJ, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+            document.getElementById("wallet_usd").innerHTML = (calculateWorth(current_walletCMJ, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+            document.getElementById("wallet_thb").innerHTML = (calculateWorth(current_walletCMJ, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+            // Start Update Staking Value
+            document.getElementById("farm_jbc").innerHTML = (calculateWorth(current_stakingCMJ, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+            document.getElementById("farm_usd").innerHTML = (calculateWorth(current_stakingCMJ, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+            document.getElementById("farm_thb").innerHTML = (calculateWorth(current_stakingCMJ, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+            // Start Update Pending Value
+            document.getElementById("pending_jbc").innerHTML = (calculateWorth(current_pendingCMJ, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+            document.getElementById("pending_usd").innerHTML = (calculateWorth(current_pendingCMJ, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+            document.getElementById("pending_thb").innerHTML = (calculateWorth(current_pendingCMJ, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+            // Start Update Total NetWorth Value
+            var total_networth = parseFloat(current_walletCMJ)+parseFloat(current_stakingCMJ)+parseFloat(current_pendingCMJ)
+            document.getElementById("nw_cmj").innerHTML = total_networth.toLocaleString(); // Convert CMJ to JBC
+            document.getElementById("nw_jbc").innerHTML = (calculateWorth(total_networth, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+            document.getElementById("nw_usd").innerHTML = (calculateWorth(total_networth, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+            document.getElementById("nw_thb").innerHTML = (calculateWorth(total_networth, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+
+        }
+
  
       } catch (error) {
         console.error('Error:', error);
+    }
   
-      }
-    };
+      };
   
   
   
@@ -1970,28 +1852,19 @@
     // Initialize workbook
     var wb = XLSX.utils.book_new();
   
-    // Get data from both tables and merge into one
-    var table1Data = XLSX.utils.table_to_sheet(document.getElementById("purchaseTable"));
+    // Get data from table2 and convert it to a worksheet
     var table2Data = XLSX.utils.table_to_sheet(document.getElementById("purchaseTableBody"));
   
-  // Convert TxHash and ID columns to string format
-  // Convert TxHash and ID columns to string format
-  table1Data = convertColumnsToString(table1Data, [0, 2]);
-  table2Data = convertColumnsToString(table2Data, [0, 2]);
-  table2Data = convertColumnsToString(table2Data, [0, 0]);
-  
-  
-  
-    // Merge data into one worksheet
-    var mergedData = mergeData(table1Data, table2Data);
+    // Convert columns to string format
+    table2Data = convertColumnsToString(table2Data, [0, 2]);
   
     // Add worksheet to workbook
-    XLSX.utils.book_append_sheet(wb, mergedData, "Purchase Data");
+    XLSX.utils.book_append_sheet(wb, table2Data, "Purchase Data");
   
     // Save workbook as Excel file
     XLSX.writeFile(wb, "purchase_data.xlsx");
-  }
-  
+}
+
   // Function to merge data from two worksheets into one
   function mergeData(sheet1, sheet2) {
     var result = XLSX.utils.book_new();
@@ -2030,8 +1903,33 @@
   
   
   function resetPurchaseTable() {
-    document.getElementById("purchaseTableBody").innerHTML = '';
-  }
+    document.getElementById("purchaseTableBody").innerHTML = '<tr><th>TxHash</th><th>Item Name</th><th>ID</th><th>Methods</th><th>Price</th><th>Symbol</th></tr>';
+    document.getElementById("walletAsset").innerHTML = '<tr><th>Name</th><th>Balance</th><th>Current Price</th><th>Value</th><th></th></tr>';
+    document.getElementById("farmingAsset").innerHTML = '<tr><th>Farm/Pool/Staking</th><th>Balance</th><th>Value</th><th>Reward</th></tr>';
+    document.getElementById("dungeon").innerHTML = '<tr><th>Dungeon Name</th><th>Status</th><th>Power</th><th>Reward/Day</th><th>Pending</th><th>End At</th></tr>';
+    var current_walletCMJ = 0; // get Current CMJ
+    var current_stakingCMJ = 0; // get Current CMJ
+    var current_pendingCMJ = 0; // get Current CMJ
+    // Start Update Wallet Value
+    document.getElementById("wallet_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    document.getElementById("wallet_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+    document.getElementById("wallet_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    // Start Update Staking Value
+    document.getElementById("farm_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    document.getElementById("farm_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+    document.getElementById("farm_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    // Start Update Pending Value
+    document.getElementById("pending_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    document.getElementById("pending_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+    document.getElementById("pending_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    // Start Update Total NetWorth Value
+    var total_networth = 0;
+    document.getElementById("nw_cmj").innerHTML = total_networth.toLocaleString(); // Convert CMJ to JBC
+    document.getElementById("nw_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+    document.getElementById("nw_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+    document.getElementById("nw_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+
+}
   
   function fetchTransferHistory() {
     var walletAddress = document.getElementById("wallet_address").value;
@@ -2094,8 +1992,6 @@
   
     return Promise.all([transfers_from, transfers_to]); 
   }
-  </script>
-  <script>
     // Your existing script for updating prices
   
     function updateData(data) {
@@ -2132,6 +2028,31 @@
     setInterval(updateCountdown, 1000);
   
   
-  
+  </script>
+  <script>
+    function showdPopup(popupId) {
+        document.getElementById(popupId).style.display = 'flex';
+    }
+    function closedPopup(popupId) {
+      document.getElementById(popupId).style.display = 'none';
+  }
+    function showQR(method) {
+        if (method === 'PromptPay') {
+            document.getElementById('qrImage').src = 'promptpay_qr_code.png'; // ใส่ URL รูปภาพ QR Code ของ PromptPay ที่คุณมี
+        } else if (method === 'Crypto') {
+            document.getElementById('qrImage').src = 'https://i.ibb.co/q5Z3K9P/Metamask-Main-Wallet-Address.png'; // ใส่ URL รูปภาพ QR Code ของ Crypto Wallet ที่คุณมี
+        }
+        document.getElementById('qrCode').style.display = 'block';
+    }
+    function copyAddress(text) {
+        var tempInput = document.createElement('input');
+        tempInput.value = text; // ใส่ค่าข้อความที่ได้รับเข้าไปโดยตรง
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert('Copied to clipboard: ' + text);
+    }
+    
   </script>
 </html>
