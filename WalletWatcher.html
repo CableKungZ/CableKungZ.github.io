@@ -1572,9 +1572,10 @@
               let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
               stakeJTAO = stakeJTAO[0]/10**18;
               var stakeValue = parseFloat(calculateWorth(stakeJTAO,Jtao_to_CMJ));
-              penndingGear1 = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
+              if(stakeJTAO > 0){
+                penndingGear1 = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
               addFieldtoStaking("Field | Mech Harvest Zone (JTAO)",stakeJTAO,(JTAO_to_CMJ),(penndingGear1),((2/30000000)*USD_to_CMJ),"GEAR")
-
+              }
                 for (let i = 0; i <= 299; i++){
                     const data = await MHZField.methods.nftStake(TDMID[i]).call();
                     if (data[0] === walletAddress){
