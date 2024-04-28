@@ -1904,6 +1904,8 @@
   
   function resetPurchaseTable() {
     document.getElementById("purchaseTableBody").innerHTML = '<tr><th>TxHash</th><th>Item Name</th><th>ID</th><th>Methods</th><th>Price</th><th>Symbol</th></tr>';
+    document.getElementById("totalRedeem").innerHTML = 'Total Spent:';
+
     document.getElementById("walletAsset").innerHTML = '<tr><th>Name</th><th>Balance</th><th>Current Price</th><th>Value</th><th></th></tr>';
     document.getElementById("farmingAsset").innerHTML = '<tr><th>Farm/Pool/Staking</th><th>Balance</th><th>Value</th><th>Reward</th></tr>';
     document.getElementById("dungeon").innerHTML = '<tr><th>Dungeon Name</th><th>Status</th><th>Power</th><th>Reward/Day</th><th>Pending</th><th>End At</th></tr>';
