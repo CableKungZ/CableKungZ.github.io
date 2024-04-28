@@ -569,7 +569,7 @@
           <div id="totalRedeem"class="center">
             <h2>Total Spent</h2>
           </div>
-          <h4 style="color: blue;" onclick="downloadExcel()">Download xlsx (bug for txhash fix later)</h4>
+          <h4 style="color: blue;" onclick="downloadExcel()">Download table to file.xlsx</h4>
           <table id="purchaseTable" width="100%" border="1">
               <thead>
                   <tr>
@@ -1937,8 +1937,8 @@ function process_token_transfers(data, tx_hash, tableid, symbolSums) {
                 
                 // แสดงผลเฉพาะค่าที่มากกว่า 0
                 if (price > 0) {
-                    var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${tx_hash}</a>`;
-                    var newRow = `<tr><td>${txHashLink}</td><td>${itemName}</td><td>${itemID}</td><td>${type}</td><td>${price.toLocaleString()} ${symbol}</td></tr>`;
+                    var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
+                    var newRow = `<tr><td>${txHashLink}</td><td>${itemName}</td><td>${"'"+itemID+"'"}</td><td>${type}</td><td>${price.toLocaleString()} ${symbol}</td></tr>`;
                     document.getElementById(tableid).insertAdjacentHTML('beforeend', newRow);
                 }
             }
