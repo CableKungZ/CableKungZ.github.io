@@ -363,7 +363,8 @@
 </head>
 <body>
   <div class="token-price">
-
+    <div id="countdown">Countdown</div>
+    <div id="updatedMessage" style="display:none;">Updated</div>
     <h2>PROJECT TOKEN <span>[USD = <span id="THB"></span>THB</span>]</h2>
     <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
       <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
@@ -506,22 +507,22 @@
                 <span>Pending Reward : <span id="pendingJBCJUSDT"></span> JDAO</span>
               </div>
               <div class="tokenPending">
-                <p class="header">Field : Tuna Lake</p>
+                <p class="header">Field : Tuna Lake <span id="Tuna_stats"></span></p>
                 <span>Stake : <span id="stakeTuna"></span> </span>
-                <span>Pending Reward : <span id="pendingTuna"></span> Tuna</span>
+                <span>Pending Reward : <span id="pendingTuna"></span> Tuna (~<span id="pendingTuna_W"></span> CMJ)</span>
               </div>
               <div class="tokenPending">
-                <p class="header">Field : Old WareHouse</p>
+                <p class="header">Field : Old WareHouse <span id="Mice_stats"></span></p>
                 <span>Stake : <span id="stakeMice"></span> </span>
                 <span>Pending Reward : <span id="pendingMice"></span> Mice (~<span id="pendingMice_W"></span> CMJ)</span>
               </div>
               <div class="tokenPending">
-                <p class="header">Field : The Heaven Land</p>
-                <span>Stake : <span id="stakeMHL"></span> </span>
+                <p class="header">Field : The Heaven Land <span id="THL_stats"></span></p>
+                <span>Stake : <span id="stakeMHL"></span> (~<span id="pendingMHLNFT_W"></span> CMJ)</span>
                 <span>Pending Reward : <span id="pendingMHL"></span> Gold (~<span id="pendingMHL_W"></span> CMJ)</span>
               </div>
               <div class="tokenPending">
-                <p class="header">Field : Mech Harvest Zone</p>
+                <p class="header">Field : Mech Harvest Zone <span id="MHZ_stats"></span></p>
                 <span>Stake(JTAO) : <span id="staketokenMHZ"></span> (~<span id="TDM_StakeValue"></span> CMJ)</span>
                 <span>Stake(NFT) : <span id="stakeMHZ"></span> </span>
                 <span>Pending Reward : <span id="pendingMHZ"></span> $Gear (~<span id="TDM_WorthStake"></span>CMJ)</span>
@@ -1615,6 +1616,7 @@ async function call_SC(address, contract, divider) {
         document.getElementById("pendingTuna").innerHTML = "";
         // Iterate through indices from 0 to 100
         for (let i = 0; i <= 100; i++) {
+          document.getElementById("Tuna_stats").innerHTML = '🔃';
             try {
                 // Call the contract method to get data for the current index
                 const data = await TunaField.methods.nftStake(i).call();
@@ -1629,8 +1631,14 @@ async function call_SC(address, contract, divider) {
                     totalTuna += parseInt(getReward); // Assuming getReward is in integer format
                     
                   }
-                  document.getElementById("stakeTuna").innerHTML = indicesToCollect.length.toLocaleString();
-                    document.getElementById("pendingTuna").innerHTML = (totalTuna/10**18).toLocaleString();
+            pendingTuna = calculateWorth(totalTuna,Tuna_to_CMJ);
+            document.getElementById('pendingTuna_W').innerHTML = pendingTuna.toLocaleString();
+            document.getElementById("stakeTuna").innerHTML = indicesToCollect.length.toLocaleString();
+            document.getElementById("pendingTuna").innerHTML = (totalTuna/10**18).toLocaleString();
+            var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            newCMJ = parseFloat(pendingTuna) + parseFloat(networth_CMJ);
+            updateWorth(newCMJ);
+            document.getElementById("Tuna_stats").innerHTML = '✅';
             } catch (error) {
                 console.error(`Error fetching data for index ${i}:`, error);
                 // Handle the error if needed
@@ -1642,6 +1650,7 @@ async function call_SC(address, contract, divider) {
     }
     async function collectMiceRewards() {
     var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+    document.getElementById("Mice_stats").innerHTML = '🔃';
 
       let totalMice = 0;
       let MiceindicesToCollect = [];
@@ -1659,12 +1668,17 @@ async function call_SC(address, contract, divider) {
                 document.getElementById("stakeMice").innerHTML = (MiceindicesToCollect.length).toLocaleString();
                   document.getElementById("pendingMice").innerHTML = (totalMice/10**18).toLocaleString();
 
-            pendingMice = calculateWorth(totalMice,Mice_to_CMJ);
-          } catch (error) {
+            
+  } catch (error) {
               console.error(`Error fetching data for index ${i}:`, error);
           }
       }
-  
+      pendingMice = calculateWorth(totalMice/10**18,Mice_to_CMJ);
+      document.getElementById('pendingMice_W').innerHTML = pendingMice.toLocaleString();
+      document.getElementById("Mice_stats").innerHTML = '✅';
+      var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+      newCMJ = parseFloat(pendingMice) + parseFloat(networth_CMJ);
+      updateWorth(newCMJ);
       // Now you have the totalTuna and the indices to collect
       
       
@@ -1679,6 +1693,7 @@ async function call_SC(address, contract, divider) {
 
     for (let i = 0; i <= 1000; i++) {
         try {
+          document.getElementById("THL_stats").innerHTML = '🔃';
             const data = await FieldTHL.methods.nftStake(i).call();
             if (data[0] === walletAddress) {
               GoldindicesToCollect.push(i);
@@ -1687,12 +1702,21 @@ async function call_SC(address, contract, divider) {
             }
             document.getElementById("stakeMHL").innerHTML = (GoldindicesToCollect.length).toLocaleString();
             document.getElementById("pendingMHL").innerHTML = (totalGold/10**18).toLocaleString();
-            pendingGold = calculateWorth(totalGold,Gold_to_CMJ);
+            
+            
         } catch (error) {
             console.error(`Error fetching data for index ${i}:`, error);
         }
     }
-}
+    var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+            pendingGold = calculateWorth(totalGold/10**18,Gold_to_CMJ);
+            NFTValue = calculateWorth((GoldindicesToCollect.length*20),USD_to_CMJ);
+            document.getElementById("pendingMHLNFT_W").innerHTML = (NFTValue).toLocaleString();
+            document.getElementById("pendingMHL_W").innerHTML = (pendingGold).toLocaleString();
+            newCMJ = parseFloat(networth_CMJ) + parseFloat(pendingGold) + parseFloat(NFTValue);
+            updateWorth(newCMJ);
+            document.getElementById("THL_stats").innerHTML = '✅'
+          }
 async function collectGearRewards(){
   pendingWorth = 0;
   stakeValue = 0;
@@ -1701,6 +1725,7 @@ async function collectGearRewards(){
   let TaodumOwnerID = []; 
 
   try {
+    document.getElementById("MHZ_stats").innerHTML = '🔃';
     let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
     stakeJTAO = stakeJTAO[0]/10**18;
     var stakeValue = parseFloat(calculateWorth(stakeJTAO,Jtao_to_CMJ));
@@ -1721,13 +1746,13 @@ async function collectGearRewards(){
             pendingWorth = calculateWorth(penndingGear, ((2/30000000)*USD_to_CMJ));
             document.getElementById("TDM_WorthStake").innerText = pendingWorth.toLocaleString(undefined,{maximumFractionDigits:2});
       }
-      console.log("Worth Pending : ",parseFloat(pendingWorth));
-      console.log("Old Networth",parseFloat(networth_CMJ));
-      console.log("Stake Value ",parseFloat(stakeValue));
       var networth_CMJ = parseFloat(document.getElementById("networth_CMJ").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+      console.log("Worth Pending : ",parseFloat(pendingWorth));
+      console.log("Stake Value ",parseFloat(stakeValue));
+      console.log("Old Networth",parseFloat(networth_CMJ));
       newNetworth = parseFloat(pendingWorth) + parseFloat(networth_CMJ) + parseFloat(stakeValue);
       updateWorth(newNetworth);
-      console.log(newNetworth);
+      document.getElementById("MHZ_stats").innerHTML = '✅';
       
   } catch(error) {
       console.error('Error fetching data:', error);
@@ -2115,6 +2140,45 @@ function getTokenTransfers(walletAddress, token_address) {
 
   return Promise.all([transfers_from, transfers_to]); 
 }
+</script>
+<script>
+  // Your existing script for updating prices
+
+  function updateData(data) {
+
+    // Show the updated message
+    document.getElementById('updatedMessage').style.display = 'block';
+    setTimeout(function() {
+      // Hide the updated message after 3 seconds
+      document.getElementById('updatedMessage').style.display = 'none';
+    }, 200); // 3000 milliseconds = 3 seconds
+  }
+
+  // Countdown Timer
+  var countdownElement = document.getElementById('countdown');
+  var countdownTime = 300; // seconds
+   
+
+  function updateCountdown() {
+    countdownElement.textContent = 'Price refreshing in ' + countdownTime + ' seconds';
+    countdownTime--;
+
+    if (countdownTime < 0) {
+      // Call the updateData function when the countdown reaches 0
+       
+      main();
+      countdownTime = 300; // Reset the countdown time
+    }
+  }
+
+  // Initial call to start the countdown
+  updateCountdown();
+
+  // Update the countdown every second
+  setInterval(updateCountdown, 1000);
+
+
+
 </script>
 </body>
 </html>

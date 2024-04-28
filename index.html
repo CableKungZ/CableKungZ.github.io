@@ -1218,13 +1218,6 @@ Materials in Cost are subject to a reduced tax plus a 5% SwapFee. Conversely, Re
 
     function updateData(data) {
 
-      for (var label in data) {
-        var element = document.getElementById(label);
-        if (element) {
-          element.textContent = data[label];
-        }
-      }
-
       // Show the updated message
       document.getElementById('updatedMessage').style.display = 'block';
       setTimeout(function() {
