@@ -369,6 +369,8 @@
             </section>
             <section class="overview-item">
                 <h1>Dungeon</h1>
+                <h6>Power Estimate Calculation : CoreDungeon 150cmPow / 1 USD , TaodumDungeon 520cmPow / USD , ANGB 25cmPow / USD **It isn't the real value of nft power in commudao game.</h6>
+
                 <table id="dungeon">
                     <tr>
                         <th>Dungeon Name</th>
@@ -1399,17 +1401,18 @@
         }
   
 
-        var DungeonList = [ // Note 1 = nftStatus , 2 = nftEqiup
-            { name: "Cryptic Cogs", contract: CCContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0767232,finishTimeStamp: 86400, rewardToken: "EE", methodsCall: 1,divider:18},
-            { name: "Daemon World", contract: DWContract, indexOfTimestamp: 9,indexOfPower: 8,rewardPerTimestamp: 0.000012096,finishTimeStamp: 86400, rewardToken: "ANGB", methodsCall: 2,divider:18},
-            { name: "Jasper Cave",contract: JASPContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0000864,finishTimeStamp: 86400, rewardToken: "JASP",methodsCall: 2,divider:9},
-            { name: "Copper Mine",contract: CUContract, indexOfTimestamp: 4,indexOfPower: 3,rewardPerTimestamp:0.36*24,finishTimeStamp:3600,rewardToken:"CU", methodsCall: 2,divider:18},
+        var DungeonList = [ // Note 1 = nftStatus , 2 = nftEqiup 
+        // Power Worth = Amount Power per USD
+            { name: "Cryptic Cogs", contract: CCContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0767232,finishTimeStamp: 86400, rewardToken: "EE", methodsCall: 1,divider:18,powerWorth: 520,rewardPrice: EE_to_CMJ},
+            { name: "Daemon World", contract: DWContract, indexOfTimestamp: 9,indexOfPower: 8,rewardPerTimestamp: 0.000012096,finishTimeStamp: 86400, rewardToken: "ANGB", methodsCall: 2,divider:18,powerWorth: 25,rewardPrice: Angb_to_CMJ},
+            { name: "Jasper Cave",contract: JASPContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0000864,finishTimeStamp: 86400, rewardToken: "JASP",methodsCall: 2,divider:9,powerWorth: 150,rewardPrice: Jasper_to_CMJ},
+            { name: "Copper Mine",contract: CUContract, indexOfTimestamp: 4,indexOfPower: 3,rewardPerTimestamp:0.36*24,finishTimeStamp:3600,rewardToken:"CU", methodsCall: 2,divider:18,powerWorth:150,rewardPrice: Cu_to_CMJ},
         ]
         DungeonList.forEach(function(dun) {
-            dungeonData(dun.name,dun.contract,dun.indexOfTimestamp,dun.indexOfPower,dun.rewardPerTimestamp,dun.finishTimeStamp,dun.rewardToken,dun.methodsCall,dun.divider);
+            dungeonData(dun.name,dun.contract,dun.indexOfTimestamp,dun.indexOfPower,dun.rewardPerTimestamp,dun.finishTimeStamp,dun.rewardToken,dun.methodsCall,dun.divider,dun.powerWorth,dun.rewardPrice);
         });
 
-        async function dungeonData(dungeonName,contract,indexOfTimestamp,indexOfPower,rewardPerTimestamp,finishTimeStamp,rewardToken,methodsCall,divider){
+        async function dungeonData(dungeonName,contract,indexOfTimestamp,indexOfPower,rewardPerTimestamp,finishTimeStamp,rewardToken,methodsCall,divider,powerWorth,rewardPrice){
             console.log(" Access Dungeon Data Function")
             try{
                 var getData = []; 
@@ -1443,9 +1446,11 @@
                     Status = `<span style='color: red;'>No MainChar</span>`;
                 }
                 console.log(dungeonName," | Pendding =  ",getPending,"| Start ",getData[indexOfTimestamp]," END" ,getData[indexOfTimestamp] + finishTimeStamp);
-                addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending)
+                addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending,rewardPrice,powerWorth)
 
-                function addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending){
+                function addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending,rewardPrice,powerWorth){
+                    powerWorth = powerWorth*(1/USD_to_CMJ);
+                    console.log(powerWorth)
                     var table = document.getElementById("dungeon");
                     if (parseFloat(Power) > 0){
                         var newRow = table.insertRow(-1);
@@ -1459,9 +1464,10 @@
 
                         nameCell.innerHTML = dungeonName;
                         StatusCell.innerHTML = Status;
-                        PowerCell.innerHTML = `${(Power).toLocaleString()} CmPow`;
+                        PowerCell.innerHTML = `${(Power).toLocaleString()} CmPow<br>~${(Power/powerWorth).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ`;
                         MaxRewardCell.innerHTML = `${(MaxReward).toLocaleString()} ${rewardToken} /day`;
-                        getPendingCell.innerHTML = `${getPending.toLocaleString()} ${rewardToken}`;
+                        getPendingCell.innerHTML = `${getPending.toLocaleString()} ${rewardToken}<br>~${(getPending*rewardPrice).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ`;
+                        addFarmingWorth((Power/powerWorth),(getPending*rewardPrice))
                         console.log(endTimestamp);
                         dungeonEndCell.innerHTML = formatTimestamp(endTimestamp);
                     }
