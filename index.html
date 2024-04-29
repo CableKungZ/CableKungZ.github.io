@@ -826,8 +826,16 @@ li {
         <div class="card2 dungeon calc">
           <div class="card-body">
             <h5 class="card-title center">Mining Profit Calculator</h5>
-            <label for="power" class="center">Enter Power:</label>
-            <input type="number" class="center" id="power" min="0" placeholder="Enter Power" value="500">
+            <p id="powerBox">
+              <label for="power" class="center">Enter Power:</label>
+              <input type="number" class="center" id="power" min="0" placeholder="Insert Power Here">
+            </p>
+            <input type="checkbox" id="multiPower" name="checkbox1">
+            <label for="checkbox1">Multiple Power</label><br>
+            <p id="input" style="display: none;">
+              <input type="text" class="center" id="wallet" min="0" placeholder="Get From Wallet Address">
+            </p>
+            
             <!-- <button onclick="calculateProfit()">Calculate Profit</button> -->
             <table id="miningTable">
               <thead>
@@ -843,7 +851,10 @@ li {
         <tbody>
             <tr class="copperMine">
               <tr>
-                <td colspan="2">CopperMine <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="40" height="40"></td>
+                <td colspan="2">
+                  CopperMine <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="40" height="40">
+                  <p id="input1" style="display: none;"><input type="number" class="center" id="power1" min="0" placeholder="Insert Power Here" width="250px"></p>
+                </td>
                 <td>1 Hour</td>
                 <td><span id="labR3"></span> CMJ <br>(~<span id="labS3"></span> JBC)</td>
                 <td>0.36 CU</td>
@@ -853,7 +864,8 @@ li {
             </tr>
             <tr class="jasperCave">
                 <tr>
-                  <td colspan="2">JasperCave  <img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="40" height="40"></td>
+                  <td colspan="2">JasperCave  <img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="40" height="40">
+                    <p id="input2" style="display: none;"><input type="number" class="center" id="power2" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                   <td>1 Day</td>
                   <td><span id="labR4"></span> CMJ <br>(~<span id="labS5"></span> JBC)</td>
                   <td>0.0000864 Jasp</td>
@@ -863,7 +875,8 @@ li {
             </tr>
             <tr class="daemonWorld">
                 <tr>
-                  <td colspan="2">Deamon World <img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="Angel Blessing" width="40" height="40"></td>
+                  <td colspan="2">Deamon World <img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="Angel Blessing" width="40" height="40">
+                    <p id="input3" style="display: none;"><input type="number" class="center" id="power3" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                   <td>1 Day</td>
                   <td><span id="labR5"></span> CMJ <br>(~<span id="labS7"></span> JBC)</td>
                   <td>0.000012096 Angb<br>(x10 Event)</td>
@@ -872,7 +885,8 @@ li {
             </tr>
             <tr class="cryptic-cogs">
               <tr>
-                <td colspan="2">Cryptic Cogs <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="40" height="40"></td>
+                <td colspan="2">Cryptic Cogs <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="40" height="40">
+                  <p id="input4" style="display: none;"><input type="number" class="center" id="power4" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                 <td>1 Day</td>
                 <td><span id="Dun4_CMJ"></span> JTAO <br>(~<span id="Dun4_JBC"></span> USD)</td>
                 <td>0.0767232 EE</td>
@@ -1651,17 +1665,45 @@ inputs.forEach(input => {
 
 }
 
-const powerInputs = document.querySelectorAll("#power");
+const powerInputs = document.querySelectorAll("#power, #input1, #input2, #input3, #input4");
 
-// ใช้ forEach loop เพื่อเพิ่ม event listener ให้กับทุก input
-powerInputs.forEach(powerInput => {
-    powerInput.addEventListener("input", calculateProfit);
+powerInputs.forEach(input => {
+    input.addEventListener("input", calculateProfit);
 });
+
+
+
+
 
  function calculateProfit() {
     // ดึงค่า Power จาก input
-    const power = document.getElementById("power").value;
+    var isMultiple = document.getElementById("multiPower").checked;
+    var power = 0;
+    var CuPower = 0;
+    var JaspPower = 0;
+    var AngbPower = 0;
+    var EEPower = 0;
+    
 
+    if(isMultiple){
+      var CuPower = document.getElementById("power1").value || 0;
+      var JaspPower = document.getElementById("power2").value || 0;
+      var AngbPower = document.getElementById("power3").value || 0;
+      var EEPower = document.getElementById("power4").value || 0;
+      
+    
+    }else{
+      var power = document.getElementById("power").value || 0;
+      var CuPower = power;
+      var JaspPower = power;  
+      var AngbPower = power
+      var EEPower = power;
+    }
+    console.log("isMultiple : ",isMultiple);
+    console.log("CU POW : ",CuPower);
+    console.log("JASP POW : ",JaspPower);
+    console.log("ANGB POW : ",AngbPower);
+    console.log("EE POW : ",EEPower);
     const cuMine = parseFloat(document.getElementById("labR2").textContent) || 0; // Copper Mine Gas
     const jaspCave = parseFloat(document.getElementById("labR4").textContent) || 0; // Japser Cave Gas
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) || 0; // daemonWorld Gas
@@ -1688,11 +1730,11 @@ powerInputs.forEach(powerInput => {
     let angb = 0;
     let CrypticCog = 0;
 
-      copperMineHourly = 0.36 * power;
-      copperMineDaily = 0.36 * power * 24;
-      jasperCave = 0.0000864 * power;
-      angb = ((14000000 * 86400 * 10) * 10 ** -18) * power;
-      CrypticCog = (power * 0.0767232);
+      copperMineHourly = 0.36 * CuPower;
+      copperMineDaily = 0.36 * CuPower * 24;
+      jasperCave = 0.0000864 * JaspPower;
+      angb = ((14000000 * 86400 * 10) * 10 ** -18) * AngbPower;
+      CrypticCog = (EEPower * 0.0767232);
 
     // คำนวณ PNL - GASFEE
     const copperMineGasFee = (copperMineDaily * cuPrice) - (cuMine * 24);
@@ -1784,7 +1826,17 @@ powerInputs.forEach(powerInput => {
       "type": "function"
     }
   ];
-
+  async function loadContract(contractAddress) {
+    try {
+      const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
+      const data = await response.json();
+      const abi = JSON.parse(data.result);
+      return new web3.eth.Contract(abi, contractAddress);
+    } catch (error) {
+      console.error('Error loading contract:', error);
+      alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง")
+    }
+  }
         // สร้างออบเจ็กต์สัญญา
         const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
         const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
@@ -1818,6 +1870,43 @@ powerInputs.forEach(powerInput => {
         JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
 
         try {
+          document.addEventListener('DOMContentLoaded', function() {
+            var walletInput = document.getElementById('wallet');
+          
+            walletInput.addEventListener('input', function() {
+                setPowerFromWallet();
+            });
+          });
+          async function setPowerFromWallet(){
+            const walletAddress = document.getElementById("wallet").value;
+            if(walletAddress != 0){
+            console.log(walletAddress);
+            CUContract = await loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+            EEContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+            JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+            DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+        
+            getDataCu = await CUContract.methods.nftEquip(walletAddress).call();
+            getDataJasp = await JASPContract.methods.nftEquip(walletAddress).call();
+            getDataAngb = await DWContract.methods.nftEquip(walletAddress).call();
+            getDataEE = await EEContract.methods.nftStatus(walletAddress).call();
+        
+            var CuPow = document.getElementById('power1');
+            var JaspPow = document.getElementById('power2');
+            var AngbPow = document.getElementById('power3');
+            var EEPow = document.getElementById('power4');
+            console.log(getDataCu[3]);
+            console.log(getDataJasp[7]);
+            console.log(getDataAngb[8]);
+            console.log(getDataEE[7]);
+            CuPow.value = parseFloat(getDataCu[3]);
+            JaspPow.value = parseFloat(getDataJasp[7]);
+            AngbPow.value = parseFloat(getDataAngb[8]);
+            EEPow.value = parseFloat(getDataEE[7]);
+            }
+        }
+                
+          
             
             
             // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
@@ -2553,5 +2642,26 @@ setUSD()
 
 });
 
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkbox = document.getElementById('multiPower');
+    var powerInput = document.getElementById('powerBox');
+    var inputs = document.querySelectorAll('p[id^="input"]');
+
+    checkbox.addEventListener('change', function() {
+      if (checkbox.checked) {
+        powerInput.style.display = 'none';
+        inputs.forEach(function(input) {
+          input.style.display = 'block';
+        });
+      } else {
+        powerInput.style.display = 'block';
+        inputs.forEach(function(input) {
+          input.style.display = 'none';
+        });
+      }
+    });
+  });
 </script>
 </html>
