@@ -1766,11 +1766,11 @@ powerInputs.forEach(input => {
     document.getElementById("CrypticNight").innerHTML = `   * ${setLocal(CrypticCog,8)} EE/d `;
 
     // Display PNL messages
-    displayPNLMessages(CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
+    displayPNLMessages(CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }
 
   // Function to display PNL messages
-  function displayPNLMessages(CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
+  function displayPNLMessages(CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
     const pnlCu = copperMineGasFee; // PNL for CopperMine (Cu)
     const pnlJasp = jasperCaveGasFee; // PNL for JasperCave (Jasp)
     const pnlCuh = copperMiner2GasFee;
@@ -1784,15 +1784,39 @@ powerInputs.forEach(input => {
     const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span> for EE: ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USDT` : `<span class="loss">Loss</span> for EE: ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
 
     // Display PNL messages
+    if(CuPower != 0){
+    const pnlCuMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCu,2)} CMJ , ~${setLocal(copperMineGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCu),2)} CMJ ,  ~${setLocal(Math.abs(copperMineGasFee_inJBC),5)} JBC`;
+    const pnlCuhMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCuh,2)} CMJ , ~${setLocal(copperMiner2GasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCuh),2)} CMJ ,  ~${setLocal(Math.abs(copperMiner2GasFee_inJBC),5)} JBC`;
     document.getElementById("copperMineHourly").innerHTML += ` <br>(${pnlCuhMessage})` ;
-    document.getElementById("copperMineDaily").innerHTML += ` <br>(${pnlCuMessage})` ;
-    document.getElementById("jasperCave").innerHTML +=` <br>(${pnlJaspMessage})` ;
-    document.getElementById("DaemonWorld").innerHTML += ` <br>(${pnlAngbMessage})` ;
-    document.getElementById("CrypticNight").innerHTML += ` <br>(${pnlCCMessage})` ;
+      document.getElementById("copperMineDaily").innerHTML += ` <br>(${pnlCuMessage})` ;
+    }else{
+      document.getElementById("copperMineHourly").innerHTML += ` <br>(No Power No Miner)` ;
+      document.getElementById("copperMineDaily").innerHTML += ` <br>(No Power No Miner)` ;
 
-    // Log PNL messages to the console
-    console.log(pnlCuMessage);
-    console.log(pnlJaspMessage);
+    }
+    if(JaspPower != 0 ){
+    const pnlJaspMessage = pnlJasp >= 0 ? `<span class="profit">Profit</span> for Jasp: ${setLocal(pnlJasp,2)} CMJ , ~${setLocal(jasperCaveGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Jasp: ${setLocal(Math.abs(pnlJasp),2)} CMJ ,  ~${setLocal(Math.abs(jasperCaveGasFee_inJBC),5)} JBC`;
+    document.getElementById("jasperCave").innerHTML +=` <br>(${pnlJaspMessage})` ;
+    }else{
+      document.getElementById("jasperCave").innerHTML +=` <br>(No Power No Miner)` ;
+      
+    }
+    if(AngbPower != 0){
+    const pnlAngbMessage = pnlAngb >= 0 ? `<span class="profit">Profit</span> for Angb: ${setLocal(pnlAngb,2)} CMJ , ~${setLocal(daemonWorldGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Angb: ${setLocal(Math.abs(pnlAngb),2)} CMJ ,  ~${setLocal(Math.abs(daemonWorldGasFee_inJBC),5)} JBC`;
+    document.getElementById("DaemonWorld").innerHTML += ` <br>(${pnlAngbMessage})` ;
+    }else{
+      document.getElementById("DaemonWorld").innerHTML += ` <br>(No Power No Miner)` ;
+    }
+    if(EEPower != 0){
+    const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span> for EE: ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USDT` : `<span class="loss">Loss</span> for EE: ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
+    document.getElementById("CrypticNight").innerHTML += ` <br>(${pnlCCMessage})` ;
+    }else{
+      document.getElementById("CrypticNight").innerHTML += ` <br>(No Power No Miner)` ;
+
+    }
+
+    
+
   }
 
 
