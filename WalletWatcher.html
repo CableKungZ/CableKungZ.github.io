@@ -1516,7 +1516,7 @@
               }
           }
 
-        addFieldtoStaking("Field | Tuna Lake",NftStakeID.length,0,(totalTuna/10**18),Tuna_to_CMJ,"TUNA")
+        addFieldtoStaking("Field | Tuna Lake",NftStakeID.length,(5*USD_to_CMJ),(totalTuna/10**18),Tuna_to_CMJ,"TUNA")
       }
 
       async function collectMiceRewards() {
@@ -1535,7 +1535,7 @@
             }
         }
 
-        addFieldtoStaking("Field | Ware Old House",StakeNFTID.length,0,(totalMice/10**18),Mice_to_CMJ,"Mice")
+        addFieldtoStaking("Field | Ware Old House",StakeNFTID.length,(5*USD_to_CMJ),(totalMice/10**18),Mice_to_CMJ,"Mice")
     }
 
     async function collectTHLRewards() {
@@ -1549,12 +1549,11 @@
                   const getReward = await FieldTHL.methods.calculateRewards1(i).call();
                   totalGold += parseInt(getReward); // Assuming getReward is in integer format
               }
-              
           } catch (error) {
               console.error(`Error fetching data for index ${i}:`, error);
           }
       }
-      addFieldtoStaking("Field | The Heaven Land",GoldindicesToCollect.length,(20/CMJ_to_USD),(totalGold/10**18),Gold_to_CMJ,"GOLD")
+      addFieldtoStaking("Field | The Heaven Land",GoldindicesToCollect.length,(20*USD_to_CMJ),(totalGold/10**18),Gold_to_CMJ,"GOLD")
       document.getElementById('Status').innerHTML = '✅'
     }
 
@@ -1595,9 +1594,6 @@
 
     // แสดงผลลัพธ์ที่ได้
     
-  
-  
-        // Call the function
         document.getElementById('Status').innerHTML = '🔃'
         getFarming();
         collectTunaRewards();
