@@ -435,6 +435,26 @@
     .underline {
         text-decoration: underline;
     }
+    footer {
+      background-color: #f0f0f0; /* สีพื้นหลังของ Footer */
+      padding: 20px; /* ระยะห่างของขอบ Footer กับเนื้อหา */
+  }
+  
+  .partner, .sponsor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px; /* ระยะห่างระหว่าง Partner และ Sponsor */
+  }
+  
+  .partner img, .sponsor img {
+      width: 100px; /* ขนาดของรูปภาพ Partner และ Sponsor */
+      margin: 0 10px; /* ระยะห่างระหว่างรูปภาพ */
+  }
+  .sponsor p{
+    margin-right: 20px;
+    font-size: 18px;
+  }
     </style>
 </head>
 <body>
@@ -1238,7 +1258,16 @@
       <iframe src="https://daobuddy.xyz/WalletWatcher" style="width: 100%; height: 100vh; border: none;"></iframe>
   </div>
 </div>
-
+<footer>
+  <h1 class="center">Ecosystem of CommuDao</h1>
+  <div class="partner">
+      <img src="https://commudao.xyz/favicon.png" alt="Partner 1">
+  </div>
+  <h1 class="center">Sponser By</h1>
+  <div class="sponsor">
+    <p>CommuDao</p>
+  </div>
+</footer>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
