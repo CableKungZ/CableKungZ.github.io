@@ -1359,11 +1359,12 @@ async function getBalance() {
     const JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
     const DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
     const CCContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
-    const LPFarming = await loadContract('0x6B25033c2B4F5594809cBEf9F625771a2574C1a6'); 
-    const TunaField = await loadContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
-    const MiceField = await loadContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
-    const FieldTHL = await loadContract('0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9');
-    const MHZField = await loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+    const LPFarming = await loadContract('0x6B25033c2B4F5594809cBEf9F625771a2574C1a6'); // Game Swap Contract
+    const TunaField = await loadContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381'); // Tuna field
+    const MiceField = await loadContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df'); // Old warehouse field
+    const FieldTHL = await loadContract('0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9'); // The Heaven Land
+    const MHZField = await loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890'); // Mech Harvest Zone
+    const VbagField = await loadContract('0x495d66c9Fd7c63807114d06802A48BdAA60a0426'); // Eastern (Vabag)
     function calculateWorth(balance, conversionRate) {
       return parseFloat(balance * conversionRate);
   }
@@ -1372,7 +1373,7 @@ async function getBalance() {
     // หา DOM element ของตารางโดยใช้ ID
     var table = document.getElementById("walletAsset");
     var tokenValue = calculateWorth(tokenAmount,tokenPrice);
-    console.log(tokenValue)
+    //console.log(tokenValue)
     // สร้าง row ใหม่
     if (tokenValue > 1){
         var newRow = table.insertRow(-1);
@@ -1480,13 +1481,13 @@ async function getBalance() {
       try{
         const Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
         const Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
-        console.log(Info1)
+        //console.log(Info1)
         const Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
         const Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
-        console.log(Info2)
+        //console.log(Info2)
         const Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
         const Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
-        console.log(Info3)
+        //console.log(Info3)
 
 
         addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),16.88,(Pending1/10**18),Jdao_to_CMJ,"JDAO");
@@ -1494,11 +1495,9 @@ async function getBalance() {
         addtoStaking("Farming LP JBC-JUSDT",(Info3[0]/10**18),2.9,(Pending3/10**18),Jdao_to_CMJ,"JDAO");
 
         function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
-            // หา DOM element ของตารางโดยใช้ ID
             var table = document.getElementById("farmingAsset");
             var stakingValue = calculateWorth(tokenAmount,tokenPrice);
             var pendingValue = calculateWorth(Pending,pendingPrice);
-            // สร้าง row ใหม่
             if (stakingValue > 1){
                 var newRow = table.insertRow(-1);
                 // เพิ่มข้อมูลในแต่ละ column
@@ -1553,7 +1552,7 @@ async function getBalance() {
             }else if(methodsCall == 2){
                 var getData = await contract.methods.nftEquip(walletAddress).call();
             }
-            console.log("data Table of ",dungeonName," ",getData);
+            //console.log("data Table of ",dungeonName," ",getData);
             if(parseFloat(getData[0]) != 0){
                 var getPending = await contract.methods.calculateRewards(walletAddress).call() / (10**divider);
                 var endTimestamp = parseFloat(getData[indexOfTimestamp]) + finishTimeStamp ;
@@ -1573,7 +1572,7 @@ async function getBalance() {
 
             function addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending,rewardPrice,powerWorth){
                 powerWorth = powerWorth*(1/USD_to_CMJ);
-                console.log(powerWorth)
+                //console.log(powerWorth)
                 var table = document.getElementById("dungeon");
                 if (parseFloat(Power) > 0){
                     var newRow = table.insertRow(-1);
@@ -1591,7 +1590,7 @@ async function getBalance() {
                     MaxRewardCell.innerHTML = `${(MaxReward).toLocaleString()} ${rewardToken} /day`;
                     getPendingCell.innerHTML = `${getPending.toLocaleString()} ${rewardToken}<br>~${(getPending*rewardPrice).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ`;
                     addFarmingWorth((Power/powerWorth),(getPending*rewardPrice))
-                    console.log(endTimestamp);
+                    //console.log(endTimestamp);
                     dungeonEndCell.innerHTML = formatTimestamp(endTimestamp);
                 }
             }
@@ -1629,72 +1628,96 @@ async function getBalance() {
             }
         }
 
-    async function collectTunaRewards() {
-      let totalTuna = 0;
-      let NftStakeID = [];
-      for (let i = 0; i <= 100; i++) {
-          try {
-              const data = await TunaField.methods.nftStake(i).call();
-              if (data[0] === walletAddress) {
-                  NftStakeID.push(i);
-                  const getReward = await TunaField.methods.calculateRewards(i).call();
-                  totalTuna += parseInt(getReward); 
-                }
-          } catch (error) {
-              console.error(`Error fetching data for index ${i}:`, error);
-          }
-      }
 
-    addFieldtoStaking("Field | Tuna Lake",NftStakeID.length,(5*USD_to_CMJ),(totalTuna/10**18),Tuna_to_CMJ,"TUNA")
-  }
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //                                              FIELD SETTING                           
+    //
 
-  async function collectMiceRewards() {
-    let totalMice = 0;
-    let StakeNFTID = [];
-    for (let i = 0; i <= 1000; i++) {
+    document.getElementById('Status').innerHTML = '🔃'
+    getFarming();
+    getGear()
+
+    fieldInfo = [
+    {fieldName:"Tuna Lake", contract: TunaField, fieldAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",nftAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",tokenReward:"TUNA",tokenPrice:Tuna_to_CMJ,nftValue:(5*USD_to_CMJ)},
+    {fieldName:"Old Ware House", contract: MiceField, fieldAddress:"0x09DE640ecd50e1c81bCB266279e3ffC2719873df", nftAddress:"0xd492e20ecf3ae85fe3e3159bb064442b86d6dc02", tokenReward:"MICE", tokenPrice: Mice_to_CMJ, nftValue:(5*USD_to_CMJ)},
+    {fieldName:"Eastern Front", contract: VbagField, fieldAddress:"0x495d66c9Fd7c63807114d06802A48BdAA60a0426", nftAddress:"0x526A70be985EB234c3f2c4933aCB59F6EB595Ed7", tokenReward:"VABAG", tokenPrice: (3/1)*USD_to_CMJ , nftValue:(10*USD_to_CMJ)},
+    {fieldName:"Mech Harvest Zone", contract: MHZField, fieldAddress:"0x0E2610730A3c42fd721B289BEe092D9AD1C76890", nftAddress:"0x2036186F6d5287FcB05C56C38374AC5236d8A61d", tokenReward:"GEAR", tokenPrice: (2/15000000)*USD_to_CMJ , nftValue:(201.38*USD_to_CMJ)},
+    {fieldName:"The Heaven Land", contract: FieldTHL, fieldAddress:"0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9", nftAddress:"0xA6f8cE1425E0fC4b74f3b1c2f9804e9968f90e17", tokenReward:"GOLD", tokenPrice: Gold_to_CMJ, nftValue:(20*USD_to_CMJ)},
+    //{fieldName:"", fieldAddress:"", nftAddress:"", tokenReward:"", tokenPrice: , nftValue:},
+    ]
+
+    for (const field of fieldInfo) {
+        console.log("Call ",field.fieldName);
+        await dungeon(field.fieldName, field.contract, field.fieldAddress, field.nftAddress, field.tokenReward, field.tokenPrice, field.nftValue);
+    }
+    document.getElementById('Status').innerHTML = '✅';
+
+    async function getNftTransfer(walletAddress, fieldAddress, nftAddress) {
+        var event_filter = {
+            'fromBlock': 'earliest',
+            'toBlock': 'latest',
+            'address': nftAddress,
+            'topics': [
+                web3.utils.keccak256('Transfer(address,address,uint256)'),
+                '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase(),
+                '0x000000000000000000000000' + fieldAddress.slice(2).toLowerCase()
+            ]
+        };
+      
+        return await web3.eth.getPastLogs(event_filter);
+    }
+    
+    async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenReward, tokenPrice, nftValue) {
+        let totalReward = 0;
+        let ownedNFTID = [];
         try {
-            const data = await MiceField.methods.nftStake(i).call();
-            if (data[0] === walletAddress) {
-                StakeNFTID.push(i);
-                const getReward = await MiceField.methods.calculateRewards(i).call();
-                totalMice += parseInt(getReward); // Assuming getReward is in integer format
-              }
-} catch (error) {
-            console.error(`Error fetching data for index ${i}:`, error);
+            let transfer_tx = await getNftTransfer(walletAddress, fieldAddress, nftAddress); // ดึงข้อมูล transfer
+            console.log(transfer_tx)
+            for (const log of transfer_tx) { // ใช้ for...of เพื่อวนลูป logsArray
+                var tx_hash = log.transactionHash;
+                var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                var response = await fetch(transaction_url);
+                var data = await response.json();
+                if (data.items) { // Loop ตรวจสอบ data จาก json
+                    for (const item of data.items) {
+                        console.log("TYPE : ", item.token.type,"ID : ", item.total.token_id)
+                        if (item.token.type != "ERC-20") { // ตรวจสอบ Type ERC721
+                        console.log("Pass Check Type")
+                        const itemID = item.total.token_id;
+                            const checkOwner = await contract.methods.nftStake(parseInt(itemID)).call(); // ตรวจสอบเจ้าของให้ตรงกันอีกครั้ง
+                            console.log("Owner = ",checkOwner[0]);
+                            if (checkOwner[0] === walletAddress) {
+                                ownedNFTID.push(itemID); // เพิ่มเจ้าของ
+                                console.log(ownedNFTID);
+                                var getReward = 0;
+                                if (fieldName === "The Heaven Land") {
+                                    var getReward = await contract.methods.calculateRewards1(itemID).call() / 10 ** 18;
+                                    console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                                } else if (fieldName === "Mech Harvest Zone") {
+                                    var getReward = await contract.methods.calculateRewards(itemID, walletAddress, "true").call() / 10 ** 18;
+                                    console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                                } else {
+                                    var getReward = await contract.methods.calculateRewards(itemID).call() / 10 ** 18;
+                                    console.log("Other Zone with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                                }
+                                totalReward += parseInt(getReward);
+                            }
+                        }
+                    }
+                }
+            }
+            fieldName = "Field | " + fieldName;
+            addFieldtoStaking(fieldName, ownedNFTID.length, nftValue, totalReward, tokenPrice, tokenReward);
+        } catch (error) {
+            console.error('Error:', error);
         }
     }
-
-    addFieldtoStaking("Field | Ware Old House",StakeNFTID.length,(5*USD_to_CMJ),(totalMice/10**18),Mice_to_CMJ,"Mice")
-}
-
-async function collectTHLRewards() {
-  let totalGold = 0;
-  let GoldindicesToCollect = [];
-  for (let i = 0; i <= 1000; i++) {
-      try {
-          const data = await FieldTHL.methods.nftStake(i).call();
-          if (data[0] === walletAddress) {
-            GoldindicesToCollect.push(i);
-              const getReward = await FieldTHL.methods.calculateRewards1(i).call();
-              totalGold += parseInt(getReward); // Assuming getReward is in integer format
-          }
-      } catch (error) {
-          console.error(`Error fetching data for index ${i}:`, error);
-      }
-  }
-  addFieldtoStaking("Field | The Heaven Land",GoldindicesToCollect.length,(20*USD_to_CMJ),(totalGold/10**18),Gold_to_CMJ,"GOLD")
-  document.getElementById('Status').innerHTML = '✅'
-}
-
-    async function collectGearRewards(){
+    async function getGear(){
         pendingWorth = 0;
         stakeValue = 0;
         penndingGear1 =0;
         penndingGear =0;
-
-        TDMID = [39190528,39059456,38928384,38797312,38666240,38535168,38404096,38273024,38141952,38010880,37879808,37748736,37617664,37486592,37355520,37224448,37093376,36962304,36831232,36700160,36569088,36438016,36306944,36175872,36044800,35913728,35782656,35651584,35520512,35389440,35258368,35127296,34996224,34865152,34734080,34603008,34471936,34340864,34209792,34078720,33947648,33816576,33685504,33554432,33423360,33292288,33161216,33030144,32899072,32768000,32636928,32505856,32374784,32243712,32112640,31981568,31850496,31719424,31588352,31457280,31326208,31195136,31064064,30932992,30801920,30670848,30539776,30408704,30277632,30146560,30015488,29884416,29753344,29622272,29491200,29360128,29229056,29097984,28966912,28835840,28704768,28573696,28442624,28311552,28180480,28049408,27918336,27787264,27656192,27525120,27394048,27262976,27131904,27000832,26869760,26738688,26607616,26476544,26345472,26214400,26083328,25952256,25821184,25690112,25559040,25427968,25296896,25165824,25034752,24903680,24772608,24641536,24510464,24379392,24248320,24117248,23986176,23855104,23724032,23592960,23461888,23330816,23199744,23068672,22937600,22806528,22675456,22544384,22413312,22282240,22151168,22020096,21889024,21757952,21626880,21495808,21364736,21233664,21102592,20971520,20840448,20709376,20578304,20447232,20316160,20185088,20054016,19922944,19791872,19660800,19529728,19398656,19267584,19136512,19005440,18874368,18743296,18612224,18481152,18350080,18219008,18087936,17956864,17825792,17694720,17563648,17432576,17301504,17170432,17039360,16908288,16777216,16646144,16515072,16384000,16252928,16121856,15990784,15859712,15728640,15597568,15466496,15335424,15204352,15073280,14942208,14811136,14680064,14548992,14417920,14286848,14155776,14024704,13893632,13762560,13631488,13500416,13369344,13238272,13107200,12976128,12845056,12713984,12582912,12451840,12320768,12189696,12058624,11927552,11796480,11665408,11534336,11403264,11272192,11141120,11010048,10878976,10747904,10616832,10485760,10354688,10223616,10092544,9961472,9830400,9699328,9568256,9437184,9306112,9175040,9043968,8912896,8781824,8650752,8519680,8388608,8257536,8126464,7995392,7864320,7733248,7602176,7471104,7340032,7208960,7077888,6946816,6815744,6684672,6553600,6422528,6291456,6160384,6029312,5898240,5767168,5636096,5505024,5373952,5242880,5111808,4980736,4849664,4718592,4587520,4456448,4325376,4194304,4063232,3932160,3801088,3670016,3538944,3407872,3276800,3145728,3014656,2883584,2752512,2621440,2490368,2359296,2228224,2097152,1966080,1835008,1703936,1572864,1441792,1310720,1179648,1048576,917504,786432,655360,524288,393216,262144,131072,0];
-      
-        let TaodumOwnerID = []; 
       
         try {
           let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
@@ -1704,31 +1727,11 @@ async function collectTHLRewards() {
             penndingGear1 = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
           addFieldtoStaking("Field | Mech Harvest Zone (JTAO)",stakeJTAO,(JTAO_to_CMJ),(penndingGear1),((2/30000000)*USD_to_CMJ),"GEAR")
           }
-            for (let i = 0; i <= 299; i++){
-                const data = await MHZField.methods.nftStake(TDMID[i]).call();
-                if (data[0] === walletAddress){
-                    TaodumOwnerID.push(TDMID[i]);
-                    const getReward = await MHZField.methods.calculateRewards(TDMID[i],walletAddress, "true").call();
-                    penndingGear += getReward/10**18;
-                  }
-            }
         } catch(error) {
             console.error('Error fetching data:', error);
         }
-        addFieldtoStaking("Field | Mech Harvest Zone (NFT)",TaodumOwnerID.length,(201.38*USD_to_CMJ),(penndingGear),((2/30000000)*USD_to_CMJ),"GEAR")
     }
 
-    
-
-
-// แสดงผลลัพธ์ที่ได้
-
-    document.getElementById('Status').innerHTML = '🔃'
-    getFarming();
-    collectTunaRewards();
-    collectMiceRewards();
-    collectTHLRewards();
-    collectGearRewards();
 
     function addWalletWorth(TokenValue){
         var currentCMJ = parseFloat(document.getElementById("wallet_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
@@ -1816,7 +1819,6 @@ function startHistory(){
       token_transfers.push(get_token_transfers(from_address, Naruta, address));
       token_transfers.push(get_token_transfers(from_address, Redeem_TDM, address));
       token_transfers.push(get_token_transfers(from_address, Market, address));
-      
   }
 
   Promise.all(token_transfers)
