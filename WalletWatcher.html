@@ -245,6 +245,49 @@
       button:hover {
         background-color: #45a049;
       }
+        /* Style the dropdown button */
+        .dropDown {
+        background-color: #f9f9f9;
+        color: #333;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    /* Style the dropdown content (hidden by default) */
+    .dropDown .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    /* Style the dropdown links */
+    .dropDown .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropDown .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    
+    /* Show the dropdown menu on hover */
+    .dropDown:hover .dropdown-content {
+        display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropDown:hover {
+        background-color: #f1f1f1;
+    }
+  
     </style>
 </head>
 <body>
@@ -271,6 +314,7 @@
                 <li><a onclick='showdPopup("dpopup")'>Donations</a></li>
                 <li><a onclick="toggleCards('dashboard')">Dashboard</a></li>
                 <li><a onclick="toggleCards('priceboard')">Price Board</a></li>
+                <li><a onclick="toggleCards('txhistory')">Transaction History</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Tools</a>
                     <div class="dropdown-content">
@@ -281,14 +325,13 @@
             </ul>
         </nav>
     </header>
-    <div class="c main-container" id="dashboard" style="display: block;">
-        <div class="center">
-          <div id="chainSelector">
-            <p>Choose chain</p>
-            <button onclick="selectChain('bitkubchain#')">Bitkub Chain (..Soon)</button>
-            <button onclick="selectChain('jibchain')">Jib Chain</button>
-              <p></p>
-          </div>
+<div class="c main-container" id="dashboard" style="display: block;">
+    <div class="center">
+        <div id="chainSelector">
+        <p>Choose chain</p>
+        <button onclick="selectChain('bitkubchain')">Bitkub Chain (..Soon)</button>
+        <button onclick="selectChain('jibchain')">Jib Chain</button>
+        </div>
 <div id="jibchain" class="chain">
 <!-- ข้อความและ input text -->
   <h1>Jib Chain</h1>
@@ -416,190 +459,222 @@
     </table>
 </div>
 </div>
-<div id="bitkubchain" style="display:none;" class="chain">
-<!-- ข้อความและ input text -->
-  <h1>Bitkub Chain</h1>
-  <label for="bkc_wallet_address" class="center">Enter Wallet Address:</label>
-  <input type="text" class="center" id="bkc_wallet_address" placeholder="Enter Wallet Address">
-  <button onclick="get_BKCBalance()">Get Balance</button>
-  <section class="overview">
-    <div class="overview-item">
-        <h2>Total Networth</h2>
-        <div class="overview-details">
-            <div class="big-value"><span id="bkc_nw_usd">0</span> USD</div>
-            <div class="small-values">
-                <div>~<span id="bkc_nw_kub">0</span> KUB</div>
-                <div>~<span id="bkc_nw_cmm">0</span> CMM</div>
-                <div>~<span id="bkc_nw_thb">0</span> THB</div>
-            </div>
-        </div>
-    </div>
-    <div class="overview-item">
-        <h2>Pending Reward</h2>
-        <div class="overview-details">
-            <div class="big-value"><span id="bkc_pending_usd">0</span> USD</div>
-            <div class="small-values">
-                <div>~<span id="bkc_bkc_pending_kub">0</span> KUB</div>
-                <div>~<span id="bkc_pending_cmm">0</span> CMM</div>
-                <div>~<span id="bkc_pending_thb">0</span> THB</div>
-            </div>
-        </div>
-    </div>
-    <div class="overview-item">
-        <h2>Wallet Worth</h2>
-        <div class="overview-details">
-            <div class="big-value"><span id="bkc_wallet_usd">0</span> USD</div>
-            <div class="small-values">
-                <div>~<span id="bkc_wallet_kub">0</span> KUB</div>
-                <div>~<span id="bkc_wallet_cmm">0</span> CMM</div>
-                <div>~<span id="bkc_wallet_thb">0</span> THB</div>
-            </div>
-        </div>
-    </div>
-    <div class="overview-item">
-        <h2>Staking Worth</h2>
-        <div class="overview-details">
-            <div class="big-value"><span id="bkc_farm_usd">0</span> USD</div>
-            <div class="small-values">
-                <div>~<span id="bkc_farm_kub">0</span> KUB</div>
-                <div>~<span id="bkc_farm_cmm">0</span> CMM</div>
-                <div>~<span id="bkc_farm_thb">0</span> THB</div>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="main-container">
-    <section class="overview">
-        <!-- เริ่มต้นแสดงข้อมูล Asset in Wallet -->
+<div id="bitkubchain" class="chain" style="display: none;">
+    <!-- ข้อความและ input text -->
+      <h1>Bitkub Chain (Not Avillable Yet)</h1>
+      <label for="wallet_address" class="center">Enter Wallet Address:</label>
+      <input type="text" class="center" id="wallet_address" placeholder="Enter Wallet Address">
+      <button onclick="getBalanceBKC()">Get Balance</button>
+      <section class="overview">
         <div class="overview-item">
-            <h2>Asset in Wallet</h2>
-            <h6>Display only asset value greater than 1 CMJ</h6>
-            <table id="bkc_walletAsset">
-              <thead>
-                  <tr>
-                      <th>Token</th>
-                      <th>Amount</th>
-                      <th>Price (USD)</th>
-                      <th>Value (USD)</th>
-                  </tr>
-              </thead>
-              <tbody id="assetBody">
-              </tbody>
-          </table>
+            <h2>Total Networth</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="nw_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="nw_jbc">0</span> KUB</div>
+                    <div>~<span id="nw_cmj">0</span> CMM</div>
+                    <div>~<span id="nw_thb">0</span> THB</div>
+                </div>
+            </div>
         </div>
-        <!-- สิ้นสุดแสดงข้อมูล Asset in Wallet -->
-        <!-- เริ่มต้นแสดงข้อมูล Asset in farms/pool/staking -->
         <div class="overview-item">
-            <h2>Asset in Farms/Pool/Staking <span id="bkc_Status"></span></h2>
-            <h6>Display only asset balance mininmum 1 </h6>
-            <table id="bkc_farmingAsset">
-                <tr>
-                    <th>Farm/Pool/Staking</th>
-                    <th>Balance</th>
-                    <th>Value</th>
-                    <th>Reward</th>
-                </tr>
-            </table>
+            <h2>Pending Reward</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="pending_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="pending_jbc">0</span> KUB</div>
+                    <div>~<span id="pending_cmj">0</span> CMM</div>
+                    <div>~<span id="pending_thb">0</span> THB</div>
+                </div>
+            </div>
         </div>
-        <!-- สิ้นสุดแสดงข้อมูล Asset in farms/pool/staking -->
+        <div class="overview-item">
+            <h2>Wallet Worth</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="wallet_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="wallet_jbc">0</span> KUB</div>
+                    <div>~<span id="wallet_cmj">0</span> CMM</div>
+                    <div>~<span id="wallet_thb">0</span> THB</div>
+                </div>
+            </div>
+        </div>
+        <div class="overview-item">
+            <h2>Staking Worth</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="farm_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="farm_jbc">0</span> KUB</div>
+                    <div>~<span id="farm_cmj">0</span> CMM</div>
+                    <div>~<span id="farm_thb">0</span> THB</div>
+                </div>
+            </div>
+        </div>
     </section>
-<!--
-      <section class="overview-item">
-        <h1>Dungeon</h1>
-        <table id="bkc_dungeon">
-            <tr>
-                <th>Dungeon Name</th>
-                <th>Status</th>
-                <th>Power</th>
-                <th>Reward/Day</th>
-                <th>Pending</th>
-                <th>End At</th>
-            </tr>
-        </table>
-    </section>
--->
+    <div class="main-container">
+        <section class="overview">
+            <!-- เริ่มต้นแสดงข้อมูล Asset in Wallet -->
+            <div class="overview-item">
+                <h2>Asset in Wallet</h2>
+                <h6>Display only <span style="color:green;">listed</span> asset value</h6>
+                <table id="walletAsset">
+                    <tr>
+                        <th>Name</th>
+                        <th>Balance</th>
+                        <th>Current Price</th>
+                        <th>Value</th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
+            <!-- สิ้นสุดแสดงข้อมูล Asset in Wallet -->
+            <!-- เริ่มต้นแสดงข้อมูล Asset in farms/pool/staking -->
+            <div class="overview-item">
+                <h2>Asset in Farms/Pool/Staking <span id="Status"></span></h2>
+                <h6>Display only asset balance mininmum 1 </h6>
+                <table id="farmingAsset">
+                    <tr>
+                        <th>Farm/Pool/Staking</th>
+                        <th>Balance</th>
+                        <th>Value</th>
+                        <th>Reward</th>
+                    </tr>
+                </table>
+            </div>
+            <!-- สิ้นสุดแสดงข้อมูล Asset in farms/pool/staking -->
+        </section>
 
-</div>
+    </div>
+    </div>
 </div>
 
+
+
+
+    </div>
 <div class="c main-container" id="priceboard" style="display: none;">
-<div class="token-price">
-    <div id="countdown">Countdown</div>
-    <div id="updatedMessage" style="display:none;">Updated</div>
-    <h2>PROJECT TOKEN <span>[USD = <span id="THB"></span>THB</span>]</h2>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
-      <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
-      Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
-      <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD<br>
-      Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
-      <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD<br>
-      Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
-      <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
-  
-    <h2>MATERIALS </h2>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20"><a href="https://meowneon.app/swapmeowwood"  target="_blank">Wood</a>*0%   : 
-      <br>Buy/Sell <span id="priceB4">..Loading</span> CMJ<br>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20"><a href="https://meowneon.app/swapmeowtuna"  target="_blank">Tuna</a>*0%  : 
-      <br>Buy/Sell <span id="priceB5">..Loading</span> CMJ<br>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20"><a href="https://meowneon.app/swapmeowmice"  target="_blank">Mice</a>*0%  : 
-      <br>Buy/Sell <span id="priceB6">..Loading</span> CMJ<br>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Copper</a>*5%  : 
-      <br>Buy <span id="priceB7">..Loading</span> CMJ<br>
-      Sell  <span id="Sell_CuinCMJ">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JASPER</a>*5%  : 
-      <br>Buy <span id="priceB17">..Loading</span> CMJ<br>
-      Sell  <span id="priceB17_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">OS</a>*5%  : 
-      <br>Buy <span id="priceB18">..Loading</span> CMJ<br>
-      Sell  <span id="priceB18_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JDAO</a>*5%  : 
-      <br>Buy <span id="priceB15">..Loading</span> CMJ<br>
-      Sell  <span id="priceB15_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20"><a href="https://meowneon.app/swapmeowmt"  target="_blank">MT</a>*0%  : 
-      <br>Buy/Sell <span id="priceB16">..Loading</span> CMJ<br>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">ANGB</a>*5%  : 
-      <br>Buy <span id="priceB23">..Loading</span> CMJ,<span id="priceD23">..Loading</span> WJBC<br>
-      Sell  <span id="priceB23_2">..Loading</span> CMJ,<span id="priceD23_2">..Loading</span> WJBC</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">II</a>*5%  : 
-      <br>Buy <span id="IIPrice_CMJ">..Loading</span> CMJ,<span id="IIPrice_JTAO">..Loading</span> JTAO<br>
-      Sell  <span id="IIPrice_CMJ_2">..Loading</span> CMJ,<span id="IIPrice_JTAO_2">..Loading</span> JTAO</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">EE</a>*5%  : 
-      <br>Buy <span id="EEPrice_CMJ">..Loading</span> CMJ,<span id="EEPrice_JTAO">..Loading</span> JTAO<br>
-      Sell  <span id="EEPrice_CMJ_2">..Loading</span> CMJ,<span id="EEPrice_JTAO_2">..Loading</span> JTAO</h4>
-  
-    <h2>PRODUCT</h2>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">BBQ</a>*5%  : 
-      <br>Buy <span id="priceB8">..Loading</span> CMJ<br>
-      Sell  <span id="priceB8_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Pizza</a>*5%  : 
-      <br>Buy <span id="priceB9">..Loading</span> CMJ<br>
-      Sell  <span id="priceB9_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">CTUNA</a>*5%  : 
-      <br>Buy <span id="priceB10">..Loading</span> CMJ<br>
-      Sell  <span id="priceB10_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SX31</a>*5%  : 
-      <br>Buy <span id="priceB11">..Loading</span> CMJ<br>
-      Sell  <span id="priceB11_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20"><a href="https://meowneon.app/swapmeowsil"  target="_blank">Silver</a>*5%  : 
-      <br>Buy <span id="priceB12">..Loading</span> CMJ<br>
-      Sell  <span id="priceB12_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20"><a href="https://meowneon.app/swapmeowgold"  target="_blank">Gold</a>*5%  : 
-      <br>Buy <span id="priceB13">..Loading</span> CMJ<br>
-      Sell  <span id="priceB13_2">..Loading</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :
-      <br>Buy [คาดเดา] <span id="priceB19">0.001155</span> CMJ<br>
-      Sell [คาดเดา]  <span id="">0.001045</span> CMJ</h4>
-    <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : 
-      <br>Buy <span id="priceB21">..Loading</span> CMJ, <span id="priceD21">..Loading</span> JBC<br>
-      Sell  <span id="priceB21_2">..Loading</span> CMJ,<span id="priceD21_2">..Loading</span> JBC</h4>
-  
-    <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
-  </div>
+    <div class="token-price">
+        <div id="countdown">Countdown</div>
+        <div id="updatedMessage" style="display:none;">Updated</div>
+        <h2>PROJECT TOKEN <span>[USD = <span id="THB"></span>THB</span>]</h2>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
+          <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
+          Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
+          <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD<br>
+          Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
+          <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD<br>
+          Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
+          <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
+      
+        <h2>MATERIALS </h2>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20"><a href="https://meowneon.app/swapmeowwood"  target="_blank">Wood</a>*0%   : 
+          <br>Buy/Sell <span id="priceB4">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20"><a href="https://meowneon.app/swapmeowtuna"  target="_blank">Tuna</a>*0%  : 
+          <br>Buy/Sell <span id="priceB5">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20"><a href="https://meowneon.app/swapmeowmice"  target="_blank">Mice</a>*0%  : 
+          <br>Buy/Sell <span id="priceB6">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Copper</a>*5%  : 
+          <br>Buy <span id="priceB7">..Loading</span> CMJ<br>
+          Sell  <span id="Sell_CuinCMJ">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JASPER</a>*5%  : 
+          <br>Buy <span id="priceB17">..Loading</span> CMJ<br>
+          Sell  <span id="priceB17_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">OS</a>*5%  : 
+          <br>Buy <span id="priceB18">..Loading</span> CMJ<br>
+          Sell  <span id="priceB18_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JDAO</a>*5%  : 
+          <br>Buy <span id="priceB15">..Loading</span> CMJ<br>
+          Sell  <span id="priceB15_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20"><a href="https://meowneon.app/swapmeowmt"  target="_blank">MT</a>*0%  : 
+          <br>Buy/Sell <span id="priceB16">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">ANGB</a>*5%  : 
+          <br>Buy <span id="priceB23">..Loading</span> CMJ,<span id="priceD23">..Loading</span> WJBC<br>
+          Sell  <span id="priceB23_2">..Loading</span> CMJ,<span id="priceD23_2">..Loading</span> WJBC</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">II</a>*5%  : 
+          <br>Buy <span id="IIPrice_CMJ">..Loading</span> CMJ,<span id="IIPrice_JTAO">..Loading</span> JTAO<br>
+          Sell  <span id="IIPrice_CMJ_2">..Loading</span> CMJ,<span id="IIPrice_JTAO_2">..Loading</span> JTAO</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">EE</a>*5%  : 
+          <br>Buy <span id="EEPrice_CMJ">..Loading</span> CMJ,<span id="EEPrice_JTAO">..Loading</span> JTAO<br>
+          Sell  <span id="EEPrice_CMJ_2">..Loading</span> CMJ,<span id="EEPrice_JTAO_2">..Loading</span> JTAO</h4>
+      
+        <h2>PRODUCT</h2>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">BBQ</a>*5%  : 
+          <br>Buy <span id="priceB8">..Loading</span> CMJ<br>
+          Sell  <span id="priceB8_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Pizza</a>*5%  : 
+          <br>Buy <span id="priceB9">..Loading</span> CMJ<br>
+          Sell  <span id="priceB9_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">CTUNA</a>*5%  : 
+          <br>Buy <span id="priceB10">..Loading</span> CMJ<br>
+          Sell  <span id="priceB10_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SX31</a>*5%  : 
+          <br>Buy <span id="priceB11">..Loading</span> CMJ<br>
+          Sell  <span id="priceB11_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20"><a href="https://meowneon.app/swapmeowsil"  target="_blank">Silver</a>*5%  : 
+          <br>Buy <span id="priceB12">..Loading</span> CMJ<br>
+          Sell  <span id="priceB12_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20"><a href="https://meowneon.app/swapmeowgold"  target="_blank">Gold</a>*5%  : 
+          <br>Buy <span id="priceB13">..Loading</span> CMJ<br>
+          Sell  <span id="priceB13_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :
+          <br>Buy [คาดเดา] <span id="priceB19">0.001155</span> CMJ<br>
+          Sell [คาดเดา]  <span id="">0.001045</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : 
+          <br>Buy <span id="priceB21">..Loading</span> CMJ, <span id="priceD21">..Loading</span> JBC<br>
+          Sell  <span id="priceB21_2">..Loading</span> CMJ,<span id="priceD21_2">..Loading</span> JBC</h4>
+      
+        <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
+      </div>
+    </div>
+<div class="c main-container" id="txhistory" style="display: none;">
+    <div class="center">
+        <label for="wallet_address" class="center">Interact With:</label>
+        <input type="text" class="center" id="txhash_address" placeholder="Type your wallet Address">
+    </div>
+    <div class="center" style="display: none;">
+        <label for="wallet_address" class="center">From:</label>
+        <input type="text" class="center" id="txhash_from" placeholder="Enter Wallet Address">
+        <label for="wallet_address" class="center">To:</label>
+        <input type="text" class="center" id="txhash_to" placeholder="Please field blank if to any Address">
+    </div>
+    <div class="center">
+        <label for="wallet_address" class="center" >Token:</label>
+        <select class="dropDown" id="token" style="margin-right:40px;">
+            <option value="anyToken">ERC-20</option>
+            <option value="onlyNFT">ERC-721</option>
+            <option value="0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b">CMJ</option>
+            <option value="0x24599b658b57f91E7643f4F154B16bcd2884f9ac">JUSDT</option>
+            <option value="0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd">JTAO</option>
+        </select>
+        <label for="wallet_address" class="center">Sorted By: </label>
+        <select class="dropDown" id="sortby">
+            <option value="Earliest">Earliest</option>
+            <option value="Latest">Latest</option>
+        </select>
+        <br>
+    <button style="text-align:center;" onclick="fentchTransaction()">Search Transaction</button>
+
+    <div>
+        <h1>Transaction</h1>
+        <h4>Download table.xlsx</h4>
+        <table id="purchaseTableBody">
+        
+            <tr>
+                <th>TxHash</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Amount</th>
+                <th>Symbol</th>
+            </tr>
+            
+        </table>
+    </div>
 </div>
-</div>
+
+    </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -709,8 +784,20 @@
             showCard.style.display = 'block';
         }
     }
-</script>
-<script>
+    function selectChain(showType) {
+        // Hide all cards first
+        var allCards = document.querySelectorAll('#jibchain,#bitkubchain');
+        for (var i = 0; i < allCards.length; i++) {
+            allCards[i].style.display = 'none';
+        }
+
+        // Show the selected card
+        var showCard = document.getElementById(showType);
+        if (showCard) {
+            showCard.style.display = 'block';
+        }
+    }
+
 function setUSD(){
 const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
 fetch(exchangeRateUrl)
@@ -2191,66 +2278,4 @@ function copyAddress(text) {
 </script>
 
 
-  <script>
-    async function get_BKCBalance() {
-        const walletAddress = document.getElementById('bkc_wallet_address').value;
-        const apiUrl = `https://www.bkcscan.com/api/v2/addresses/${walletAddress}/token-balances`;
-        console.log(apiUrl)
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            const tokens = data.result;
-
-            let multiaddress = "";
-            let exceptToken = ["FANS"];
-            let tokenData = [];
-
-            for (let token of tokens) {
-                // Check if token symbol is in exceptToken array
-                if (!exceptToken.includes(token.symbol)) {
-                    // Construct multiaddress string
-                    multiaddress += token.address + ",";
-                    // Add token data to array
-                    tokenData.push({
-                        amount: token.value / 10**18,
-                        symbol: token.symbol,
-                        address: token.address
-                    });
-                }
-            }
-
-            // Remove trailing comma from multiaddress
-            multiaddress = multiaddress.slice(0, -1);
-
-            // Fetch data for each token
-            const geckoApiUrl = `https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/multi/${multiaddress}`;
-            console.log(geckoApiUrl)
-            const geckoResponse = await fetch(geckoApiUrl);
-            const geckoData = await geckoResponse.json();
-
-            // Populate table with token data
-            const assetBody = document.getElementById('assetBody');
-            assetBody.innerHTML = "";
-            tokenData.forEach(token => {
-                const tokenInfo = geckoData.find(item => item.attributes.address === token.address);
-                if (tokenInfo) {
-                    const tokenPrice = tokenInfo.attributes.priceusd;
-                    const tokenImg = tokenInfo.attributes.image_url;
-
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td><img src="${tokenImg}" width="25px" height="25px"> ${token.symbol}</td>
-                        <td>${token.amount}</td>
-                        <td>${tokenPrice}</td>
-                        <td>${(token.amount * tokenPrice).toFixed(2)}</td>
-                    `;
-                    assetBody.appendChild(row);
-                }
-            });
-
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }
-</script>
 </html>
