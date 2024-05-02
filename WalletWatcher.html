@@ -654,6 +654,8 @@
             <option value="Earliest">Earliest</option>
             <option value="Latest">Latest</option>
         </select>
+        <label for="greaterthan" class="center">Minimum: </label>
+        <input type="number" class="center" id="greaterthan" placeholder="แสดง txhash ที่มากกว่า">
         <br>
     <button style="text-align:center;" onclick="fetchTransaction()">Search Transaction</button>
 
@@ -2153,6 +2155,7 @@ function copyAddress(text) {
 function fetchTransaction(){
     var wallet_address = document.getElementById("txhash_address").value;
     var token_address = document.getElementById("token").value;
+    document.getElementById("transactionHistory").innerHTML = `<tr><th>TxHash</th><th>From</th><th>To</th><th>Amount</th><th>Symbol</th></tr>`
     getTokenTransfer(wallet_address, token_address)
     .then(function(logsArray) {
         logsArray.forEach(function(logs) {
@@ -2203,6 +2206,7 @@ function getTokenTransfer(wallet_address , token_address) {
 }
 
 function processTxhash(wallet_address,token_address,data, tx_hash) {
+    var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
     if(data.items){
         console.log(data)
         data.items.forEach(function(item){
@@ -2220,7 +2224,7 @@ function processTxhash(wallet_address,token_address,data, tx_hash) {
                 }
             }
             txhash = item.txhash;
-            if ((from === wallet_address || to === wallet) && to != '0x0000000000000000000000000000000000000001' && value != 0 && token_address === address){
+            if ((from === wallet_address || to === wallet) && to != '0x0000000000000000000000000000000000000001' && value != 0 && token_address === address && value > greaterthan){
                 var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
                 var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value} </td><td>${symbol}</td></tr>`;
                 document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
