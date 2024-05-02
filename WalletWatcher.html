@@ -232,7 +232,12 @@
         border-radius: 5px;
         width: 400px;
       }
-    
+      input[type="number"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 400px;
+      }
       button {
         padding: 10px 20px;
         background-color: #4CAF50;
@@ -643,23 +648,33 @@
         <input type="text" class="center" id="txhash_to" placeholder="Please field blank if to any Address">
     </div>
     <div class="center">
-        <label for="token" class="center" >Token:</label>
-        <select class="dropDown" id="token" style="margin-right:40px;">
-            <option value="0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b">CMJ</option>
-            <option value="0x24599b658b57f91E7643f4F154B16bcd2884f9ac">JUSDT</option>
-            <option value="0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd">JTAO</option>
-        </select>
-        <label for="sortby" class="center">Sorted By: </label>
-        <select class="dropDown" id="sortby">
-            <option value="Earliest">Earliest</option>
-            <option value="Latest">Latest</option>
-        </select>
-        <label for="greaterthan" class="center">Minimum: </label>
-        <input type="number" class="center" id="greaterthan" placeholder="แสดง txhash ที่มากกว่า">
-        <br>
-    <button style="text-align:center;" onclick="fetchTransaction()">Search Transaction</button>
+        <div>
+            <label for="token" class="center" >Token:</label>
+            <select class="dropDown" id="token">
+                <option value="0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b">CMJ</option>
+                <option value="0x24599b658b57f91E7643f4F154B16bcd2884f9ac">JUSDT</option>
+                <option value="0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd">JTAO</option>
+            </select>
+        </div>
+        <div>
+            <p>Block Period (ยิ่งห่างเยอะ ยิ่งมีสิทธิ์โดนบล็อกจาก API สูง)</p>
+            <label for="sortby" class="center">From Block: </label>
+            <input type="number" class="center" width="200px" id="fromBlock" placeholder="(ใส่ช่องว่างเพื่อแสดงผลตั้งแต่บล็อกที่ 0)">
+            <label for="sortby" class="center">To Block: </label>
+            <input type="number" class="center" width="200px" id="toBlock" placeholder="(ใส่ช่องว่างเพื่อแสดงผลจนถึงบล็อกล่าสุด)">
+
+        </div>
+        <div>
+            <label for="greaterthan" class="center">Minimum Token: </label>
+            <input type="number" class="center" width="150px" id="greaterthan" placeholder="แสดง txhash ที่มากกว่า">
+        </div>
+        <div>
+            <button style="text-align:center;" onclick="fetchTransaction()">Search Transaction</button>
+
+        </div>
 
     <div>
+        <h1 id="txStatus"></h1>
         <h1>Transaction</h1>
         <h4>Download table.xlsx</h4>
         <table id="transactionHistory">
@@ -2153,10 +2168,17 @@ function copyAddress(text) {
 }
 
 function fetchTransaction(){
+    
     var wallet_address = document.getElementById("txhash_address").value;
     var token_address = document.getElementById("token").value;
-    document.getElementById("transactionHistory").innerHTML = `<tr><th>TxHash</th><th>From</th><th>To</th><th>Amount</th><th>Symbol</th></tr>`
-    getTokenTransfer(wallet_address, token_address)
+    var fromBlock = document.getElementById("fromBlock").value;
+    var toBlock = document.getElementById("toBlock").value;
+
+    // ถ้าช่อง From Block หรือ To Block ว่างเปล่า ให้ใช้ค่าเริ่มต้น 'earliest' และ 'latest' ตามลำดับ
+    if (!fromBlock) fromBlock = 'earliest';
+    if (!toBlock) toBlock = 'latest';
+
+    getTokenTransfer(wallet_address, token_address, fromBlock, toBlock)
     .then(function(logsArray) {
         logsArray.forEach(function(logs) {
             logs.forEach(function(log) {
@@ -2175,13 +2197,13 @@ function fetchTransaction(){
     });
 }
 
-function getTokenTransfer(wallet_address , token_address) {
+function getTokenTransfer(wallet_address , token_address, fromBlock, toBlock) {
     var from_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
     var to_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
 
     var event_filter_from = {
-        'fromBlock': 'earliest',
-        'toBlock': 'latest',
+        'fromBlock': fromBlock,
+        'toBlock': toBlock,
         'address': token_address,
         'topics': [
             web3.utils.keccak256('Transfer(address,address,uint256)'),
@@ -2190,8 +2212,8 @@ function getTokenTransfer(wallet_address , token_address) {
     };
 
     var event_filter_to = {
-        'fromBlock': 'earliest',
-        'toBlock': 'latest',
+        'fromBlock': fromBlock,
+        'toBlock': toBlock,
         'address': token_address,
         'topics': [
             web3.utils.keccak256('Transfer(address,address,uint256)'),
@@ -2204,6 +2226,8 @@ function getTokenTransfer(wallet_address , token_address) {
         web3.eth.getPastLogs(event_filter_to)
     ]);
 }
+
+
 
 function processTxhash(wallet_address,token_address,data, tx_hash) {
     var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
@@ -2231,10 +2255,9 @@ function processTxhash(wallet_address,token_address,data, tx_hash) {
             }
             
 
-        })
+        });
     }
 }
-
 
 </script>
 
