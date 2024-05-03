@@ -852,7 +852,7 @@ input[type="number"]{
           <div style="display:flex; flex-wrap: nowrap;">
             <p style="margin-right: 10px;">Your Investment <input type="number" class="center" id="invest" min="0" placeholder="Your Invest(USD)"> </p>
             <p style="margin-right: 10px;">Your Return <input type="number" class="center" id="return" min="0" placeholder="Your Return(USD)"> </p>
-            <p style="margin-right: 10px;">Return In : <span id="returnDate"></span></p>
+            <p style="margin-right: 10px;"><span id="returnDate"></span></p>
             <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
           </div>
           
@@ -1895,12 +1895,12 @@ powerInputs.forEach(input => {
         remianing = investment - returns;
         roiPercent = parseFloat((returns/investment)*100);
         roiDay = remianing / sum;
-        document.getElementById("returnDate").innerHTML = `~${parseInt(roiDay+1)} Days Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
+        document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
       }else if(returns > investment){
         // Profit
         remianing = investment - returns;
         roiPercent = parseFloat((returns/investment)*100);
-        document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อยย กำไรอยู่ที่ ${(remianing).toLocaleString(undefined,{maximumFractionDigits:2})} (${(roiPercent).toLocaleString(undefined,{maximumFractionDigits:2})})%`;
+        document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อย กำไรอยู่ที่ ${(remianing).toLocaleString(undefined,{maximumFractionDigits:2})} (${(roiPercent).toLocaleString(undefined,{maximumFractionDigits:2})})%`;
       }
 
     }
