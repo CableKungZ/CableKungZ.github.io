@@ -1898,7 +1898,9 @@ powerInputs.forEach(input => {
         document.getElementById("returnDate").innerHTML = `~${parseInt(roiDay+1)} Days Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
       }else if(returns > investment){
         // Profit
-        document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อยย`;
+        remianing = investment - returns;
+        roiPercent = parseFloat((returns/investment)*100);
+        document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อยย กำไรอยู่ที่ ${(remianing).toLocaleString(undefined,{maximumFractionDigits:2})} (${(roiPercent).toLocaleString(undefined,{maximumFractionDigits:2})})%`;
       }
 
     }
