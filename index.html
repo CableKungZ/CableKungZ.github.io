@@ -472,6 +472,12 @@ table{
 td{
   font-size: 16px;
 }
+input[type="text"]{
+  width: 410px;
+}
+input[type="number"]{
+  width: 200px;
+}
     </style>
     
 </head>
@@ -843,6 +849,12 @@ td{
             <p id="input" style="display: none;">
               <input type="text" class="center" id="wallet_power" placeholder="Get From Wallet Address">
           </p>
+          <div style="display:flex; flex-wrap: nowrap;">
+            <p style="margin-right: 10px;">Your Investment <input type="number" class="center" id="invest" min="0" placeholder="Your Invest(USD)"> </p>
+            <p style="margin-right: 10px;">Your Return <input type="number" class="center" id="return" min="0" placeholder="Your Return(USD)"> </p>
+            <p style="margin-right: 10px;">Return In : ~ <span id="returnDate"></span></p>
+            <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
+          </div>
           
           
             
@@ -1807,6 +1819,29 @@ powerInputs.forEach(input => {
     const pnlCC = CrypticCogsGasFee;
     const pnlOS = HouseStakingGasFee;
 
+    cmjToUsd = parseFloat(document.getElementById("Sell_CMJinUSD").textContent) || 0;
+    var usd_pnlCU = 0 ;
+    var usd_pnlJasp = 0; 
+    var usd_pnlAngb = 0;
+    var usd_pnlCC = 0;
+    var usd_pnlOS = 0;
+  
+    // convest PNL from CMJ to USD
+    if((pnlCu * cmjToUsd) > 0 ){
+      var usd_pnlCU = pnlCu * cmjToUsd;
+    }if((pnlJasp * cmjToUsd) > 0){
+      var usd_pnlJasp = pnlJasp * cmjToUsd;
+    }if((pnlAngb * cmjToUsd) > 0){
+      var usd_pnlAngb = pnlAngb * cmjToUsd;
+    }if(CrypticCog_inJBC > 0){
+      var usd_pnlCC = CrypticCog_inJBC;
+    }if(pnlOS * cmjToUsd > 0){
+      var usd_pnlOS = pnlOS * cmjToUsd;
+    }
+
+
+    calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS)
+
 
     // Display PNL messages
     if(CuPower != 0){
@@ -1846,11 +1881,27 @@ powerInputs.forEach(input => {
         document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
   
       }
+    }
 
-    
+    function calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS){
+      investment = parseFloat(document.getElementById("invest").value) || 0;
+      returns = parseFloat(document.getElementById("return").value) || 0;
+      console.log("InvestMent",investment,"Return : ",returns);
+      console.log("CU",usd_pnlCU," JASP",usd_pnlJasp," ANGB",usd_pnlAngb," CC",usd_pnlCC," usd_pnlOS",usd_pnlOS);
+      
+      sum = usd_pnlCU+usd_pnlJasp+usd_pnlAngb+usd_pnlCC+usd_pnlOS;
+      document.getElementById("gain").innerHTML = ` ${sum.toLocaleString(undefined,{maximumFractionDigits:4})} USD`;
+      if(investment>returns){
+        remianing = investment - returns;
+        roiPercent = parseFloat((returns/investment)*100);
+        roiDay = remianing / sum;
+        document.getElementById("returnDate").innerHTML = `Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) ~${parseInt(roiDay+1)} Days`;
+      }else if(returns > investment){
+        // Profit
+        document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อยย`;
+      }
 
-  }
-
+    }
 
 
     async function main() {
