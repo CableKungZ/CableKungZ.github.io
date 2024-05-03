@@ -833,8 +833,10 @@ li {
             <input type="checkbox" id="multiPower" name="checkbox1">
             <label for="checkbox1">Multiple Power</label><br>
             <p id="input" style="display: none;">
-              <input type="text" class="center" id="wallet" min="0" placeholder="Get From Wallet Address">
-            </p>
+              <input type="text" class="center" id="wallet_power" placeholder="Get From Wallet Address">
+          </p>
+          
+          
             
             <!-- <button onclick="calculateProfit()">Calculate Profit</button> -->
             <table id="miningTable">
@@ -1673,7 +1675,7 @@ inputs.forEach(input => {
 
 }
 
-const powerInputs = document.querySelectorAll("#power, #input1, #input2, #input3, #input4");
+const powerInputs = document.querySelectorAll("#power, #input1, #input2, #input3, #input4,#input5");
 
 powerInputs.forEach(input => {
     input.addEventListener("input", calculateProfit);
@@ -1916,55 +1918,55 @@ powerInputs.forEach(input => {
         JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
         const HouseStaking = await loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
 
+        
+
         try {
-          document.addEventListener('DOMContentLoaded', function() {
-            var walletInput = document.getElementById('wallet');
-          
-            walletInput.addEventListener('input', function() {
-                setPowerFromWallet();
-            });
-          });
-          
-          async function setPowerFromWallet(){
-            console.log("Setting Data For Wallet")
-            const walletAddress = document.getElementById("wallet").value;
+
+          const walletInput = document.querySelectorAll("#wallet_power");
+        walletInput.forEach(input => {
+            input.addEventListener("input", setPowerFromWallet);
+        });
+        
+            async function setPowerFromWallet(){
+              const walletAddress = document.getElementById("wallet_power").value;
             if(walletAddress != 0){
-            console.log(walletAddress);
-            CUContract = await loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
-            EEContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
-            JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
-            DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
-        
-            getDataCu = await CUContract.methods.nftEquip(walletAddress).call();
-            getDataJasp = await JASPContract.methods.nftEquip(walletAddress).call();
-            getDataAngb = await DWContract.methods.nftEquip(walletAddress).call();
-            getDataEE = await EEContract.methods.nftStatus(walletAddress).call();
-        
-            var CuPow = document.getElementById('power1');
-            var JaspPow = document.getElementById('power2');
-            var AngbPow = document.getElementById('power3');
-            var EEPow = document.getElementById('power4');
-            console.log(getDataCu[3]);
-            console.log(getDataJasp[7]);
-            console.log(getDataAngb[8]);
-            console.log(getDataEE[7]);
-            CuPow.value = parseFloat(getDataCu[3]);
-            JaspPow.value = parseFloat(getDataJasp[7]);
-            AngbPow.value = parseFloat(getDataAngb[8]);
-            EEPow.value = parseFloat(getDataEE[7]);
-          calculateProfit()  
-          }
+              if(walletAddress != 0){
+                console.log(walletAddress);
+                CUContract = await loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+                EEContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+                JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+                DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+            
+                getDataCu = await CUContract.methods.nftEquip(walletAddress).call();
+                getDataJasp = await JASPContract.methods.nftEquip(walletAddress).call();
+                getDataAngb = await DWContract.methods.nftEquip(walletAddress).call();
+                getDataEE = await EEContract.methods.nftStatus(walletAddress).call();
+            
+                var CuPow = document.getElementById('power1');
+                var JaspPow = document.getElementById('power2');
+                var AngbPow = document.getElementById('power3');
+                var EEPow = document.getElementById('power4');
+                var OSPow = document.getElementById('power5');
+                console.log(getDataCu[3]);
+                console.log(getDataJasp[7]);
+                console.log(getDataAngb[8]);
+                console.log(getDataEE[7]);
+                CuPow.value = parseFloat(getDataCu[3]);
+                JaspPow.value = parseFloat(getDataJasp[7]);
+                AngbPow.value = parseFloat(getDataAngb[8]);
+                EEPow.value = parseFloat(getDataEE[7]);
+                OSPow.value = parseFloat(0);
+              calculateProfit()  
+              }
+            }else{
+              alert("Invalid Wallet Address")
+            }
+            
         }
                 
+                
           
-            // HOUSE
-          PoolData = await HouseStaking.methods.poolInfo(1).call();
-          totalPower = PoolData[1];
-          rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() / 10**18;
-          reward_perPower_perBlock = rewardPerBlock/totalPower;
-          document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
-          document.getElementById("RewardPerPower").innerHTML = (reward_perPower_perBlock*6490*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
-          //
+            
             
             // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
             address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
@@ -2366,6 +2368,15 @@ powerInputs.forEach(input => {
             const stOPT_Price = Jib_stOPT_in_CMJ;
             const Jbc_Price = JBC_to_CMJ;
             const Plat_Price = 0.0011;
+                        // HOUSE  
+            PoolData = await HouseStaking.methods.poolInfo(1).call();
+            totalPower = parseFloat(PoolData[1]);
+            rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() /10**18;
+            reward_perPower_perBlock = rewardPerBlock/totalPower;
+            document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
+            document.getElementById("RewardPerPower").innerHTML = (reward_perPower_perBlock*6490*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+            //
+
             setLabFactory(Plat_Price,JTAO_to_II,JTAO_to_CMJ,ANGB_in_CMJ,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price);
 
 
@@ -2669,8 +2680,6 @@ fetch(exchangeRateUrl)
         const priceThb = priceUsd * exchangeRate;
 
         // แสดงผลลัพธ์ใน HTML
-        document.getElementById("KUBTHB").textContent = priceThb.toFixed(2);
-        document.getElementById("exchangeRate").textContent = exchangeRate.toFixed(2);
       });
   })
   .catch(error => {
