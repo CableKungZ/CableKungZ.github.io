@@ -893,6 +893,14 @@ li {
                 <td colspan="2"><span id="CrypticNight"></span></td>
               </tr>
           </tr>
+          <tr class="houseStaking">
+            <tr>
+              <td colspan="2">House Staking <img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="40" height="40">
+                <p id="input5" style="display: none;"><input type="number" class="center" id="power5" min="0" placeholder="Insert Power Here" width="250px"></p></td>
+              <td colspan="3">Pool Power : <span id="TotalPower"></span><br>Reward/Pow: <span id="RewardPerPower"> </span> OS/Day</td>
+              <td colspan="2"><span id="HouseStaking"></span></td>
+            </tr>
+        </tr>
         </tbody>
     </table>
     
@@ -1678,11 +1686,13 @@ powerInputs.forEach(input => {
  function calculateProfit() {
     // ดึงค่า Power จาก input
     var isMultiple = document.getElementById("multiPower").checked;
+    var RewardOs = parseFloat(document.getElementById("RewardPerPower").textContent) || 0;
     var power = 0;
     var CuPower = 0;
     var JaspPower = 0;
     var AngbPower = 0;
     var EEPower = 0;
+    var OSPower = 0;
     
 
     if(isMultiple){
@@ -1690,6 +1700,7 @@ powerInputs.forEach(input => {
       var JaspPower = document.getElementById("power2").value || 0;
       var AngbPower = document.getElementById("power3").value || 0;
       var EEPower = document.getElementById("power4").value || 0;
+      var OSPower = document.getElementById("power5").value || 0;
       
     
     }else{
@@ -1698,12 +1709,14 @@ powerInputs.forEach(input => {
       var JaspPower = power;  
       var AngbPower = power
       var EEPower = power;
+      var OSPower = power;
     }
     console.log("isMultiple : ",isMultiple);
     console.log("CU POW : ",CuPower);
     console.log("JASP POW : ",JaspPower);
     console.log("ANGB POW : ",AngbPower);
     console.log("EE POW : ",EEPower);
+    console.log("OS POW : ",OSPower);
     const cuMine = parseFloat(document.getElementById("labR2").textContent) || 0; // Copper Mine Gas
     const jaspCave = parseFloat(document.getElementById("labR4").textContent) || 0; // Japser Cave Gas
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) || 0; // daemonWorld Gas
@@ -1720,6 +1733,7 @@ powerInputs.forEach(input => {
     const cuPrice = parseFloat(document.getElementById("priceB7").textContent) || 0;
     const jaspPrice = parseFloat(document.getElementById("priceB17").textContent) || 0;
     const angbPrice = parseFloat(document.getElementById("priceB23").textContent) || 0;
+    const osPrice = parseFloat(document.getElementById("priceB18").textContent) || 0;
 
     const noprice = 0;
 
@@ -1729,7 +1743,9 @@ powerInputs.forEach(input => {
     let jasperCave = 0;
     let angb = 0;
     let CrypticCog = 0;
+    let Os = 0;
 
+      OsDaily = RewardOs*OSPower;
       copperMineHourly = 0.36 * CuPower;
       copperMineDaily = 0.36 * CuPower * 24;
       jasperCave = 0.0000864 * JaspPower;
@@ -1742,6 +1758,7 @@ powerInputs.forEach(input => {
     const jasperCaveGasFee = (jasperCave * jaspPrice) - jaspCave;
     const daemonWorldGasFee = (angb * angbPrice) - daemonWorld;
     const CrypticCogsGasFee = (CrypticCog* EEPrice) -gasDun5; // Reward in JTAO
+    const HouseStakingGasFee = (OsDaily*osPrice); // reward in CMJ
 
     // คำนวนในมูลค่า JBC
 
@@ -1750,6 +1767,7 @@ powerInputs.forEach(input => {
     const jasperCaveGasFee_inJBC = (jasperCaveGasFee * cmj_to_JBC);
     const daemonWorldGasFee_inJBC = (daemonWorldGasFee * cmj_to_JBC);
     const CrypticCog_inJBC = (CrypticCogsGasFee * TaoPriceUSDT); // คำนวรเป็น USDT
+    const HouseSTaking_inJBC = (HouseStakingGasFee * cmj_to_JBC);
 
       // GasFee 
     const GasFee_CrypticCogs_inJTAO = (parseFloat(document.getElementById("IIPrice_JTAO").textContent) || 0) * 7;
@@ -1764,24 +1782,21 @@ powerInputs.forEach(input => {
     document.getElementById("jasperCave").innerHTML = `   * ${setLocal(jasperCave,8)} Jasp/d `;
     document.getElementById("DaemonWorld").innerHTML = `   * ${setLocal(angb,8)} Angb/d `;
     document.getElementById("CrypticNight").innerHTML = `   * ${setLocal(CrypticCog,8)} EE/d `;
+    document.getElementById("HouseStaking").innerHTML = `   * ${setLocal(OsDaily,8)} OS/d `;
 
     // Display PNL messages
-    displayPNLMessages(CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
+    displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }
 
   // Function to display PNL messages
-  function displayPNLMessages(CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
+  function displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
     const pnlCu = copperMineGasFee; // PNL for CopperMine (Cu)
     const pnlJasp = jasperCaveGasFee; // PNL for JasperCave (Jasp)
     const pnlCuh = copperMiner2GasFee;
     const pnlAngb = daemonWorldGasFee;
-    const pnlCC = CrypticCogsGasFee
+    const pnlCC = CrypticCogsGasFee;
+    const pnlOS = HouseStakingGasFee;
 
-    const pnlCuMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCu,2)} CMJ , ~${setLocal(copperMineGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCu),2)} CMJ ,  ~${setLocal(Math.abs(copperMineGasFee_inJBC),5)} JBC`;
-    const pnlCuhMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCuh,2)} CMJ , ~${setLocal(copperMiner2GasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCuh),2)} CMJ ,  ~${setLocal(Math.abs(copperMiner2GasFee_inJBC),5)} JBC`;
-    const pnlJaspMessage = pnlJasp >= 0 ? `<span class="profit">Profit</span> for Jasp: ${setLocal(pnlJasp,2)} CMJ , ~${setLocal(jasperCaveGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Jasp: ${setLocal(Math.abs(pnlJasp),2)} CMJ ,  ~${setLocal(Math.abs(jasperCaveGasFee_inJBC),5)} JBC`;
-    const pnlAngbMessage = pnlAngb >= 0 ? `<span class="profit">Profit</span> for Angb: ${setLocal(pnlAngb,2)} CMJ , ~${setLocal(daemonWorldGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Angb: ${setLocal(Math.abs(pnlAngb),2)} CMJ ,  ~${setLocal(Math.abs(daemonWorldGasFee_inJBC),5)} JBC`;
-    const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span> for EE: ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USDT` : `<span class="loss">Loss</span> for EE: ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
 
     // Display PNL messages
     if(CuPower != 0){
@@ -1814,6 +1829,13 @@ powerInputs.forEach(input => {
       document.getElementById("CrypticNight").innerHTML += ` <br>(No Power No Miner)` ;
 
     }
+    if(OSPower != 0){
+    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span> for OS: ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC` : `<span class="loss">Loss</span> for OS: ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC`;
+    document.getElementById("HouseStaking").innerHTML += ` <br>(${pnlOSMessage})` ;
+      }else{
+        document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
+  
+      }
 
     
 
@@ -1892,6 +1914,7 @@ powerInputs.forEach(input => {
         const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
         const CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
         JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
+        const HouseStaking = await loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
 
         try {
           document.addEventListener('DOMContentLoaded', function() {
@@ -1901,7 +1924,9 @@ powerInputs.forEach(input => {
                 setPowerFromWallet();
             });
           });
+          
           async function setPowerFromWallet(){
+            console.log("Setting Data For Wallet")
             const walletAddress = document.getElementById("wallet").value;
             if(walletAddress != 0){
             console.log(walletAddress);
@@ -1932,7 +1957,14 @@ powerInputs.forEach(input => {
         }
                 
           
-            
+            // HOUSE
+          PoolData = await HouseStaking.methods.poolInfo(1).call();
+          totalPower = PoolData[1];
+          rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() / 10**18;
+          reward_perPower_perBlock = rewardPerBlock/totalPower;
+          document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
+          document.getElementById("RewardPerPower").innerHTML = (reward_perPower_perBlock*6490*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+          //
             
             // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
             address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
