@@ -840,21 +840,23 @@ input[type="number"]{
         <div class="card2 dungeon calc">
           <div class="card-body">
             <h5 class="card-title center">Mining Profit Calculator</h5>
+            <div style="margin-right:15px; margin-bottom:15px;">
+              <button id="multiPowerBtn">Multiple Power</button>
+              <button id="toggleInfoBtn">Calculate ROI</button>
+            </div>
             <p id="powerBox">
               <label for="power" class="center">Enter Power:</label>
               <input type="number" class="center" id="power" min="0" placeholder="Insert Power Here">
             </p>
-            <input type="checkbox" id="multiPower" name="checkbox1">
-            <label for="checkbox1">Multiple Power</label><br>
             <p id="input" style="display: none;">
               <input type="text" class="center" id="wallet_power" placeholder="Get From Wallet Address">
           </p>
-          <div style="display:flex; flex-wrap: nowrap;">
+          <div id="infoDiv" style="display:none; flex-wrap: nowrap;">
             <p style="margin-right: 10px;">Your Investment <input type="number" class="center" id="invest" min="0" placeholder="Your Invest(USD)"> </p>
             <p style="margin-right: 10px;">Your Return <input type="number" class="center" id="return" min="0" placeholder="Your Return(USD)"> </p>
             <p style="margin-right: 10px;"><span id="returnDate"></span></p>
-            <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
           </div>
+          <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
           
           
             
@@ -1707,7 +1709,7 @@ powerInputs.forEach(input => {
 
  function calculateProfit() {
     // ดึงค่า Power จาก input
-    var isMultiple = document.getElementById("multiPower").checked;
+    var isMultiple = document.getElementById("multiPowerBtn").classList.contains('active');
     var RewardOs = parseFloat(document.getElementById("RewardPerPower").textContent) || 0;
     var power = 0;
     var CuPower = 0;
@@ -1891,12 +1893,12 @@ powerInputs.forEach(input => {
       
       sum = usd_pnlCU+usd_pnlJasp+usd_pnlAngb+usd_pnlCC+usd_pnlOS;
       document.getElementById("gain").innerHTML = ` ${sum.toLocaleString(undefined,{maximumFractionDigits:4})} USD`;
-      if(investment>returns){
+      if(investment>returns && investment != 0){
         remianing = investment - returns;
         roiPercent = parseFloat((returns/investment)*100);
         roiDay = remianing / sum;
-        document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
-      }else if(returns > investment){
+        document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (Returned : ${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
+      }else if(returns > investment && investment != 0){
         // Profit
         remianing = investment - returns;
         roiPercent = parseFloat((returns/investment)*100);
@@ -2772,21 +2774,38 @@ setUSD()
 </script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var checkbox = document.getElementById('multiPower');
+    var button = document.getElementById('multiPowerBtn');
     var powerInput = document.getElementById('powerBox');
     var inputs = document.querySelectorAll('p[id^="input"]');
 
-    checkbox.addEventListener('change', function() {
-      if (checkbox.checked) {
-        powerInput.style.display = 'none';
-        inputs.forEach(function(input) {
-          input.style.display = 'block';
-        });
-      } else {
+    button.addEventListener('click', function() {
+      if (button.classList.contains('active')) {
         powerInput.style.display = 'block';
         inputs.forEach(function(input) {
           input.style.display = 'none';
         });
+        button.classList.remove('active');
+      } else {
+        powerInput.style.display = 'none';
+        inputs.forEach(function(input) {
+          input.style.display = 'block';
+        });
+        button.classList.add('active');
+      }
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleInfoButton = document.getElementById('toggleInfoBtn');
+    var infoDiv = document.getElementById('infoDiv');
+
+    toggleInfoButton.addEventListener('click', function() {
+      // เมื่อคลิกที่ปุ่ม Toggle Info
+      if (infoDiv.style.display === 'none') {
+        infoDiv.style.display = 'flex'; // แสดง div ถ้ามันถูกซ่อนอยู่
+      } else {
+        infoDiv.style.display = 'none'; // ซ่อน div ถ้ามันถูกแสดงอยู่
       }
     });
   });
