@@ -654,6 +654,9 @@
                 <option value="0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b">CMJ</option>
                 <option value="0x24599b658b57f91E7643f4F154B16bcd2884f9ac">JUSDT</option>
                 <option value="0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd">JTAO</option>
+                <option value="0x523AA3aB2371A6360BeC4fEea7bE1293adb32241">II</option>
+                <option value="0xF663c756b6D57724C3B41c8839aB9c7Af83c9751">EE</option>
+                <option value="0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860">JASP</option>
             </select>
         </div>
         <div>
@@ -1270,6 +1273,7 @@ async function call_SC(address, contract, divider) {
 }
 
 async function getBalance() {
+    document.getElementById("nw_usd").innerHTML = `<img width="32px" src="https://s12.gifyu.com/images/SavRL.gif">`
   resetPurchaseTable()
   startHistory()
   THB_to_USD = parseFloat(document.getElementById("THB").textContent) || 36.5;
