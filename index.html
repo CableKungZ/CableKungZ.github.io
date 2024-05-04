@@ -1886,18 +1886,20 @@ powerInputs.forEach(input => {
     }
 
     function calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS){
+      jbcToUsd = parseFloat(document.getElementById("Sell_JBCinUSD").textContent) || 0;
       investment = parseFloat(document.getElementById("invest").value) || 0;
       returns = parseFloat(document.getElementById("return").value) || 0;
       console.log("InvestMent",investment,"Return : ",returns);
       console.log("CU",usd_pnlCU," JASP",usd_pnlJasp," ANGB",usd_pnlAngb," CC",usd_pnlCC," usd_pnlOS",usd_pnlOS);
       
       sum = usd_pnlCU+usd_pnlJasp+usd_pnlAngb+usd_pnlCC+usd_pnlOS;
-      document.getElementById("gain").innerHTML = ` ${sum.toLocaleString(undefined,{maximumFractionDigits:4})} USD`;
+      sumJBC = sum/jbcToUsd;
+      document.getElementById("gain").innerHTML = ` ${sum.toLocaleString(undefined,{maximumFractionDigits:4})} USD , ${sumJBC.toLocaleString(undefined,{maximumFractionDigits:4})} JBC`;
       if(investment>returns && investment != 0){
         remianing = investment - returns;
         roiPercent = parseFloat((returns/investment)*100);
         roiDay = remianing / sum;
-        document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} (Returned : ${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
+        document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days , Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} USD (Returned : ${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
       }else if(returns > investment && investment != 0){
         // Profit
         remianing = investment - returns;
