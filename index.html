@@ -256,7 +256,7 @@
           position: fixed;
           bottom: 10px;
           right: 10px;
-          background-color: green;
+          background-color: rgba(255, 0, 221, 0.116);
           padding: 5px;
           border: 1px solid #ccc;
           display: none;
@@ -517,12 +517,13 @@ input[type="number"]{
 <div>
     <!-------------------------------------------------- Start PriceBoard  --------------------------------------->
 <div  id="priceBoard" class="container mt-5" >
-    <div><div id="countdown">Countdown</div>
+    <div>
     <div id="updatedMessage">Updated</div>
     <h2 class="center">PROJECT TOKEN</h2></div>
     <h2 class="center">** ในการซื้อ/ขายแลกเปลี่ยน จะมีค่าธรรมเนียมเกิดขึ้น โดยแต่ละแพลตฟอร์มจะมีค่าธรรมเนียมแตกต่างกัน **</h2>
   
     <div class="token-price">
+      <div id="countdown" style="display:block;">Countdown</div>
       <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
           <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
           Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
@@ -534,6 +535,8 @@ input[type="number"]{
           Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
         <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
           <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
+          <h4><img src="https://cloudflare-ipfs.com/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="$USD" width="20" height="20">USD </a>*0%  : 
+          <br>Buy/Sell <span id="usdTHB">..Loading</span> THB/USD <br>
     </div>
     <h2 class="center">MATERIALS </h2>
     <div class="token-price">
@@ -1418,18 +1421,18 @@ input[type="number"]{
 
     // Countdown Timer
     var countdownElement = document.getElementById('countdown');
-    var countdownTime = 15; // seconds
+    var countdownTime = 5; // seconds
      
 
     function updateCountdown() {
-      countdownElement.textContent = 'Refreshing in ' + countdownTime + ' seconds';
+      countdownElement.textContent = 'Price refreshing in ' + countdownTime + ' seconds';
       countdownTime--;
 
       if (countdownTime < 0) {
         // Call the updateData function when the countdown reaches 0
          
         main();
-        countdownTime = 15; // Reset the countdown time
+        countdownTime = 30; // Reset the countdown time
       }
     }
 
@@ -2743,6 +2746,7 @@ fetch(exchangeRateUrl)
         // ดึงข้อมูล price_usd และแปลงเป็นบาท
         const priceUsd = parseFloat(data.data.attributes.price_usd);
         const priceThb = priceUsd * exchangeRate;
+        document.getElementById("usdTHB").innerHTML = exchangeRate;
 
         // แสดงผลลัพธ์ใน HTML
       });
