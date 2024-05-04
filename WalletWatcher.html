@@ -634,18 +634,27 @@
         <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
       </div>
     </div>
-<div class="c main-container" id="txhistory" style="display: none;">
+<div class="c main-container" class="center" id="txhistory" style="display: none;">
     <div class="center">
         <h1>Transaction History Finder [Beta]</h1>
         <h4>คำเตือน มีการเรียกใช้ API จาก BlockScout หากข้อมูลเยอะเกินไป คุณอาจถูก block ชั่วคราวจากการดูข้อมูลบน https://exp-l1.jibchain.net/</h4>
-        <label for="txhash_address" class="center">Interact With:</label>
-        <input type="text" class="center" id="txhash_address" placeholder="Type your wallet Address">
+        <div style="margin-right:15px; margin-bottom:15px;">
+            <button id="toggleInfoBtn">From-To</button>
+          </div>
+        <div id="oneWay">
+            <label for="txhash_address" class="center">Interact With:</label>
+            <input type="text" class="center" id="txhash_address" placeholder="Type your wallet Address">
+            
+            <button style="text-align:center;" onclick="fetchTransaction()">Search Transaction</button>
+        </div>
+        
     </div>
-    <div class="center" style="display: none;">
+    <div class="center" id="formTo" style="display: none;">
         <label for="wallet_address" class="center">From:</label>
         <input type="text" class="center" id="txhash_from" placeholder="Enter Wallet Address">
         <label for="wallet_address" class="center">To:</label>
         <input type="text" class="center" id="txhash_to" placeholder="Please field blank if to any Address">
+        <button style="text-align:center;" onclick="fetchTransaction2()">Search Transaction</button>
     </div>
     <div class="center">
         <div>
@@ -672,7 +681,6 @@
             <input type="number" class="center" width="150px" id="greaterthan" placeholder="แสดง txhash ที่มากกว่า">
         </div>
         <div>
-            <button style="text-align:center;" onclick="fetchTransaction()">Search Transaction</button>
 
         </div>
 
@@ -2172,7 +2180,8 @@ function copyAddress(text) {
 }
 
 function fetchTransaction(){
-    
+    resetTable();
+    console.log("fetch Data Wallet : ",wallet_address," Token : ",token_address," from Block ",fromBlock," to Block ",toBlock)
     var wallet_address = document.getElementById("txhash_address").value;
     var token_address = document.getElementById("token").value;
     var fromBlock = document.getElementById("fromBlock").value;
@@ -2200,7 +2209,37 @@ function fetchTransaction(){
         console.error("Error fetching logs:", error);
     });
 }
+function fetchTransaction2(){
+    resetTable();
+    console.log("fetch Data from  : ",fromAddress," to ",toAddress," Token : ",token_address," from Block ",fromBlock," to Block ",toBlock)
+    var fromAddress = document.getElementById("txhash_from").value;
+    var toAddress = document.getElementById("txhash_to").value;
+    var token_address = document.getElementById("token").value;
+    var fromBlock = document.getElementById("fromBlock").value;
+    var toBlock = document.getElementById("toBlock").value;
 
+    // ถ้าช่อง From Block หรือ To Block ว่างเปล่า ให้ใช้ค่าเริ่มต้น 'earliest' และ 'latest' ตามลำดับ
+    if (!fromBlock) fromBlock = 'earliest';
+    if (!toBlock) toBlock = 'latest';
+
+    getTokenTransfer2(fromAddress,toAddress , token_address, fromBlock, toBlock)
+    .then(function(logsArray) {
+        logsArray.forEach(function(logs) {
+            logs.forEach(function(log) {
+                var tx_hash = log.transactionHash;
+                var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                console.log(transaction_url)
+                fetch(transaction_url)
+                    .then(response => response.json())
+                    .then(data => processTxhash2(fromAddress,toAddress,token_address,data, tx_hash))
+                    .catch(error => console.error("Error fetching transaction data:", error));
+            });
+        });
+    })
+    .catch(function(error) {
+        console.error("Error fetching logs:", error);
+    });
+}
 function getTokenTransfer(wallet_address , token_address, fromBlock, toBlock) {
     var from_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
     var to_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
@@ -2230,9 +2269,25 @@ function getTokenTransfer(wallet_address , token_address, fromBlock, toBlock) {
         web3.eth.getPastLogs(event_filter_to)
     ]);
 }
+function getTokenTransfer2(fromAddress,toAddress , token_address, fromBlock, toBlock) {
+    var from_topic = '0x000000000000000000000000' + fromAddress.slice(2).toLowerCase();
+    var to_topic = '0x000000000000000000000000' + toAddress.slice(2).toLowerCase();
 
-
-
+    var event_filter = {
+        'fromBlock': fromBlock,
+        'toBlock': toBlock,
+        'address': token_address,
+        'topics': [
+            web3.utils.keccak256('Transfer(address,address,uint256)'),
+            from_topic,
+            to_topic
+        ]
+    };
+  
+    return Promise.all([
+        web3.eth.getPastLogs(event_filter),
+    ]);
+}
 function processTxhash(wallet_address,token_address,data, tx_hash) {
     var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
     if(data.items){
@@ -2252,7 +2307,7 @@ function processTxhash(wallet_address,token_address,data, tx_hash) {
                 }
             }
             txhash = item.txhash;
-            if ((from === wallet_address || to === wallet_address) && to != '0x0000000000000000000000000000000000000001' && value != 0 && token_address === address && value > greaterthan){
+            if ((from === wallet_address || to === wallet_address) && value != 0 && token_address === address && value > greaterthan){
                 var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
                 var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value} </td><td>${symbol}</td></tr>`;
                 document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
@@ -2262,8 +2317,78 @@ function processTxhash(wallet_address,token_address,data, tx_hash) {
         });
     }
 }
+function processTxhash2(fromAddress,toAddress,token_address,data, tx_hash) {
+    var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
+
+    if(data.items){
+        console.log(data)
+        data.items.forEach(function(item){
+            from = item.from.hash;
+            if(from === fromAddress){
+                to = item.to.hash;
+                name = item.to.name || 'unknowed';
+                symbol = item.token.symbol;
+                address = item.token.address;
+                value = 0;
+                if (symbol === "JASP"){
+                    value = item.total.value / (10**9);
+                }else{
+                    value = item.total.value / (10**18);
+                }
+            }
+            txhash = item.txhash;
+            console.log("TO ",to);
+            if (to === "0x0000000000000000000000000000000000000001"){
+                name = "Burned";
+            }
+            if ((from === fromAddress) && value != 0 && token_address === address && value > greaterthan){
+                var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
+                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value} </td><td>${symbol}</td></tr>`;
+                document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
+            }
+            
+
+        });
+    }
+}
+function resetTable(){
+    document.getElementById("transactionHistory").innerHTML = `<tr><th>TxHash</th><th>From</th><th>To</th><th>Amount</th><th>Symbol</th></tr>`;
+}
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var toggleInfoButton = document.getElementById('toggleInfoBtn');
+    var infoDiv = document.getElementById('formTo');
+    var addressInput = document.getElementById("oneWay");
+    var txhashFromInput = document.getElementById("txhash_from");
+    var txhashToInput = document.getElementById("txhash_to");
+    var txhashAddressInput = document.getElementById("txhash_address");
+
+    toggleInfoButton.addEventListener('click', function() {
+        // เมื่อคลิกที่ปุ่ม Toggle Info
+        if (infoDiv.style.display === 'none') {
+            infoDiv.style.display = 'block'; // แสดง div ถ้ามันถูกซ่อนอยู่
+            infoDiv.classList.add('center'); // เพิ่มคลาส Center
+            addressInput.style.display = 'none';
+            // เซ็ตค่าให้กับฟิลด์ที่ต้องการเป็นช่องว่าง
+            txhashFromInput.value = '';
+            txhashToInput.value = '';
+            txhashAddressInput.value = '';
+        } else {
+            infoDiv.style.display = 'none'; // ซ่อน div ถ้ามันถูกแสดงอยู่
+            addressInput.style.display = 'block';
+        }
+    });
+});
+
 
 </script>
+
+
 
 
 </html>
