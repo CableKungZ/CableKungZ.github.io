@@ -666,6 +666,7 @@
                 <option value="0x523AA3aB2371A6360BeC4fEea7bE1293adb32241">II</option>
                 <option value="0xF663c756b6D57724C3B41c8839aB9c7Af83c9751">EE</option>
                 <option value="0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860">JASP</option>
+                <option value="0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88">JDAO</option>
             </select>
         </div>
         <div>
@@ -687,6 +688,7 @@
     <div>
         <h1 id="txStatus"></h1>
         <h1>Transaction</h1>
+        <span id="transactionResult"></span>
         <h4>Download table.xlsx</h4>
         <table id="transactionHistory">
         
@@ -2181,6 +2183,7 @@ function copyAddress(text) {
 
 function fetchTransaction(){
     resetTable();
+    
     console.log("fetch Data Wallet : ",wallet_address," Token : ",token_address," from Block ",fromBlock," to Block ",toBlock)
     var wallet_address = document.getElementById("txhash_address").value;
     var token_address = document.getElementById("token").value;
@@ -2211,6 +2214,7 @@ function fetchTransaction(){
 }
 function fetchTransaction2(){
     resetTable();
+    
     console.log("fetch Data from  : ",fromAddress," to ",toAddress," Token : ",token_address," from Block ",fromBlock," to Block ",toBlock)
     var fromAddress = document.getElementById("txhash_from").value;
     var toAddress = document.getElementById("txhash_to").value;
@@ -2291,7 +2295,6 @@ function getTokenTransfer2(fromAddress,toAddress , token_address, fromBlock, toB
 function processTxhash(wallet_address,token_address,data, tx_hash) {
     var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
     if(data.items){
-        console.log(data)
         data.items.forEach(function(item){
             from = item.from.hash;
             if(from === wallet_address){
@@ -2306,14 +2309,17 @@ function processTxhash(wallet_address,token_address,data, tx_hash) {
                     value = item.total.value / (10**18);
                 }
             }
+            if (to === "0x0000000000000000000000000000000000000001"){
+                name = "Burned";
+            }
             txhash = item.txhash;
             if ((from === wallet_address || to === wallet_address) && value != 0 && token_address === address && value > greaterthan){
                 var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
-                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value} </td><td>${symbol}</td></tr>`;
+                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value.toLocaleString()} </td><td>${symbol}</td></tr>`;
                 document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
+                console.log(data);
             }
-            
-
+            updateTransactionResult()
         });
     }
 }
@@ -2321,7 +2327,6 @@ function processTxhash2(fromAddress,toAddress,token_address,data, tx_hash) {
     var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
 
     if(data.items){
-        console.log(data)
         data.items.forEach(function(item){
             from = item.from.hash;
             if(from === fromAddress){
@@ -2337,26 +2342,22 @@ function processTxhash2(fromAddress,toAddress,token_address,data, tx_hash) {
                 }
             }
             txhash = item.txhash;
-            console.log("TO ",to);
             if (to === "0x0000000000000000000000000000000000000001"){
                 name = "Burned";
             }
             if ((from === fromAddress) && value != 0 && token_address === address && value > greaterthan){
                 var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
-                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value} </td><td>${symbol}</td></tr>`;
+                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value.toLocaleString()} </td><td>${symbol}</td></tr>`;
                 document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
+                console.log(data);
             }
-            
-
+            updateTransactionResult()
         });
     }
 }
 function resetTable(){
     document.getElementById("transactionHistory").innerHTML = `<tr><th>TxHash</th><th>From</th><th>To</th><th>Amount</th><th>Symbol</th></tr>`;
 }
-
-
-
 
 
 
@@ -2385,9 +2386,45 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function countTransactions() {
+    var table = document.getElementById("transactionHistory");
+    var rowCount = table.getElementsByTagName("td").length;
+    return rowCount/5;
+}
 
+function sumAmounts() {
+    var table = document.getElementById("transactionHistory");
+    var rows = table.getElementsByTagName("tr");
+    var sum = 0;
+
+    for (var i = 1; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName("td");
+        sum += parseFloat(cells[3].innerText.replace(/,/g, ''));
+    }
+
+    return sum;
+}
+
+
+function getSymbol() {
+    var table = document.getElementById("transactionHistory");
+    var lastRow = table.rows[table.rows.length - 1];
+    var symbol = lastRow.cells[4].innerText;
+    return symbol;
+}
+
+function updateTransactionResult() {
+    var transactionCount = countTransactions();
+    var transactionSum = sumAmounts();
+    var transactionSymbol = getSymbol();
+
+    var transactionResult = document.getElementById("transactionResult");
+    transactionResult.innerText = "Totally Transaction: " + transactionCount.toLocaleString() + " Transfer " + transactionSum.toLocaleString() + " " + transactionSymbol;
+}
+
+// เรียกใช้งานฟังก์ชันเพื่อแสดงผลลัพธ์เริ่มต้น
+updateTransactionResult();
 </script>
-
 
 
 
