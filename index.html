@@ -476,7 +476,8 @@ input[type="text"]{
   width: 410px;
 }
 input[type="number"]{
-  width: 200px;
+  width: 126px;
+  font-size: 12px;
 }
     </style>
     
@@ -867,10 +868,10 @@ input[type="number"]{
             <table id="miningTable">
               <thead>
                 <tr>
-                  <th colspan="2">Dungeon</th>
-                  <th style="font-size:12px;">Duration <br></th>
-                  <th>GasFee/Day</th>
-                  <th>Reward/Power</th>
+                  <th style="width:140px;">Dungeon</th>
+                  <th style="font-size:12px; width:15px;">Duration <br></th>
+                  <th >GasFee/Day</th>
+                  <th style="width:15px;">Reward/Power</th>
                   <th>Reward/Round<br></th>
                   <th>Reward/Day </th>
                 </tr>
@@ -878,7 +879,7 @@ input[type="number"]{
         <tbody>
             <tr class="copperMine">
               <tr>
-                <td colspan="2">
+                <td>
                   CopperMine <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="40" height="40">
                   <p id="input1" style="display: none;"><input type="number" class="center" id="power1" min="0" placeholder="Insert Power Here" width="250px"></p>
                 </td>
@@ -891,7 +892,7 @@ input[type="number"]{
             </tr>
             <tr class="jasperCave">
                 <tr>
-                  <td colspan="2">JasperCave  <img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="40" height="40">
+                  <td>JasperCave  <img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="40" height="40">
                     <p id="input2" style="display: none;"><input type="number" class="center" id="power2" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                   <td>1 Day</td>
                   <td><span id="labR4"></span> CMJ <br>(~<span id="labS5"></span> JBC)</td>
@@ -902,7 +903,7 @@ input[type="number"]{
             </tr>
             <tr class="daemonWorld">
                 <tr>
-                  <td colspan="2">Deamon World <img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="Angel Blessing" width="40" height="40">
+                  <td>Deamon World <img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="Angel Blessing" width="40" height="40">
                     <p id="input3" style="display: none;"><input type="number" class="center" id="power3" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                   <td>1 Day</td>
                   <td><span id="labR5"></span> CMJ <br>(~<span id="labS7"></span> JBC)</td>
@@ -912,7 +913,7 @@ input[type="number"]{
             </tr>
             <tr class="cryptic-cogs">
               <tr>
-                <td colspan="2">Cryptic Cogs <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="40" height="40">
+                <td>Cryptic Cogs <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="40" height="40">
                   <p id="input4" style="display: none;"><input type="number" class="center" id="power4" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                 <td>1 Day</td>
                 <td><span id="Dun4_CMJ"></span> JTAO <br>(~<span id="Dun4_JBC"></span> USD)</td>
@@ -922,7 +923,7 @@ input[type="number"]{
           </tr>
           <tr class="houseStaking">
             <tr>
-              <td colspan="2">House Staking <img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="40" height="40">
+              <td>House Staking <img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="40" height="40">
                 <p id="input5" style="display: none;"><input type="number" class="center" id="power5" min="0" placeholder="Insert Power Here" width="250px"></p></td>
               <td colspan="3">Pool Power : <span id="TotalPower"></span><br>Reward/Pow: <span id="RewardPerPower"> </span> OS/Day</td>
               <td colspan="2"><span id="HouseStaking"></span></td>
@@ -1405,8 +1406,6 @@ input[type="number"]{
         alert('Copied to clipboard: ' + text);
     }
     
-  </script>
-  <script>
     // Your existing script for updating prices
 
     function updateData(data) {
@@ -1443,10 +1442,6 @@ input[type="number"]{
     setInterval(updateCountdown, 1000);
 
 
-  
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
-    <script>
         let totalOpened = 0;
         let nCount = 0;
         let rCount = 0;
@@ -1826,6 +1821,7 @@ powerInputs.forEach(input => {
 
     cmjToUsd = parseFloat(document.getElementById("Sell_CMJinUSD").textContent) || 0;
     var usd_pnlCU = 0 ;
+    var usd_pnlCUH = 0 ;
     var usd_pnlJasp = 0; 
     var usd_pnlAngb = 0;
     var usd_pnlCC = 0;
@@ -1842,6 +1838,8 @@ powerInputs.forEach(input => {
       var usd_pnlCC = CrypticCog_inJBC;
     }if(pnlOS * cmjToUsd > 0){
       var usd_pnlOS = pnlOS * cmjToUsd;
+    }if(pnlCuh * cmjToUsd > 0){
+      var usd_pnlCUH = pnlCuh * cmjToUsd;
     }
 
 
@@ -1850,8 +1848,8 @@ powerInputs.forEach(input => {
 
     // Display PNL messages
     if(CuPower != 0){
-    const pnlCuMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCu,2)} CMJ , ~${setLocal(copperMineGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCu),2)} CMJ ,  ~${setLocal(Math.abs(copperMineGasFee_inJBC),5)} JBC`;
-    const pnlCuhMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCuh,2)} CMJ , ~${setLocal(copperMiner2GasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCuh),2)} CMJ ,  ~${setLocal(Math.abs(copperMiner2GasFee_inJBC),5)} JBC`;
+    const pnlCuMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> ${setLocal(pnlCu,2)} CMJ , ~${setLocal(copperMineGasFee_inJBC,3)} JBC , ~${setLocal(usd_pnlCU,5)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlCu),2)} CMJ ,  ~${setLocal(Math.abs(copperMineGasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlCU),6)} USD`;
+    const pnlCuhMessage = pnlCu >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlCuh,2)} CMJ , ~${setLocal(copperMiner2GasFee_inJBC,3)} JBC , ~${setLocal(usd_pnlCUH,5)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlCuh),2)} CMJ ,  ~${setLocal(Math.abs(copperMiner2GasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlCUH),6)} USD`;
     document.getElementById("copperMineHourly").innerHTML += ` <br>(${pnlCuhMessage})` ;
       document.getElementById("copperMineDaily").innerHTML += ` <br>(${pnlCuMessage})` ;
     }else{
@@ -1860,27 +1858,27 @@ powerInputs.forEach(input => {
 
     }
     if(JaspPower != 0 ){
-    const pnlJaspMessage = pnlJasp >= 0 ? `<span class="profit">Profit</span> for Jasp: ${setLocal(pnlJasp,2)} CMJ , ~${setLocal(jasperCaveGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Jasp: ${setLocal(Math.abs(pnlJasp),2)} CMJ ,  ~${setLocal(Math.abs(jasperCaveGasFee_inJBC),5)} JBC`;
+    const pnlJaspMessage = pnlJasp >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlJasp,2)} CMJ , ~${setLocal(jasperCaveGasFee_inJBC,5)} JBC , ~${setLocal(usd_pnlJasp,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlJasp),2)} CMJ ,  ~${setLocal(Math.abs(jasperCaveGasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlJasp),6)} USD`;
     document.getElementById("jasperCave").innerHTML +=` <br>(${pnlJaspMessage})` ;
     }else{
       document.getElementById("jasperCave").innerHTML +=` <br>(No Power No Miner)` ;
       
     }
     if(AngbPower != 0){
-    const pnlAngbMessage = pnlAngb >= 0 ? `<span class="profit">Profit</span> for Angb: ${setLocal(pnlAngb,2)} CMJ , ~${setLocal(daemonWorldGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Angb: ${setLocal(Math.abs(pnlAngb),2)} CMJ ,  ~${setLocal(Math.abs(daemonWorldGasFee_inJBC),5)} JBC`;
+    const pnlAngbMessage = pnlAngb >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlAngb,2)} CMJ , ~${setLocal(daemonWorldGasFee_inJBC,5)} JBC , ~${setLocal(usd_pnlAngb,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlAngb),2)} CMJ ,  ~${setLocal(Math.abs(daemonWorldGasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlAngb),6)} USD`;
     document.getElementById("DaemonWorld").innerHTML += ` <br>(${pnlAngbMessage})` ;
     }else{
       document.getElementById("DaemonWorld").innerHTML += ` <br>(No Power No Miner)` ;
     }
     if(EEPower != 0){
-    const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span> for EE: ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USDT` : `<span class="loss">Loss</span> for EE: ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
+    const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
     document.getElementById("CrypticNight").innerHTML += ` <br>(${pnlCCMessage})` ;
     }else{
       document.getElementById("CrypticNight").innerHTML += ` <br>(No Power No Miner)` ;
 
     }
     if(OSPower != 0){
-    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span> for OS: ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC` : `<span class="loss">Loss</span> for OS: ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC`;
+    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC , ~${setLocal(usd_pnlOS,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC , ~${setLocal(math.abs(usd_pnlOS),6)} USD`;
     document.getElementById("HouseStaking").innerHTML += ` <br>(${pnlOSMessage})` ;
       }else{
         document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
@@ -1905,7 +1903,7 @@ powerInputs.forEach(input => {
         document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days , Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} USD (Returned : ${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
       }else if(returns > investment && investment != 0){
         // Profit
-        remianing = investment - returns;
+        remianing =  returns-investment;
         roiPercent = parseFloat((returns/investment)*100);
         document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อย กำไรอยู่ที่ ${(remianing).toLocaleString(undefined,{maximumFractionDigits:2})} (${(roiPercent).toLocaleString(undefined,{maximumFractionDigits:2})})%`;
       }
@@ -2103,8 +2101,11 @@ powerInputs.forEach(input => {
             const CMJ_inBBQCMJ = await call_SC(address, CMJ, 18);
             const BBQ_to_CMJ = (BBQ_inBBQCMJ/CMJ_inBBQCMJ).toFixed(4);
             const CMJ_to_BBQ = (CMJ_inBBQCMJ/BBQ_inBBQCMJ).toFixed(10);
-                    document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if (CMJ_to_BBQ != 0){
+              document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
 
             // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
@@ -2113,8 +2114,11 @@ powerInputs.forEach(input => {
             const CMJ_inCuCMJ = await call_SC(address, CMJ, 18);
             const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
             const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
-                    document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if (CMJ_to_Cu != 0){
+              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
 
             // Bal of Jasp CMJ
@@ -2123,8 +2127,11 @@ powerInputs.forEach(input => {
             const CMJ_inJaspCMJ = await call_SC(address, CMJ, 18);
             const Jasp_to_CMJ = (Jasp_inJaspCMJ/CMJ_inJaspCMJ).toFixed(4);
             const CMJ_to_Jasp = (CMJ_inJaspCMJ/Jasp_inJaspCMJ).toFixed(10);
-                    document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if (CMJ_to_Jasp != 0){
+              document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
 
 
@@ -2135,8 +2142,11 @@ powerInputs.forEach(input => {
             const Jdao_to_CMJ = (Jdao_inJdaoCMJ/CMJ_inJdaoCMJ).toFixed(4);
             const CMJ_to_Jdao = (CMJ_inJdaoCMJ/Jdao_inJdaoCMJ).toFixed(10);
                     // display 
-                    document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Jdao != 0){
+              document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
             // Bal of Pizza(Pza)  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70';
@@ -2144,8 +2154,11 @@ powerInputs.forEach(input => {
             const CMJ_inPzaCMJ = await call_SC(address, CMJ, 18);
             const Pza_to_CMJ = (Pza_inPzaCMJ/CMJ_inPzaCMJ).toFixed(4);
             const CMJ_to_Pza = (CMJ_inPzaCMJ/Pza_inPzaCMJ).toFixed(10);
-                    document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Pza != 0){
+              document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                   
 
             // Bal of Sx31  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0xda558EE93B466aEb4F59fBf95D25d410318be43A';
@@ -2153,8 +2166,11 @@ powerInputs.forEach(input => {
             const CMJ_inSx31CMJ = await call_SC(address, CMJ, 18);
             const Sx31_to_CMJ = (Sx31_inSx31CMJ/CMJ_inSx31CMJ).toFixed(4);
             const CMJ_to_Sx31 = (CMJ_inSx31CMJ/Sx31_inSx31CMJ).toFixed(10);
-                    document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Sx31 != 0){
+              document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
             // Bal of Ctuna  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x7801F8cdBABE6999331d1Bf37d74aAf713C3722F';
@@ -2162,8 +2178,12 @@ powerInputs.forEach(input => {
             const CMJ_inCtunaCMJ = await call_SC(address, CMJ, 18);
             const Ctuna_to_CMJ = (Ctuna_inCtunaCMJ/CMJ_inCtunaCMJ).toFixed(4);
             const CMJ_to_Ctuna = (CMJ_inCtunaCMJ/Ctuna_inCtunaCMJ).toFixed(10);
-                document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Ctuna != 0){
+              document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+              
+                
 
             // Bal of Gold  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x7086EC7ED5D94ef503bE324B0aE8A3748A15fAE5';
@@ -2171,9 +2191,12 @@ powerInputs.forEach(input => {
             const CMJ_inGoldCMJ = await call_SC(address, CMJ, 18);
             const Gold_to_CMJ = (Gold_inGoldCMJ/CMJ_inGoldCMJ).toFixed(4);
             const CMJ_to_Gold = (CMJ_inGoldCMJ/Gold_inGoldCMJ).toFixed(10);
-                document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-            
+            if(CMJ_to_Gold != 0){
+              document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+          
+            }
+                
 
             // Bal of Os  , JBC/  0x329889325A555b217C41A4c2EADD529a0CfA4231
             address = '0x329889325A555b217C41A4c2EADD529a0CfA4231';
@@ -2181,8 +2204,11 @@ powerInputs.forEach(input => {
             const CMJ_inOsCMJ = await call_SC(address, CMJ, 18);
             const Os_to_CMJ = (Os_inOsCMJ/CMJ_inOsCMJ).toFixed(4);
             const CMJ_to_Os = (CMJ_inOsCMJ/Os_inOsCMJ).toFixed(10);
-                document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Os != 0){
+              document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+               
 
 
 
@@ -2193,10 +2219,14 @@ powerInputs.forEach(input => {
             const Swar_to_WJBC = (Swar_inSwarWJBC/WJBC_inSwarWJBC).toFixed(4);
             const WJBC_to_Swar = (WJBC_inSwarWJBC/Swar_inSwarWJBC).toFixed(10);
             const SWAR_in_CMJ = (WJBC_to_Swar*JBC_to_CMJ).toFixed(6)
-                document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            if(SWAR_in_CMJ != 0){
+              document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            }
+
+                
 
             // Bal of ANGB , WJBC 
             address = '0xDd35db1a731CD86C01d74A8a4bA4354ca1CDE24d';
@@ -2205,10 +2235,13 @@ powerInputs.forEach(input => {
             const ANGB_to_WJBC = (ANGB_inANGBWJBC/WJBC_inANGBWJBC).toFixed(4);
             const WJBC_to_ANGB = (WJBC_inANGBWJBC/ANGB_inANGBWJBC).toFixed(4);
             const ANGB_in_CMJ = (WJBC_to_ANGB*JBC_to_CMJ).toFixed(6)
-                document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            if(ANGB_in_CMJ != 0){
+              document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            }
+                
 
             // Bal of CMJ , SIL 
             address = '0xf189c5B03694b70e5DFD8e8CAE84118Ed7616F19';
@@ -2216,11 +2249,18 @@ powerInputs.forEach(input => {
             const CMJ_inSILCMJ = await call_SC(address, CMJ, 18);
             const SIL_to_CMJ = (SIL_inSILCMJ/CMJ_inSILCMJ).toFixed(6);
             const CMJ_to_SIL = (CMJ_inSILCMJ/SIL_inSILCMJ).toFixed(10);
-                document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-            
-                Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+            if(CMJ_to_SIL != 0){
+              document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+          
+              
+            }
+
+            Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+            if(Tao_CMJ != 0){
             document.getElementById('priceB22').innerText = `${Tao_CMJ.toFixed(8)}`;
+          }
+                
             
 
             // BAL of II , JTAO
@@ -2231,12 +2271,17 @@ powerInputs.forEach(input => {
             const JTAO_to_II = (JTAO_inIIJTAO/II_inIIJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
             JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
             CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
-            document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(JTAO_to_II != 0){
+              document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
             document.getElementById("IIPrice_JTAO_2").innerHTML = (JTAO_to_II*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
             JTAO_to_CMJ = (JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2;
             II_to_CMJ = ((JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
-            document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-            document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(II_to_CMJ != 0){
+              document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+            
             
             // BAL of EE , JTAO
             address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60';
@@ -2246,13 +2291,18 @@ powerInputs.forEach(input => {
             const JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
             JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
             CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
-            document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-            document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(JTAO_to_EE != 0){
+              document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                      
             JTAO_to_CMJ = (JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2;
             EEPrice_CMJ = ((JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
-            document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-            document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-            
+            if(EEPrice_CMJ != 0){
+              document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+              
+            }  
 
 ////////////////////////////////////////////////////////////////////////////////////// MEOW NEON////////////////////////////////////////////////////////////////////////////////
             // Bal of Meow-BBQ
