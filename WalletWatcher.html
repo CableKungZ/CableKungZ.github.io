@@ -1283,10 +1283,16 @@ async function call_SC(address, contract, divider) {
     return null;
   }
 }
+function resetNetworth(){
+    document.getElementById("wallet_cmj").innerHTML = 0;
+    document.getElementById("farm_cmj").textContent = 0;
+    document.getElementById("pending_cmj").textContent = 0;
+}
 
 async function getBalance() {
     document.getElementById("nw_usd").innerHTML = `<img width="32px" src="https://s12.gifyu.com/images/SavRL.gif">`
   resetPurchaseTable()
+  resetNetworth();
   startHistory()
   THB_to_USD = parseFloat(document.getElementById("THB").textContent) || 36.5;
   console.log("THB / USD : "+THB_to_USD);
@@ -1426,7 +1432,7 @@ async function getBalance() {
     function calculateWorth(balance, conversionRate) {
       return parseFloat(balance * conversionRate);
   }
-
+  
   function addToTable(tokenName, tokenAmount, tokenPrice) {
     // หา DOM element ของตารางโดยใช้ ID
     var table = document.getElementById("walletAsset");
@@ -1794,7 +1800,7 @@ async function getBalance() {
         }
     }
 
-
+    
     function addWalletWorth(TokenValue){
         var currentCMJ = parseFloat(document.getElementById("wallet_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
         var newCMJ = parseFloat(TokenValue)+parseFloat(currentCMJ);
@@ -2214,37 +2220,34 @@ function fetchTransaction(){
         console.error("Error fetching logs:", error);
     });
 }
-function fetchTransaction2(){
+function fetchTransaction2() {
     resetTable();
-    
-    console.log("fetch Data from  : ",fromAddress," to ",toAddress," Token : ",token_address," from Block ",fromBlock," to Block ",toBlock)
-    var fromAddress = document.getElementById("txhash_from").value;
-    var toAddress = document.getElementById("txhash_to").value;
+
+    var fromAddress = document.getElementById("txhash_from").value || "Any";
+    var toAddress = document.getElementById("txhash_to").value || "Any";
     var token_address = document.getElementById("token").value;
-    var fromBlock = document.getElementById("fromBlock").value;
-    var toBlock = document.getElementById("toBlock").value;
+    var fromBlock = document.getElementById("fromBlock").value || 'earliest';
+    var toBlock = document.getElementById("toBlock").value || 'latest';
 
-    // ถ้าช่อง From Block หรือ To Block ว่างเปล่า ให้ใช้ค่าเริ่มต้น 'earliest' และ 'latest' ตามลำดับ
-    if (!fromBlock) fromBlock = 'earliest';
-    if (!toBlock) toBlock = 'latest';
+    console.log("fetch Data from : ", fromAddress, " to ", toAddress, " Token : ", token_address, " from Block ", fromBlock, " to Block ", toBlock);
 
-    getTokenTransfer2(fromAddress,toAddress , token_address, fromBlock, toBlock)
-    .then(function(logsArray) {
-        logsArray.forEach(function(logs) {
-            logs.forEach(function(log) {
-                var tx_hash = log.transactionHash;
-                var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
-                console.log(transaction_url)
-                fetch(transaction_url)
-                    .then(response => response.json())
-                    .then(data => processTxhash2(fromAddress,toAddress,token_address,data, tx_hash))
-                    .catch(error => console.error("Error fetching transaction data:", error));
+    getTokenTransfer2(fromAddress, toAddress, token_address, fromBlock, toBlock)
+        .then(function(logsArray) {
+            logsArray.forEach(function(logs) {
+                logs.forEach(function(log) {
+                    var tx_hash = log.transactionHash;
+                    var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                    console.log(transaction_url)
+                    fetch(transaction_url)
+                        .then(response => response.json())
+                        .then(data => processTxhash2(fromAddress, toAddress, token_address, data, tx_hash))
+                        .catch(error => console.error("Error fetching transaction data:", error));
+                });
             });
+        })
+        .catch(function(error) {
+            console.error("Error fetching logs:", error);
         });
-    })
-    .catch(function(error) {
-        console.error("Error fetching logs:", error);
-    });
 }
 function getTokenTransfer(wallet_address , token_address, fromBlock, toBlock) {
     var from_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
@@ -2275,25 +2278,30 @@ function getTokenTransfer(wallet_address , token_address, fromBlock, toBlock) {
         web3.eth.getPastLogs(event_filter_to)
     ]);
 }
-function getTokenTransfer2(fromAddress,toAddress , token_address, fromBlock, toBlock) {
-    var from_topic = '0x000000000000000000000000' + fromAddress.slice(2).toLowerCase();
-    var to_topic = '0x000000000000000000000000' + toAddress.slice(2).toLowerCase();
+function getTokenTransfer2(fromAddress, toAddress, token_address, fromBlock, toBlock) {
+    console.log("INPUT From", fromAddress, " INPUT to ", toAddress);
+
+    var from_topic = (fromAddress !== "Any") ? '0x000000000000000000000000' + fromAddress.slice(2).toLowerCase() : "";
+    var to_topic = (toAddress !== "Any") ? '0x000000000000000000000000' + toAddress.slice(2).toLowerCase() : "";
+
+    var topics = [web3.utils.keccak256('Transfer(address,address,uint256)')];
+    if (fromAddress !== "Any") topics.push(from_topic);
+    if (toAddress !== "Any") topics.push(to_topic);
 
     var event_filter = {
         'fromBlock': fromBlock,
         'toBlock': toBlock,
         'address': token_address,
-        'topics': [
-            web3.utils.keccak256('Transfer(address,address,uint256)'),
-            from_topic,
-            to_topic
-        ]
+        'topics': topics
     };
-  
+
     return Promise.all([
-        web3.eth.getPastLogs(event_filter),
+    web3.eth.getPastLogs(event_filter)
     ]);
 }
+
+
+
 function processTxhash(wallet_address,token_address,data, tx_hash) {
     var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
     if(data.items){
@@ -2325,38 +2333,40 @@ function processTxhash(wallet_address,token_address,data, tx_hash) {
         });
     }
 }
-function processTxhash2(fromAddress,toAddress,token_address,data, tx_hash) {
+function processTxhash2(fromAddress, toAddress, token_address, data, tx_hash) {
     var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
 
-    if(data.items){
-        data.items.forEach(function(item){
-            from = item.from.hash;
-            if(from === fromAddress){
+    if (data.items) {
+        data.items.forEach(function(item) {
+            var from = item.from.hash;
+            var to = ""; // Define 'to' variable within the block
+            if (from === fromAddress) {
                 to = item.to.hash;
-                name = item.to.name || 'unknowed';
-                symbol = item.token.symbol;
-                address = item.token.address;
-                value = 0;
-                if (symbol === "JASP"){
-                    value = item.total.value / (10**9);
-                }else{
-                    value = item.total.value / (10**18);
+                var name = item.to.name || 'unknown';
+                var symbol = item.token.symbol;
+                var address = item.token.address;
+                var value = 0;
+                if (symbol === "JASP") {
+                    value = item.total.value / (10 ** 9);
+                } else {
+                    value = item.total.value / (10 ** 18);
                 }
             }
-            txhash = item.txhash;
-            if (to === "0x0000000000000000000000000000000000000001"){
+            var txhash = item.txhash;
+            if (to === "0x0000000000000000000000000000000000000001") {
                 name = "Burned";
             }
-            if ((from === fromAddress) && value != 0 && token_address === address && value > greaterthan){
+            if ((value != 0) && (token_address === address) && (value > greaterthan)) {
                 var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
                 var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value.toLocaleString()} </td><td>${symbol}</td></tr>`;
                 document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
                 console.log(data);
             }
-            updateTransactionResult()
+            updateTransactionResult();
         });
     }
 }
+
 function resetTable(){
     document.getElementById("transactionHistory").innerHTML = `<tr><th>TxHash</th><th>From</th><th>To</th><th>Amount</th><th>Symbol</th></tr>`;
 }
