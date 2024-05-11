@@ -1504,8 +1504,6 @@ setUSD()
 
 });
 
-</script>
-<script>
   document.addEventListener('DOMContentLoaded', function() {
     var button = document.getElementById('multiPowerBtn');
     var powerInput = document.getElementById('powerBox');
@@ -1527,8 +1525,6 @@ setUSD()
       }
     });
   });
-</script>
-<script>
   document.addEventListener('DOMContentLoaded', function() {
     var toggleInfoButton = document.getElementById('toggleInfoBtn');
     var infoDiv = document.getElementById('infoDiv');
