@@ -2508,7 +2508,7 @@ powerInputs.forEach(input => {
             reward = (multiplier*rewardPerBlock*poolAllocPoint) / totalAllocPoint ;
             accRewardPerShare = (reward * (10**12)) / poolPowerAll ;
             rewardPerPower = ((1 * accRewardPerShare) / (10**12)) - RewardDebt;
-            FinalOSreward = rewardPerPower / (10**18);
+            FinalOSreward = rewardPerPower ;
             document.getElementById("RewardPerPower").innerHTML = (FinalOSreward*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
         
             //
