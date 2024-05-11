@@ -1769,12 +1769,8 @@ powerInputs.forEach(input => {
     let CrypticCog = 0;
     let Os = 0;
      
-      OsReward = (2 * 0.14 * 10 ) / 13 ; // Multiply * RewardPerBlock * Pool.alloc devide total Pool.Alloc
-      accRewardPerShare = (OsReward*(10**12)) / OsPowerAll;
-        //                                                    debt =(stakednft.power (0) * pool.accRewardPerShare (10) ) / 1e12
-         FinalOSreward = ((accRewardPerShare / (10**12)) - ((1*10)/(10**12)))/10**18;
-        
-      OsDaily = FinalOSreward*OSPower; 
+      OsReward = (2 * 0.14 * 10 ) / 13 ;
+      OsDaily = 0.0016*OSPower; 
       copperMineHourly = 0.36 * CuPower;
       copperMineDaily = 0.36 * CuPower * 24;
       jasperCave = 0.0000864 * JaspPower;
@@ -2502,7 +2498,7 @@ powerInputs.forEach(input => {
             OsReward = (2 * 0.14 * 10 ) / 13 ; // Multiply * RewardPerBlock * Pool.alloc devide total Pool.Alloc
             accRewardPerShare = (OsReward*(10**12)) / totalPower;
             FinalOSreward = ((accRewardPerShare / (10**12)) - 5.855303423009268*(10**29))/10**18;
-            document.getElementById("RewardPerPower").innerHTML = (FinalOSreward*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+            document.getElementById("RewardPerPower").innerHTML = ((2.597 * 10**-7)*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
         
             //
 
