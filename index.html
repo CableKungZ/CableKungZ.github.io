@@ -1769,8 +1769,7 @@ powerInputs.forEach(input => {
     let CrypticCog = 0;
     let Os = 0;
      
-      OsReward = (2 * 0.14 * 10 ) / 13 ;
-      OsDaily = 0.0016*OSPower; 
+      OsDaily = RewardOs*OSPower; 
       copperMineHourly = 0.36 * CuPower;
       copperMineDaily = 0.36 * CuPower * 24;
       jasperCave = 0.0000864 * JaspPower;
@@ -2495,10 +2494,17 @@ powerInputs.forEach(input => {
             rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() /10**18;
             
             document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
-            OsReward = (2 * 0.14 * 10 ) / 13 ; // Multiply * RewardPerBlock * Pool.alloc devide total Pool.Alloc
-            accRewardPerShare = (OsReward*(10**12)) / totalPower;
-            FinalOSreward = ((accRewardPerShare / (10**12)) - 5.855303423009268*(10**29))/10**18;
-            document.getElementById("RewardPerPower").innerHTML = ((2.597 * 10**-7)*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+
+            RewardDebt = (1 * 10) / (10**12);
+            multiplier = 2 ;
+            rewardPerBlock = 140000000000000000 ; //(0.14)
+            poolAllocPoint = 10;
+            totalAllocPoint = 13;
+            reward = (multiplier*rewardPerBlock*poolAllocPoint) / totalAllocPoint ;
+            accRewardPerShare = (reward * (10**12)) / totalPower ;
+            rewardPerPower = ((1 * accRewardPerShare) / (10**12)) - RewardDebt;
+            FinalOSreward = rewardPerPower /(10**18);
+            document.getElementById("RewardPerPower").innerHTML = (FinalOSreward*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
         
             //
 
