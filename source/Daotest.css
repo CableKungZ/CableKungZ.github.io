@@ -1,0 +1,472 @@
+        /* CSS Styles for the navigation bar */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+        }
+        
+        nav {
+            background-color: #ff81c6;
+            color: #fff;
+            padding: 10px 20px;
+        }
+        .logo {
+            float: left;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: auto;
+
+        }
+        .logo img{
+            width: 40px;
+            height: 40px;
+        }
+
+        li a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        li a:hover {
+            background-color: #111;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+            text-decoration: none;
+        }
+        .dropdown-content a:hover {
+            background-color: #111;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .center{text-align: center;}
+    /* CSS for Token Price section */
+    .loss,.profit{
+        font-weight: bolder;
+        font-size: 18px;
+      }
+      .loss{
+        color: red;
+      }
+      .profit{
+        color: green;
+      }
+      .token-price {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 4 columns per row by default */
+        gap: 20px;
+      }
+      .join-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 15px;
+      }
+    
+      .join-btn:hover {
+        background-color: #0056b3;
+      }
+      .token-price h1, .token-price h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        grid-column: 1 / -1; /* Full width across all columns */
+      }
+      .token-price h4 {font-size: 16px;margin-bottom: 10px;}
+      .token-price h6 {
+        font-size: 12px;
+        color: #777;
+        margin-top: 15px;
+        grid-column: 1 / -1; /* Full width across all columns */
+      }
+      .token-price a {color: #3498db;font-size: 12px;}
+      .token-price img {margin-right: 5px;}
+  
+      @media screen and (max-width: 1199.98px) {
+        .token-price {grid-template-columns: repeat(4, 1fr);}}
+      @media screen and (max-width: 991.98px) {
+        .token-price {grid-template-columns: repeat(2, 1fr);}}
+      @media screen and (max-width: 575.98px) {
+        .token-price {grid-template-columns: repeat(1, 1fr);}}
+  
+
+      .button {
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          padding: 16px 35px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 17px;
+          border-radius: 5px;
+          cursor: pointer;
+          margin: 0 10px;
+      }
+      .button:hover {background-color: #45a049;}
+      .center {align-items: center;}
+      .center label {margin-right: 10px;width: 150px;}
+      label{width: 150px;}
+      
+      .card {
+          z-index: 999; /* Adjust the value as needed */
+          margin: 10px;
+          padding: 20px;
+          border: 2px solid #3498db;
+          border-radius: 8px;
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+      }
+      .card:hover,.card-long:hover {transform: scale(1.05);}
+      .card-body,.card-long-body {margin-top: -10px;}
+      .card-title,.card-long-title {
+          margin-bottom: 5px;
+          font-size: 26px;
+          text-align: center;
+          font-weight: bold;
+          padding-top: 10px;
+      }
+      .card-text,.card-long-text {
+          margin-top: cal(100%-20px);
+          margin-bottom: 5px; /* Adjust as needed */
+      }
+      .card-long {
+          z-index: 999; /* Adjust the value as needed */
+          margin: 10px;
+          padding: 20px;
+          border: 2px solid #3498db;
+          border-radius: 8px;
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+      }
+  
+      .card2 {
+          width: 100%;
+          padding: 25px;
+          margin: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #f9f9f9;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          transition: background-color 0.3s ease;
+      }
+      .card2 .card-body{margin-top: 10px;margin-bottom: 15px;}
+      
+      .card2:hover {background-color: #eaeaea;}
+          /* Extra small devices (phones) */
+          @media (max-width: 768px) {
+            .card {
+              width: 100%;
+            }
+  
+          }
+      
+          /* Small devices (tablets) */
+          @media (min-width: 577px) and (max-width: 768px) {
+            .card {
+              width: 100%;
+            }
+          }
+      
+          /* Medium devices (desktops) */
+          @media (min-width: 576px) {
+            .card {
+              width: 100%; /* เพื่อให้การ์ดเต็มแถว col */
+            }
+  
+            .card-short{
+              width: 100%;
+            }
+  
+          }
+          /* MAIN SCREEN SIZE */
+          @media (min-width: 375px) {
+              .card {
+                width: 100%; /* เพื่อให้การ์ดเต็มแถว col */
+              }
+  
+  
+            }
+        .low{
+            color: blue;
+        }
+        .bg-gray{
+          background-color: gray;
+          margin-top: 2px;
+          margin-bottom: 3px;
+        }
+        .card-text{margin-right: -10px;}
+        /* CSS for the button */
+      .button {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+      }
+  
+      .button:hover {background-color: red;}
+      .center {text-align: center;}
+      .bg-gray {background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลัง */color: #333; /* เปลี่ยนสีข้อความ */}
+  
+      .button-container {margin-top: 10px;padding-bottom: 30px;}
+      .button {cursor: pointer;}
+    
+      .dropdown{
+        position: unset;
+      }
+    
+        #countdown {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          background-color: rgba(255, 0, 221, 0.116);
+          padding: 5px;
+          border: 1px solid #ccc;
+          display: none;
+          font-size: 12px;
+        }
+    
+        #updatedMessage {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          background-color: green;
+          padding: 5px;
+          border: 1px solid #ccc;
+          display: none;
+          font-size: 12px;
+        }
+        .calc {width: 100%;}
+        #result,#boxType,#lootBox{
+          text-align: center;
+        }
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+          margin-bottom: 100px;
+      }
+      .section-board {
+          width: 80%;
+          margin: 20px auto;
+          background-color: #fff;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+      }
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+      }
+      th, td {
+          border: 1px solid #ddd;
+          padding: 12px;
+          text-align: left;
+      }
+      th {background-color: #f2f2f2;}
+      tr:nth-child(even) {background-color: #f9f9f9;}
+      button {
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          padding: 10px 15px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 14px;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      button:hover {background-color: #45a049;}
+      .green-text {color: green;}
+      .tokenlogo{height: 30px;width: 30px;margin: auto;padding: auto;}
+    .header {
+      font-size: 30px;
+      padding: 30px;
+      background-image: linear-gradient(135deg, #FFB6C1, #FF69B4); /* สีชมพูสดใสในรูปแบบ gradient */
+      text-align: center;
+    }
+      .nftcol,.font-16{font-size: 16px;}
+      .font-12{font-size: 12px;}
+      .font-14{font-size: 14px;}
+      .tab{margin-left: 20px;margin-bottom: -20px;margin-top: -6px;}
+      .factory .header h6 {font-size: 14px;color: black;margin-top: 15px;grid-column: 1 / -1; }
+          /* เรียงลำดับขอบเขต footer และข้อความภายใน */
+          .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            display: flex; /* ใช้ Flexbox เพื่อจัดวาง */
+            justify-content: space-between; /* ให้โลโก้อยู่ซ้ายสุดและข้อความอยู่ขวาสุด */
+            align-items: center; /* จัดวางพื้นที่ด้านในของ footer ให้อยู่ตรงกลาง */
+            padding-top: 10px;
+            z-index: 1000; /* ทำให้ footer อยู่ข้างบน */
+        }
+        /* ขนาดโลโก้ */
+        .logo {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        /* ข้อความอนิเมชัน */
+  @keyframes textAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
+  /* ข้อความ Donation */
+  .donation {
+    display: inline-block;
+    vertical-align: middle;
+    color:red;
+    font-size: 40px;
+    margin-right: 40px;
+    animation: textAnimation 2s infinite; /* ทำให้ข้อความทรงขยายและย่อกลับ */
+    
+  }
+  
+        /* ข้อความ Wallet Address */
+        .wallet-address {
+          display: flex;
+          align-items: center;
+      }
+      /* ไอคอน Copy */
+      .copy-icon {
+          margin-left: 5px;
+          cursor: pointer;
+          height: 15px;
+      }
+      #qrImage{
+        height: 300px;
+        z-index: 1001;
+      }
+      #popup{
+        z-index: 1000;
+      }
+      .details,
+      .logs {
+        flex: 1;
+      }
+  
+      .logs {
+        margin-left: 20px; /* ให้ Logs มีระยะห่างด้านซ้ายกับ Details */
+      }
+      .box {
+        display: flex;
+      }
+    .update {
+        margin-bottom: 20px;
+    }
+    .date {
+        font-weight: bold;
+        font-size: 24px;
+    }
+    .update-text {
+        font-size: 16px;
+        padding-left: 40px;
+        margin-bottom: -5px;
+    }
+    .underline {
+        text-decoration: underline;
+    }
+    footer {
+      background-color: #f0f0f0; /* สีพื้นหลังของ Footer */
+      padding: 20px; /* ระยะห่างของขอบ Footer กับเนื้อหา */
+  }
+  
+  .partner, .sponsor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px; /* ระยะห่างระหว่าง Partner และ Sponsor */
+  }
+  
+  .partner img, .sponsor img {
+      width: 100px; /* ขนาดของรูปภาพ Partner และ Sponsor */
+      margin: 0 10px; /* ระยะห่างระหว่างรูปภาพ */
+  }
+  .sponsor p{
+    margin-right: 20px;
+    font-size: 18px;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+li {
+    float: left;
+}
+
+/* Dropdown Styles */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f7add6;
+    min-width: 160px;
+    z-index: 1;
+}
+.dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    display: block;
+    text-align: left;
+    text-decoration: none;
+}
+.dropdown-content a:hover {
+    background-color: #111;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.center{text-align: center;}
+
+table{
+  font-size: 14px;
+}
+td{
+  font-size: 16px;
+}
+input[type="text"]{
+  width: 410px;
+}
+input[type="number"]{
+  width: 126px;
+  font-size: 12px;
+}
