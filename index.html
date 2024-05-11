@@ -1710,6 +1710,7 @@ powerInputs.forEach(input => {
     // ดึงค่า Power จาก input
     var isMultiple = document.getElementById("multiPowerBtn").classList.contains('active');
     var RewardOs = parseFloat(document.getElementById("RewardPerPower").textContent) || 0;
+    var OsPowerAll = parseFloat(document.getElementById("TotalPower").textContent) || 0;
     var power = 0;
     var CuPower = 0;
     var JaspPower = 0;
@@ -1767,8 +1768,12 @@ powerInputs.forEach(input => {
     let angb = 0;
     let CrypticCog = 0;
     let Os = 0;
-
-      OsDaily = RewardOs*OSPower*2; // add multiple
+     
+      OsReward = (2 * 0.14 * 10 ) / 13 ; // Multiply * RewardPerBlock * Pool.alloc devide total Pool.Alloc
+      accRewardPerShare = (OsReward*(10**12)) / OsPowerAll;
+         FinalOSreward = ((accRewardPerShare / (10**12)) - 5.855303423009268*(10**29))/10**18;
+        
+      OsDaily = FinalOSreward*OSPower; 
       copperMineHourly = 0.36 * CuPower;
       copperMineDaily = 0.36 * CuPower * 24;
       jasperCave = 0.0000864 * JaspPower;
@@ -2491,9 +2496,13 @@ powerInputs.forEach(input => {
             PoolData = await HouseStaking.methods.poolInfo(1).call();
             totalPower = parseFloat(PoolData[1]);
             rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() /10**18;
-            reward_perPower_perBlock = rewardPerBlock/totalPower;
+            
             document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
-            document.getElementById("RewardPerPower").innerHTML = (reward_perPower_perBlock*6490*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+            OsReward = (2 * 0.14 * 10 ) / 13 ; // Multiply * RewardPerBlock * Pool.alloc devide total Pool.Alloc
+            accRewardPerShare = (OsReward*(10**12)) / totalPower;
+            FinalOSreward = ((accRewardPerShare / (10**12)) - 5.855303423009268*(10**29))/10**18;
+            document.getElementById("RewardPerPower").innerHTML = (FinalOSreward*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+        
             //
 
             setLabFactory(Plat_Price,JTAO_to_II,JTAO_to_CMJ,ANGB_in_CMJ,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price);
