@@ -1295,6 +1295,8 @@ input[type="number"]{
   <!-------------------------------------------------- Start Log  --------------------------------------->
   <div id="logs" class="container mt-5 " style="display:none;">
     <div class="update">
+        <span class="date">May 13, 2024</span>
+        <p class="update-text">DaoBuddy Update : Add price Value in THB </p>
         <span class="date">April 29, 2024</span>
         <p class="update-text">DaoBuddy Update : ปรับปรุงหน้าตาเว็บ </p>
         <p class="update-text">DaoBuddy Update : นำ WalletWatcher/Upgrade SapienTable/Upgrade Tao ได้ผ่านหน้าเว็บเดิม ไม่ขึ้นลิ้งใหม่ </p>
@@ -2828,7 +2830,7 @@ fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d
             if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
                 TaoPrice = parseFloat(pool.attributes.token_price_usd)
                 document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
-                document.getElementByID('TAO_buyTHB').innterText = '${setLocal((exchangeRate*TaoPrice),4)}'
+                document.getElementById('TAO_buyTHB').innerText = '${setLocal((exchangeRate*TaoPrice),4)}'
             }
         });
     })
