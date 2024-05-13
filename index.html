@@ -1440,8 +1440,38 @@ powerInputs.forEach(input => {
       }
 
     }
-const web3 = new Web3('https://jib-rpc.inan.in.th');
-async function loadContract(contractAddress) {
+
+
+    async function main() {
+        const divider = 10 ** 18;
+        const jaspdivider = 10 **9;
+
+        const web3 = new Web3('https://jib-rpc.inan.in.th');
+        console.log(" Access RPC Success")
+
+        const contractABI = [
+        // ABI ของ contract ERC-20
+        {
+            "constant": true,
+            "inputs": [{"name": "_owner", "type": "address"}],
+            "name": "balanceOf",
+            "outputs": [{"name": "balance", "type": "uint256"}],
+            "type": "function"
+        }
+    ];
+    const ERC721ABI = [
+    // ABI ของ balanceOf function
+    {
+      "constant": true,
+      "inputs": [{"name": "_owner", "type": "address"}],
+      "name": "balanceOf",
+      "outputs": [{"name": "", "type": "uint256"}],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ];
+  async function loadContract(contractAddress) {
     try {
       const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
       const data = await response.json();
@@ -1451,6 +1481,7 @@ async function loadContract(contractAddress) {
       console.error('Error loading contract:', error);
       alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง")
     }
+  }
         // สร้างออบเจ็กต์สัญญา
         const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
         const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
@@ -1485,37 +1516,6 @@ async function loadContract(contractAddress) {
         const HouseStaking = await loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
 
         
-    async function main() {
-        const divider = 10 ** 18;
-        const jaspdivider = 10 **9;
-
-        console.log(" Access RPC Success")
-
-        const contractABI = [
-        // ABI ของ contract ERC-20
-        {
-            "constant": true,
-            "inputs": [{"name": "_owner", "type": "address"}],
-            "name": "balanceOf",
-            "outputs": [{"name": "balance", "type": "uint256"}],
-            "type": "function"
-        }
-    ];
-    const ERC721ABI = [
-    // ABI ของ balanceOf function
-    {
-      "constant": true,
-      "inputs": [{"name": "_owner", "type": "address"}],
-      "name": "balanceOf",
-      "outputs": [{"name": "", "type": "uint256"}],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ];
-  
-  }
-
 
         try {
 
@@ -1617,7 +1617,7 @@ async function loadContract(contractAddress) {
             document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("JBC_buyTHB").innerHTML = (JBC_inJUST*exchangeRate*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
-
+                ## SELL
             document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("JBC_sellTHB").innerHTML = (JBC_inJUST*exchangeRate*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
@@ -1627,7 +1627,7 @@ async function loadContract(contractAddress) {
             document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
             document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
             document.getElementById("MEOW_buyTHB").innerHTML = (Meow_inJUST*exchangeRate*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
-
+                ## SELL
             document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
             document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
             document.getElementById("MEOW_sellTHB").innerHTML = (Meow_inJUST*exchangeRate*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
