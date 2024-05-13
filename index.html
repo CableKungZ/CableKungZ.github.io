@@ -2322,7 +2322,6 @@ async function call_SC(address, contract, divider) {
 function setUSD(){
   // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
 const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
-exchangeRate = 0;
 fetch(exchangeRateUrl)
   .then(response => response.json())
   .then(data => {
@@ -2358,6 +2357,8 @@ fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d
         pools.forEach(pool => {
             if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
                 TaoPrice = parseFloat(pool.attributes.token_price_usd)
+
+                exchangeRate = parseFloat(document.getElementById("usdTHB").textContent) || 33; 
                 document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
                 document.getElementById('TAO_buyTHB').innerText = `${setLocal((exchangeRate*TaoPrice),4)}`
             }
