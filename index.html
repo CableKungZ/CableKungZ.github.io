@@ -1602,21 +1602,31 @@ powerInputs.forEach(input => {
             console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
             console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
             console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
+            exchangeRate = parseFloat(document.getElementById("usdTHB").textContent) || 33; 
             // Buy Token
             document.getElementById("priceB2").innerHTML = (CMJ_to_JBC*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("priceD2").innerHTML = (CMJ_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_JUSDT
+            document.getElementById("CMJ_buyTHB").innerHTML = (CMJ_inJUST*1.013*exchangeRate).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_THB
+            
             document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
-            document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:4});
-            document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:4});
+            document.getElementById("JBC_buyTHB").innerHTML = (JBC_inJUST*exchangeRate*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
+            
+            document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("MEOW_buyTHB").innerHTML = (Meow_inJUST*exchangeRate*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
 
             // Sell Token
             document.getElementById("Sell_CMJinJBC").innerHTML = (CMJ_to_JBC*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("Sell_CMJinUSD").innerHTML = (CMJ_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_JUSDT
+            document.getElementById("CMJ_sellTHB").innerHTML = (CMJ_inJUST*exchangeRate*0.99).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_THB
+            
             document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
             document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
-            document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:4});
-            document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:4});
+    
+            document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("MEOW_sellTHB").innerHTML = (Meow_inJUST*exchangeRate*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
             const TAOPriceUSD = parseFloat(document.getElementById("priceD22").textContent) || 0;
             const CMJPriceUSD = parseFloat(document.getElementById("priceD2").textContent) || 0;
             
