@@ -63,7 +63,7 @@
           <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD, <span id="MEOW_buyTHB">..Loading</span> THB<br>
           Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD, <span id="MEOW_sellTHB">..Loading</span> THB</h4>
         <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
-          <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC), <span id="TAO_buyTHB">..Loading</span> THB<br>
+          <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD, <span id="TAO_buyTHB">..Loading</span> THB<br>
           <h4><img src="https://cloudflare-ipfs.com/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="$USD" width="20" height="20">USD </a>*0%  : 
           <br>Buy/Sell <span id="usdTHB">..Loading</span> THB/USD <br>
     </div>
@@ -2370,7 +2370,7 @@ fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d
                 TaoPrice = parseFloat(pool.attributes.token_price_usd)
 
                 exchangeRate = parseFloat(document.getElementById("usdTHB").textContent) || 33; 
-                document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
+                document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(6)}`;
                 document.getElementById('TAO_buyTHB').innerText = `${setLocal((exchangeRate*TaoPrice),4)}`
             }
         });
