@@ -2322,12 +2322,13 @@ async function call_SC(address, contract, divider) {
 function setUSD(){
   // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
 const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
-
+exchangeRate = 0;
 fetch(exchangeRateUrl)
   .then(response => response.json())
   .then(data => {
     // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
     const exchangeRate = data.rates.THB;
+      
 
     // ทำ HTTP GET request เพื่อดึงข้อมูล price_usd จาก API ที่กำหนด
     const tokenUrl = "https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5";
