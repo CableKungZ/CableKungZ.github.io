@@ -2358,7 +2358,7 @@ fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d
             if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
                 TaoPrice = parseFloat(pool.attributes.token_price_usd)
                 document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
-                document.getElementById('TAO_buyTHB').innerText = '${setLocal((exchangeRate*TaoPrice),4)}'
+                document.getElementById('TAO_buyTHB').innerText = `${setLocal((exchangeRate*TaoPrice),4)}`
             }
         });
     })
