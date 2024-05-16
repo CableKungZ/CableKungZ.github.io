@@ -1,442 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-adsense-account" content="ca-pub-9195099699232258">
     <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-9195099699232258">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaoBuddy - Template</title>
+    <title>DaoBuddy - CommuDao Helper Tool</title>
     <link rel="icon" type="image/png" href="https://i.ibb.co/xqW3n5T/Dao-Buddy-th-removebg-preview-nobg.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-        /* CSS Styles for the navigation bar */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-        }
-        
-        nav {
-            background-color: #ff81c6;
-            color: #fff;
-            padding: 10px 20px;
-        }
-        .logo {
-            float: left;
-            font-size: 20px;
-            font-weight: bold;
-            margin-right: auto;
-
-        }
-        .logo img{
-            width: 40px;
-            height: 40px;
-        }
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-weight: bold;
-        }
-        li {
-            float: left;
-        }
-        li a {
-            display: block;
-            color: #fff;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        li a:hover {
-            background-color: #111;
-        }
-        /* Dropdown Styles */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f7add6;
-            min-width: 160px;
-            z-index: 1;
-        }
-        .dropdown-content a {
-            color: #fff;
-            padding: 12px 16px;
-            display: block;
-            text-align: left;
-            text-decoration: none;
-        }
-        .dropdown-content a:hover {
-            background-color: #111;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .center{text-align: center;}
-    /* CSS for Token Price section */
-    .loss,.profit{
-        font-weight: bolder;
-        font-size: 18px;
-      }
-      .loss{
-        color: red;
-      }
-      .profit{
-        color: green;
-      }
-      .token-price {
-        margin: 20px;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        background-color: #f9f9f9;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 4 columns per row by default */
-        gap: 20px;
-      }
-      .join-btn {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        text-align: center;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        margin-top: 15px;
-      }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="source/index.css">
     
-      .join-btn:hover {
-        background-color: #0056b3;
-      }
-      .token-price h1, .token-price h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
-        grid-column: 1 / -1; /* Full width across all columns */
-      }
-      .token-price h4 {font-size: 16px;margin-bottom: 10px;}
-      .token-price h6 {
-        font-size: 12px;
-        color: #777;
-        margin-top: 15px;
-        grid-column: 1 / -1; /* Full width across all columns */
-      }
-      .token-price a {color: #3498db;font-size: 12px;}
-      .token-price img {margin-right: 5px;}
-  
-      @media screen and (max-width: 1199.98px) {
-        .token-price {grid-template-columns: repeat(4, 1fr);}}
-      @media screen and (max-width: 991.98px) {
-        .token-price {grid-template-columns: repeat(2, 1fr);}}
-      @media screen and (max-width: 575.98px) {
-        .token-price {grid-template-columns: repeat(1, 1fr);}}
-  
-      .navbar {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 20px;
-          flex-wrap: wrap; /* Allow items to wrap */
-      }
-      .button {
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          padding: 16px 35px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 17px;
-          border-radius: 5px;
-          cursor: pointer;
-          margin: 0 10px;
-      }
-      .button:hover {background-color: #45a049;}
-      .center {align-items: center;}
-      .center label {margin-right: 10px;width: 150px;}
-      label{width: 150px;}
-      
-      .card {
-          z-index: 999; /* Adjust the value as needed */
-          margin: 10px;
-          padding: 20px;
-          border: 2px solid #3498db;
-          border-radius: 8px;
-          background-color: #fff;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s ease;
-      }
-      .card:hover,.card-long:hover {transform: scale(1.05);}
-      .card-body,.card-long-body {margin-top: -10px;}
-      .card-title,.card-long-title {
-          margin-bottom: 5px;
-          font-size: 26px;
-          text-align: center;
-          font-weight: bold;
-          padding-top: 10px;
-      }
-      .card-text,.card-long-text {
-          margin-top: cal(100%-20px);
-          margin-bottom: 5px; /* Adjust as needed */
-      }
-      .card-long {
-          z-index: 999; /* Adjust the value as needed */
-          margin: 10px;
-          padding: 20px;
-          border: 2px solid #3498db;
-          border-radius: 8px;
-          background-color: #fff;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s ease;
-      }
-  
-      .card2 {
-          width: 100%;
-          padding: 25px;
-          margin: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          background-color: #f9f9f9;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-          transition: background-color 0.3s ease;
-      }
-      .card2 .card-body{margin-top: 10px;margin-bottom: 15px;}
-      
-      .card2:hover {background-color: #eaeaea;}
-          /* Extra small devices (phones) */
-          @media (max-width: 768px) {
-            .card {
-              width: 100%;
-            }
-  
-          }
-      
-          /* Small devices (tablets) */
-          @media (min-width: 577px) and (max-width: 768px) {
-            .card {
-              width: 100%;
-            }
-          }
-      
-          /* Medium devices (desktops) */
-          @media (min-width: 576px) {
-            .card {
-              width: 100%; /* เพื่อให้การ์ดเต็มแถว col */
-            }
-  
-            .card-short{
-              width: 100%;
-            }
-  
-          }
-          /* MAIN SCREEN SIZE */
-          @media (min-width: 375px) {
-              .card {
-                width: 100%; /* เพื่อให้การ์ดเต็มแถว col */
-              }
-  
-  
-            }
-        .low{
-            color: blue;
-        }
-        .bg-gray{
-          background-color: gray;
-          margin-top: 2px;
-          margin-bottom: 3px;
-        }
-        .card-text{margin-right: -10px;}
-        /* CSS for the button */
-      .button {
-        display: inline-block;
-        padding: 15px 30px;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-        margin-top: 10px;
-      }
-  
-      .button:hover {background-color: red;}
-      .center {text-align: center;}
-      .bg-gray {background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลัง */color: #333; /* เปลี่ยนสีข้อความ */}
-  
-      .button-container {margin-top: 10px;padding-bottom: 30px;}
-      .button {cursor: pointer;}
-    
-        .content {
-          margin-top: 70px; /* Adjust this value based on the height of your navbar */
-          padding: 20px;
-        }
-    
-        #countdown {
-          position: fixed;
-          bottom: 10px;
-          right: 10px;
-          background-color: green;
-          padding: 5px;
-          border: 1px solid #ccc;
-          display: none;
-          font-size: 12px;
-        }
-    
-        #updatedMessage {
-          position: fixed;
-          bottom: 10px;
-          right: 10px;
-          background-color: green;
-          padding: 5px;
-          border: 1px solid #ccc;
-          display: none;
-          font-size: 12px;
-        }
-        .calc {width: 100%;}
-        #result,#boxType,#lootBox{
-          text-align: center;
-        }
-        body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #f4f4f4;
-          margin-bottom: 100px;
-      }
-      .section-board {
-          width: 80%;
-          margin: 20px auto;
-          background-color: #fff;
-          padding: 20px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          border-radius: 10px;
-      }
-      table {
-          width: 100%;
-          border-collapse: collapse;
-          margin-top: 20px;
-      }
-      th, td {
-          border: 1px solid #ddd;
-          padding: 12px;
-          text-align: left;
-      }
-      th {background-color: #f2f2f2;}
-      tr:nth-child(even) {background-color: #f9f9f9;}
-      button {
-          background-color: #4CAF50;
-          color: white;
-          border: none;
-          padding: 10px 15px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 14px;
-          border-radius: 5px;
-          cursor: pointer;
-      }
-      button:hover {background-color: #45a049;}
-      .green-text {color: green;}
-      .tokenlogo{height: 30px;width: 30px;margin: auto;padding: auto;}
-    .header {
-      font-size: 30px;
-      padding: 30px;
-      background-image: linear-gradient(135deg, #FFB6C1, #FF69B4); /* สีชมพูสดใสในรูปแบบ gradient */
-      text-align: center;
-    }
-      .nftcol,.font-16{font-size: 16px;}
-      .font-12{font-size: 12px;}
-      .font-14{font-size: 14px;}
-      .tab{margin-left: 20px;margin-bottom: -20px;margin-top: -6px;}
-      .factory .header h6 {font-size: 14px;color: black;margin-top: 15px;grid-column: 1 / -1; }
-          /* เรียงลำดับขอบเขต footer และข้อความภายใน */
-          .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #333;
-            color: white;
-            display: flex; /* ใช้ Flexbox เพื่อจัดวาง */
-            justify-content: space-between; /* ให้โลโก้อยู่ซ้ายสุดและข้อความอยู่ขวาสุด */
-            align-items: center; /* จัดวางพื้นที่ด้านในของ footer ให้อยู่ตรงกลาง */
-            padding-top: 10px;
-            z-index: 1000; /* ทำให้ footer อยู่ข้างบน */
-        }
-        /* ขนาดโลโก้ */
-        .logo {
-            width: 40px;
-            height: 40px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-        /* ข้อความอนิเมชัน */
-  @keyframes textAnimation {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-  
-  /* ข้อความ Donation */
-  .donation {
-    display: inline-block;
-    vertical-align: middle;
-    color:red;
-    font-size: 40px;
-    margin-right: 40px;
-    animation: textAnimation 2s infinite; /* ทำให้ข้อความทรงขยายและย่อกลับ */
-    
-  }
-  
-        /* ข้อความ Wallet Address */
-        .wallet-address {
-          display: flex;
-          align-items: center;
-      }
-      /* ไอคอน Copy */
-      .copy-icon {
-          margin-left: 5px;
-          cursor: pointer;
-          height: 15px;
-      }
-      #qrImage{
-        height: 300px;
-        z-index: 1001;
-      }
-      #popup{
-        z-index: 1000;
-      }
-      .details,
-      .logs {
-        flex: 1;
-      }
-  
-      .logs {
-        margin-left: 20px; /* ให้ Logs มีระยะห่างด้านซ้ายกับ Details */
-      }
-      .box {
-        display: flex;
-      }
-    .update {
-        margin-bottom: 20px;
-    }
-    .date {
-        font-weight: bold;
-        font-size: 24px;
-    }
-    .update-text {
-        font-size: 16px;
-        padding-left: 40px;
-        margin-bottom: -5px;
-    }
-    .underline {
-        text-decoration: underline;
-    }
-    </style>
 </head>
 <body>
 <nav>
@@ -450,7 +22,7 @@
         <li><a onclick="toggleCards('noti')">Notification</a></li>
         <li><a onclick="showdPopup('donation')" style="font-weight: bold;color:rgb(139, 16, 16)">Donation</a></li>
         <li class="dropdown">
-            <a>Tools</a>
+            <a href="#">Tools</a>
             <div class="dropdown-content">
                 <a onclick="toggleCards('logs')">Log</a>
                 <a onclick="window.open('https://github.com/CableKungZ/Web3_CommuDao.git', '_blank')">Github</a>
@@ -473,24 +45,27 @@
           <!-- POPUP -->
 <div>
     <!-------------------------------------------------- Start PriceBoard  --------------------------------------->
-<div  id="priceBoard" class="container mt-5">
-    <div><div id="countdown">Countdown</div>
+<div  id="priceBoard" class="container mt-5" >
+    <div>
     <div id="updatedMessage">Updated</div>
     <h2 class="center">PROJECT TOKEN</h2></div>
     <h2 class="center">** ในการซื้อ/ขายแลกเปลี่ยน จะมีค่าธรรมเนียมเกิดขึ้น โดยแต่ละแพลตฟอร์มจะมีค่าธรรมเนียมแตกต่างกัน **</h2>
   
     <div class="token-price">
+      <div id="countdown" style="display:block;">Countdown</div>
       <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
-          <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
-          Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
+          <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD , <span id="CMJ_sellTHB">..Loading</span> THB<br>
+          Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD , <span id="CMJ_buyTHB">..Loading</span> THB</h4>
         <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
-          <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD<br>
-          Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD</h4>
+          <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD, <span id="JBC_buyTHB">..Loading</span> THB<br>
+          Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD, <span id="JBC_sellTHB">..Loading</span> THB</h4>
         <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
-          <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD<br>
-          Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
+          <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD, <span id="MEOW_buyTHB">..Loading</span> THB<br>
+          Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD, <span id="MEOW_sellTHB">..Loading</span> THB</h4>
         <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
-          <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
+          <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD, <span id="TAO_buyTHB">..Loading</span> THB<br>
+          <h4><img src="https://cloudflare-ipfs.com/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="$USD" width="20" height="20">USD </a>*0%  : 
+          <br>Buy/Sell <span id="usdTHB">..Loading</span> THB/USD <br>
     </div>
     <h2 class="center">MATERIALS </h2>
     <div class="token-price">
@@ -555,7 +130,7 @@
   
   </div>
   <!-------------------------------------------------- Start Factory  --------------------------------------->
-  <div id="factory" class="container mt-5">
+  <div id="factory" class="container mt-5" style="display:none;">
     <div class="factory">
         <div class="row">
                                                               <!-- Card Factory1 -->
@@ -792,21 +367,39 @@
       </div></div>
   </div>
   <!-------------------------------------------------- Start Dungeon  --------------------------------------->
-  <div id="dungeon" class="container mt-5">
+  <div id="dungeon" class="container mt-5" style="display:none;">
     <div class="col-12">
         <div class="card2 dungeon calc">
           <div class="card-body">
             <h5 class="card-title center">Mining Profit Calculator</h5>
-            <label for="power" class="center">Enter Power:</label>
-            <input type="number" class="center" id="power" min="0" placeholder="Enter Power" value="500">
+            <div style="margin-right:15px; margin-bottom:15px;">
+              <button id="multiPowerBtn">Multiple Power</button>
+              <button id="toggleInfoBtn">Calculate ROI</button>
+            </div>
+            <p id="powerBox">
+              <label for="power" class="center">Enter Power:</label>
+              <input type="number" class="center" id="power" min="0" placeholder="Insert Power Here">
+            </p>
+            <p id="input" style="display: none;">
+              <input type="text" class="center" id="wallet_power" placeholder="Get From Wallet Address">
+          </p>
+          <div id="infoDiv" style="display:none; flex-wrap: nowrap;">
+            <p style="margin-right: 10px;">Your Investment <input type="number" class="center" id="invest" min="0" placeholder="Your Invest(USD)"> </p>
+            <p style="margin-right: 10px;">Your Return <input type="number" class="center" id="return" min="0" placeholder="Your Return(USD)"> </p>
+            <p style="margin-right: 10px;"><span id="returnDate"></span></p>
+          </div>
+          <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
+          
+          
+            
             <!-- <button onclick="calculateProfit()">Calculate Profit</button> -->
             <table id="miningTable">
               <thead>
                 <tr>
-                  <th colspan="2">Dungeon</th>
-                  <th>Duration <br></th>
-                  <th>GasFee/Day</th>
-                  <th>Reward/Power</th>
+                  <th style="width:140px;">Dungeon</th>
+                  <th style="font-size:12px; width:15px;">Duration <br></th>
+                  <th >GasFee/Day</th>
+                  <th style="width:15px;">Reward/Power</th>
                   <th>Reward/Round<br></th>
                   <th>Reward/Day </th>
                 </tr>
@@ -814,42 +407,56 @@
         <tbody>
             <tr class="copperMine">
               <tr>
-                <td colspan="2">CopperMine <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="40" height="40"></td>
+                <td>
+                  CopperMine 
+                  <p id="input1" style="display: none;"><input type="number" class="center" id="power1" min="0" placeholder="Insert Power Here" width="250px"></p>
+                </td>
                 <td>1 Hour</td>
                 <td><span id="labR3"></span> CMJ <br>(~<span id="labS3"></span> JBC)</td>
-                <td>0.36 CU</td>
+                <td>0.36 <img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"></td>
                 <td><span id="copperMineHourly"></span></td>
                 <td><span id="copperMineDaily"></span></td>
               </tr>
             </tr>
             <tr class="jasperCave">
                 <tr>
-                  <td colspan="2">JasperCave  <img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="40" height="40"></td>
+                  <td>JasperCave  
+                    <p id="input2" style="display: none;"><input type="number" class="center" id="power2" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                   <td>1 Day</td>
                   <td><span id="labR4"></span> CMJ <br>(~<span id="labS5"></span> JBC)</td>
-                  <td>0.0000864 Jasp</td>
+                  <td>0.0000864 <img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"></td>
                   <td colspan="2"><span id="jasperCave"></span></td>
     
                 </tr>
             </tr>
             <tr class="daemonWorld">
                 <tr>
-                  <td colspan="2">Deamon World <img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="Angel Blessing" width="40" height="40"></td>
+                  <td>Deamon World 
+                    <p id="input3" style="display: none;"><input type="number" class="center" id="power3" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                   <td>1 Day</td>
                   <td><span id="labR5"></span> CMJ <br>(~<span id="labS7"></span> JBC)</td>
-                  <td>0.000012096 Angb<br>(x10 Event)</td>
+                  <td>0.000012096 <img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="Angel Blessing" width="20" height="20"><br>(x10 Event)</td>
                   <td colspan="2"><span id="DaemonWorld"></span></td>
                 </tr>
             </tr>
             <tr class="cryptic-cogs">
               <tr>
-                <td colspan="2">Cryptic Cogs <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="40" height="40"></td>
+                <td>Cryptic Cogs 
+                  <p id="input4" style="display: none;"><input type="number" class="center" id="power4" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                 <td>1 Day</td>
                 <td><span id="Dun4_CMJ"></span> JTAO <br>(~<span id="Dun4_JBC"></span> USD)</td>
-                <td>0.0767232 EE</td>
+                <td>0.0767232 <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="20" height="20"></td>
                 <td colspan="2"><span id="CrypticNight"></span></td>
               </tr>
           </tr>
+          <tr class="houseStaking">
+            <tr>
+              <td>House Staking 
+                <p id="input5" style="display: none;"><input type="number" class="center" id="power5" min="0" placeholder="Insert Power Here" width="250px"></p></td>
+              <td colspan="3">Pool Power : <span id="TotalPower"></span><br>Reward/Pow: <span id="RewardPerPower"> </span> <img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20">/Day</td>
+              <td colspan="2"><span id="HouseStaking"></span></td>
+            </tr>
+        </tr>
         </tbody>
     </table>
     
@@ -1057,7 +664,7 @@
           </div>
   </div>
   <!-------------------------------------------------- Start Gashapon  --------------------------------------->
-<div id="gashapon" class="container mt-5">
+  <div id="gashapon" class="container mt-5" style="display:none;">
     <div class="col-12">
         <div class="card2 gashapon">
           <div class="card-body">
@@ -1108,10 +715,10 @@
       </div>
   </div>
   <!-------------------------------------------------- Start Pool  --------------------------------------->
-  <div id="pool" class="container mt-5">
+  <div id="pool" class="container mt-5" style="display:none;">
   </div>
   <!-------------------------------------------------- Start Upgrade  --------------------------------------->
-  <div id="upgrade" class="container mt-5">
+  <div id="upgrade" class="container mt-5" style="display:none;">
       <div class="container">
           <div class="container mt-5" id="upgradeDetails">
               <div class="row">
@@ -1181,7 +788,7 @@
       </div>
   </div>
   <!-------------------------------------------------- Start Noti  --------------------------------------->
-  <div id="noti" class="container mt-5">
+  <div id="noti" class="container mt-5" style="display:none;">
     <div class="row">
         <!-- Card 2 -->
         <div class="col-4">
@@ -1214,8 +821,13 @@
       </div>
   </div>
   <!-------------------------------------------------- Start Log  --------------------------------------->
-  <div id="logs" class="container mt-5">
+  <div id="logs" class="container mt-5 " style="display:none;">
     <div class="update">
+        <span class="date">May 13, 2024</span>
+        <p class="update-text">DaoBuddy Update : Add price Value in THB </p>
+        <span class="date">April 29, 2024</span>
+        <p class="update-text">DaoBuddy Update : ปรับปรุงหน้าตาเว็บ </p>
+        <p class="update-text">DaoBuddy Update : นำ WalletWatcher/Upgrade SapienTable/Upgrade Tao ได้ผ่านหน้าเว็บเดิม ไม่ขึ้นลิ้งใหม่ </p>
         <span class="date">April 28, 2024</span>
         <p class="update-text">DaoBuddy Update : Migrate Webapp ไปยัง daobuddy.xyz </p>
         <span class="date">April 26, 2024</span>
@@ -1232,15 +844,24 @@
     </div>
   </div>
   <!-------------------------------------------------- Start Wallet Watcher  --------------------------------------->
-  <div id="walletWatcher" class="container mt-5">
+  <div id="walletWatcher" class="container mt-5" style="display:none;">
       <iframe src="https://daobuddy.xyz/WalletWatcher" style="width: 100%; height: 100vh; border: none;"></iframe>
   </div>
 </div>
-
+<footer>
+  <h1 class="center">Ecosystem of CommuDao</h1>
+  <div class="partner">
+      <img src="https://commudao.xyz/favicon.png" alt="Partner 1">
+  </div>
+  <h1 class="center">Sponser By</h1>
+  <div class="sponsor">
+    <p>CommuDao</p>
+  </div>
+</footer>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
 
 <script>
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1315,8 +936,6 @@
         alert('Copied to clipboard: ' + text);
     }
     
-  </script>
-  <script>
     // Your existing script for updating prices
 
     function updateData(data) {
@@ -1331,18 +950,18 @@
 
     // Countdown Timer
     var countdownElement = document.getElementById('countdown');
-    var countdownTime = 15; // seconds
+    var countdownTime = 5; // seconds
      
 
     function updateCountdown() {
-      countdownElement.textContent = 'Refreshing in ' + countdownTime + ' seconds';
+      countdownElement.textContent = 'Price refreshing in ' + countdownTime + ' seconds';
       countdownTime--;
 
       if (countdownTime < 0) {
         // Call the updateData function when the countdown reaches 0
          
         main();
-        countdownTime = 15; // Reset the countdown time
+        countdownTime = 10; // Reset the countdown time
       }
     }
 
@@ -1353,10 +972,6 @@
     setInterval(updateCountdown, 1000);
 
 
-  
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
-    <script>
         let totalOpened = 0;
         let nCount = 0;
         let rCount = 0;
@@ -1610,17 +1225,51 @@ inputs.forEach(input => {
 
 }
 
-const powerInputs = document.querySelectorAll("#power");
+const powerInputs = document.querySelectorAll("#power, #input1, #input2, #input3, #input4,#input5");
 
-// ใช้ forEach loop เพื่อเพิ่ม event listener ให้กับทุก input
-powerInputs.forEach(powerInput => {
-    powerInput.addEventListener("input", calculateProfit);
+powerInputs.forEach(input => {
+    input.addEventListener("input", calculateProfit);
 });
+
+
+
+
 
  function calculateProfit() {
     // ดึงค่า Power จาก input
-    const power = document.getElementById("power").value;
+    var isMultiple = document.getElementById("multiPowerBtn").classList.contains('active');
+    var RewardOs = parseFloat(document.getElementById("RewardPerPower").textContent) || 0;
+    var OsPowerAll = parseFloat(document.getElementById("TotalPower").textContent) || 0;
+    var power = 0;
+    var CuPower = 0;
+    var JaspPower = 0;
+    var AngbPower = 0;
+    var EEPower = 0;
+    var OSPower = 0;
+    
 
+    if(isMultiple){
+      var CuPower = document.getElementById("power1").value || 0;
+      var JaspPower = document.getElementById("power2").value || 0;
+      var AngbPower = document.getElementById("power3").value || 0;
+      var EEPower = document.getElementById("power4").value || 0;
+      var OSPower = document.getElementById("power5").value || 0;
+      
+    
+    }else{
+      var power = document.getElementById("power").value || 0;
+      var CuPower = power;
+      var JaspPower = power;  
+      var AngbPower = power
+      var EEPower = power;
+      var OSPower = power;
+    }
+    console.log("isMultiple : ",isMultiple);
+    console.log("CU POW : ",CuPower);
+    console.log("JASP POW : ",JaspPower);
+    console.log("ANGB POW : ",AngbPower);
+    console.log("EE POW : ",EEPower);
+    console.log("OS POW : ",OSPower);
     const cuMine = parseFloat(document.getElementById("labR2").textContent) || 0; // Copper Mine Gas
     const jaspCave = parseFloat(document.getElementById("labR4").textContent) || 0; // Japser Cave Gas
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) || 0; // daemonWorld Gas
@@ -1637,6 +1286,7 @@ powerInputs.forEach(powerInput => {
     const cuPrice = parseFloat(document.getElementById("priceB7").textContent) || 0;
     const jaspPrice = parseFloat(document.getElementById("priceB17").textContent) || 0;
     const angbPrice = parseFloat(document.getElementById("priceB23").textContent) || 0;
+    const osPrice = parseFloat(document.getElementById("priceB18").textContent) || 0;
 
     const noprice = 0;
 
@@ -1646,12 +1296,14 @@ powerInputs.forEach(powerInput => {
     let jasperCave = 0;
     let angb = 0;
     let CrypticCog = 0;
-
-      copperMineHourly = 0.36 * power;
-      copperMineDaily = 0.36 * power * 24;
-      jasperCave = 0.0000864 * power;
-      angb = ((14000000 * 86400 * 10) * 10 ** -18) * power;
-      CrypticCog = (power * 0.0767232);
+    let Os = 0;
+     
+      OsDaily = RewardOs*OSPower; 
+      copperMineHourly = 0.36 * CuPower;
+      copperMineDaily = 0.36 * CuPower * 24;
+      jasperCave = 0.0000864 * JaspPower;
+      angb = ((14000000 * 86400 * 10) * 10 ** -18) * AngbPower;
+      CrypticCog = (EEPower * 0.0767232);
 
     // คำนวณ PNL - GASFEE
     const copperMineGasFee = (copperMineDaily * cuPrice) - (cuMine * 24);
@@ -1659,6 +1311,7 @@ powerInputs.forEach(powerInput => {
     const jasperCaveGasFee = (jasperCave * jaspPrice) - jaspCave;
     const daemonWorldGasFee = (angb * angbPrice) - daemonWorld;
     const CrypticCogsGasFee = (CrypticCog* EEPrice) -gasDun5; // Reward in JTAO
+    const HouseStakingGasFee = (OsDaily*osPrice); // reward in CMJ
 
     // คำนวนในมูลค่า JBC
 
@@ -1667,6 +1320,7 @@ powerInputs.forEach(powerInput => {
     const jasperCaveGasFee_inJBC = (jasperCaveGasFee * cmj_to_JBC);
     const daemonWorldGasFee_inJBC = (daemonWorldGasFee * cmj_to_JBC);
     const CrypticCog_inJBC = (CrypticCogsGasFee * TaoPriceUSDT); // คำนวรเป็น USDT
+    const HouseSTaking_inJBC = (HouseStakingGasFee * cmj_to_JBC);
 
       // GasFee 
     const GasFee_CrypticCogs_inJTAO = (parseFloat(document.getElementById("IIPrice_JTAO").textContent) || 0) * 7;
@@ -1681,44 +1335,112 @@ powerInputs.forEach(powerInput => {
     document.getElementById("jasperCave").innerHTML = `   * ${setLocal(jasperCave,8)} Jasp/d `;
     document.getElementById("DaemonWorld").innerHTML = `   * ${setLocal(angb,8)} Angb/d `;
     document.getElementById("CrypticNight").innerHTML = `   * ${setLocal(CrypticCog,8)} EE/d `;
+    document.getElementById("HouseStaking").innerHTML = `   * ${setLocal(OsDaily,8)} OS/d `;
 
     // Display PNL messages
-    displayPNLMessages(CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
+    displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }
 
   // Function to display PNL messages
-  function displayPNLMessages(CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
+  function displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
     const pnlCu = copperMineGasFee; // PNL for CopperMine (Cu)
     const pnlJasp = jasperCaveGasFee; // PNL for JasperCave (Jasp)
     const pnlCuh = copperMiner2GasFee;
     const pnlAngb = daemonWorldGasFee;
-    const pnlCC = CrypticCogsGasFee
+    const pnlCC = CrypticCogsGasFee;
+    const pnlOS = HouseStakingGasFee;
 
-    const pnlCuMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCu,2)} CMJ , ~${setLocal(copperMineGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCu),2)} CMJ ,  ~${setLocal(Math.abs(copperMineGasFee_inJBC),5)} JBC`;
-    const pnlCuhMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> for Cu: ${setLocal(pnlCuh,2)} CMJ , ~${setLocal(copperMiner2GasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Cu: ${setLocal(Math.abs(pnlCuh),2)} CMJ ,  ~${setLocal(Math.abs(copperMiner2GasFee_inJBC),5)} JBC`;
-    const pnlJaspMessage = pnlJasp >= 0 ? `<span class="profit">Profit</span> for Jasp: ${setLocal(pnlJasp,2)} CMJ , ~${setLocal(jasperCaveGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Jasp: ${setLocal(Math.abs(pnlJasp),2)} CMJ ,  ~${setLocal(Math.abs(jasperCaveGasFee_inJBC),5)} JBC`;
-    const pnlAngbMessage = pnlAngb >= 0 ? `<span class="profit">Profit</span> for Angb: ${setLocal(pnlAngb,2)} CMJ , ~${setLocal(daemonWorldGasFee_inJBC,5)} JBC` : `<span class="loss">Loss</span> for Angb: ${setLocal(Math.abs(pnlAngb),2)} CMJ ,  ~${setLocal(Math.abs(daemonWorldGasFee_inJBC),5)} JBC`;
-    const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span> for EE: ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USDT` : `<span class="loss">Loss</span> for EE: ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
+    cmjToUsd = parseFloat(document.getElementById("Sell_CMJinUSD").textContent) || 0;
+    var usd_pnlCU = 0 ;
+    var usd_pnlCUH = 0 ;
+    var usd_pnlJasp = 0; 
+    var usd_pnlAngb = 0;
+    var usd_pnlCC = 0;
+    var usd_pnlOS = 0;
+  
+    // convest PNL from CMJ to USD
+    if((pnlCu * cmjToUsd) > 0 ){
+      var usd_pnlCU = pnlCu * cmjToUsd;
+    }if((pnlJasp * cmjToUsd) > 0){
+      var usd_pnlJasp = pnlJasp * cmjToUsd;
+    }if((pnlAngb * cmjToUsd) > 0){
+      var usd_pnlAngb = pnlAngb * cmjToUsd;
+    }if(CrypticCog_inJBC > 0){
+      var usd_pnlCC = CrypticCog_inJBC;
+    }if(pnlOS * cmjToUsd > 0){
+      var usd_pnlOS = pnlOS * cmjToUsd;
+    }if(pnlCuh * cmjToUsd > 0){
+      var usd_pnlCUH = pnlCuh * cmjToUsd;
+    }
+
+
+    calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS)
+
 
     // Display PNL messages
+    if(CuPower != 0){
+    const pnlCuMessage = pnlCu >= 0 ? `<span class="profit">Profit</span> ${setLocal(pnlCu,2)} CMJ , ~${setLocal(copperMineGasFee_inJBC,3)} JBC , ~${setLocal(usd_pnlCU,5)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlCu),2)} CMJ ,  ~${setLocal(Math.abs(copperMineGasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlCU),6)} USD`;
+    const pnlCuhMessage = pnlCu >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlCuh,2)} CMJ , ~${setLocal(copperMiner2GasFee_inJBC,3)} JBC , ~${setLocal(usd_pnlCUH,5)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlCuh),2)} CMJ ,  ~${setLocal(Math.abs(copperMiner2GasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlCUH),6)} USD`;
     document.getElementById("copperMineHourly").innerHTML += ` <br>(${pnlCuhMessage})` ;
-    document.getElementById("copperMineDaily").innerHTML += ` <br>(${pnlCuMessage})` ;
+      document.getElementById("copperMineDaily").innerHTML += ` <br>(${pnlCuMessage})` ;
+    }else{
+      document.getElementById("copperMineHourly").innerHTML += ` <br>(No Power No Miner)` ;
+      document.getElementById("copperMineDaily").innerHTML += ` <br>(No Power No Miner)` ;
+
+    }
+    if(JaspPower != 0 ){
+    const pnlJaspMessage = pnlJasp >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlJasp,2)} CMJ , ~${setLocal(jasperCaveGasFee_inJBC,5)} JBC , ~${setLocal(usd_pnlJasp,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlJasp),2)} CMJ ,  ~${setLocal(Math.abs(jasperCaveGasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlJasp),6)} USD`;
     document.getElementById("jasperCave").innerHTML +=` <br>(${pnlJaspMessage})` ;
+    }else{
+      document.getElementById("jasperCave").innerHTML +=` <br>(No Power No Miner)` ;
+      
+    }
+    if(AngbPower != 0){
+    const pnlAngbMessage = pnlAngb >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlAngb,2)} CMJ , ~${setLocal(daemonWorldGasFee_inJBC,5)} JBC , ~${setLocal(usd_pnlAngb,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlAngb),2)} CMJ ,  ~${setLocal(Math.abs(daemonWorldGasFee_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlAngb),6)} USD`;
     document.getElementById("DaemonWorld").innerHTML += ` <br>(${pnlAngbMessage})` ;
+    }else{
+      document.getElementById("DaemonWorld").innerHTML += ` <br>(No Power No Miner)` ;
+    }
+    if(EEPower != 0){
+    const pnlCCMessage = pnlCC >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlCC,5)} JTAO , ~${setLocal(CrypticCog_inJBC,5)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlCC),5)} JTAO ,  ~${setLocal(Math.abs(CrypticCog_inJBC),5)} USD`;
     document.getElementById("CrypticNight").innerHTML += ` <br>(${pnlCCMessage})` ;
+    }else{
+      document.getElementById("CrypticNight").innerHTML += ` <br>(No Power No Miner)` ;
 
-    // Log PNL messages to the console
-    console.log(pnlCuMessage);
-    console.log(pnlJaspMessage);
-  }
+    }
+    if(OSPower != 0){
+    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC , ~${setLocal(usd_pnlOS,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC , ~${setLocal(math.abs(usd_pnlOS),6)} USD`;
+    document.getElementById("HouseStaking").innerHTML += ` <br>(${pnlOSMessage})` ;
+      }else{
+        document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
+  
+      }
+    }
 
+    function calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS){
+      jbcToUsd = parseFloat(document.getElementById("Sell_JBCinUSD").textContent) || 0;
+      investment = parseFloat(document.getElementById("invest").value) || 0;
+      returns = parseFloat(document.getElementById("return").value) || 0;
+      console.log("InvestMent",investment,"Return : ",returns);
+      console.log("CU",usd_pnlCU," JASP",usd_pnlJasp," ANGB",usd_pnlAngb," CC",usd_pnlCC," usd_pnlOS",usd_pnlOS);
+      
+      sum = usd_pnlCU+usd_pnlJasp+usd_pnlAngb+usd_pnlCC+usd_pnlOS;
+      sumJBC = sum/jbcToUsd;
+      document.getElementById("gain").innerHTML = ` ${sum.toLocaleString(undefined,{maximumFractionDigits:4})} USD , ${sumJBC.toLocaleString(undefined,{maximumFractionDigits:4})} JBC`;
+      if(investment>returns && investment != 0){
+        remianing = investment - returns;
+        roiPercent = parseFloat((returns/investment)*100);
+        roiDay = remianing / sum;
+        document.getElementById("returnDate").innerHTML = `Return In : ~${parseInt(roiDay+1)} Days , Remaining ${((remianing).toLocaleString(undefined,{maximumFractionDigits:2}))} USD (Returned : ${((roiPercent).toLocaleString(undefined,{maximumFractionDigits:2}))}%) `;
+      }else if(returns > investment && investment != 0){
+        // Profit
+        remianing =  returns-investment;
+        roiPercent = parseFloat((returns/investment)*100);
+        document.getElementById("returnDate").innerHTML = `คืนทุนเรียบร้อย กำไรอยู่ที่ ${(remianing).toLocaleString(undefined,{maximumFractionDigits:2})} (${(roiPercent).toLocaleString(undefined,{maximumFractionDigits:2})})%`;
+      }
 
-
-    async function main() {
-        const divider = 10 ** 18;
-        const jaspdivider = 10 **9;
-
-        const web3 = new Web3('https://rpc-l1.jibchain.net	');
+    }
+        const web3 = new Web3('https://jib-rpc.inan.in.th');
         console.log(" Access RPC Success")
 
         const contractABI = [
@@ -1743,7 +1465,17 @@ powerInputs.forEach(powerInput => {
       "type": "function"
     }
   ];
-
+  async function loadContract(contractAddress) {
+    try {
+      const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
+      const data = await response.json();
+      const abi = JSON.parse(data.result);
+      return new web3.eth.Contract(abi, contractAddress);
+    } catch (error) {
+      console.error('Error loading contract:', error);
+      alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง")
+    }
+  }
         // สร้างออบเจ็กต์สัญญา
         const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
         const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
@@ -1775,8 +1507,62 @@ powerInputs.forEach(powerInput => {
         const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
         const CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
         JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
+        const HouseStaking = await loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
+
+        
+
+    async function main() {
+        const divider = 10 ** 18;
+        const jaspdivider = 10 **9;
+
+
 
         try {
+
+          const walletInput = document.querySelectorAll("#wallet_power");
+        walletInput.forEach(input => {
+            input.addEventListener("input", setPowerFromWallet);
+        });
+        
+            async function setPowerFromWallet(){
+              const walletAddress = document.getElementById("wallet_power").value;
+            if(walletAddress != 0){
+              if(walletAddress != 0){
+                console.log(walletAddress);
+                CUContract = await loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+                EEContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+                JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+                DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+            
+                getDataCu = await CUContract.methods.nftEquip(walletAddress).call();
+                getDataJasp = await JASPContract.methods.nftEquip(walletAddress).call();
+                getDataAngb = await DWContract.methods.nftEquip(walletAddress).call();
+                getDataEE = await EEContract.methods.nftStatus(walletAddress).call();
+            
+                var CuPow = document.getElementById('power1');
+                var JaspPow = document.getElementById('power2');
+                var AngbPow = document.getElementById('power3');
+                var EEPow = document.getElementById('power4');
+                var OSPow = document.getElementById('power5');
+                console.log(getDataCu[3]);
+                console.log(getDataJasp[7]);
+                console.log(getDataAngb[8]);
+                console.log(getDataEE[7]);
+                CuPow.value = parseFloat(getDataCu[3]);
+                JaspPow.value = parseFloat(getDataJasp[7]);
+                AngbPow.value = parseFloat(getDataAngb[8]);
+                EEPow.value = parseFloat(getDataEE[7]);
+                OSPow.value = parseFloat(0);
+              calculateProfit()  
+              }
+            }else{
+              alert("Invalid Wallet Address")
+            }
+            
+        }
+                
+                
+          
             
             
             // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
@@ -1816,21 +1602,38 @@ powerInputs.forEach(powerInput => {
             console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
             console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
             console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
+            exchangeRate = parseFloat(document.getElementById("usdTHB").textContent) || 33; 
             // Buy Token
-            document.getElementById("priceB2").innerHTML = (CMJ_to_JBC*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("priceD2").innerHTML = (CMJ_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
-            document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+            if(CMJ_to_JBC != 0 && CMJ_inJUST != 0){
+                document.getElementById("priceB2").innerHTML = (CMJ_to_JBC*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
+                document.getElementById("priceD2").innerHTML = (CMJ_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_JUSDT
+                document.getElementById("CMJ_buyTHB").innerHTML = (CMJ_inJUST*1.013*exchangeRate).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_THB
+                // Sell Token
+                document.getElementById("Sell_CMJinJBC").innerHTML = (CMJ_to_JBC*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
+                document.getElementById("Sell_CMJinUSD").innerHTML = (CMJ_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_JUSDT
+                document.getElementById("CMJ_sellTHB").innerHTML = (CMJ_inJUST*exchangeRate*0.99).toLocaleString(undefined,{maximumFractionDigits:4});  // CMJ_to_THB
+            }
+            if(JBC_to_CMJ !=0 && JBC_inJUST !=0){
+            document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
+            document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
+            document.getElementById("JBC_buyTHB").innerHTML = (JBC_inJUST*exchangeRate*1.013).toLocaleString(undefined,{maximumFractionDigits:4});
+ 
+            document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
+            document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
+            document.getElementById("JBC_sellTHB").innerHTML = (JBC_inJUST*exchangeRate*0.99).toLocaleString(undefined,{maximumFractionDigits:4});
+            }
+            if(CMJ_to_Meowmes != 0 && Meow_inJUST != 0){
+    
+            document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("MEOW_buyTHB").innerHTML = (Meow_inJUST*exchangeRate*1.05).toLocaleString(undefined,{maximumFractionDigits:5});
+ 
+            document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
+            document.getElementById("MEOW_sellTHB").innerHTML = (Meow_inJUST*exchangeRate*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
+            }
+            
 
-            // Sell Token
-            document.getElementById("Sell_CMJinJBC").innerHTML = (CMJ_to_JBC*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("Sell_CMJinUSD").innerHTML = (CMJ_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
-            document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
-            document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
             const TAOPriceUSD = parseFloat(document.getElementById("priceD22").textContent) || 0;
             const CMJPriceUSD = parseFloat(document.getElementById("priceD2").textContent) || 0;
             
@@ -1846,8 +1649,11 @@ powerInputs.forEach(powerInput => {
             const CMJ_inBBQCMJ = await call_SC(address, CMJ, 18);
             const BBQ_to_CMJ = (BBQ_inBBQCMJ/CMJ_inBBQCMJ).toFixed(4);
             const CMJ_to_BBQ = (CMJ_inBBQCMJ/BBQ_inBBQCMJ).toFixed(10);
-                    document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if (CMJ_to_BBQ != 0){
+              document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
 
             // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
@@ -1856,8 +1662,11 @@ powerInputs.forEach(powerInput => {
             const CMJ_inCuCMJ = await call_SC(address, CMJ, 18);
             const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
             const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
-                    document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if (CMJ_to_Cu != 0){
+              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
 
             // Bal of Jasp CMJ
@@ -1866,8 +1675,11 @@ powerInputs.forEach(powerInput => {
             const CMJ_inJaspCMJ = await call_SC(address, CMJ, 18);
             const Jasp_to_CMJ = (Jasp_inJaspCMJ/CMJ_inJaspCMJ).toFixed(4);
             const CMJ_to_Jasp = (CMJ_inJaspCMJ/Jasp_inJaspCMJ).toFixed(10);
-                    document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if (CMJ_to_Jasp != 0){
+              document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
 
 
@@ -1878,8 +1690,11 @@ powerInputs.forEach(powerInput => {
             const Jdao_to_CMJ = (Jdao_inJdaoCMJ/CMJ_inJdaoCMJ).toFixed(4);
             const CMJ_to_Jdao = (CMJ_inJdaoCMJ/Jdao_inJdaoCMJ).toFixed(10);
                     // display 
-                    document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Jdao != 0){
+              document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
             // Bal of Pizza(Pza)  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70';
@@ -1887,8 +1702,11 @@ powerInputs.forEach(powerInput => {
             const CMJ_inPzaCMJ = await call_SC(address, CMJ, 18);
             const Pza_to_CMJ = (Pza_inPzaCMJ/CMJ_inPzaCMJ).toFixed(4);
             const CMJ_to_Pza = (CMJ_inPzaCMJ/Pza_inPzaCMJ).toFixed(10);
-                    document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Pza != 0){
+              document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                   
 
             // Bal of Sx31  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0xda558EE93B466aEb4F59fBf95D25d410318be43A';
@@ -1896,8 +1714,11 @@ powerInputs.forEach(powerInput => {
             const CMJ_inSx31CMJ = await call_SC(address, CMJ, 18);
             const Sx31_to_CMJ = (Sx31_inSx31CMJ/CMJ_inSx31CMJ).toFixed(4);
             const CMJ_to_Sx31 = (CMJ_inSx31CMJ/Sx31_inSx31CMJ).toFixed(10);
-                    document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                    document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Sx31 != 0){
+              document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                    
 
             // Bal of Ctuna  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x7801F8cdBABE6999331d1Bf37d74aAf713C3722F';
@@ -1905,8 +1726,12 @@ powerInputs.forEach(powerInput => {
             const CMJ_inCtunaCMJ = await call_SC(address, CMJ, 18);
             const Ctuna_to_CMJ = (Ctuna_inCtunaCMJ/CMJ_inCtunaCMJ).toFixed(4);
             const CMJ_to_Ctuna = (CMJ_inCtunaCMJ/Ctuna_inCtunaCMJ).toFixed(10);
-                document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Ctuna != 0){
+              document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+              
+                
 
             // Bal of Gold  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x7086EC7ED5D94ef503bE324B0aE8A3748A15fAE5';
@@ -1914,9 +1739,12 @@ powerInputs.forEach(powerInput => {
             const CMJ_inGoldCMJ = await call_SC(address, CMJ, 18);
             const Gold_to_CMJ = (Gold_inGoldCMJ/CMJ_inGoldCMJ).toFixed(4);
             const CMJ_to_Gold = (CMJ_inGoldCMJ/Gold_inGoldCMJ).toFixed(10);
-                document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-            
+            if(CMJ_to_Gold != 0){
+              document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+          
+            }
+                
 
             // Bal of Os  , JBC/  0x329889325A555b217C41A4c2EADD529a0CfA4231
             address = '0x329889325A555b217C41A4c2EADD529a0CfA4231';
@@ -1924,8 +1752,11 @@ powerInputs.forEach(powerInput => {
             const CMJ_inOsCMJ = await call_SC(address, CMJ, 18);
             const Os_to_CMJ = (Os_inOsCMJ/CMJ_inOsCMJ).toFixed(4);
             const CMJ_to_Os = (CMJ_inOsCMJ/Os_inOsCMJ).toFixed(10);
-                document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(CMJ_to_Os != 0){
+              document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+               
 
 
 
@@ -1936,10 +1767,14 @@ powerInputs.forEach(powerInput => {
             const Swar_to_WJBC = (Swar_inSwarWJBC/WJBC_inSwarWJBC).toFixed(4);
             const WJBC_to_Swar = (WJBC_inSwarWJBC/Swar_inSwarWJBC).toFixed(10);
             const SWAR_in_CMJ = (WJBC_to_Swar*JBC_to_CMJ).toFixed(6)
-                document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            if(SWAR_in_CMJ != 0){
+              document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            }
+
+                
 
             // Bal of ANGB , WJBC 
             address = '0xDd35db1a731CD86C01d74A8a4bA4354ca1CDE24d';
@@ -1948,10 +1783,13 @@ powerInputs.forEach(powerInput => {
             const ANGB_to_WJBC = (ANGB_inANGBWJBC/WJBC_inANGBWJBC).toFixed(4);
             const WJBC_to_ANGB = (WJBC_inANGBWJBC/ANGB_inANGBWJBC).toFixed(4);
             const ANGB_in_CMJ = (WJBC_to_ANGB*JBC_to_CMJ).toFixed(6)
-                document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
-                document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            if(ANGB_in_CMJ != 0){
+              document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+              document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+            }
+                
 
             // Bal of CMJ , SIL 
             address = '0xf189c5B03694b70e5DFD8e8CAE84118Ed7616F19';
@@ -1959,11 +1797,18 @@ powerInputs.forEach(powerInput => {
             const CMJ_inSILCMJ = await call_SC(address, CMJ, 18);
             const SIL_to_CMJ = (SIL_inSILCMJ/CMJ_inSILCMJ).toFixed(6);
             const CMJ_to_SIL = (CMJ_inSILCMJ/SIL_inSILCMJ).toFixed(10);
-                document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-                document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-            
-                Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+            if(CMJ_to_SIL != 0){
+              document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+          
+              
+            }
+
+            Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+            if(Tao_CMJ != 0){
             document.getElementById('priceB22').innerText = `${Tao_CMJ.toFixed(8)}`;
+          }
+                
             
 
             // BAL of II , JTAO
@@ -1974,12 +1819,17 @@ powerInputs.forEach(powerInput => {
             const JTAO_to_II = (JTAO_inIIJTAO/II_inIIJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
             JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
             CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
-            document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(JTAO_to_II != 0){
+              document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
             document.getElementById("IIPrice_JTAO_2").innerHTML = (JTAO_to_II*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
             JTAO_to_CMJ = (JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2;
             II_to_CMJ = ((JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
-            document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-            document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(II_to_CMJ != 0){
+              document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+            
             
             // BAL of EE , JTAO
             address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60';
@@ -1989,13 +1839,18 @@ powerInputs.forEach(powerInput => {
             const JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
             JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
             CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
-            document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-            document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            if(JTAO_to_EE != 0){
+              document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+            }
+                      
             JTAO_to_CMJ = (JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2;
             EEPrice_CMJ = ((JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
-            document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
-            document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-            
+            if(EEPrice_CMJ != 0){
+              document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+              
+            }  
 
 ////////////////////////////////////////////////////////////////////////////////////// MEOW NEON////////////////////////////////////////////////////////////////////////////////
             // Bal of Meow-BBQ
@@ -2179,6 +2034,26 @@ powerInputs.forEach(powerInput => {
             const stOPT_Price = Jib_stOPT_in_CMJ;
             const Jbc_Price = JBC_to_CMJ;
             const Plat_Price = 0.0011;
+                        // HOUSE  
+            PoolData = await HouseStaking.methods.poolInfo(1).call();
+            totalPower = parseFloat(PoolData[1]);
+            rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() /10**18;
+            
+            document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
+
+            RewardDebt = (1 * 10) / (10**12);
+            multiplier = 2 ;
+            rewardPerBlock = 140000000000000000 ; //(0.14)
+            poolAllocPoint = 10;
+            totalAllocPoint = 13;
+            reward = (multiplier*rewardPerBlock*poolAllocPoint) / totalAllocPoint ;
+            accRewardPerShare = (reward * (10**12)) / totalPower ;
+            rewardPerPower = ((1 * accRewardPerShare) / (10**12)) - RewardDebt;
+            FinalOSreward = rewardPerPower /(10**18);
+            document.getElementById("RewardPerPower").innerHTML = (FinalOSreward*6485*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+        
+            //
+
             setLabFactory(Plat_Price,JTAO_to_II,JTAO_to_CMJ,ANGB_in_CMJ,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price);
 
 
@@ -2464,12 +2339,12 @@ async function call_SC(address, contract, divider) {
 function setUSD(){
   // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
 const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
-
 fetch(exchangeRateUrl)
   .then(response => response.json())
   .then(data => {
     // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
     const exchangeRate = data.rates.THB;
+      
 
     // ทำ HTTP GET request เพื่อดึงข้อมูล price_usd จาก API ที่กำหนด
     const tokenUrl = "https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5";
@@ -2480,10 +2355,9 @@ fetch(exchangeRateUrl)
         // ดึงข้อมูล price_usd และแปลงเป็นบาท
         const priceUsd = parseFloat(data.data.attributes.price_usd);
         const priceThb = priceUsd * exchangeRate;
+        document.getElementById("usdTHB").innerHTML = exchangeRate;
 
         // แสดงผลลัพธ์ใน HTML
-        document.getElementById("KUBTHB").textContent = priceThb.toFixed(2);
-        document.getElementById("exchangeRate").textContent = exchangeRate.toFixed(2);
       });
   })
   .catch(error => {
@@ -2500,7 +2374,10 @@ fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d
         pools.forEach(pool => {
             if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
                 TaoPrice = parseFloat(pool.attributes.token_price_usd)
-                document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
+
+                exchangeRate = parseFloat(document.getElementById("usdTHB").textContent) || 33; 
+                document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(6)}`;
+                document.getElementById('TAO_buyTHB').innerText = `${setLocal((exchangeRate*TaoPrice),4)}`
             }
         });
     })
@@ -2512,6 +2389,44 @@ setUSD()
 
 });
 
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var button = document.getElementById('multiPowerBtn');
+    var powerInput = document.getElementById('powerBox');
+    var inputs = document.querySelectorAll('p[id^="input"]');
+
+    button.addEventListener('click', function() {
+      if (button.classList.contains('active')) {
+        powerInput.style.display = 'block';
+        inputs.forEach(function(input) {
+          input.style.display = 'none';
+        });
+        button.classList.remove('active');
+      } else {
+        powerInput.style.display = 'none';
+        inputs.forEach(function(input) {
+          input.style.display = 'block';
+        });
+        button.classList.add('active');
+      }
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var toggleInfoButton = document.getElementById('toggleInfoBtn');
+    var infoDiv = document.getElementById('infoDiv');
+
+    toggleInfoButton.addEventListener('click', function() {
+      // เมื่อคลิกที่ปุ่ม Toggle Info
+      if (infoDiv.style.display === 'none') {
+        infoDiv.style.display = 'flex';
+      } else {
+        infoDiv.style.display = 'none';
+      }
+    });
+  });
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9195099699232258"
      crossorigin="anonymous"></script>
