@@ -1465,7 +1465,7 @@ powerInputs.forEach(input => {
       "type": "function"
     }
   ];
-  async function loadContract(contractAddress) {
+function loadContract(contractAddress) {
     try {
       const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
       const data = await response.json();
@@ -1507,7 +1507,7 @@ powerInputs.forEach(input => {
         const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
         const CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
         JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
-        const HouseStaking = await loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
+        const HouseStaking = loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
 
         
 
