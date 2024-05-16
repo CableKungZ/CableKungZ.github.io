@@ -1465,7 +1465,7 @@ powerInputs.forEach(input => {
       "type": "function"
     }
   ];
-function loadContract(contractAddress) {
+async function loadContract(contractAddress) {
     try {
       const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
       const data = await response.json();
