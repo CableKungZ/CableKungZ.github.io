@@ -823,6 +823,8 @@
   <!-------------------------------------------------- Start Log  --------------------------------------->
   <div id="logs" class="container mt-5 " style="display:none;">
     <div class="update">
+        <span class="date">May 19, 2024</span>
+        <p class="update-text">DaoBuddy Update : Add LP Platinum/CMJ in Price Board </p>
         <span class="date">May 13, 2024</span>
         <p class="update-text">DaoBuddy Update : Add price Value in THB </p>
         <span class="date">April 29, 2024</span>
@@ -864,6 +866,62 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
 
 <script>
+    ///////////// WEB3 SCRIPT /////////////////
+const divider = 10 ** 18;
+const jaspdivider = 10 ** 9;
+
+const web3 = new Web3('https://jib-rpc.inan.in.th');
+console.log("Access RPC Success");
+
+const contractABI = [{"constant": true,"inputs": [{"name": "_owner", "type": "address"}],"name": "balanceOf","outputs": [{"name": "balance", "type": "uint256"}],"type": "function"}];
+const ERC721ABI = [{"constant": true,"inputs": [{"name": "_owner", "type": "address"}],"name": "balanceOf","outputs": [{"name": "", "type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}];
+const houseABI = [{"inputs":[{"internalType":"address","name":"_cmcitySlot1","type":"address"},{"internalType":"address","name":"_rewardToken","type":"address"},{"internalType":"uint256","name":"_rewardPerBlock","type":"uint256"},{"internalType":"uint256","name":"_startBlock","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"reward","type":"uint256"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"ItemStaked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"ItemUnstaked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[],"name":"BONUS_MULTIPLIER","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"},{"internalType":"uint256","name":"_allocPoint","type":"uint256"},{"internalType":"bool","name":"_withUpdate","type":"bool"}],"name":"add","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cmcitySlot1","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_from","type":"uint256"},{"internalType":"uint256","name":"_to","type":"uint256"}],"name":"getMultiplier","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"massUpdatePools","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"address","name":"_to","type":"address"}],"name":"migrateNFT","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"migrateReward","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"nftStake","outputs":[{"internalType":"address","name":"tokenOwnerOf","type":"address"},{"internalType":"uint256","name":"tokenStakedAt","type":"uint256"},{"internalType":"uint256","name":"power","type":"uint256"},{"internalType":"uint256","name":"rewardDebt","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"onERC721Received","outputs":[{"internalType":"bytes4","name":"","type":"bytes4"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"pendingReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"poolInfo","outputs":[{"internalType":"address","name":"nftAddr","type":"address"},{"internalType":"uint256","name":"powerAll","type":"uint256"},{"internalType":"uint256","name":"allocPoint","type":"uint256"},{"internalType":"uint256","name":"lastRewardBlock","type":"uint256"},{"internalType":"uint256","name":"accRewardPerShare","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"poolLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"rewardPerBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rewardToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_allocPoint","type":"uint256"},{"internalType":"bool","name":"_withUpdate","type":"bool"}],"name":"set","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"slotUsage","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"uint256","name":"_house","type":"uint256"}],"name":"stake","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalAllocPoint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"},{"internalType":"uint256","name":"_tokenId","type":"uint256"},{"internalType":"uint256","name":"_house","type":"uint256"},{"internalType":"bool","name":"_unstake","type":"bool"}],"name":"unstake","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_multiplierNumber","type":"uint256"}],"name":"updateMultiplier","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_pid","type":"uint256"}],"name":"updatePool","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+
+async function loadContract(contractAddress) {
+    try {
+        const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
+        const data = await response.json();
+        const abi = JSON.parse(data.result);
+        return new web3.eth.Contract(abi, contractAddress);
+    } catch (error) {
+        console.error('Error loading contract:', error);
+        alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง");
+    }
+}
+// Initialize contracts
+const CMJ = new web3.eth.Contract(contractABI, '0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+const WJBC = new web3.eth.Contract(contractABI, '0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+const Jib_WJBC = new web3.eth.Contract(contractABI, '0x99999999990FC47611b74827486218f3398A4abD');
+const Meow = new web3.eth.Contract(contractABI, '0x04052384166fC30D03929eE328805eC084776843');
+const Wood = new web3.eth.Contract(contractABI, '0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+const Tuna = new web3.eth.Contract(contractABI, '0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+const Mice = new web3.eth.Contract(contractABI, '0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+const Cu = new web3.eth.Contract(contractABI, '0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+const Jasp = new web3.eth.Contract(contractABI, '0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+const Os = new web3.eth.Contract(contractABI, '0xAc5299D92373E9352636559cca497d7683A47655');
+const Jdao = new web3.eth.Contract(contractABI, '0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+const Mt = new web3.eth.Contract(contractABI, '0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+const Vabag = new web3.eth.Contract(contractABI, '0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+const Bbq = new web3.eth.Contract(contractABI, '0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+const Pza = new web3.eth.Contract(contractABI, '0x09DcdCFc6C48803681a3422997c679E773656763');
+const Ctuna = new web3.eth.Contract(contractABI, '0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+const Sx31 = new web3.eth.Contract(contractABI, '0xd431d826d7a4380b9259612176f00528b88840a7');
+const Sil = new web3.eth.Contract(contractABI, '0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+const Gold = new web3.eth.Contract(contractABI, '0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+const Plat = new web3.eth.Contract(contractABI, '0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+const Swar = new web3.eth.Contract(contractABI, '0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+const Jusdt = new web3.eth.Contract(contractABI, '0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+const stOPT = new web3.eth.Contract(contractABI, '0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+const Jtao = new web3.eth.Contract(contractABI, '0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+const Angb = new web3.eth.Contract(contractABI, '0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+const Taodum = new web3.eth.Contract(ERC721ABI, '0x2036186F6d5287FcB05C56C38374AC5236d8A61d');
+const EE = new web3.eth.Contract(contractABI, '0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+const II = new web3.eth.Contract(contractABI, '0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+const HouseStaking = new web3.eth.Contract(houseABI, '0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
+    
+CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0;
+JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////// Uprade Table open url ////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -889,6 +947,7 @@
             upgradeDiv.appendChild(backButton);
         }
     }
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////// Show / Hide Card Board////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -950,7 +1009,7 @@
 
     // Countdown Timer
     var countdownElement = document.getElementById('countdown');
-    var countdownTime = 5; // seconds
+    var countdownTime = 20; // seconds
      
 
     function updateCountdown() {
@@ -1443,87 +1502,11 @@ powerInputs.forEach(input => {
 
 
     async function main() {
-        const divider = 10 ** 18;
-        const jaspdivider = 10 **9;
-
-        const web3 = new Web3('https://jib-rpc.inan.in.th');
-        console.log(" Access RPC Success")
-
-        const contractABI = [
-        // ABI ของ contract ERC-20
-        {
-            "constant": true,
-            "inputs": [{"name": "_owner", "type": "address"}],
-            "name": "balanceOf",
-            "outputs": [{"name": "balance", "type": "uint256"}],
-            "type": "function"
-        }
-    ];
-    const ERC721ABI = [
-    // ABI ของ balanceOf function
-    {
-      "constant": true,
-      "inputs": [{"name": "_owner", "type": "address"}],
-      "name": "balanceOf",
-      "outputs": [{"name": "", "type": "uint256"}],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ];
-  async function loadContract(contractAddress) {
-    try {
-      const response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
-      const data = await response.json();
-      const abi = JSON.parse(data.result);
-      return new web3.eth.Contract(abi, contractAddress);
-    } catch (error) {
-      console.error('Error loading contract:', error);
-      alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง")
-    }
-  }
-        // สร้างออบเจ็กต์สัญญา
-        const CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
-        const WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
-        const Jib_WJBC = new web3.eth.Contract(contractABI,'0x99999999990FC47611b74827486218f3398A4abD');
-        const Meow = new web3.eth.Contract(contractABI,'0x04052384166fC30D03929eE328805eC084776843');
-        const Wood = new web3.eth.Contract(contractABI,'0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
-        const Tuna = new web3.eth.Contract(contractABI,'0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
-        const Mice = new web3.eth.Contract(contractABI,'0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
-        const Cu = new web3.eth.Contract(contractABI,'0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
-        const Jasp = new web3.eth.Contract(contractABI,'0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
-        const Os = new web3.eth.Contract(contractABI,'0xAc5299D92373E9352636559cca497d7683A47655');
-        const Jdao = new web3.eth.Contract(contractABI,'0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
-        const Mt = new web3.eth.Contract(contractABI,'0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
-        const Vabag = new web3.eth.Contract(contractABI,'0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
-        const Bbq = new web3.eth.Contract(contractABI,'0x7004757e595409568Bd728736e1b0c79FDc94e1c');
-        const Pza = new web3.eth.Contract(contractABI,'0x09DcdCFc6C48803681a3422997c679E773656763');
-        const Ctuna = new web3.eth.Contract(contractABI,'0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
-        const Sx31 = new web3.eth.Contract(contractABI,'0xd431d826d7a4380b9259612176f00528b88840a7');
-        const Sil = new web3.eth.Contract(contractABI,'0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
-        const Gold = new web3.eth.Contract(contractABI,'0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
-        const Plat = new web3.eth.Contract(contractABI,'0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
-        const Swar = new web3.eth.Contract(contractABI,'0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
-        const Jusdt = new web3.eth.Contract(contractABI,'0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
-        const stOPT = new web3.eth.Contract(contractABI,'0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
-        const Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
-        const Angb = new web3.eth.Contract(contractABI,'0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
-        const Taodum = new web3.eth.Contract(ERC721ABI,'0x2036186F6d5287FcB05C56C38374AC5236d8A61d');
-        const EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
-        const II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
-        const CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
-        JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
-        const HouseStaking = await loadContract('0x2eF9d702c42BC0F8B9D7305C34B4f63526502255');
-
-        
-
-        try {
-
+            try {
           const walletInput = document.querySelectorAll("#wallet_power");
         walletInput.forEach(input => {
             input.addEventListener("input", setPowerFromWallet);
         });
-        
             async function setPowerFromWallet(){
               const walletAddress = document.getElementById("wallet_power").value;
             if(walletAddress != 0){
@@ -1554,17 +1537,8 @@ powerInputs.forEach(input => {
                 EEPow.value = parseFloat(getDataEE[7]);
                 OSPow.value = parseFloat(0);
               calculateProfit()  
-              }
-            }else{
-              alert("Invalid Wallet Address")
-            }
-            
-        }
-                
-                
-          
-            
-            
+              }}else{alert("Invalid Wallet Address")}}
+
             // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
             address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
             const JBC_inJCLP = await web3.eth.getBalance(address) / divider; 
@@ -1592,9 +1566,7 @@ powerInputs.forEach(input => {
                     document.getElementById("TaoNFT").innerHTML = "Error";
                 } else {
                     document.getElementById("TaoDum").innerHTML = balance;
-                    console.log(balance)
-                }
-              });
+                    console.log(balance)}});
             document.getElementById("TaoLock").innerHTML = getJtao.toLocaleString( {minimumFractionDigits: 2});
             const Meow_inJUST = (CMJ_to_Meowmes*CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
             const CMJ_inJUST = (CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
@@ -1633,15 +1605,8 @@ powerInputs.forEach(input => {
             document.getElementById("MEOW_sellTHB").innerHTML = (Meow_inJUST*exchangeRate*0.95).toLocaleString(undefined,{maximumFractionDigits:5});
             }
             
-
             const TAOPriceUSD = parseFloat(document.getElementById("priceD22").textContent) || 0;
             const CMJPriceUSD = parseFloat(document.getElementById("priceD2").textContent) || 0;
-            
-
-
-
-
-
 
             // Bal of BBQ  , JBC/  0x6F93F16cF86205C5BB9145078d584c354758D6DB
             address = '0x6F93F16cF86205C5BB9145078d584c354758D6DB';
@@ -1655,7 +1620,6 @@ powerInputs.forEach(input => {
             }
                     
 
-
             // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
             address = '0x1b70c95fD4EbF8920A624bd2ce22b6905eFBdF60';
             const Cu_inCuCMJ = await call_SC(address, Cu, 18);
@@ -1663,8 +1627,8 @@ powerInputs.forEach(input => {
             const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
             const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
             if (CMJ_to_Cu != 0){
-              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:6});
-              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:6});
+              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:10});
+              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:10});
             }
                     
 
@@ -1680,8 +1644,6 @@ powerInputs.forEach(input => {
               document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:6});
             }
                     
-
-
 
             // Bal of Jdao  , JBC/  0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0
             address = '0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0';
@@ -2017,12 +1979,6 @@ powerInputs.forEach(input => {
             const Jib_Meow_to_stOPT = (Jib_MEOW_instOPTMEOW/Jib_stOPT_instOPTMEOW).toFixed(10);
             const Jib_stOPT_in_CMJ = (Jib_Meow_to_stOPT*CMJ_to_Meow).toFixed(10);
 
-
-            
-
-
-
-
                 // Token Value in CMJ
             const Bbq_Price = CMJ_to_BBQ;
             const Pza_Price = CMJ_to_Pza;
@@ -2068,8 +2024,7 @@ powerInputs.forEach(input => {
         } catch (error) {
             console.error('Error:', error);
             console.log('An error occurred while fetching contract information.');
-        }
-    }
+        }}
 main();
 function setLocal(number,maximumFractionDigits){
   return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
