@@ -121,8 +121,8 @@
       <br>Buy <span id="priceB13">..Loading</span> CMJ<br>
       Sell  <span id="priceB13_2">..Loading</span> CMJ</h4>
     <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :
-      <br>Buy [คาดเดา] <span id="priceB19">0.001155</span> CMJ<br>
-      Sell [คาดเดา]  <span id="">0.001045</span> CMJ</h4>
+      <br>Buy <span id="platinumBuy">..Loading</span> CMJ<br>
+      Sell <span id="platinumSell">..Loading</span> CMJ</h4>
     <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : 
       <br>Buy <span id="priceB21">..Loading</span> CMJ, <span id="priceD21">..Loading</span> JBC<br>
       Sell  <span id="priceB21_2">..Loading</span> CMJ,<span id="priceD21_2">..Loading</span> JBC</h4>
@@ -1800,8 +1800,16 @@ powerInputs.forEach(input => {
             if(CMJ_to_SIL != 0){
               document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
               document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
-          
-              
+            }
+            // Bal of CMJ , PLAT 
+            address = '0x78Ff63F4f91Ce56f72882ef9dbE3Be79fBF15044';
+            const Plat_inPlatCMJ = await call_SC(address, Plat, 18);
+            const CMJ_inPlatCMJ = await call_SC(address, CMJ, 18);
+            const Plat_to_CMJ = (Plat_inPlatCMJ/CMJ_inPlatCMJ).toFixed(6);
+            const CMJ_to_Plat = (CMJ_inPlatCMJ/Plat_inPlatCMJ).toFixed(10);
+            if(CMJ_to_Plat != 0){
+              document.getElementById("platinumBuy").innerHTML = (CMJ_to_Plat*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("platinumSell").innerHTML = (CMJ_to_Plat*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
             }
 
             Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
@@ -2033,7 +2041,7 @@ powerInputs.forEach(input => {
             const Sx31_Price = CMJ_to_Sx31;
             const stOPT_Price = Jib_stOPT_in_CMJ;
             const Jbc_Price = JBC_to_CMJ;
-            const Plat_Price = 0.0011;
+            const Plat_Price = CMJ_to_Plat;
                         // HOUSE  
             PoolData = await HouseStaking.methods.poolInfo(1).call();
             totalPower = parseFloat(PoolData[1]);
