@@ -1625,8 +1625,8 @@ powerInputs.forEach(input => {
             const Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
             const CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
             if (CMJ_to_Cu != 0){
-              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:6});
-              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:6});
+              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:10});
+              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:10});
             }
                     
 
