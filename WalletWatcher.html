@@ -1543,20 +1543,35 @@ async function getBalance() {
     async function getFarming(){
       console.log('Get Farming Details');
       try{
+          // LP JBC-CMJ
         const Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
         const Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
         //console.log(Info1)
+          // LP CMJ
         const Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
         const Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
         //console.log(Info2)
+          // LP JBC-JUSDT
         const Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
         const Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
         //console.log(Info3)
+          // LP JASP-CMJ
+        const Info4 = await LPFarming.methods.userInfo(parseInt(4),String(walletAddress)).call();
+        const Pending4 = await LPFarming.methods.pendingCake(parseInt(4),String(walletAddress)).call();
+          // LP JDAO-CMJ
+        const Info5 = await LPFarming.methods.userInfo(parseInt(5),String(walletAddress)).call();
+        const Pending5 = await LPFarming.methods.pendingCake(parseInt(5),String(walletAddress)).call();
+          // LP OS-CMJ
+        const Info6 = await LPFarming.methods.userInfo(parseInt(6),String(walletAddress)).call();
+        const Pending6 = await LPFarming.methods.pendingCake(parseInt(6),String(walletAddress)).call();
 
 
         addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),16.88,(Pending1/10**18),Jdao_to_CMJ,"JDAO");
         addtoStaking("Staking CMJ",(Info2[0]/10**18),1,Pending2/10**18,Jdao_to_CMJ,"JDAO");
         addtoStaking("Farming LP JBC-JUSDT",(Info3[0]/10**18),2.9,(Pending3/10**18),Jdao_to_CMJ,"JDAO");
+        addtoStaking("Farming LP JASP-CMJ",(Info4[0]/10**18),1.05,(Pending4/10**18),Jdao_to_CMJ,"JDAO");
+        addtoStaking("Farming LP JDAO-CMJ",(Info5[0]/10**18),2.12,(Pending5/10**18),Jdao_to_CMJ,"JDAO");
+        addtoStaking("Farming LP OS-CMJ",(Info6[0]/10**18),1.57,(Pending6/10**18),Jdao_to_CMJ,"JDAO");
 
         function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
             var table = document.getElementById("farmingAsset");
@@ -1564,7 +1579,6 @@ async function getBalance() {
             var pendingValue = calculateWorth(Pending,pendingPrice);
             if (stakingValue > 1){
                 var newRow = table.insertRow(-1);
-                // เพิ่มข้อมูลในแต่ละ column
                 var nameCell = newRow.insertCell(0);
                 var amountCell = newRow.insertCell(1);
                 var valueCell = newRow.insertCell(2);
