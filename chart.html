@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Balance Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="balanceChart" width="800" height="400"></canvas>
+    <script>
+        // Initialize Web3
+        const web3 = new Web3(new Web3.providers.HttpProvider('https://jib-rpc.inan.in.th/'));
+
+        // Function to get the balance of a wallet at a specific block
+        async function getBalanceAtBlock(walletAddress, blockNumber) {
+            const balance = await web3.eth.getBalance(walletAddress, blockNumber);
+            return web3.utils.fromWei(balance, 'ether'); // Convert balance from Wei to Ether
+        }
+
+        // Function to get balances at multiple blocks
+        async function getBalancesAtBlocks(walletAddress, startBlock, endBlock, step) {
+            const balances = [];
+            for (let blockNumber = startBlock; blockNumber <= endBlock; blockNumber += step) {
+                const balance = await getBalanceAtBlock(walletAddress, blockNumber);
+                balances.push({ blockNumber, balance });
+            }
+            return balances;
+        }
+
+        // Fetch the latest block number
+        async function getLatestBlockNumber() {
+            return await web3.eth.getBlockNumber();
+        }
+
+        // Fetch balances and draw chart
+        async function drawChart() {
+            const walletAddress = '0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1'; // Replace with your wallet address
+            const startBlock = 0; // Starting from block 0
+            const step = 1000; // Step by 1000 blocks
+
+            const endBlock = await getLatestBlockNumber();
+            const data = await getBalancesAtBlocks(walletAddress, startBlock, endBlock, step);
+
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(entry => entry.blockNumber),
+                    datasets: [{
+                        label: 'Wallet Balance (ETH)',
+                        data: data.map(entry => entry.balance),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Block Number'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Balance (ETH)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        drawChart();
+    </script>
+</body>
+</html>
