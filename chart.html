@@ -8,6 +8,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <label for="walletAddress">Wallet Address:</label>
+    <input type="text" id="walletAddress" placeholder="Enter wallet address">
+    <button onclick="fetchHighestBalance()">Fetch Highest Balance</button>
     <canvas id="balanceChart" width="800" height="400"></canvas>
     <script>
         // Initialize Web3 with custom RPC URL
@@ -36,6 +39,21 @@
             return balances;
         }
 
+        // Function to fetch the highest balance for a wallet
+        async function fetchHighestBalance() {
+            const walletAddress = document.getElementById('walletAddress').value;
+            const latestBlock = await web3.eth.getBlockNumber();
+            const oldestBlock = latestBlock - 1000000; // Fetch balances for the last 1,000,000 blocks
+
+            const balances = await getBalancesAtBlocks(walletAddress, latestBlock, oldestBlock, 100); // Fetch every 100 blocks
+            if (balances.length > 0) {
+                const highestBalance = balances.reduce((max, b) => Math.max(max, parseFloat(b.balance)), 0);
+                alert(`Highest balance for ${walletAddress} is ${highestBalance} ETH`);
+            } else {
+                alert(`No balance data available for ${walletAddress}`);
+            }
+        }
+
         // Fetch the latest block number
         async function getLatestBlockNumber() {
             return await web3.eth.getBlockNumber();
@@ -45,9 +63,9 @@
         async function drawChart() {
             const walletAddress = '0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1'; // Replace with your wallet address
             const latestBlock = await getLatestBlockNumber();
-            const oldestBlock = latestBlock - 100; // Fetch balances for the last 100 blocks
+            const oldestBlock = latestBlock - 1000000; // Fetch balances for the last 1,000,000 blocks
 
-            const data = await getBalancesAtBlocks(walletAddress, latestBlock, oldestBlock, 1);
+            const data = await getBalancesAtBlocks(walletAddress, latestBlock, oldestBlock, 100); // Fetch every 100 blocks
 
             const ctx = document.getElementById('balanceChart').getContext('2d');
             new Chart(ctx, {
