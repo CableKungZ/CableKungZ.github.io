@@ -45,7 +45,7 @@
         async function drawChart() {
             const walletAddress = '0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1'; // Replace with your wallet address
             const latestBlock = await getLatestBlockNumber();
-            const oldestBlock = latestBlock - 1000; // Fetch balances for the last 1000 blocks
+            const oldestBlock = latestBlock - 100; // Fetch balances for the last 100 blocks
 
             const data = await getBalancesAtBlocks(walletAddress, latestBlock, oldestBlock, 1);
 
