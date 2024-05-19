@@ -54,14 +54,48 @@
                 alert(`No balance data available for ${walletAddress}`);
             }
         }
-
         // Function to draw chart
         async function drawChart() {
-            // Function implementation remains the same
-            // You can keep or modify it as needed
+            const walletAddress = '0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1'; // Replace with your wallet address
+            const latestBlock = await getLatestBlockNumber();
+            const oldestBlock = latestBlock - 100; // Fetch balances for the last 100 blocks
+
+            const data = await getBalancesAtBlocks(walletAddress, latestBlock, oldestBlock, 1);
+
+            const ctx = document.getElementById('balanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(entry => entry.blockNumber),
+                    datasets: [{
+                        label: 'Wallet Balance (ETH)',
+                        data: data.map(entry => entry.balance),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Block Number'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Balance (ETH)'
+                            }
+                        }
+                    }
+                }
+            });
         }
 
-        // Initial draw
         drawChart();
     </script>
 </body>
