@@ -10,7 +10,7 @@
 <body>
     <canvas id="balanceChart" width="800" height="400"></canvas>
     <script>
-        // Initialize Web3 with Infura archival node
+        // Initialize Web3 with custom RPC URL
         const web3 = new Web3(new Web3.providers.HttpProvider('https://jib-rpc.inan.in.th'));
 
         // Function to get the balance of a wallet at a specific block
@@ -27,7 +27,7 @@
         // Function to get balances at multiple blocks
         async function getBalancesAtBlocks(walletAddress, startBlock, endBlock, step) {
             const balances = [];
-            for (let blockNumber = startBlock; blockNumber <= endBlock; blockNumber += step) {
+            for (let blockNumber = startBlock; blockNumber >= endBlock; blockNumber -= step) {
                 const balance = await getBalanceAtBlock(walletAddress, blockNumber);
                 if (balance !== null) {
                     balances.push({ blockNumber, balance });
@@ -44,11 +44,10 @@
         // Fetch balances and draw chart
         async function drawChart() {
             const walletAddress = '0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1'; // Replace with your wallet address
-            const startBlock = 0; // Starting from block 0
-            const step = 1000; // Step by 1000 blocks
+            const latestBlock = await getLatestBlockNumber();
+            const oldestBlock = latestBlock - 1000; // Fetch balances for the last 1000 blocks
 
-            const endBlock = await getLatestBlockNumber();
-            const data = await getBalancesAtBlocks(walletAddress, startBlock, endBlock, step);
+            const data = await getBalancesAtBlocks(walletAddress, latestBlock, oldestBlock, 1);
 
             const ctx = document.getElementById('balanceChart').getContext('2d');
             new Chart(ctx, {
