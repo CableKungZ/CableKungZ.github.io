@@ -1507,15 +1507,12 @@ powerInputs.forEach(input => {
       }
 
     }
-
-
-    async function main() {
-            try {
-          const walletInput = document.querySelectorAll("#wallet_power");
+    const walletInput = document.querySelectorAll("#wallet_power");
         walletInput.forEach(input => {
             input.addEventListener("input", setPowerFromWallet);
         });
-            async function setPowerFromWallet(){
+            
+    async function setPowerFromWallet(){
               const walletAddress = document.getElementById("wallet_power").value;
             if(walletAddress != 0){
               if(walletAddress != 0){
@@ -1546,6 +1543,10 @@ powerInputs.forEach(input => {
                 OSPow.value = parseFloat(0);
               calculateProfit()  
               }}else{alert("Invalid Wallet Address")}}
+
+    async function main() {
+            try {
+
 
             // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
             address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
