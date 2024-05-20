@@ -1574,14 +1574,15 @@ powerInputs.forEach(input => {
                     document.getElementById("TaoNFT").innerHTML = "Error";
                 } else {
                     document.getElementById("TaoDum").innerHTML = balance;
-                    console.log(balance)}});
+                    //console.log(balance)
+                }});
             document.getElementById("TaoLock").innerHTML = getJtao.toLocaleString( {minimumFractionDigits: 2});
             const Meow_inJUST = (CMJ_to_Meowmes*CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
             const CMJ_inJUST = (CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
             const JBC_inJUST = (JBC_to_JUSDT*1).toFixed(6);
-            console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
-            console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
-            console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
+            //console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
+            //console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
+            //console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
             exchangeRate = parseFloat(document.getElementById("usdTHB").textContent) || 33; 
             // Buy Token
             if(CMJ_to_JBC != 0 && CMJ_inJUST != 0){
@@ -2475,6 +2476,7 @@ async function get_unique_addresses_and_sum_data(setting, current_block) {
         for (const address of unique_addresses) {
             const stats_result = await contract.methods[contract_stats_function_name](address).call();
             data_sum += parseInt(stats_result[power_index]);
+            console.log("Address : ",address," Power : ",stats_result[power_index]," Total : ",data_sum)
         }
         document.getElementById(totalPower).innerHTML = data_sum.toLocaleString(undefined,{maximumFractionDigits:0})
         document.getElementById(totalMainChar).innerHTML = (unique_addresses.size).toLocaleString(undefined,{maximumFractionDigits:0})
