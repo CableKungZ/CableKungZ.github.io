@@ -20,7 +20,7 @@
         <li><a onclick="toggleCards('walletWatcher')">WalletWatcher</a></li>
         <li><a onclick="toggleCards('upgrade')" >Upgrade Table</a></li>
         <li><a onclick="toggleCards('noti')">Notification</a></li>
-        <li><a onclick="toggleCards('kycList')">KYC</a></li>
+        <li><a onclick="toggleCards('kyc')">KYC</a></li>
         <li><a onclick="showdPopup('donation')" style="font-weight: bold;color:rgb(139, 16, 16)">Donation</a></li>
         <li class="dropdown">
             <a href="#">Tools</a>
@@ -864,17 +864,18 @@
         <h1>KYC ACCOUNT</h1>
         <p>หาก KYC แล้วรายชื่อไม่แสดงให้ทำการ เข้าไปยัง <a href="https://commudao.xyz/community/quester-oasis" target="_blank">Quester-Oasis</a>  และสำเร็จเควส How To Win Frens! โดยการใส่ Wallet Address ผู้อื่น</p>
         <p>สามารถสนับสนุน DaoBuddy โดยการกรอก Address : 0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1</p>
+        <table id="kycList" width="100%">
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
-      <table id="kycList">
-        <thead>
-          <tr>
-            <th>Number</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+      
     </div>
 
 
@@ -982,14 +983,14 @@ JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
     ///////////////////// Show / Hide Card Board////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     document.addEventListener("DOMContentLoaded", function() {
-      var allCards = document.querySelectorAll('#factory,#dungeon,#gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher');
+      var allCards = document.querySelectorAll('#factory,#dungeon,#gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher,#kyc');
       for (var i = 0; i < allCards.length; i++) {
         allCards[i].style.display = 'none';
       }
     });
     function toggleCards(showType) {
         console.log("Call ",showType);
-      var allCards = document.querySelectorAll('#priceBoard,#factory, #dungeon, #gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher');
+      var allCards = document.querySelectorAll('#priceBoard,#factory, #dungeon, #gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher,#kyc');
       for (var i = 0; i < allCards.length; i++) {
         allCards[i].style.display = 'none';
       }
@@ -1583,10 +1584,7 @@ powerInputs.forEach(input => {
       cellNumber.innerHTML = i + 1;
       cellAddress.innerHTML = data[0];
 
-      // Optionally display the KYC div if not already displayed
-      if (document.getElementById('kyc').style.display === 'none') {
-        document.getElementById('kyc').style.display = 'block';
-      }
+
     }
   }
 
