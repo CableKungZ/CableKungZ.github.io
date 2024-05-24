@@ -2547,6 +2547,8 @@ async function get_unique_addresses_and_sum_data(setting, current_block) {
         console.log(`Total Transfer Events: ${transfer_logs.length}`);
 
         const unique_addresses = new Set();
+        const logArray = []; // Array to store log data
+
         for (const log of transfer_logs) {
             const tx = await web3.eth.getTransaction(log.transactionHash);
             if (tx.to && tx.to.toLowerCase() === contract_address.toLowerCase()) {
@@ -2557,19 +2559,33 @@ async function get_unique_addresses_and_sum_data(setting, current_block) {
         let data_sum = 0;
         for (const address of unique_addresses) {
             const stats_result = await contract.methods[contract_stats_function_name](address).call();
-            data_sum += parseInt(stats_result[power_index]);
-            console.log("Address : ",address," Power : ",stats_result[power_index]," Total : ",data_sum)
-        }
-        document.getElementById(totalPower).innerHTML = data_sum.toLocaleString(undefined,{maximumFractionDigits:0})
-        document.getElementById(totalMainChar).innerHTML = (unique_addresses.size).toLocaleString(undefined,{maximumFractionDigits:0})
+            const power = parseInt(stats_result[power_index]);
+            data_sum += power;
 
-        return [data_sum, unique_addresses.size];
+            // Store log data in array
+            const logData = {
+                address: address,
+                power: power,
+                total: data_sum
+            };
+            logArray.push(logData);
+        }
+
+        // Update HTML elements with the results
+        document.getElementById(totalPower).innerHTML = data_sum.toLocaleString(undefined, { maximumFractionDigits: 0 });
+        document.getElementById(totalMainChar).innerHTML = unique_addresses.size.toLocaleString(undefined, { maximumFractionDigits: 0 });
+
+        // Display the log array contents
+        console.table(logArray);
+
+        return [data_sum, unique_addresses.size, logArray]; // Return logArray as part of the result
 
     } catch (error) {
         console.error('Error fetching data:', error);
-        return [0, 0];
+        return [0, 0, []]; // Return empty array in case of error
     }
 }
+
 
 async function TotalPow() {
     const current_block = await web3.eth.getBlockNumber();
