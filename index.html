@@ -1864,7 +1864,7 @@ powerInputs.forEach(input => {
             const JTAO_inEEJTAO = await call_SC(address,Jtao,18);
             const EE_to_JTAO = setLocal((EE_inEEJTAO/JTAO_inEEJTAO),4);
             const JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
-                console.log("EE-JTAO | ",EE_inEEJTAO.toFixed(4),"EE , ",JTAO_inEEJTAO.toFixed(4)," JTAO (",JTAO_to_EE," EE/JTAO)")
+        
             JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
             CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
             if(JTAO_to_EE != 0){
