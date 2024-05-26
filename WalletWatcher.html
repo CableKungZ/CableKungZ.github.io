@@ -1860,12 +1860,9 @@ async function getBalance() {
                          var itemID = item.total.token_id;
                              var checkOwner = await contract.methods.nftStake(parseInt(itemID)).call(); // ตรวจสอบเจ้าของให้ตรงกันอีกครั้ง
 
-                            if (checkOwner[0] === walletAddress) {
+                            if (checkOwner[0] == walletAddress) {
                                 console.log("Owner = ",checkOwner[0]);
-                                if (getReward != 0) {
-                                    ownedNFTID.push(itemID); // เพิ่มเจ้าของ
-                                }
-                                
+                                ownedNFTID.push(itemID); // เพิ่มเจ้าของ
                                 var getReward = 0;
                                 if (fieldName === "The Heaven Land") {
                                     var getReward = await contract.methods.calculateRewards1(itemID).call() / 10 ** 18;
