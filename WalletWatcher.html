@@ -1569,7 +1569,7 @@ async function getBalance() {
       console.log('Get Farming Details');
       try{
           // LP JBC-CMJ
-         var liqValue1 = CMJ_inJCLP*2; // Value in CMJ
+         var liqValue1 = await CMJ_ERC20.methods.balanceOf('0x472d0e2E9839c140786D38110b3251d5ED08DF41').call()*2; // Value in CMJ
          var totalSupplyLP1 = JCLP.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue1 = liqValue1/totalSupplyLP1;
          var Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
@@ -1580,68 +1580,74 @@ async function getBalance() {
          var Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
         //console.log(Info2)
           // LP JBC-JUSDT
-         var liqValue2 = (JBC_inJULP*2)/JBC_to_CMJ;
+          var amountOfJBC_JUCP = await web3.eth.getBalance('0x280608DD7712a5675041b95d0000B9089903B569') / (10**18);
+          var amountOfJUSDT_JULP = await Jusdt_ERC20.methods.balanceOf('0x280608DD7712a5675041b95d0000B9089903B569').call() / (10**18);
+                  var JbcJusdtSwap = amountOfJUSDT_JULP/amountOfJBC_JUCP;
+          var amountOfJBC_JCLP = await web3.eth.getBalance('0x472d0e2E9839c140786D38110b3251d5ED08DF41') / (10**18);
+          var amountOfCMJ_JCLP = await CMJ_ERC20.methods.balanceOf('0x472d0e2E9839c140786D38110b3251d5ED08DF41').call() / (10**18);
+                  var JbcCmjSwap = amountOfCMJ_JCLP/amountOfJBC_JCLP;
+         var liqValue2 = (amountOfJBC_JUCP*2)*JbcCmjSwap;
          var totalSupplyLP2 = JULP.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue2 = liqValue2/totalSupplyLP2;
          var Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
          var Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
         //console.log(Info3)
           // LP JASP-CMJ
-         var liqValue3 = (CMJ_inJaspCMJ*2);
+         var liqValue3 = (await CMJ_ERC20.methods.balanceOf('0xc19DE37d5e14b387BCda8e62aB4934591315901D').call()*2);
          var totalSupplyLP3 = JASPCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue3 = liqValue3/totalSupplyLP3;
          var Info4 = await LPFarming.methods.userInfo(parseInt(4),String(walletAddress)).call();
          var Pending4 = await LPFarming.methods.pendingCake(parseInt(4),String(walletAddress)).call();
           // LP JDAO-CMJ
-         var liqValue4 = (CMJ_inJdaoCMJ*2);
+         var liqValue4 = (await CMJ_ERC20.methods.balanceOf('0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0').call()*2);
          var totalSupplyLP4 = JDAOCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue4 = liqValue4/totalSupplyLP4;
          var Info5 = await LPFarming.methods.userInfo(parseInt(5),String(walletAddress)).call();
          var Pending5 = await LPFarming.methods.pendingCake(parseInt(5),String(walletAddress)).call();
           // LP OS-CMJ
-         var liqValue5 = (CMJ_inOsCMJ*2);
+         var liqValue5 = (await CMJ_ERC20.methods.balanceOf('0x329889325A555b217C41A4c2EADD529a0CfA4231').call()*2);
          var totalSupplyLP5 = OSCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue5 = liqValue5/totalSupplyLP5;
          var Info6 = await LPFarming.methods.userInfo(parseInt(6),String(walletAddress)).call();
          var Pending6 = await LPFarming.methods.pendingCake(parseInt(6),String(walletAddress)).call();
              // LP CU-CMJ
-         var liqValue6 = (CMJ_inCuCMJ*2);
+         var liqValue6 = (await CMJ_ERC20.methods.balanceOf('0x1b70c95fd4ebf8920a624bd2ce22b6905efbdf60').call()*2);
          var totalSupplyLP6 = CUCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue6 = liqValue6/totalSupplyLP6;
          var Info7 = await LPFarming.methods.userInfo(parseInt(7),String(walletAddress)).call();
          var Pending7 = await LPFarming.methods.pendingCake(parseInt(7),String(walletAddress)).call();
              // LP SIL-CMJ
-         var liqValue7 = (CMJ_inSILCMJ*2);
+         var liqValue7 = (await CMJ_ERC20.methods.balanceOf('0xf189c5b03694b70e5dfd8e8cae84118ed7616f19').call()*2);
          var totalSupplyLP7 = SILCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue7 = liqValue7/totalSupplyLP7;
          var Info8 = await LPFarming.methods.userInfo(parseInt(8),String(walletAddress)).call();
          var Pending8 = await LPFarming.methods.pendingCake(parseInt(8),String(walletAddress)).call();
              // LP GOLD-CMJ
-         var liqValue8 = (CMJ_inGoldCMJ*2);
+         var liqValue8 = (await CMJ_ERC20.methods.balanceOf('0x7086ec7ed5d94ef503be324b0ae8a3748a15fae5').call()*2);
          var totalSupplyLP8 = GOLDCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue8 = liqValue8/totalSupplyLP8;
          var Info9 = await LPFarming.methods.userInfo(parseInt(9),String(walletAddress)).call();
          var Pending9 = await LPFarming.methods.pendingCake(parseInt(9),String(walletAddress)).call();
              // LP PLAT-CMJ
-         var liqValue9 = (CMJ_inPlatCMJ*2);
+         var liqValue9 = (await CMJ_ERC20.methods.balanceOf('0x78ff63f4f91ce56f72882ef9dbe3be79fbf15044').call()*2);
          var totalSupplyLP9 = PLATCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue9 = liqValue9/totalSupplyLP9;
          var Info10 = await LPFarming.methods.userInfo(parseInt(10),String(walletAddress)).call();
          var Pending10 = await LPFarming.methods.pendingCake(parseInt(10),String(walletAddress)).call();
             // LP CTUNA-CMJ
-         var liqValue10 = (CMJ_inCtunaCMJ*2);
+         var liqValue10 = (await CMJ_ERC20.methods.balanceOf('0x7801f8cdbabe6999331d1bf37d74aaf713c3722f').call()*2);
          var totalSupplyLP10 = CTUNACMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue10 = liqValue10/totalSupplyLP10;
          var Info11 = await LPFarming.methods.userInfo(parseInt(12),String(walletAddress)).call();
          var Pending11 = await LPFarming.methods.pendingCake(parseInt(12),String(walletAddress)).call();
             // LP SX31-CMJ
-         var liqValue11 = (CMJ_inSx31CMJ*2);
+         var liqValue11 = (await CMJ_ERC20.methods.balanceOf('0xda558ee93b466aeb4f59fbf95d25d410318be43a').call()*2);
          var totalSupplyLP11 = SX31CMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue11 = liqValue11/totalSupplyLP11;
          var Info12 = await LPFarming.methods.userInfo(parseInt(13),String(walletAddress)).call();
          var Pending12 = await LPFarming.methods.pendingCake(parseInt(13),String(walletAddress)).call();
             // LP BBQ-CMJ
-         var liqValue12 = (CMJ_inBBQCMJ*2);
+         var liqValue12 = (await CMJ_ERC20.methods.balanceOf('0x6f93f16cf86205c5bb9145078d584c354758d6db').call()*2);
          var totalSupplyLP12 = BBQCMJ.methods.totalSupply().call() /(10**18); 
          var calculateLPTokenValue12 = liqValue12/totalSupplyLP12;
          var Info13 = await LPFarming.methods.userInfo(parseInt(14),String(walletAddress)).call();
