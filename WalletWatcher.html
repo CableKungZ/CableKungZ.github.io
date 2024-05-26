@@ -1574,11 +1574,11 @@ async function getBalance() {
          var calculateLPTokenValue1 = liqValue1/totalSupplyLP1;
          var Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
          var Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
-        //console.log(Info1)
+        console.log("liqValue1 :",liqValue1," totalSupplyLP1:",totalSupplyLP1," calculateLPTokenValue1:",calculateLPTokenValue1,"Info1 : ",Info1);
           // LP CMJ
          var Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
          var Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
-        //console.log(Info2)
+        console.log("Info2 : ",Info1);
           // LP JBC-JUSDT
           var amountOfJBC_JUCP = await web3.eth.getBalance('0x280608DD7712a5675041b95d0000B9089903B569') / (10**18);
           var amountOfJUSDT_JULP = await Jusdt_ERC20.methods.balanceOf('0x280608DD7712a5675041b95d0000B9089903B569').call() / (10**18);
@@ -1591,7 +1591,7 @@ async function getBalance() {
          var calculateLPTokenValue2 = liqValue2/totalSupplyLP2;
          var Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
          var Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
-        //console.log(Info3)
+        console.log("liqValue2 :",liqValue2," totalSupplyLP2:",totalSupplyLP2," calculateLPTokenValue2:",calculateLPTokenValue2,"Info3 : ",Info3);
           // LP JASP-CMJ
          var liqValue3 = (await CMJ_ERC20.methods.balanceOf('0xc19DE37d5e14b387BCda8e62aB4934591315901D').call()*2);
          var totalSupplyLP3 = JASPCMJ.methods.totalSupply().call() /(10**18); 
@@ -1808,7 +1808,6 @@ async function getBalance() {
     //                                              FIELD SETTING                           
     //
 
-    document.getElementById('Status').innerHTML = '🔃'
     getFarming();
     getGear()
 
