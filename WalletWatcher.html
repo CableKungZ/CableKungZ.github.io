@@ -1576,6 +1576,7 @@ async function getBalance() {
          var Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
         console.log("liqValue1 :",liqValue1," totalSupplyLP1:",totalSupplyLP1," calculateLPTokenValue1:",calculateLPTokenValue1,"Info1 : ",Info1);
           // LP CMJ
+         var liqValueCMJ = ((await CMJ_ERC20.methods.balanceOf('0x6B25033c2B4F5594809cBEf9F625771a2574C1a6').call()/10**18)*2);
          var Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
          var Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
         console.log("Info2 : ",Info1);
@@ -1660,20 +1661,20 @@ async function getBalance() {
          var Pending14 = await LPFarming.methods.pendingCake(parseInt(15),String(walletAddress)).call();
 
 
-        addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),calculateLPTokenValue1,(Pending1/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Staking CMJ",(Info2[0]/10**18),1,Pending2/10**18,Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP JBC-JUSDT",(Info3[0]/10**18),calculateLPTokenValue2,(Pending3/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP JASP-CMJ",(Info4[0]/10**18),calculateLPTokenValue3,(Pending4/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP JDAO-CMJ",(Info5[0]/10**18),calculateLPTokenValue4,(Pending5/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP OS-CMJ",(Info6[0]/10**18),calculateLPTokenValue5,(Pending6/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP CU-CMJ",(Info7[0]/10**18),calculateLPTokenValue6,(Pending7/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP SIL-CMJ",(Info8[0]/10**18),calculateLPTokenValue7,(Pending8/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP GOLD-CMJ",(Info9[0]/10**18),calculateLPTokenValue8,(Pending9/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP PLAT-CMJ",(Info10[0]/10**18),calculateLPTokenValue9,(Pending10/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP CTUNA-CMJ",(Info11[0]/10**18),calculateLPTokenValue10,(Pending11/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP SX31-CMJ",(Info12[0]/10**18),calculateLPTokenValue11,(Pending12/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP BBQ-CMJ",(Info13[0]/10**18),calculateLPTokenValue12,(Pending13/10**18),Jdao_to_CMJ,"JDAO");
-        addtoStaking("Farming LP PZA-CMJ",(Info14[0]/10**18),calculateLPTokenValue13,(Pending14/10**18),Jdao_to_CMJ,"JDAO");
+        addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),calculateLPTokenValue1,(Pending1/10**18),Jdao_to_CMJ,"JDAO",(Info1[0]/10**18/totalSupplyLP1));
+        addtoStaking("Staking CMJ",(Info2[0]/10**18),1,Pending2/10**18,Jdao_to_CMJ,"JDAO",(Info2[0]/10**18/liqValueCMJ));
+        addtoStaking("Farming LP JBC-JUSDT",(Info3[0]/10**18),calculateLPTokenValue2,(Pending3/10**18),Jdao_to_CMJ,"JDAO",(Info3[0]/10**18/totalSupplyLP2));
+        addtoStaking("Farming LP JASP-CMJ",(Info4[0]/10**18),calculateLPTokenValue3,(Pending4/10**18),Jdao_to_CMJ,"JDAO",(Info4[0]/10**18/totalSupplyLP3));
+        addtoStaking("Farming LP JDAO-CMJ",(Info5[0]/10**18),calculateLPTokenValue4,(Pending5/10**18),Jdao_to_CMJ,"JDAO",(Info5[0]/10**18/totalSupplyLP4));
+        addtoStaking("Farming LP OS-CMJ",(Info6[0]/10**18),calculateLPTokenValue5,(Pending6/10**18),Jdao_to_CMJ,"JDAO",(Info6[0]/10**18/totalSupplyLP5));
+        addtoStaking("Farming LP CU-CMJ",(Info7[0]/10**18),calculateLPTokenValue6,(Pending7/10**18),Jdao_to_CMJ,"JDAO",(Info7[0]/10**18/totalSupplyLP6));
+        addtoStaking("Farming LP SIL-CMJ",(Info8[0]/10**18),calculateLPTokenValue7,(Pending8/10**18),Jdao_to_CMJ,"JDAO",(Info8[0]/10**18/totalSupplyLP7));
+        addtoStaking("Farming LP GOLD-CMJ",(Info9[0]/10**18),calculateLPTokenValue8,(Pending9/10**18),Jdao_to_CMJ,"JDAO",(Info9[0]/10**18/totalSupplyLP8));
+        addtoStaking("Farming LP PLAT-CMJ",(Info10[0]/10**18),calculateLPTokenValue9,(Pending10/10**18),Jdao_to_CMJ,"JDAO",(Info10[0]/10**18/totalSupplyLP9));
+        addtoStaking("Farming LP CTUNA-CMJ",(Info11[0]/10**18),calculateLPTokenValue10,(Pending11/10**18),Jdao_to_CMJ,"JDAO",(Info11[0]/10**18/totalSupplyLP10));
+        addtoStaking("Farming LP SX31-CMJ",(Info12[0]/10**18),calculateLPTokenValue11,(Pending12/10**18),Jdao_to_CMJ,"JDAO",((Info12[0]/10**18/totalSupplyLP11)));
+        addtoStaking("Farming LP BBQ-CMJ",(Info13[0]/10**18),calculateLPTokenValue12,(Pending13/10**18),Jdao_to_CMJ,"JDAO",(Info13[0]/10**18/totalSupplyLP12));
+        addtoStaking("Farming LP PZA-CMJ",(Info14[0]/10**18),calculateLPTokenValue13,(Pending14/10**18),Jdao_to_CMJ,"JDAO",(Info14[0]/10**18/totalSupplyLP13));
 
 
         function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
