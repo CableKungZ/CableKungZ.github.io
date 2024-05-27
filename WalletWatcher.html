@@ -1677,7 +1677,7 @@ async function getBalance() {
         addtoStaking("Farming LP PZA-CMJ",(Info14[0]/10**18),calculateLPTokenValue13,(Pending14/10**18),Jdao_to_CMJ,"JDAO",(Info14[0]/10**18/totalSupplyLP13));
 
 
-        function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
+        function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken,percentShare){
             var table = document.getElementById("farmingAsset");
             var stakingValue = calculateWorth(tokenAmount,tokenPrice);
             var pendingValue = calculateWorth(Pending,pendingPrice);
@@ -1690,7 +1690,7 @@ async function getBalance() {
                 
             
                 // กำหนดข้อมูลให้กับแต่ละ cell
-                nameCell.innerHTML = stakingName;
+                nameCell.innerHTML = `${stakingName} (Share ${percentShare.toLocaleString({maximumFractionDigits:2})}%)`;
                 amountCell.innerHTML = (tokenAmount).toLocaleString();
                 valueCell.innerHTML = `${(stakingValue).toLocaleString()} CMJ`;
                 rewardCell.innerHTML = `${Pending.toLocaleString()} ${pendingToken} <br>(~${(pendingValue).toLocaleString({maximumFractionDigits:4})} CMJ)`;
