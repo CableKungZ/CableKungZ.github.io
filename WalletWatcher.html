@@ -1304,7 +1304,7 @@ async function getBalance() {
     document.getElementById("Status").innerHTML = `<img width="32px" src="https://s12.gifyu.com/images/SavRL.gif">`
   resetPurchaseTable()
   resetNetworth();
-  startHistory()
+  
   THB_to_USD = parseFloat(document.getElementById("THB").textContent) || 36.5;
   console.log("THB / USD : "+THB_to_USD);
   CMJ_to_JBC = parseFloat(document.getElementById("Sell_CMJinJBC").textContent) || 0;
@@ -1690,7 +1690,7 @@ async function getBalance() {
                 
             
                 // กำหนดข้อมูลให้กับแต่ละ cell
-                nameCell.innerHTML = `${stakingName} (Share ${percentShare.toLocaleString({maximumFractionDigits:2})}%)`;
+                nameCell.innerHTML = `${stakingName} (Share ${(percentShare*100).toLocaleString({maximumFractionDigits:2})}%)`;
                 amountCell.innerHTML = (tokenAmount).toLocaleString();
                 valueCell.innerHTML = `${(stakingValue).toLocaleString()} CMJ`;
                 rewardCell.innerHTML = `${Pending.toLocaleString()} ${pendingToken} <br>(~${(pendingValue).toLocaleString({maximumFractionDigits:4})} CMJ)`;
@@ -1810,14 +1810,14 @@ async function getBalance() {
             }
         }
 
-
+    
     ////////////////////////////////////////////////////////////////////////////////////////
     //
     //                                              FIELD SETTING                           
     //
 
     getFarming();
-    getGear()
+    getGear();
 
     fieldInfo = [
     {fieldName:"Tuna Lake", contract: TunaField, fieldAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",nftAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",tokenReward:"TUNA",tokenPrice:Tuna_to_CMJ,nftValue:(5*USD_to_CMJ)},
@@ -1957,7 +1957,7 @@ async function getBalance() {
         document.getElementById("nw_jbc").innerHTML = (calculateWorth(total_networth, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
         document.getElementById("nw_usd").innerHTML = (calculateWorth(total_networth, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
         document.getElementById("nw_thb").innerHTML = (calculateWorth(total_networth, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
-
+    startHistory();
     }
 
 
