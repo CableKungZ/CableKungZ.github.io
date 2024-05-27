@@ -1,4 +1,4 @@
-764.552*<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="google-adsense-account" content="ca-pub-9195099699232258">
@@ -1452,7 +1452,7 @@ async function getBalance() {
      var CTUNACMJ = await loadContract('0x7801f8cdbabe6999331d1bf37d74aaf713c3722f');
      var SX31CMJ = await loadContract('0xda558ee93b466aeb4f59fbf95d25d410318be43a');
      var BBQCMJ = await loadContract('0x6f93f16cf86205c5bb9145078d584c354758d6db');
-
+     var PZABBQ = await loadContract('0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70');
     
     function calculateWorth(balance, conversionRate) {
       return parseFloat(balance * conversionRate);
@@ -1652,6 +1652,12 @@ async function getBalance() {
          var calculateLPTokenValue12 = liqValue12/totalSupplyLP12;
          var Info13 = await LPFarming.methods.userInfo(parseInt(14),String(walletAddress)).call();
          var Pending13 = await LPFarming.methods.pendingCake(parseInt(14),String(walletAddress)).call();
+            // LP PZA-CMJ
+         var liqValue13 = ((await CMJ_ERC20.methods.balanceOf('0x3161ee630bf36d2ab6333a9cfd22ebaa3e2d7c70').call()/10**18)*2);
+         var totalSupplyLP13 = await PZACMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue13 = liqValue13/totalSupplyLP13;
+         var Info14 = await LPFarming.methods.userInfo(parseInt(15),String(walletAddress)).call();
+         var Pending14 = await LPFarming.methods.pendingCake(parseInt(15),String(walletAddress)).call();
 
 
         addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),calculateLPTokenValue1,(Pending1/10**18),Jdao_to_CMJ,"JDAO");
@@ -1667,6 +1673,7 @@ async function getBalance() {
         addtoStaking("Farming LP CTUNA-CMJ",(Info11[0]/10**18),calculateLPTokenValue10,(Pending11/10**18),Jdao_to_CMJ,"JDAO");
         addtoStaking("Farming LP SX31-CMJ",(Info12[0]/10**18),calculateLPTokenValue11,(Pending12/10**18),Jdao_to_CMJ,"JDAO");
         addtoStaking("Farming LP BBQ-CMJ",(Info13[0]/10**18),calculateLPTokenValue12,(Pending13/10**18),Jdao_to_CMJ,"JDAO");
+        addtoStaking("Farming LP PZA-CMJ",(Info14[0]/10**18),calculateLPTokenValue13,(Pending14/10**18),Jdao_to_CMJ,"JDAO");
 
 
         function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
