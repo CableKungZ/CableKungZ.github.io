@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaoBuddy Service</title>
+</head>
+<body>
+    <h1>DaoBuddy Service</h1>
+    <div>
+        <h2>batchTransfer</h2>
+        <input type="text" id="batchTransferToken" placeholder="Token Address">
+        <textarea id="batchTransferAddresses" placeholder="Addresses (comma separated)"></textarea>
+        <textarea id="batchTransferAmounts" placeholder="Amounts (comma separated)"></textarea>
+        <button onclick="batchTransfer()">Submit</button>
+    </div>
+    <div>
+        <h2>batchTransferWithFixAmount</h2>
+        <input type="text" id="batchTransferWithFixAmountToken" placeholder="Token Address">
+        <textarea id="batchTransferWithFixAmountAddresses" placeholder="Addresses (comma separated)"></textarea>
+        <input type="text" id="batchTransferWithFixAmount" placeholder="Amount per Recipient">
+        <button onclick="batchTransferWithFixAmount()">Submit</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="source/daoBuddyService.js"></script>
+</body>
+</html>
