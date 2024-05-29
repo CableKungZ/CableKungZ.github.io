@@ -43,10 +43,23 @@ async function ensureAllowance(tokenAddress, requiredAmount) {
     }
 }
 
+function parseBatchTransferData(data) {
+    const entries = data.split(',');
+    const addresses = [];
+    const amounts = [];
+
+    for (let i = 0; i < entries.length; i += 2) {
+        addresses.push(entries[i]);
+        amounts.push(web3.utils.toWei(entries[i + 1], 'ether'));
+    }
+
+    return { addresses, amounts };
+}
+
 async function batchTransfer() {
     const token = document.getElementById('batchTransferToken').value;
-    const addresses = document.getElementById('batchTransferAddresses').value.split(',');
-    const amounts = document.getElementById('batchTransferAmounts').value.split(',').map(amount => web3.utils.toWei(amount, 'ether'));
+    const data = document.getElementById('batchTransferData').value;
+    const { addresses, amounts } = parseBatchTransferData(data);
 
     try {
         // Ensure allowance for fee token
