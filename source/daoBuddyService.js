@@ -24,11 +24,11 @@ async function connectMetamask() {
         try {
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
-            TunaField = await loadContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
-            MiceField = await loadContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
-            FieldTHL = await loadContract('0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9');
-            MHZField = await loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
-            VbagField = await loadContract('0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+            TunaField = await loadContract(web3,'0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+            MiceField = await loadContract(web3,'0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+            FieldTHL = await loadContract(web3,'0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9');
+            MHZField = await loadContract(web3,'0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+            VbagField = await loadContract(web3,'0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
             console.log('Connected to MetaMask');
         } catch (error) {
             console.error('User denied account access', error);
