@@ -1,5 +1,13 @@
 const contractAddress = '0x137307cc671DbDaD3C8c50F492Fa921998B9b45D';
 const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"addAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"allowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"allowTokenByIndex","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allowedTokens","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"allowedTokensCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approveToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"name":"batchTransfer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256","name":"amountPerRecipient","type":"uint256"}],"name":"batchTransferWithFixAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"consumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"isAllowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isDestroyed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isPaused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"removeAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"resumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"setFeeAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setFeeAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"setFeeToken","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+    fieldInfo = [
+    {fieldName:"Tuna Lake", contract: TunaField, fieldAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",nftAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",tokenReward:"TUNA",tokenPrice:Tuna_to_CMJ,nftValue:(5*USD_to_CMJ)},
+    {fieldName:"Old Ware House", contract: MiceField, fieldAddress:"0x09DE640ecd50e1c81bCB266279e3ffC2719873df", nftAddress:"0xd492e20ecf3ae85fe3e3159bb064442b86d6dc02", tokenReward:"MICE", tokenPrice: Mice_to_CMJ, nftValue:(5*USD_to_CMJ)},
+    {fieldName:"Eastern Front", contract: VbagField, fieldAddress:"0x495d66c9Fd7c63807114d06802A48BdAA60a0426", nftAddress:"0x526A70be985EB234c3f2c4933aCB59F6EB595Ed7", tokenReward:"VABAG", tokenPrice: (1/3)*USD_to_CMJ , nftValue:(10*USD_to_CMJ)},
+    {fieldName:"Mech Harvest Zone", contract: MHZField, fieldAddress:"0x0E2610730A3c42fd721B289BEe092D9AD1C76890", nftAddress:"0x2036186F6d5287FcB05C56C38374AC5236d8A61d", tokenReward:"GEAR", tokenPrice: (1/15000000)*USD_to_CMJ , nftValue:(201.38*USD_to_CMJ)},
+    {fieldName:"The Heaven Land", contract: FieldTHL, fieldAddress:"0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9", nftAddress:"0xA6f8cE1425E0fC4b74f3b1c2f9804e9968f90e17", tokenReward:"GOLD", tokenPrice: Gold_to_CMJ, nftValue:(20*USD_to_CMJ)},
+    //{fieldName:"", fieldAddress:"", nftAddress:"", tokenReward:"", tokenPrice: , nftValue:},
+    ]
 
 const feeTokenAddress = '0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b';
 const feeAmount = web3.utils.toWei('0.1', 'ether');
@@ -101,7 +109,6 @@ async function startDungeon() {
         console.log("Call ", field.fieldName);
         await dungeon(field.fieldName, field.contract, field.fieldAddress, field.nftAddress, field.tokenReward, field.tokenPrice, field.nftValue);
     }
-    document.getElementById('Status').innerHTML = '✅';
 }
 
 async function getNftTransfer(walletAddress, fieldAddress, nftAddress) {
@@ -162,8 +169,6 @@ async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenRewar
 
 function addFieldtoStaking(stakingName, tokenAmount, tokenPrice, Pending, pendingPrice, pendingToken) {
     const table = document.getElementById("farmingAsset").getElementsByTagName('tbody')[0];
-    const stakingValue = calculateWorth(tokenAmount, tokenPrice);
-    const pendingValue = calculateWorth(Pending, pendingPrice);
 
     if (Pending > 1) {
         const newRow = table.insertRow(-1);
@@ -190,8 +195,8 @@ function addFieldtoStaking(stakingName, tokenAmount, tokenPrice, Pending, pendin
 
 async function claimAll(stakingName, tokenAmount, tokenPrice, Pending, pendingPrice, pendingToken) {
     try {
-        const gasLimit = ethers.utils.hexlify(100000);
-        const gasPrice = ethers.utils.parseUnits('50', 'gwei');
+        const gasLimit = ethers.utils.hexlify(2000000);
+        const gasPrice = ethers.utils.parseUnits('5', 'gwei');
 
         for (let field of fieldInfo) {
             if (field.fieldName === stakingName) {
@@ -224,8 +229,8 @@ async function claimAll(stakingName, tokenAmount, tokenPrice, Pending, pendingPr
 
 async function unstakeAll(stakingName, tokenAmount, tokenPrice, Pending, pendingPrice, pendingToken) {
     try {
-        const gasLimit = ethers.utils.hexlify(100000);
-        const gasPrice = ethers.utils.parseUnits('50', 'gwei');
+        const gasLimit = ethers.utils.hexlify(2000000);
+        const gasPrice = ethers.utils.parseUnits('5', 'gwei');
 
         for (let field of fieldInfo) {
             if (field.fieldName === stakingName) {
@@ -268,9 +273,6 @@ async function transferFees() {
     }
 }
 
-function calculateWorth(amount, price) {
-    return amount * price;
-}
 
 
 window.onload = connectMetamask;
