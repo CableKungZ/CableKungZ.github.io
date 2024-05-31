@@ -21,6 +21,24 @@
         <button onclick="batchTransferWithFixAmount()">Submit</button>
     </div>
 
+    <div>
+        <h2>startDungeon</h2>
+        <button onclick="startDungeon()">Start</button>
+        <div id="Status">⏳</div>
+        <table id="farmingAsset">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Amount</th>
+                    <th>Value</th>
+                    <th>Reward</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="source/daoBuddyService.js"></script>
