@@ -1,6 +1,22 @@
+
+let web3;
+let daoBuddyService;
+let accounts;
+let TunaField;
+let MiceField;
+let FieldTHL;
+let MHZField;
+let VbagField;
+
+
+const feeTokenAddress = '0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b';
+const feeAmount = web3.utils.toWei('0.1', 'ether');
 const contractAddress = '0x137307cc671DbDaD3C8c50F492Fa921998B9b45D';
 const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"addAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"allowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"allowTokenByIndex","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allowedTokens","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"allowedTokensCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approveToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"name":"batchTransfer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256","name":"amountPerRecipient","type":"uint256"}],"name":"batchTransferWithFixAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"consumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"isAllowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isDestroyed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isPaused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"removeAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"resumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"setFeeAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setFeeAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"setFeeToken","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-    fieldInfo = [
+
+
+
+fieldInfo = [
     {fieldName:"Tuna Lake", contract: TunaField, fieldAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",nftAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",tokenReward:"TUNA",tokenPrice:Tuna_to_CMJ,nftValue:(5*USD_to_CMJ)},
     {fieldName:"Old Ware House", contract: MiceField, fieldAddress:"0x09DE640ecd50e1c81bCB266279e3ffC2719873df", nftAddress:"0xd492e20ecf3ae85fe3e3159bb064442b86d6dc02", tokenReward:"MICE", tokenPrice: Mice_to_CMJ, nftValue:(5*USD_to_CMJ)},
     {fieldName:"Eastern Front", contract: VbagField, fieldAddress:"0x495d66c9Fd7c63807114d06802A48BdAA60a0426", nftAddress:"0x526A70be985EB234c3f2c4933aCB59F6EB595Ed7", tokenReward:"VABAG", tokenPrice: (1/3)*USD_to_CMJ , nftValue:(10*USD_to_CMJ)},
@@ -9,12 +25,6 @@ const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constru
     //{fieldName:"", fieldAddress:"", nftAddress:"", tokenReward:"", tokenPrice: , nftValue:},
     ]
 
-const feeTokenAddress = '0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b';
-const feeAmount = web3.utils.toWei('0.1', 'ether');
-
-let web3;
-let daoBuddyService;
-let accounts;
 
 async function connectMetamask() {
     if (window.ethereum) {
@@ -22,6 +32,11 @@ async function connectMetamask() {
         try {
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
+            TunaField = await loadContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+            MiceField = await loadContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+            FieldTHL = await loadContract('0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9');
+            MHZField = await loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+            VbagField = await loadContract('0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
             console.log('Connected to MetaMask');
         } catch (error) {
             console.error('User denied account access', error);
