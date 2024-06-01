@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,8 @@
     <div>
         <h2>batchTransfer</h2>
         <input type="text" id="batchTransferToken" placeholder="Token Address">
-        <textarea id="batchTransferData" placeholder="address1,value1,address2,value2,..."></textarea>
+        <textarea id="batchTransferAddresses" placeholder="Addresses (comma separated)"></textarea>
+        <textarea id="batchTransferAmounts" placeholder="Amounts (comma separated)"></textarea>
         <button onclick="batchTransfer()">Submit</button>
     </div>
     <div>
@@ -23,6 +24,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="source/daoBuddyService.js"></script>
+    <script src="daoBuddyService.js"></script>
 </body>
 </html>
