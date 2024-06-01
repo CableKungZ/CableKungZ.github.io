@@ -73,8 +73,9 @@
             <p>Transfer Any Token To Multiple Wallet Address With Different Amount</p>
             <p style="color:blue;">Tx Fee : 0.01 CMJ per target Account</p>
             <input type="text" id="batchTransferToken" placeholder="Token Address">
-            <textarea id="batchTransferAddresses" placeholder="address1,amount1\naddress2,amount2\n..."></textarea>
+            <textarea id="batchTransferData" placeholder="Address,Amount&#10;Address,Amount&#10;..."></textarea>
             <button onclick="batchTransfer()" style="text-align: center;">Send TX</button>
+
         </div>
     </div>
     <div class="container" id="batchTransferWithFixAmountSection" style="display: none;">
@@ -155,7 +156,17 @@ async function ensureAllowance(tokenAddress, requiredAmount, feeTokenAddress, fe
 async function batchTransfer() {
     const token = document.getElementById('batchTransferToken').value;
     const data = document.getElementById('batchTransferData').value;
-    const { addresses, amounts } = parseBatchTransferData(data);
+    const rows = data.trim().split('\n'); // แยกแต่ละแถวด้วย "\n"
+    
+    const addresses = [];
+    const amounts = [];
+    
+    // วนลูปผ่านแต่ละแถวของข้อมูล
+    for (const row of rows) {
+        const [address, amount] = row.split(','); // แยก address และ amount ด้วย ","
+        addresses.push(address.trim()); // เพิ่ม address เข้าไปในอาร์เรย์ addresses
+        amounts.push(amount.trim()); // เพิ่ม amount เข้าไปในอาร์เรย์ amounts
+    }
 
     try {
         // Ensure allowance for fee token
@@ -171,6 +182,7 @@ async function batchTransfer() {
         console.error('Transaction failed', error);
     }
 }
+
 
 async function batchTransferWithFixAmount() {
     const token = document.getElementById('batchTransferWithFixAmountToken').value;
