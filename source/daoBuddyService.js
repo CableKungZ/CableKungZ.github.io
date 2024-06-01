@@ -15,6 +15,8 @@ async function connectMetamask() {
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
             console.log('Connected to MetaMask');
+
+            // Call other functions here that rely on web3, e.g., batchTransfer
         } catch (error) {
             console.error('User denied account access', error);
         }
@@ -22,6 +24,9 @@ async function connectMetamask() {
         console.error('MetaMask not detected');
     }
 }
+
+// Call connectMetamask when the window loads
+window.onload = connectMetamask;
 
 async function loadContract(provider, contractAddress) {
     const response = await axios.get(`https://jib-rpc.inan.in.th/api?module=contract&action=getabi&address=${contractAddress}`);
@@ -43,6 +48,10 @@ async function ensureAllowance(tokenAddress, requiredAmount) {
 }
 
 async function batchTransfer() {
+        if (!web3 || !accounts || !daoBuddyService) {
+        console.error('Please connect MetaMask first');
+        return;
+    }
     const token = document.getElementById('batchTransferToken').value;
     const addresses = document.getElementById('batchTransferAddresses').value.split(',');
     const amounts = document.getElementById('batchTransferAmounts').value.split(',').map(amount => web3.utils.toWei(amount, 'ether'));
@@ -63,6 +72,10 @@ async function batchTransfer() {
 }
 
 async function batchTransferWithFixAmount() {
+        if (!web3 || !accounts || !daoBuddyService) {
+        console.error('Please connect MetaMask first');
+        return;
+    }
     const token = document.getElementById('batchTransferWithFixAmountToken').value;
     const addresses = document.getElementById('batchTransferWithFixAmountAddresses').value.split(',');
     const amountPerRecipient = web3.utils.toWei(document.getElementById('batchTransferWithFixAmount').value, 'ether');
