@@ -37,7 +37,7 @@ async function ensureAllowance(tokenAddress, requiredAmount) {
     const tokenContract = await loadContract(web3, tokenAddress);
     await tokenContract.methods.approve(contractAddress, requiredAmount).send({ from: accounts[0] });
     }
-}
+
 
 function parseBatchTransferData(data) {
     const entries = data.split(',');
