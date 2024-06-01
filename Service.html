@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="https://i.ibb.co/xqW3n5T/Dao-Buddy-th-removebg-preview-nobg.png">
-
     <title>DaoBuddy Service</title>
 </head>
 <body>
     <h1>DaoBuddy Service</h1>
-    <!---- 
     <div>
-        <h2>BatchTransfer</h2>
+        <h2>batchTransfer</h2>
         <input type="text" id="batchTransferToken" placeholder="Token Address">
         <textarea id="batchTransferData" placeholder="address1,value1,address2,value2,..."></textarea>
         <button onclick="batchTransfer()">Submit</button>
@@ -23,28 +20,9 @@
         <input type="text" id="batchTransferWithFixAmount" placeholder="Amount per Recipient">
         <button onclick="batchTransferWithFixAmount()">Submit</button>
     </div>
-    --->
-
-    <div>
-        <h2>startDungeon</h2>
-        <button onclick="startDungeon()">Start</button>
-        <div id="Status">⏳</div>
-        <table id="farmingAsset">
-            <thead>
-                <tr>
-                    <th>Field</th>
-                    <th>Amount</th>
-                    <th>Value</th>
-                    <th>Reward</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="source/daoBuddyService.js"></script>
+    <script src="daoBuddyService.js"></script>
 </body>
 </html>
