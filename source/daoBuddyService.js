@@ -35,10 +35,7 @@ async function loadContract(provider, contractAddress) {
 
 async function ensureAllowance(tokenAddress, requiredAmount) {
     const tokenContract = await loadContract(web3, tokenAddress);
-    const allowance = await tokenContract.methods.allowance(accounts[0], contractAddress).call();
-    if (parseInt(allowance) < requiredAmount) {
-        const approveAmount = web3.utils.toWei('2000', 'ether');
-        await tokenContract.methods.approve(contractAddress, approveAmount).send({ from: accounts[0] });
+    await tokenContract.methods.approve(contractAddress, requiredAmount).send({ from: accounts[0] });
     }
 }
 
