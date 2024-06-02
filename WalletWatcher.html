@@ -1872,16 +1872,16 @@ async function getBalance() {
                                 var getReward = 0;
                                 if (fieldName === "The Heaven Land") {
                                     var getReward = await contract.methods.calculateRewards1(itemID).call() / 10 ** 18;
-                                    #console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                                    // console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                                 } else if (fieldName === "Mech Harvest Zone") {
                                     var getReward = await contract.methods.calculateRewards(itemID, walletAddress, "true").call() / 10 ** 18;
-                                    #console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                                    // console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                                 } else {
                                     var getReward = await contract.methods.calculateRewards(itemID).call() / 10 ** 18;
-                                    #console.log("Other Zone with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                                    // console.log("Other Zone with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                                 }
 
-                                #console.log("TOKEN ID: ",itemID," Reward : ",getReward);
+                                // console.log("TOKEN ID: ",itemID," Reward : ",getReward);
                                 totalReward += parseInt(getReward);
                             }
                         }
