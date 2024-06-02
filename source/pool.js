@@ -232,38 +232,59 @@ const blockNumber = await web3.eth.getBlockNumber();
 
 const transferEventSignature = web3.utils.sha3('Transfer(address,address,uint256)');
 
-async function getTokenTransfersToAddress(tokenAddress,targetAddress) {
+
+async function getTokenTransfersToAddress(tokenAddress, fromAddress , targetAddress,previousBlock) {
+    const transferEventSignature = web3.utils.sha3('Transfer(address,address,uint256)');
+    const fromAddressPadded = '0x' + fromAddress.replace('0x', '').padStart(64, '0');
+    const targetAddressPadded = '0x' + targetAddress.replace('0x', '').padStart(64, '0');
+
     const events = await web3.eth.getPastLogs({
-        fromBlock: blockNumber-6700,
+        fromBlock: blockNumber - previousBlock,
         toBlock: 'latest',
         address: tokenAddress,
         topics: [
             transferEventSignature,
-            null,
-            '0x' + targetAddress.replace('0x', '').padStart(64, '0')
+            fromAddressPadded,
+            targetAddressPadded
         ]
     });
 
-    let txCount = events.length;
-    let totalAmount = events.reduce((sum, event) => {
-        let amount = web3.utils.toBN(event.data);
-        return sum.add(amount);
-    }, web3.utils.toBN(0));
+    let txCount = 0;
+    let totalAmount = web3.utils.toBN(0);
+
+    // Filter out events not related to Transfer(address,address,uint256) or addLiquidity(uint256,uint256)
+    const relevantEvents = events.filter(event => {
+        const topic = event.topics[0];
+        return topic === transferEventSignature || topic === addLiquidityEventSignature;
+    });
+
+    // Filter out addLiquidity events
+    const transferEvents = relevantEvents.filter(event => event.topics[0] === transferEventSignature);
+
+    if (transferEvents.length > 0) {
+        txCount = transferEvents.length;
+        totalAmount = transferEvents.reduce((sum, event) => {
+            let amount = web3.utils.toBN(event.data);
+            return sum.add(amount);
+        }, web3.utils.toBN(0));
+    }
 
     console.log(`Total Transactions: ${txCount}`);
     let sumToken;
-    if(tokenAddress == "0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860"){
+    if (tokenAddress === "0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860") {
         console.log(`Total Amount Transferred: ${web3.utils.fromWei(totalAmount, 'gwei')} Tokens`);
-        sumToken = web3.utils.fromWei(totalAmount, 'gwei')
-    }else{
+        sumToken = totalAmount / 10**9; // Convert from gwei to token
+    } else {
         console.log(`Total Amount Transferred: ${web3.utils.fromWei(totalAmount, 'ether')} Tokens`);
-        sumToken = web3.utils.fromWei(totalAmount, 'ether')
+        sumToken = web3.utils.fromWei(totalAmount, 'ether');
     }
     
-    return sumToken
-}  
-async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events) {
-    const fromBlock = blockNumber - 6700;
+    return sumToken;
+}
+
+
+async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,previousBlock) {
+    const fromBlock = blockNumber - previousBlock;
     const toBlock = 'latest';
 
     let eventLogs;
@@ -296,11 +317,19 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events) 
         throw new Error("Invalid event type. Must be 'to' or 'from'.");
     }
 
-    let txCount = eventLogs.length;
-    let totalAmount = eventLogs.reduce((sum, event) => {
-        let amount = web3.utils.toBN(event.data);
-        return sum.add(amount);
-    }, web3.utils.toBN(0));
+    let txCount = 0;
+    let totalAmount = web3.utils.toBN(0);
+
+    // Filter out events not related to Transfer(address,address,uint256)
+    eventLogs = eventLogs.filter(event => event.topics[0] === transferEventSignature);
+
+    if (eventLogs.length > 0) {
+        txCount = eventLogs.length;
+        totalAmount = eventLogs.reduce((sum, event) => {
+            let amount = web3.utils.toBN(event.data);
+            return sum.add(amount);
+        }, web3.utils.toBN(0));
+    }
 
     console.log(`Total Transactions (${events}): ${txCount}`);
     let sumToken;
@@ -315,23 +344,50 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events) 
     return sumToken;
 }
 
-    let sumFee, sumFee_2, totalFee;
+
+    let sumFee, sumFee_2, totalFee,VolumeTrade;
     if (main.options.address === "0x0000000000000000000000000000000000000000") {
         [sumFee, sumFee_2] = await Promise.all([
-            getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'to'),
-            getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'from')
+            getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'to',6700),
+            getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'from',6700)
         ]);
         sumFee *= 0.01;
         sumFee_2 *= 1 / 99;
         totalFee = sumFee + (sumFee_2 * swap1);
+        VolumeTrade = totalFee / 0.01;
+        console.log("Volume Trade :",VolumeTrade)
     } else {
         [sumFee, sumFee_2] = await Promise.all([
-            getTokenTransfersToAddress(main.options.address, contract.options.address),
-            getTokenTransfersToAddress(pair.options.address, contract.options.address)
+            getTokenTransfersToAddress(main.options.address,contract.options.address,merchant,6700),
+            getTokenTransfersToAddress(pair.options.address,contract.options.address,merchant,6700)
         ]);
-        sumFee *= 0.01;
-        sumFee_2 *= 0.01;
+        sumFee *= 0.25;
+        sumFee_2 *= 0.25;
         totalFee = sumFee + (sumFee_2 * swap1);
+        VolumeTrade = totalFee / 0.01;
+        console.log("Volume Trade :",VolumeTrade)
+    }
+    let D7sumFee, D7sumFee_2, D7totalFee,D7VolumeTrade;
+    if (main.options.address === "0x0000000000000000000000000000000000000000") {
+        [D7sumFee, D7sumFee_2] = await Promise.all([
+            getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'to',(6700*7)),
+            getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'from',(6700*7))
+        ]);
+        D7sumFee *= 0.01;
+        D7sumFee_2 *= 1 / 99;
+        D7totalFee = D7sumFee + (D7sumFee_2 * swap1);
+        D7VolumeTrade = D7totalFee / 0.01;
+        console.log("Volume Trade :",D7VolumeTrade)
+    } else {
+        [D7sumFee, D7sumFee_2] = await Promise.all([
+            getTokenTransfersToAddress(main.options.address,contract.options.address,merchant,(6700*7)),
+            getTokenTransfersToAddress(pair.options.address,contract.options.address,merchant,(6700*7))
+        ]);
+        D7sumFee *= 0.25;
+        D7sumFee_2 *= 0.25;
+        D7totalFee = D7sumFee + (D7sumFee_2 * swap1);
+        D7VolumeTrade = D7totalFee / 0.01;
+        console.log("Volume Trade :",D7VolumeTrade)
     }
 
     // Add data to the table
@@ -348,7 +404,7 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events) 
     }
 
     row.innerHTML = `
-        <td><a target="_blank" href="${location}">${(location.split(".")[0]).replace('https://', '')}</a></td>
+        <td style="font-size: 10px;"><a target="_blank" href="${location}">${(location.split(".")[0]).replace('https://', '')}</a></td>
         <td>${name}</td>
         <td>${mainBalance.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${mainN}</td>
         <td>${pairBalance.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}</td>
@@ -358,6 +414,11 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events) 
         <td>${sumFee.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${mainN}<br>
             ${sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}<br>
             Total ${totalFee.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${mainN}</td>
+        <td>${VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
+        <td>${D7sumFee.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${mainN}<br>
+            ${D7sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}<br>
+            Total ${D7totalFee.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${mainN}</td>
+        <td>${D7VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
     `;
 
     tableBody.appendChild(row);
