@@ -1,0 +1,60 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+#data-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#data-table thead {
+    background-color: #0078D7;
+    color: #fff;
+}
+
+#data-table th, 
+#data-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+#data-table th {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+#data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#data-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#data-table td {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#data-table th:first-child, 
+#data-table td:first-child {
+    padding-left: 20px;
+}
+
+#data-table th:last-child, 
+#data-table td:last-child {
+    padding-right: 20px;
+}
