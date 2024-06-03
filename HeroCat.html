@@ -1082,10 +1082,8 @@
 
         async function call_SC(address, contract, divider) {
             try {
-                const result = await contract.methods.balanceOf(address).call();
-                // Ensure both operands are BigInt
-                const divisor = BigInt(10) ** BigInt(divider); // Convert 10 to BigInt and raise it to the power of divider, also converted to BigInt
-                return result / divisor; // Now both operands are BigInt, so this should work
+                const result = await contract.methods.balanceOf(address).call() / divider;
+                return result 
             } catch (error) {
                 console.error("Error calling contract method:", error);
                 throw error; // Rethrow the error for calling function to handle
