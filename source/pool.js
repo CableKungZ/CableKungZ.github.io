@@ -396,28 +396,31 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
 
     let format_swap1;
     if (swap1 < 0.000001) {
-        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 12 });
-    } else if (swap1 < 0.1) {
-        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 6 });
+        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 10 });
+    } else if (swap1 < 0.0001) {
+        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 8 });
+    } else if (swap1 < 0.001) {
+        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 7 });
+    } else if (swap1 < 0.01) {
+        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 4 });
     } else {
-        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 3 });
+        format_swap1 = swap1.toLocaleString(undefined, { maximumFractionDigits: 2 });
     }
 
     row.innerHTML = `
-        <td style="font-size: 10px;"><a target="_blank" href="${location}">${(location.split(".")[0]).replace('https://', '')}</a></td>
-        <td>${name}</td>
-        <td>${mainBalance.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${mainN}</td>
-        <td>${pairBalance.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}</td>
-        <td>${liqSize.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</td>
-        <td>${format_swap1} ${mainN}/${pairN}</td>
-        <td>${swap2.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}/${mainN}</td>
-        <td>${sumFee.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${mainN}<br>
-            ${sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}<br>
-            Total ${totalFee.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${mainN}</td>
+        <td>${name}<br><a target="_blank" href="${location}">${(location.split(".")[0]).replace('https://', '')}</a></td>
+        <td>${mainBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })} <span style="font-size:10px">${mainN}</span><br>
+        ${pairBalance.toLocaleString(undefined, { maximumFractionDigits: 2 })} <span style="font-size:10px">${pairN}</span></td>
+        <td>${liqSize.toLocaleString(undefined, { maximumFractionDigits: 2 })} <span style="font-size:10px">USD</span></td>
+        <td>${format_swap1} <span style="font-size:10px">${mainN}/${pairN}</span><br>
+        ${swap2.toLocaleString(undefined, { maximumFractionDigits: 3 })} <span style="font-size:10px">${pairN}/${mainN}</span></td>
+        <td>${sumFee.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${mainN}<br>
+            ${sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${pairN}<br>
+            Total ${totalFee.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${mainN}</td>
         <td>${VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
-        <td>${D7sumFee.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${mainN}<br>
-            ${D7sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${pairN}<br>
-            Total ${D7totalFee.toLocaleString(undefined, { maximumFractionDigits: 4 })} ${mainN}</td>
+        <td>${D7sumFee.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${mainN}<br>
+            ${D7sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${pairN}<br>
+            Total ${D7totalFee.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
         <td>${D7VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
     `;
 
