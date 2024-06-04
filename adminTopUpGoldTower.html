@@ -6,11 +6,73 @@
     <title>Add Gold</title>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
     <script src="https://unpkg.com/@wagmi/core/dist/index.js"></script>
-
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        input, textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        textarea {
+            height: 100px;
+            resize: none;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <input type="text" id="topupGold" placeholder="Enter amount of gold">
-    <button onclick="addGold()">Add Gold</button>
+    <h1></h1>
+    <div class="container" id="batchTransferSection">
+        <!-- Batch Transfer Content -->
+        <div style="text-align: center;">
+            <h2>Topup Gold </h2>
+            <input type="text" id="topupGold" placeholder="Enter amount of gold">
+            <button onclick="addGold()" style="text-align: center;">Add Gold</button>
+        </div>
+    </div>
+
+
     <script src="https://unpkg.com/@wagmi/core/dist/index.js"></script>
 
     <script>
