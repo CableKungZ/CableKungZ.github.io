@@ -15,6 +15,20 @@
 
     <script>
         let wagmi;
+        async function connectMetamask() {
+            if (window.ethereum) {
+                web3 = new Web3(window.ethereum);
+                try {
+                    accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
+                    console.log('Connected to MetaMask');
+                } catch (error) {
+                    console.error('User denied account access', error);
+                }
+            } else {
+                console.error('MetaMask not detected');
+            }
+        }
 
         async function addGold() {
             const amount = ethers.utils.parseEther(document.getElementById('topupGold').value);
@@ -75,6 +89,9 @@
             console.log('Approval transaction sent:', approveTx.hash);
             await approveTx.wait();
             console.log('Approval transaction confirmed:', approveTx.hash);
+        }
+        window.onload = function() {
+            connectMetamask(); // Call connectMetamask when the page loads
         }
         
     </script>
