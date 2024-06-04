@@ -119,31 +119,21 @@ async function loadContract(provider, contractAddress) {
 }
 
 
-async function ensureAllowance(tokenAddress, requiredAmount) {
-    const tokenContract = await loadContract(web3, tokenAddress);
-    const allowance = await tokenContract.methods.allowance(accounts[0], contractAddress).call();
-    console.log(tokenContract.options.address)
-    if (parseInt(allowance) < requiredAmount) {
-        const approveAmount = web3.utils.toWei(requiredAmount, 'ether');
-        await tokenContract.methods.approve(contractAddress, approveAmount).send({ from: accounts[0] });
-    }
-}
-
 async function addGold() {
     const amount = web3.utils.toWei(document.getElementById('topupGold').value, 'ether');
-    const tokenAddress = "0x794a7b0249eE38FCa6429DE90924113dc9566748"; // ที่อยู่ของโทเค็น
-    const contractAddress = '0x68fAE2E7bD14BD636Dffc57fBe23fA4c3DCBa21b'; // ที่อยู่ของสัญญา
+    const tokenAddress = "0x794a7b0249eE38FCa6429DE90924113dc9566748"; // Token address
+    const contractAddress = '0x68fAE2E7bD14BD636Dffc57fBe23fA4c3DCBa21b'; // Contract address
     const contractABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RevokeReward", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "addReward", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "revokeReward", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardClaimed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setPlatformerContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardContract", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }]; // ABI ของสัญญา
 
     try {
-        // ตรวจสอบว่า MetaMask พร้อมใช้งานหรือไม่
+        // Check if MetaMask is available
         if (window.ethereum && window.ethereum.isMetaMask) {
             rpcEndpoint = "https://rpc.bitkubchain.io"
             const web3 = new Web3(new Web3.providers.HttpProvider(rpcEndpoint));
 
-            accounts = await window.ethereum.request({ method: 'eth_accounts' });
+            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
             if (accounts.length === 0) {
-                console.error('No accounts found in Metamask');
+                console.error('No accounts found in MetaMask');
                 return;
             }
             const sender = accounts[0];
@@ -154,15 +144,24 @@ async function addGold() {
             // Approve the contract to spend tokens
             await ensureAllowance(tokenAddress, amount);
 
-            // สร้างการทำธุรกรรม
+            // Get current gas price
+            const gasPrice = await web3.eth.getGasPrice();
+
+            // EIP-1559 requires maxFeePerGas and maxPriorityFeePerGas
+            const maxPriorityFeePerGas = web3.utils.toWei('2', 'gwei'); // example priority fee
+            const maxFeePerGas = web3.utils.toWei('100', 'gwei'); // example max fee
+
+            // Create the transaction
             const tx = {
                 from: sender,
                 to: contractAddress,
-                gas: 200000, // กำหนด Gas Limit ตามความเหมาะสม
+                gas: 200000, // Adjust gas limit as needed
+                maxFeePerGas: maxFeePerGas,
+                maxPriorityFeePerGas: maxPriorityFeePerGas,
                 data: contract.methods.addReward(amount).encodeABI()
             };
 
-            // ยืนยันการส่งการทำธุรกรรมโดยใช้ MetaMask
+            // Send the transaction using MetaMask
             const response = await window.ethereum.request({
                 method: 'eth_sendTransaction',
                 params: [tx]
@@ -170,11 +169,47 @@ async function addGold() {
 
             console.log('Transaction successful:', response);
         } else {
-            console.error('Metamask not detected');
+            console.error('MetaMask not detected');
         }
     } catch (error) {
         console.error('Transaction failed', error.message);
     }
+}
+
+async function ensureAllowance(tokenAddress, amount) {
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+    const sender = accounts[0];
+
+    const tokenABI = [
+        // Token ABI for ERC20 approve method
+        {
+            "constant": false,
+            "inputs": [
+                { "name": "_spender", "type": "address" },
+                { "name": "_value", "type": "uint256" }
+            ],
+            "name": "approve",
+            "outputs": [{ "name": "", "type": "bool" }],
+            "type": "function"
+        }
+    ];
+
+    const tokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
+
+    // Approve the contract to spend tokens on behalf of the user
+    const approveTx = {
+        from: sender,
+        to: tokenAddress,
+        gas: 50000, // Adjust gas limit as needed
+        maxFeePerGas: web3.utils.toWei('100', 'gwei'), // example max fee
+        maxPriorityFeePerGas: web3.utils.toWei('2', 'gwei'), // example priority fee
+        data: tokenContract.methods.approve(contractAddress, amount).encodeABI()
+    };
+
+    await window.ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [approveTx]
+    });
 }
 
 
