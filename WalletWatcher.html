@@ -1856,36 +1856,25 @@ async function getBalance() {
             let transfer_tx = await getNftTransfer(walletAddress, fieldAddress, nftAddress); // ดึงข้อมูล transfer
             console.log(transfer_tx)
             for ( var log of transfer_tx) { // ใช้ for...of เพื่อวนลูป logsArray
-                var tx_hash = log.transactionHash;
-                var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
-                var response = await fetch(transaction_url);
-                var data = await response.json();
-                if (data.items) { // Loop ตรวจสอบ data จาก json
-                    for ( var item of data.items) {
-                        
-                        if (item.token.type != "ERC-20") { // ตรวจสอบ Type ERC721
-                         var itemID = item.total.token_id;
-                             var checkOwner = await contract.methods.nftStake(parseInt(itemID)).call(); // ตรวจสอบเจ้าของให้ตรงกันอีกครั้ง
-                            console.log("TYPE : ", item.token.type,"ID : ", item.total.token_id," OWNER : ",checkOwner[0])
-                            if (checkOwner[0] == walletAddress) {
-                                ownedNFTID.push(itemID); // เพิ่มเจ้าของ
-                                var getReward = 0;
-                                if (fieldName === "The Heaven Land") {
-                                    var getReward = await contract.methods.calculateRewards1(itemID).call() / 10 ** 18;
-                                    // console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
-                                } else if (fieldName === "Mech Harvest Zone") {
-                                    var getReward = await contract.methods.calculateRewards(itemID, walletAddress, "true").call() / 10 ** 18;
-                                    // console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
-                                } else {
-                                    var getReward = await contract.methods.calculateRewards(itemID).call() / 10 ** 18;
-                                    // console.log("Other Zone with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
-                                }
-
-                                // console.log("TOKEN ID: ",itemID," Reward : ",getReward);
-                                totalReward += parseInt(getReward);
-                            }
-                        }
+                const tokenId = web3.utils.hexToNumber(log.topics[3]);
+                var checkOwner = await contract.methods.nftStake(parseInt(tokenId)).call();
+                console.log("Token ",tokenId," OWNER : ",checkOwner[0])
+                if (checkOwner[0] == walletAddress) {
+                    ownedNFTID.push(tokenId); // เพิ่มเจ้าของ
+                    var getReward = 0;
+                    if (fieldName === "The Heaven Land") {
+                        var getReward = await contract.methods.calculateRewards1(tokenId).call() / 10 ** 18;
+                        // console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                    } else if (fieldName === "Mech Harvest Zone") {
+                        var getReward = await contract.methods.calculateRewards(tokenId, walletAddress, "true").call() / 10 ** 18;
+                        // console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
+                    } else {
+                        var getReward = await contract.methods.calculateRewards(tokenId).call() / 10 ** 18;
+                        // console.log("Other Zone with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                     }
+
+                    // console.log("TOKEN ID: ",itemID," Reward : ",getReward);
+                    totalReward += parseInt(getReward);
                 }
             }
             console.table(ownedNFTID);

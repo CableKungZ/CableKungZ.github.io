@@ -200,37 +200,37 @@ console.error('Error getting information:', error);
 }
 
 async function getData(name, contract, main, mainN, pair, pairN, mainUSD,location) {
-console.log(mainUSD)
-try {
-let address = contract.options.address;
-let mainBalance;
+    console.log(mainUSD)
+    try {
+    let address = contract.options.address;
+    let mainBalance;
 
-if (main.options.address === "0x0000000000000000000000000000000000000000") {
-    mainBalance = await web3.eth.getBalance(address) / 10 ** 18;
-    console.log("ETH Bal", mainBalance);
-} else {
-    mainBalance = await main.methods.balanceOf(address).call() / 10 ** 18;
-}
+    if (main.options.address === "0x0000000000000000000000000000000000000000") {
+        mainBalance = await web3.eth.getBalance(address) / 10 ** 18;
+        console.log("ETH Bal", mainBalance);
+    } else {
+        mainBalance = await main.methods.balanceOf(address).call() / 10 ** 18;
+    }
 
-let pairBalance
-if(pairN == "JASP"){
-    pairBalance = await pair.methods.balanceOf(address).call() / 10 ** 9;
-}else{
-    pairBalance = await pair.methods.balanceOf(address).call() / 10 ** 18;
-}
-const liqSize = (mainBalance * 2) * parseFloat(mainUSD);
-const swap1 = mainBalance / pairBalance;
-const swap2 = pairBalance / mainBalance;
+    let pairBalance
+    if(pairN == "JASP"){
+        pairBalance = await pair.methods.balanceOf(address).call() / 10 ** 9;
+    }else{
+        pairBalance = await pair.methods.balanceOf(address).call() / 10 ** 18;
+    }
+    const liqSize = (mainBalance * 2) * parseFloat(mainUSD);
+    const swap1 = mainBalance / pairBalance;
+    const swap2 = pairBalance / mainBalance;
 
-// Ensure contract has events.Transfer
-if (!contract || !contract.events || !contract.events.Transfer) {
-    console.error("Contract does not have Transfer event.");
-    return;
-}
+    // Ensure contract has events.Transfer
+    if (!contract || !contract.events || !contract.events.Transfer) {
+        console.error("Contract does not have Transfer event.");
+        return;
+    }
 
-const blockNumber = await web3.eth.getBlockNumber();
+    const blockNumber = await web3.eth.getBlockNumber();
 
-const transferEventSignature = web3.utils.sha3('Transfer(address,address,uint256)');
+    const transferEventSignature = web3.utils.sha3('Transfer(address,address,uint256)');
 
 
 async function getTokenTransfersToAddress(tokenAddress, fromAddress , targetAddress,previousBlock) {
@@ -281,8 +281,6 @@ async function getTokenTransfersToAddress(tokenAddress, fromAddress , targetAddr
     
     return sumToken;
 }
-
-
 async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,previousBlock) {
     const fromBlock = blockNumber - previousBlock;
     const toBlock = 'latest';
