@@ -146,7 +146,7 @@ async function field() {
         if (accounts.length === 0) {
             console.error('No accounts found!');
             return;
-        }
+        } 
         const walletAddress = accounts[0].toLowerCase();
         
         const fieldInfo = [

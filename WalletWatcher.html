@@ -1865,7 +1865,7 @@ async function getBalance() {
                     if (fieldName === "The Heaven Land") {
                         var getReward = await contract.methods.calculateRewards1(tokenId).call() / 10 ** 18;
                         // console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
-                    } else if (fieldName === "Mech Harvest Zone") {
+                    } else if (fieldName === "Mech Harvest Zone") { 
                         var getReward = await contract.methods.calculateRewards(tokenId, walletAddress, "true").call() / 10 ** 18;
                         // console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                     } else {
