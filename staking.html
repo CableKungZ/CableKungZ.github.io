@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Staking Table</title>
+    <style>
+        .table {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border: 1px solid #ddd;
+        }
+        .header, .row {
+            display: contents;
+        }
+        .row{
+            height: 250px;
+        }
+        .cell {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .header .cell {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .details {
+            display: none;
+            background-color: #f9f9f9;
+            grid-column: span 5;
+            padding: 16px;
+        }
+        .details-content {
+            display: flex;
+            justify-content: space-around;
+        }
+        .action{
+            display: flex;
+        }
+        .button{
+            margin-right: 25px;
+        }
+        .claim-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5px;
+          }
+          .add-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #2bb81e;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5px;
+          }
+          .remove-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #d30000b7;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5px;
+          }
+          .center{
+            text-align: center;
+          }
+    </style>
+</head>
+<body>
+<h1 class="center">DaoBuddy BunnyBuddy Staking</h1>
+<p>Total Staked Worth : 4,800 USD</p>
+<p>Total BB Reward : 161 BB Daily</p>
+<p>Project Pending Reward : 2,000 JDAO</p>
+<p>Allocation : 
+    <li>ProjectOwner 500 JDAO</li>
+    <li>LP 500 JDAO</li>
+    <li>BuyBack 1000 JDAO
+        <li>addLP 500 JDAO</li>
+        <li>Burn 500 JDAO</li>
+    </li>
+    
+</p>
+<div class="table">
+    <div class="header">
+        <div class="cell">Icon</div>
+        <div class="cell">Earn JBC</div>
+        <div class="cell">APRs</div>
+        <div class="cell">Total Staked</div>
+        <div class="cell">Daily Reward</div>
+    </div>
+    <div class="row">
+        <div class="cell"><img src="/images/mm/1.png" alt="Token Staking" width="45"></div>
+        <div class="cell">Stake LP JBC-CMJ</div>
+        <div class="cell">5%</div>
+        <div class="cell">4,000 JCLP</div>
+        <div class="cell">111 BB Daily</div>
+    </div>
+    <div class="details">
+        <div class="details-content">
+            <div>
+                <strong>Pool Status</strong>
+                <p><strong>Token Contract</strong></p>
+                <p><strong>Add Liquidity</strong></p>
+            </div>
+            <div class="center">
+                <strong>BunnyBuddy Earn</strong>
+                <p><strong>10.487 BB</strong></p>
+                <p class="claim-btn"><strong>Claim</strong></p>
+            </div>
+            <div>
+                <strong>Staking</strong>
+                <p><strong>Staking :</strong> 60.123 JCLP</p>
+                <div class="action">
+                    <p class="add-btn">Add</p>
+                    <p class="remove-btn">Remove</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell"><img src="/images/mm/1.png" alt="Token Staking" width="45"></div>
+        <div class="cell">Stake LP JBC-JUSDT</div>
+        <div class="cell">5%</div>
+        <div class="cell">200 JCLP</div>
+        <div class="cell">132 BB Daily</div>
+    </div>
+    <div class="details">
+        <div class="details-content">
+            <div>
+                <strong>Pool Status</strong>
+                <p><strong>Token Contract</strong></p>
+                <p><strong>Add Liquidity</strong></p>
+            </div>
+            <div class="center">
+                <strong>BunnyBuddy Earn</strong>
+                <p><strong>10.487 BB</strong></p>
+                <p class="claim-btn"><strong>Claim</strong></p>
+            </div>
+            <div>
+                <strong>Staking</strong>
+                <p><strong>Staking :</strong> 60.123 JCLP</p>
+                <div class="action">
+                    <p class="add-btn">Add</p>
+                    <p class="remove-btn">Remove</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell"><img src="/images/mm/1.png" alt="Token Staking" width="45"></div>
+        <div class="cell">Stake LP CMJ-JDAO</div>
+        <div class="cell">40%</div>
+        <div class="cell">50 JDAO-LP</div>
+        <div class="cell">12 BB Daily</div>
+    </div>
+    <div class="details">
+        <div class="details-content">
+            <div>
+                <strong>Pool Status</strong>
+                <p><strong>Token Contract</strong></p>
+                <p><strong>Add Liquidity</strong></p>
+            </div>
+            <div class="center">
+                <strong>BunnyBuddy Earn</strong>
+                <p><strong>10.487 BB</strong></p>
+                <p class="claim-btn"><strong>Claim</strong></p>
+            </div>
+            <div>
+                <strong>Staking</strong>
+                <p><strong>Staking :</strong> 60.123 JCLP</p>
+                <div class="action">
+                    <p class="add-btn">Add</p>
+                    <p class="remove-btn">Remove</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cell"><img src="/images/mm/1.png" alt="Token Staking" width="45"></div>
+        <div class="cell">Stake LP JTAO-II</div>
+        <div class="cell">7%</div>
+        <div class="cell">4,000 II-LP</div>
+        <div class="cell">6 BB Daily</div>
+    </div>
+    <div class="details">
+        <div class="details-content">
+            <div>
+                <strong>Pool Status</strong>
+                <p><strong>Token Contract</strong></p>
+                <p><strong>Add Liquidity</strong></p>
+            </div>
+            <div class="center">
+                <strong>BunnyBuddy Earn</strong>
+                <p><strong>10.487 BB</strong></p>
+                <p class="claim-btn"><strong>Claim</strong></p>
+            </div>
+            <div>
+                <strong>Staking</strong>
+                <p><strong>Staking :</strong> 60.123 JCLP</p>
+                <div class="action">
+                    <p class="add-btn">Add</p>
+                    <p class="remove-btn">Remove</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    document.querySelectorAll('.row').forEach(row => {
+        row.addEventListener('click', () => {
+            let detailsRow = row.nextElementSibling;
+            if (detailsRow.style.display === 'block') {
+                detailsRow.style.display = 'none';
+            } else {
+                detailsRow.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
