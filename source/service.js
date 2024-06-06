@@ -96,8 +96,11 @@ async function batchTransferWithFixAmount() {
     // ตรวจสอบความถูกต้องของที่อยู่ Ethereum
     const validAddresses = addresses.filter(address => /^0x[a-fA-F0-9]{40}$/.test(address));
 
-    const amountPerRecipient = web3.utils.toWei(document.getElementById('batchTransferWithFixAmount').value, 'ether');
+    const amountPerRecipientString = document.getElementById('batchTransferWithFixAmount').value;
+    const amountPerRecipient = web3.utils.toWei(amountPerRecipientString, 'ether');
+
     const totalAmount = amountPerRecipient * validAddresses.length;
+    
     
     console.log(validAddresses);
 
