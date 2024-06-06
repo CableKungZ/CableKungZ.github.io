@@ -184,7 +184,7 @@ async function getNftTransfer(walletAddress, fieldAddress, nftAddress) {
 }
 
 async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenReward, walletAddress) {
-    let fee = 0.5;
+    let fee = 0.0;
     let totalReward = 0;
     let ownedNFTID = [];
     try {
@@ -194,7 +194,7 @@ async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenRewar
         for (const log of transfer_tx) {
             const tokenId = web3.utils.hexToNumber(log.topics[3]);
             const checkOwner = await contract.methods.nftStake(tokenId).call(); 
-            if (checkOwner[0].toLowerCase() === walletAddress) {
+            if (checkOwner[0].toLowerCase() === walletAddress && !ownedNFTID.includes(tokenId)) {
                 ownedNFTID.push(tokenId); 
             }
         }

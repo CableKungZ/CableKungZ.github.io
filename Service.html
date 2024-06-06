@@ -65,14 +65,15 @@
     <div class="menu" style="text-align: center;">
         <button onclick="showSection('batchTransferSection')">Batch Transfer</button>
         <button onclick="showSection('batchTransferWithFixAmountSection')">Batch Transfer with Fixed Amount</button>
-        <button onclick="showSection('fieldtool')">Field Tool (Developing)</button>
+        <button onclick="showSection('fieldtool')">Field Tool</button>
+        <button onclick="showSection('bbfarm')">BunnyBuddy Farming (Developing)</button>
     </div>
     <div class="container" id="batchTransferSection">
         <!-- Batch Transfer Content -->
         <div style="text-align: center;">
             <h2>batchTransfer</h2>
             <p>Transfer Any Token To Multiple Wallet Address With Different Amount</p>
-            <p style="color:blue;">Tx Fee : 0.01 CMJ per target Account</p>
+            <p style="color:blue;">Current Tx Fee : 0.01 CMJ per target Account</p>
             <input type="text" id="batchTransferToken" placeholder="Token Address">
             <textarea id="batchTransferData" placeholder="Address,Amount&#10;Address,Amount&#10;..."></textarea>
             <button onclick="batchTransfer()" style="text-align: center;">Send TX</button>
@@ -83,148 +84,41 @@
         <div style="text-align: center;">
             <h2>batchTransferWithFixAmount</h2>
             <p>Transfer Any Token To Multiple Wallet Address With Same Amount</p>
-            <p style="color:blue;">Tx Fee : 0.01 CMJ per target Account</p>
+            <p style="color:blue;">Current Tx Fee : 0.01 CMJ per target Account</p>
             <input type="text" id="batchTransferWithFixAmountToken" placeholder="Token Address">
-            <textarea id="batchTransferWithFixAmountAddresses" placeholder="Addresses (comma separated)"></textarea>
+            <textarea id="batchTransferWithFixAmountAddresses" placeholder="Address1,Address2,Address3...."></textarea>
             <input type="text" id="batchTransferWithFixAmount" placeholder="Amount per Recipient">
             <button onclick="batchTransferWithFixAmount()" style="text-align: center;">Send TX</button>
         </div>
     </div>
-    <div class="container" id="fieldtool" style="display: none;">
+    <div class="container" id="fieldtool" style="display: none; width: 80%;">
         <!-- Batch Transfer with Fixed Amount Content -->
         <div style="text-align: center;">
             <h2>Field Tool</h2>
             <p>Harvest or Unstaking all nft from your field</p>
-            <p style="color:blue;">Tx Fee : 10 BunnyBuddy per Field/Claim </p>
-            <button onclick="alert('This feature under developing')" style="text-align: center;">Get Farm</button>
+            <h4>เปิดใช้งานฟรี<br>สามารถ Donation : <br>0x55A5A3305392cDC9c18bEB32f410784c6A30d115 (JBC only)</h4>
+            <div id="fieldInfo" style="display: table; width: 100%;">
+                <!-- Table Header -->
+                <div style="display: table-row;">
+                    <div style="display: table-cell; padding: 5px; border: 1px solid black;">Field</div>
+                    <div style="display: table-cell; padding: 5px; border: 1px solid black;">Staked NFTs</div>
+                    <div style="display: table-cell; padding: 5px; border: 1px solid black;">Service Fee</div>
+                    <div style="display: table-cell; padding: 5px; border: 1px solid black;">Actions</div>
+                </div>
+                <!-- Table Body -->
+                <!-- This part will be dynamically populated by JavaScript -->
+            </div>
+            
+            </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
-    <script>
-        const contractAddress = '0x137307cc671DbDaD3C8c50F492Fa921998B9b45D';
-        const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"addAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"allowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"allowTokenByIndex","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allowedTokens","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"allowedTokensCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approveToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"name":"batchTransfer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256","name":"amountPerRecipient","type":"uint256"}],"name":"batchTransferWithFixAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"consumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"isAllowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isDestroyed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isPaused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"removeAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"resumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"setFeeAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setFeeAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"setFeeToken","outputs":[],"stateMutability":"nonpayable","type":"function"}];
-
-        let web3;
-        let daoBuddyService;
-        let accounts;
-        let feeTokenAddress = '0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b';
-        let feeAmount = 0.2;
-
-        async function connectMetamask() {
-            if (window.ethereum) {
-                web3 = new Web3(window.ethereum);
-                try {
-                    accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
-                    console.log('Connected to MetaMask');
-                } catch (error) {
-                    console.error('User denied account access', error);
-                }
-            } else {
-                console.error('MetaMask not detected');
-            }
-        }
-        async function loadContract(provider, contractAddress) {
-    const response = await fetch(`https://exp-l1-ng.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
-    const jsonResult = await response.json();
-    if (jsonResult.status === '1') {
-        const jsonABI = JSON.parse(jsonResult.result);
-        return new provider.eth.Contract(jsonABI, contractAddress);
-    } else {
-        throw new Error('Failed to load contract ABI');
-    }
-}
-
-async function ensureAllowance(tokenAddress, requiredAmount, feeTokenAddress, feeAmount) {
-    const tokenContract = await loadContract(web3, tokenAddress);
-    const allowance = await tokenContract.methods.allowance(accounts[0], contractAddress).call();
-    if (parseInt(allowance) < requiredAmount) {
-        const approveAmount = web3.utils.toWei(requiredAmount, 'ether');
-        await tokenContract.methods.approve(contractAddress, approveAmount).send({ from: accounts[0] });
-    }
-
-    // Ensure allowance for fee token
-    const feeTokenContract = await loadContract(web3, feeTokenAddress);
-    const feeAllowance = await feeTokenContract.methods.allowance(accounts[0], contractAddress).call();
-    if (parseInt(feeAllowance) < feeAmount) {
-        const approveFeeAmount = web3.utils.toWei(feeAmount.toString(), 'ether');
-        await feeTokenContract.methods.approve(contractAddress, approveFeeAmount).send({ from: accounts[0] });
-    }
-}
-
-async function batchTransfer() {
-    const token = document.getElementById('batchTransferToken').value;
-    const data = document.getElementById('batchTransferData').value;
-    const rows = data.trim().split('\n'); // แยกแต่ละแถวด้วย "\n"
     
-    const addresses = [];
-    const amounts = [];
-    
-    // วนลูปผ่านแต่ละแถวของข้อมูล
-    for (const row of rows) {
-        const [address, amount] = row.split(','); // แยก address และ amount ด้วย ","
-        addresses.push(address.trim()); // เพิ่ม address เข้าไปในอาร์เรย์ addresses
-        amounts.push(amount.trim()); // เพิ่ม amount เข้าไปในอาร์เรย์ amounts
-    }
 
-    try {
-        // Ensure allowance for fee token
-        await ensureAllowance(feeTokenAddress, feeAmount * addresses.length, feeTokenAddress, feeAmount);
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="source/service.js"></script>
 
-        // Ensure allowance for the specified token
-        const totalAmount = amounts.reduce((acc, amount) => acc + parseInt(amount), 0);
-        await ensureAllowance(token, totalAmount, feeTokenAddress, feeAmount);
-
-        await daoBuddyService.methods.batchTransfer(token, addresses, amounts).send({ from: accounts[0] });
-        console.log('Transaction successful');
-    } catch (error) {
-        console.error('Transaction failed', error);
-    }
-}
-
-
-async function batchTransferWithFixAmount() {
-    const token = document.getElementById('batchTransferWithFixAmountToken').value;
-    const addresses = document.getElementById('batchTransferWithFixAmountAddresses').value.split(',');
-    const amountPerRecipient = web3.utils.toWei(document.getElementById('batchTransferWithFixAmount').value, 'ether');
-    const totalAmount = amountPerRecipient * addresses.length;
-
-    try {
-        // Ensure allowance for fee token
-        await ensureAllowance(feeTokenAddress, feeAmount * addresses.length, feeTokenAddress, feeAmount);
-
-        // Ensure allowance for the specified token
-        await ensureAllowance(token, totalAmount, feeTokenAddress, feeAmount);
-
-        await daoBuddyService.methods.batchTransferWithFixAmount(token, addresses, amountPerRecipient).send({ from: accounts[0] });
-        console.log('Transaction successful');
-    } catch (error) {
-        console.error('Transaction failed', error);
-    }
-}
-
-
-
-
-        // Your previous JavaScript code here
-
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.container');
-    sections.forEach(section => {
-        if (section.id === sectionId) {
-            section.style.display = 'block';
-        } else {
-            section.style.display = 'none';
-        }
-    });
-}
-
-window.onload = function() {
-    connectMetamask(); // Call connectMetamask when the page loads
-    showSection('batchTransferSection'); // Show the default section
-}
-
-    </script>
 </body>
 </html>
