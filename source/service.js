@@ -97,9 +97,8 @@ async function batchTransferWithFixAmount() {
     const validAddresses = addresses.filter(address => /^0x[a-fA-F0-9]{40}$/.test(address));
 
     const amountPerRecipientString = document.getElementById('batchTransferWithFixAmount').value;
-    const amountPerRecipient = web3.utils.toWei(amountPerRecipientString, 'ether');
 
-    const totalAmount = amountPerRecipient * validAddresses.length;
+    const totalAmount = amountPerRecipientString * validAddresses.length;
     
     
     console.log(validAddresses);
@@ -107,7 +106,7 @@ async function batchTransferWithFixAmount() {
     try {
         await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
         await ensureAllowance(token, totalAmount, feeTokenAddress, feeAmount);
-        await daoBuddyService.methods.batchTransferWithFixAmount(token, validAddresses, amountPerRecipient).send({ from: accounts[0] });
+        await daoBuddyService.methods.batchTransferWithFixAmount(token, validAddresses, web3.utils.toWei(amountPerRecipientString, 'ether')).send({ from: accounts[0] });
         console.log('Transaction successful');
     } catch (error) {
         console.error('Transaction failed', error);
