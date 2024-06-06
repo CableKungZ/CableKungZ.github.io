@@ -14,6 +14,72 @@ let FieldTHL
 let MHZField
 let VbagField
 
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.container');
+    sections.forEach(section => {
+    if (section.id === sectionId) {
+        section.style.display = 'block';
+    } else {
+        section.style.display = 'none';
+    }
+    });
+    }
+
+async function switchToChain(chainId) {
+    if (window.ethereum) {
+        try {
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: `0x${chainId.toString(16)}` }],
+            });
+            console.log('Switched to chain with ID:', chainId);
+        } catch (error) {
+            console.error('Error switching chain:', error);
+            alert('Error switching chain:', error);
+        }
+    } else {
+        console.error('MetaMask not detected');
+        alert('MetaMask not detected');
+    }
+    window.location.reload();
+}
+
+async function connectMetamask() {
+    if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        try {
+            const currentChainId = await web3.eth.getChainId();
+            console.log(currentChainId)
+            if (currentChainId != 8899) {
+                await switchToChain(8899);
+                return; // End the function if switching networks
+            }
+            
+            accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
+            console.log('Connected to MetaMask', accounts[0]);
+        } catch (error) {
+            console.error('User denied account access', error);
+            alert('User denied account access', error);
+        }
+    } else {
+        console.error('MetaMask not detected');
+        alert('MetaMask not detected');
+    }
+    main()
+
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
+    await connectMetamask();
+});
+
+
+function main(){
+    showSection('fieldtool'); 
+    daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
+    field();
+    
 async function loadContract(provider, contractAddress) {
     const response = await fetch(`https://exp-l1-ng.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
     const jsonResult = await response.json();
@@ -24,24 +90,6 @@ async function loadContract(provider, contractAddress) {
     throw new Error('Failed to load contract ABI');
     }
 }
-
-
-
-async function connectMetamask() {
-    if (window.ethereum) {
-        web3 = new Web3(window.ethereum);
-        try {
-            accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-            daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
-            console.log('Connected to MetaMask ',accounts[0]);
-        } catch (error) {
-            console.error('User denied account access', error);
-        }
-    } else {
-        console.error('MetaMask not detected');
-    }
-}
-
 
 async function ensureAllowance(tokenAddress, requiredAmount, feeTokenAddress, feeAmount) {
 const tokenContract = await loadContract(web3, tokenAddress);
@@ -115,22 +163,9 @@ async function batchTransferWithFixAmount() {
 
 
 
-function showSection(sectionId) {
-const sections = document.querySelectorAll('.container');
-sections.forEach(section => {
-if (section.id === sectionId) {
-    section.style.display = 'block';
-} else {
-    section.style.display = 'none';
-}
-});
-}
 
-window.onload = function() {
-connectMetamask(); // Call connectMetamask when the page loads
-field();
-showSection('fieldtool'); // Show the default section
-}
+
+
 
 
 
@@ -339,4 +374,6 @@ async function batchUnstaking(tokenIDs, isMechHarvestZone, contract, accounts) {
     } catch (error) {
         console.error(`Error in batch unstaking:`, error);
     }
+}
+
 }
