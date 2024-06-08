@@ -10,7 +10,7 @@ function showNotification(message, link) {
 
     var linkElement = document.createElement('a');
     linkElement.href = link;
-    linkElement.textContent = 'Click here';
+    linkElement.textContent = link;
     linkElement.target = '_blank';
     popup.appendChild(linkElement);
 
