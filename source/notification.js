@@ -27,5 +27,5 @@ function showNotification(message, link) {
         if (popup.parentNode) {
             container.removeChild(popup);
         }
-    }, 5000);
+    }, 2000);
 }
