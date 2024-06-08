@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification Popup</title>
-    <link rel="stylesheet" href="source/notification.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <button onclick="showNotification('Transaction confirm at', 'https://example.com')">Show Notification</button>
 
-    <div id="notification-popup" class="notification hidden">
-        <span id="notification-message"></span>
-        <a id="notification-link" href="#" target="_blank">Click here</a>
-        <button onclick="closeNotification()">Close</button>
-    </div>
+    <div id="notifications-container"></div>
 
-    <script src="source/notification.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
