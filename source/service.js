@@ -51,13 +51,15 @@ async function connectMetamask() {
             const currentChainId = await web3.eth.getChainId();
             console.log(currentChainId)
             if (currentChainId != 8899) {
+                showNotification(`Detected Wrong Chain ID ..... please confirm change ChainID`);
                 await switchToChain(8899);
-                return; // End the function if switching networks
+                return; 
             }
             
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
             console.log('Connected to MetaMask', accounts[0]);
+            showNotification(`Connected to Metamask ${accounts[0]}`)
         } catch (error) {
             console.error('User denied account access', error);
             alert('User denied account access', error);
@@ -355,6 +357,7 @@ async function ClaimAll(fieldName, ownedNFTID, isMechHarvestZone, contract, acco
             }
 
             console.log(`Batch Claim All NFTs in ${fieldName} successfully.`);
+            showNotification(`Claim All NFTS in ${fieldName} Successfully`)
         } else {
             console.error(`Error claiming NFTs in ${fieldName}: ownedNFTID is not an array`);
         }

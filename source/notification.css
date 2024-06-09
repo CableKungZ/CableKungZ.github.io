@@ -22,6 +22,8 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    position: relative;
+    overflow: hidden;
 }
 
 .notification a {
@@ -44,4 +46,13 @@ body {
 
 .notification button:hover {
     background-color: #777;
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background-color: #ff1e9a;
+    transition: width 0.5s linear;
 }
