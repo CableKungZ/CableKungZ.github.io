@@ -348,7 +348,10 @@ async function ClaimAll(fieldName, ownedNFTID, isMechHarvestZone, contract, acco
 
             for (let i = 0; i < ownedNFTID.length; i += batchSize) {
                 const batchTokenIDs = ownedNFTID.slice(i, i + batchSize);
-                await batchClaim(batchTokenIDs, isMechHarvestZone, contract, accounts);
+                if(fieldName == "Mech Harvest Zone"){
+                await batchClaim(batchTokenIDs, true, contract, accounts);
+                }else
+                await batchClaim(batchTokenIDs, false, contract, accounts);
             }
 
             console.log(`Batch Claim All NFTs in ${fieldName} successfully.`);
@@ -367,7 +370,11 @@ async function UnstakingAll(fieldName, ownedNFTID, isMechHarvestZone, contract, 
 
             for (let i = 0; i < ownedNFTID.length; i += batchSize) {
                 const batchTokenIDs = ownedNFTID.slice(i, i + batchSize);
-                await batchUnstaking(batchTokenIDs, isMechHarvestZone, contract, accounts);
+                if(fieldName == "Mech Harvest Zone"){
+                    await batchUnstaking(batchTokenIDs, true, contract, accounts);
+                }else
+                    await batchUnstaking(batchTokenIDs, false, contract, accounts);
+                
             }
 
             console.log(`Batch Unstaking All NFTs in ${fieldName} successfully.`);
@@ -382,11 +389,16 @@ async function UnstakingAll(fieldName, ownedNFTID, isMechHarvestZone, contract, 
 async function batchClaim(tokenIDs, isMechHarvestZone, contract, accounts) {
     try {
         const batchTransactions = [];
+        console.log(isMechHarvestZone);
 
         for (const tokenID of tokenIDs) {
-            const tx = isMechHarvestZone ?
-                contract.methods.unstake(tokenID, true, false).send({ from: accounts[0] }) :
-                contract.methods.unstake(tokenID, false).send({ from: accounts[0] });
+            let tx;
+            if(isMechHarvestZone){
+                tx = contract.methods.unstake(tokenID, true, false).send({ from: accounts[0] }); 
+            }else{
+                tx = contract.methods.unstake(tokenID, false).send({ from: accounts[0] });
+
+            }
             batchTransactions.push(tx);
         }
 
@@ -401,9 +413,13 @@ async function batchUnstaking(tokenIDs, isMechHarvestZone, contract, accounts) {
         const batchTransactions = [];
 
         for (const tokenID of tokenIDs) {
-            const tx = isMechHarvestZone ?
-                contract.methods.unstake(tokenID, true, true).send({ from: accounts[0] }) :
-                contract.methods.unstake(tokenID, true).send({ from: accounts[0] });
+            let tx;
+            console.log(isMechHarvestZone);
+            if (isMechHarvestZone) {
+                tx = contract.methods.unstake(tokenID, true, true).send({ from: accounts[0] });
+            } else {
+                tx = contract.methods.unstake(tokenID, true).send({ from: accounts[0] });
+            }
             batchTransactions.push(tx);
         }
 
@@ -412,5 +428,6 @@ async function batchUnstaking(tokenIDs, isMechHarvestZone, contract, accounts) {
         console.error(`Error in batch unstaking:`, error);
     }
 }
+
 
 }
