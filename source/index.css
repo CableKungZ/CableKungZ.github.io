@@ -86,6 +86,24 @@
       .join-btn:hover {
         background-color: #0056b3;
       }
+      .chain-btn {
+        display: block;
+        width: 25%;
+        max-width: 250px;
+        padding: 10px;
+        margin-right: 30px;
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 15px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 15px;
+      }
+    
+      .chain-btn:hover {
+        background-color: #0056b3;
+      }
       .token-price h1, .token-price h2 {
         font-size: 24px;
         margin-bottom: 20px;
@@ -128,7 +146,6 @@
       label{width: 150px;}
       
       .card {
-          z-index: 999; /* Adjust the value as needed */
           margin: 10px;
           padding: 20px;
           border: 2px solid #3498db;
@@ -151,7 +168,6 @@
           margin-bottom: 5px; /* Adjust as needed */
       }
       .card-long {
-          z-index: 999; /* Adjust the value as needed */
           margin: 10px;
           padding: 20px;
           border: 2px solid #3498db;
