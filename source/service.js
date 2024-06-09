@@ -158,6 +158,7 @@ async function batchTransferWithFixAmount() {
         console.log('Transaction successful');
     } catch (error) {
         console.error('Transaction failed', error);
+        
     }
 }
 
