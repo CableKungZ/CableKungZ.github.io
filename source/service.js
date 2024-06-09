@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 
+
 function main(){
     showSection('fieldtool'); 
     daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
@@ -88,6 +89,41 @@ async function loadContract(provider, contractAddress) {
     return new provider.eth.Contract(jsonABI, contractAddress);
     } else {
     throw new Error('Failed to load contract ABI');
+    }
+}
+const input1 = document.querySelectorAll("#batchTransferWithFixAmountToken");
+const input2 = document.querySelectorAll("#batchTransferToken");
+
+input1.forEach(input => {
+    input.addEventListener("input", () => checkToken(1));
+});
+input2.forEach(input => {
+    input.addEventListener("input", () => checkToken(2));
+});
+
+async function checkToken(tokenLocation) {
+    let tokenAddress;
+    let allowID;
+    if (tokenLocation == 1) {
+        tokenAddress = document.getElementById("batchTransferWithFixAmountToken").value;
+        allowID = "allowToken1";
+    } else {
+        tokenAddress = document.getElementById("batchTransferToken").value;
+        allowID = "allowToken2";
+    }
+
+    try {
+        const isAllow = await daoBuddyService.methods.allowToken(tokenAddress).call();
+        if (isAllow) {
+            const tokenContract = await loadContract(web3, tokenAddress);
+            const tokenName = await tokenContract.methods.symbol().call();
+            document.getElementById(allowID).innerHTML = `${tokenName} Token is Allow`;
+        } else {
+            document.getElementById(allowID).innerHTML = "Token is not allowed";
+        }
+    } catch (error) {
+        console.error("Error checking token:", error);
+        document.getElementById(allowID).innerHTML = "Error checking token";
     }
 }
 
