@@ -21,13 +21,10 @@ async function checkConnection() {
         web3 = new Web3(providerUrl);
 
         try {
-            // Try getting the latest block number
             const blockNumber = await web3.eth.getBlockNumber();
             console.log(`Connected to provider: ${providerUrl}. Latest block number: ${blockNumber}`);
-            
-            // Initialize contracts after successful connection
             initializeContracts();
-            return; // Exit the loop if connection is successful
+            return; 
         } catch (error) {
             console.error(`RPC ERROR with provider: ${providerUrl}`, error);
             
