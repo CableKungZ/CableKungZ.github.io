@@ -346,7 +346,7 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
 }
 
 
-    let sumFee, sumFee_2, totalFee,VolumeTrade;
+    let sumFee, sumFee_2, totalFee,VolumeTrade,VolumeTrade2;
     if (main.options.address === "0x0000000000000000000000000000000000000000") {
         [sumFee, sumFee_2] = await Promise.all([
             getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'to',6700),
@@ -356,6 +356,7 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
         sumFee_2 *= 1 / 99;
         totalFee = sumFee + (sumFee_2 * swap1);
         VolumeTrade = totalFee / 0.01;
+        VolumeTrade2 = VolumeTrade * swap2;
         console.log("Volume Trade :",VolumeTrade)
     } else {
         [sumFee, sumFee_2] = await Promise.all([
@@ -366,9 +367,10 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
         sumFee_2 *= 0.25;
         totalFee = sumFee + (sumFee_2 * swap1);
         VolumeTrade = totalFee / 0.01;
+        VolumeTrade2 = VolumeTrade * swap2
         console.log("Volume Trade :",VolumeTrade)
     }
-    let D7sumFee, D7sumFee_2, D7totalFee,D7VolumeTrade;
+    let D7sumFee, D7sumFee_2, D7totalFee,D7VolumeTrade,D7VolumeTrade2;
     if (main.options.address === "0x0000000000000000000000000000000000000000") {
         [D7sumFee, D7sumFee_2] = await Promise.all([
             getTokenTransfersToAddress2(pair.options.address, contract.options.address, 'to',(6700*7)),
@@ -378,6 +380,7 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
         D7sumFee_2 *= 1 / 99;
         D7totalFee = D7sumFee + (D7sumFee_2 * swap1);
         D7VolumeTrade = D7totalFee / 0.01;
+        D7VolumeTrade2 = D7VolumeTrade*swap2;
         console.log("Volume Trade :",D7VolumeTrade)
     } else {
         [D7sumFee, D7sumFee_2] = await Promise.all([
@@ -388,6 +391,8 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
         D7sumFee_2 *= 0.25;
         D7totalFee = D7sumFee + (D7sumFee_2 * swap1);
         D7VolumeTrade = D7totalFee / 0.01;
+        D7VolumeTrade2 = D7VolumeTrade*swap2;
+
         console.log("Volume Trade :",D7VolumeTrade)
     }
 
@@ -418,11 +423,17 @@ async function getTokenTransfersToAddress2(tokenAddress, targetAddress, events,p
         <td>${sumFee.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${mainN}<br>
             ${sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${pairN}<br>
             Total ${totalFee.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${mainN}</td>
-        <td>${VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
+        <td>
+            ~${VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}<br>or<br>
+            ~${parseFloat(VolumeTrade2).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${pairN}
+        </td>
         <td>${D7sumFee.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${mainN}<br>
             ${D7sumFee_2.toLocaleString(undefined, { maximumFractionDigits: 3 })} ${pairN}<br>
             Total ${D7totalFee.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
-        <td>${D7VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}</td>
+        <td>
+            ~${D7VolumeTrade.toLocaleString(undefined, { maximumFractionDigits: 2 })} ${mainN}<br>or<br>
+            ~${parseFloat(D7VolumeTrade2).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${pairN}
+        </td>
     `;
 
     tableBody.appendChild(row);

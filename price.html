@@ -4,11 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test</title>
+  <link rel="stylesheet" href="source/index.css">
+
 </head>
 <body>
-    
+    <div  id="priceBoard" class="container mt-5" >
+        <div class="center">
+          <h2>Chain Selector</h2>
+          <div style="display:flex;justify-content: center;">
+            <p class="chain-btn" onclick='showPrice("bkc")'>BKC</p>
+            <p class="chain-btn" onclick='showPrice("jbc")'>JBC</p>
+            <p class="chain-btn" onclick='showPrice("op")'>OP</p>
+            <p class="chain-btn" onclick='showPrice("bbq")'>BBQ</p>
+          </div>
+        </div>
+          <div>
+          <div id="updatedMessage">Updated</div>
+          <div id="countdown" style="display:block;">Countdown</div>
+      
+            <div id="jbc_priceboard">
+              <h2 class="center">JBC's Chain Price Board</h2>
+              <div class="token-price">
+
+                  <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
+                    <br>Buy <span id="B-cmjToJbc"> </span> CMJ , <span id="B-usdToJbc"> </span> USD, <span id="B-thbToJbc"> </span> THB<br>
+                    Sell  <span id="S-cmjToJbc"> </span> CMJ , <span id="S-usdToJbc"> </span> USD, <span id="S-thbToJbc"> </span> THB</h4>
+                      <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
+                          <br>Buy <span id="B-jbcToCmj"> </span> JBC , <span id="B-usdToCmj"> </span> USD , <span id="B-thbToCmj"> </span> THB<br>
+                          Sell  <span id="S-jbcToCmj"> </span> JBC , <span id="S-usdToCmj"> </span> USD , <span id="S-thbToCmj"> </span> THB</h4>
+
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
+                          <br>Buy <span id="B-cmjToMeow"> </span> CMJ , <span id="B-usdToMeow"> </span> USD, <span id="B-thbToMeow"> </span> THB<br>
+                          Sell  <span id="S-cmjToMeow"> </span> CMJ , <span id="S-usdToMeow"> </span> USD, <span id="S-thbToMeow"> </span> THB</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
+                          <br>Buy/Sell <span id="cmjToTao"> </span> CMJ , <span id="usdToTao"> </span> USD, <span id="thbToTao"> </span> THB<br>
+                          <h4><img src="https://cloudflare-ipfs.com/ipfs/bafkreif3vllg6mwswlqypqgtsh7i7wwap7zgrkvtlhdjoc63zjm7uv6vvi" alt="$USD" width="20" height="20">USD </a>*0%  : 
+                          <br>Buy/Sell <span id="thbUsd"> </span> THB/USD <br>
+                    </div>
+                    <h2 class="center">MATERIALS </h2>
+                    <div class="token-price">
+                      <h4><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Wood</a>*0%   : 
+                        <br>Buy <span id="B-Wood"> </span> CMJ<br>
+                        Sell  <span id="S-Wood"> </span> CMJ</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20"><a href="https://meowneon.app/swapmeowtuna"  target="_blank">Tuna</a>*0%  : 
+                          <br>Buy/Sell <span id="priceB5"> </span> CMJ<br>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20"><a href="https://meowneon.app/swapmeowmice"  target="_blank">Mice</a>*0%  : 
+                          <br>Buy/Sell <span id="priceB6"> </span> CMJ<br>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Copper</a>*5%  : 
+                          <br>Buy <span id="B-Cu"> </span> CMJ<br>
+                          Sell  <span id="S-Cu"> </span> CMJ</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JASPER</a>*5%  : 
+                          <br>Buy <span id="B-Jasp"> </span> CMJ<br>
+                          Sell  <span id="S-Jasp"> </span> CMJ</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">OS</a>*5%  : 
+                          <br>Buy <span id="B-Os"> </span> CMJ<br>
+                          Sell  <span id="S-Os"> </span> CMJ</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JDAO</a>*5%  : 
+                          <br>Buy <span id="B-Jdao"> </span> CMJ<br>
+                          Sell  <span id="S-Jdao"> </span> CMJ</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20"><a href="https://meowneon.app/swapmeowmt"  target="_blank">MT</a>*0%  : 
+                          <br>Buy/Sell <span id="priceB16"> </span> CMJ<br>
+                        <h4><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">ANGB</a>*5%  : 
+                          <br>Buy <span id="B-cmjToAngb"> </span> CMJ,<span id="B-jbcToAngb"> </span> WJBC<br>
+                          Sell  <span id="S-cmjToAngb"> </span> CMJ,<span id="S-jbcToAngb"> </span> WJBC</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">II</a>*5%  : 
+                          <br>Buy <span id="B-cmjToII"> </span> CMJ,<span id="B-taoToII"> </span> JTAO<br>
+                          Sell  <span id="S-cmjToII"> </span> CMJ,<span id="S-taoToII"> </span> JTAO</h4>
+                        <h4><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">EE</a>*5%  : 
+                          <br>Buy <span id="B-cmjToEE"> </span> CMJ,<span id="B-taoToEE"> </span> JTAO<br>
+                          Sell  <span id="S-cmjToEE"> </span> CMJ,<span id="S-taoToEE"> </span> JTAO</h4>
+                    </div> 
+                    <h2 class="center">PRODUCT</h2>
+                    <div class="token-price">
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">BBQ</a>*5%  : <br>
+                      Buy <span id="B-Bbq"> </span> CMJ<br>
+                      Sell  <span id="S-Bbq"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Pizza</a>*5%  : <br>
+                      Buy <span id="B-Pza"> </span> CMJ<br>
+                      Sell  <span id="S-Pza"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">CTUNA</a>*5%  : <br>
+                      Buy <span id="B-Ctuna"> </span> CMJ<br>
+                      Sell  <span id="S-Ctuna"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SX31</a>*5%  : <br>
+                      Buy <span id="B-Sx31"> </span> CMJ<br>
+                      Sell  <span id="S-Sx31"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20"><a href="https://meowneon.app/swapmeowsil"  target="_blank">Silver</a>*5%  : <br>
+                      Buy <span id="B-Silver"> </span> CMJ<br>
+                      Sell  <span id="S-Silver"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20"><a href="https://meowneon.app/swapmeowgold"  target="_blank">Gold</a>*5%  : <br>
+                      Buy <span id="B-Gold"> </span> CMJ<br>
+                      Sell  <span id="S-Gold"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :<br>
+                      Buy <span id="B-Plat"> </span> CMJ<br>
+                      Sell <span id="S-Plat"> </span> CMJ</h4>
+                    <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : <br>
+                      Buy <span id="B-cmjToSwar"> </span> CMJ, <span id="B-jbcToSwar"> </span> JBC<br>
+                      Sell  <span id="S-cmjToSwar"> </span> CMJ,<span id="S-jbcToSwar"> </span> JBC</h4>
+                    </div>
+              </div>
+
+            </div>
+                <!------------------------------ END PRICE BOARD OF JBC         --------------------------------------------->
+            
+            <div id="bkc_priceboard" style="display:none;">
+              <h2 class="center">BKC's Chain Price Board</h2>
+              <div class="token-price">
+                  <h4><img src="https://app.diamon.finance/images/coins/kub.png" alt="" width="20" height="20"><a href="" target="_blank">KUB </a>*1%  :
+                      <br><span id="kkub-priceUsd">..</span> USD<br>
+                      <span id="kkub-priceTHB">..</span> THB<br>
+                  <h4><img src="https://exchange.diamon.finance/images/coins/0x9B005000A10Ac871947D99001345b01C1cEf2790.png" alt="" width="20" height="20"><a href="" target="_blank">CMM </a>*1%  :
+                      <br><span id="cmm-priceKkub">..</span> KKUB<br>
+                      <span id="cmm-priceUsd">..</span> USD<br>
+                      <span id="cmm-priceTHB">..</span> THB<br>
+                  <h4><img src="https://gateway.pinata.cloud/ipfs/bafkreidcxukia62wzaaes6wpsdgpw3yjshrjm7nwijwldxdthkepsebumq" alt="" width="20" height="20"><a href="" target="_blank">CMOS </a>*1%  :
+                      <br>
+                      <span id="cmos-priceKkub">..</span> KKUB<br>
+                      <span id="cmos-priceUsd">..</span> USD<br>
+                      <span id="cmos-priceTHB">..</span> THB<br>
+                      
+      
+                </div>
+            </div>
+                <!------------------------------ END PRICE BOARD OF BKC         --------------------------------------------->
+      
+            <div id="op_priceboard" style="display:none;">
+              <h2 class="center">OP's Chain Price Board</h2>
+              <div class="token-price">
+                  <h4><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png" alt="" width="20" height="20"><a href="" target="_blank">WETH </a>  :
+                      <br><span id="weth-priceUsd">..</span> USD , <span id="weth-priceTHB">..</span> THB<br>
+                  <h4><img src="https://optimistic.etherscan.io/token/images/commudao_32.png" alt="" width="20" height="20"><a href="" target="_blank">CMD </a>*0.3%  :
+                      <br><span id="cmd-priceWeth">..</span> WETH,<span id="cmd-priceUsd">..</span> USD , <span id="cmd-priceTHB">..</span> THB<br>
+                      <br>x80<br><span id="cmd-priceWethx80">..</span> WETH,<span id="cmd-priceUsdx80">..</span> USD , <span id="cmd-priceTHBx80">..</span> THB<br>
+              </div>
+            </div>
+                <!------------------------------ END PRICE BOARD OF OP         --------------------------------------------->
+      
+            <div id="bbq_priceboard" style="display:none;">
+              <h2 class="center">BBQ's Chain Price Board</h2>
+              <div class="token-price">
+                  <h4><img src="https://optimistic.etherscan.io/token/images/commudao_32.png" alt="CMM" width="20" height="20"><a href="" target="_blank">CMD </a>*1%  :
+                      <br><span id="bbq_cmd-priceWeth">..</span> WETH,<span id="bbq_cmd-priceUsd">..</span> USD , <span id="bbq_cmd-priceTHB">..</span> THB<br>
+              </div>
+            </div>
+                <!------------------------------ END PRICE BOARD OF BBQ         --------------------------------------------->
+      
+            
+            </div>
 </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
     <script src="source/price.js"></script>
+    <script>
+      function showPrice(chain) {
+        const boards = ['jbc', 'bkc', 'op', 'bbq'];
+        boards.forEach(board => {
+          document.getElementById(board + '_priceboard').style.display = 'none';
+        });
+        document.getElementById(chain + '_priceboard').style.display = 'block';
+      }
+      function showFac(chain) {
+        const boards = ['jbc', 'bkc', 'op', 'bbq'];
+        boards.forEach(board => {
+          document.getElementById(board + '_farm').style.display = 'none';
+        });
+        document.getElementById(chain + '_farm').style.display = 'block';
+      }
+      function showDun(chain) {
+        const boards = ['jbc', 'bkc', 'op', 'bbq'];
+        boards.forEach(board => {
+          document.getElementById(board + '_dun').style.display = 'none';
+        });
+        document.getElementById(chain + '_dun').style.display = 'block';
+      }
+    </script>    
 </html>
