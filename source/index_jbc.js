@@ -712,11 +712,13 @@ powerInputs.forEach(input => {
             PoolData = await HouseStaking.methods.poolInfo(1).call();
             totalPower = parseFloat(PoolData[1]);
             rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() /10**18;
+            multiplier = await HouseStaking.methods.BONUS_MULTIPLIER().call();
+            console.log("Current House Multipiler ",multiplier);
+            document.getElementById("housemultiply").innerHTML = `*${multiplier}`;
             
             document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
 
             RewardDebt = (1 * 10) / (10**12);
-            multiplier = 2 ;
             rewardPerBlock = 140000000000000000 ; //(0.14)
             poolAllocPoint = 10;
             totalAllocPoint = 13;
