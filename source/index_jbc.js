@@ -714,6 +714,7 @@ powerInputs.forEach(input => {
             rewardPerBlock = await HouseStaking.methods.rewardPerBlock().call() /10**18;
             multiplier = await HouseStaking.methods.BONUS_MULTIPLIER().call();
             console.log("Current House Multipiler ",multiplier);
+            document.getElementById("housemultiply").innerHTML = `*${multiplier}`;
             
             document.getElementById("TotalPower").innerHTML = (totalPower.toLocaleString(undefined,{maximumFractionDigits:0}));
 
