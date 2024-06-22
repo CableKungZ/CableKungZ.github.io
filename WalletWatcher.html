@@ -1864,16 +1864,11 @@ async function getBalance() {
                     var getReward = 0;
                     if (fieldName === "The Heaven Land") {
                         var getReward = await contract.methods.calculateRewards1(tokenId).call() / 10 ** 18;
-                        // console.log("Heaven Land with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                     } else if (fieldName === "Mech Harvest Zone") { 
                         var getReward = await contract.methods.calculateRewards(tokenId, walletAddress, "true").call() / 10 ** 18;
-                        // console.log("Mech Harvest Zone With ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                     } else {
                         var getReward = await contract.methods.calculateRewards(tokenId).call() / 10 ** 18;
-                        // console.log("Other Zone with ","TYPE : ", item.token.type,"ID : ", item.total.token_id," Reward ",getReward);
                     }
-
-                    // console.log("TOKEN ID: ",itemID," Reward : ",getReward);
                     totalReward += parseInt(getReward);
                 }
             }
@@ -1999,6 +1994,7 @@ function startHistory(){
               logs.forEach(function(log) {
                   var tx_hash = log.transactionHash;
                   var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                  console.log(transaction_url)
                   fetch(transaction_url)
                       .then(response => response.json())
                       .then(data => process_token_transfers(data, tx_hash,'purchaseTableBody', symbolSums)) // ส่ง symbolSums เป็นอาร์กิวเมนต์ให้กับฟังก์ชั่น process_token_transfers
