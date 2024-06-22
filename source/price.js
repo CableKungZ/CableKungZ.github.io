@@ -6,7 +6,7 @@ showNotification("Loading Price Board........")
 let taoToUsd;
 let thbToUsd;
 let kubToUsd;
-
+let usdToWeth;
 async function setFiatAndTaoPrice(){
     try {
         const exchangeRateResponse = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
@@ -39,7 +39,7 @@ async function setFiatAndTaoPrice(){
 
         let usdToWeth;
         pools3.forEach(pool => {
-            if (pool.id === 'optimism_0x1e60272cadcfb575247a666c11dbea146299a2c4') {
+            if (pool.id === 'optimism_0x1fb3cf6e48f1e7b10213e7b6d87d4c073c7fdb7b') {
                 usdToWeth = parseFloat(pool.attributes.token_price_usd);
             }
         });
