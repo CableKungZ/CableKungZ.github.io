@@ -1371,8 +1371,6 @@ async function getBalance() {
 
    var CMDAO_NFT = loadContract('0x20724DC1D37E67B7B69B52300fDbA85E558d8F9A');
    var NRT_NFT = loadContract('0x5E620D8980335167d9eF36cEf5d9A6Ea6607a8Cb');
-  //** TOKEN 
-
 
   try {
      var jbcBalWei = await web3.eth.getBalance(walletAddress) / (10**18);
