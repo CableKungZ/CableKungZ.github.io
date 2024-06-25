@@ -12,7 +12,7 @@
     <div class="container">
         <h1>BunnyBuddy</h1>
         <p class="center">Contract : <a class="text-box" onclick="copy('0x0000000000000000000000000000000000000000')">0x0000000000000000000000000000000000000000</a></p>
-
+        <div id="tooltip"></div>
         <div class="flex flex-container" style="justify-content: space-around;">
             <p class="bubble">Current Supply: <span> 555,555</span> BB</p>
             <p class="bubble">Current Price: <span>Infinity CMJ</span></p>
@@ -30,8 +30,8 @@
             <div class="grid-item header">Details</div>
             <div class="grid-item header">Quota</div>
             <!-- ROW 1 -->
-            <div class="grid-item">1</div>
-            <div class="grid-item">7,000 CU / BB</div>
+            <div class="grid-item">1 <span class="green bold">Active</span></div>
+            <div class="grid-item">7,000 CU / 1 BB</div>
             <div class="grid-item">10,000 BB</div>
             <!-- ROW 1 -->
             <div class="grid-item">2</div>
@@ -46,7 +46,7 @@
         <div class="swap">
             <div>
                 <label for="buy" class="form-label center">Spent</label>
-            <input type="number" id="buy" class="form-control mb-3" min="0" placeholder="token buy amount">
+            <input type="number" id="buy" class="form-control mb-3" min="0" max="7000000" placeholder="token buy amount">
             </div>
             <div>
                 <a class="btn-buy">BUY !!</a>
@@ -61,19 +61,76 @@
             <h1>Gashapon <span class="red">(Stay Tuned)</span></h1>
                 <div class="gashapontent">
                         <div class="gashapon">
-                            <h3>Bunny Eggs (BB) <img src="./img/info_icon.png" width="25px"></h3>
+                            <h3>Bunny Eggs (BB) <img src="./img/info_icon.png" width="25px" onclick='showdPopup("gashapon1")'></h3>
                             <p>Price : 888 BB / Boxes</p>
                             <p>Remaining : 100 Boxes</p>
                             <img src="./img/gashapon.png" width="150px">
                             <p class="btn">Open Now !!</p>
                         </div>
                         <div class="gashapon">
-                            <h3>Bunny Eggs (BB) <img src="./img/info_icon.png" width="25px"></h3>
+                            <h3>Bunny Eggs (BB) <img src="./img/info_icon.png" width="25px" onclick='showdPopup("gashapon2")'></h3>
                             <p>Price : 15 WJBC / Boxes</p>
                             <p>Remaining : 100 Boxes</p>
                             <img src="./img/gashapon.png" width="150px">
                             <p class="btn">Open Now !!</p>
                         </div>
+                </div>
+                <div id="gashapon1" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
+                    <div style="border-radius: 15px; text-align: center; background-color: white; padding: 20px;">
+                        <div class="gasha-container center" style="display: flex;flex-wrap: wrap;">
+                            <h2>Gashapon Details 1 </h2>
+                            <div class="close-btn" onclick='closedPopup("gashapon1")'>X</div>
+                        </div>
+
+                        <div class="grid-container">
+                            <!-- HEADER -->
+                            <div class="grid-item header">Name</div>
+                            <div class="grid-item header">Power</div>
+                            <div class="grid-item header">Supply This Box</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/BUNNY2.png"><br>N BUNNY MINER</div>
+                            <div class="grid-item">1,888 BunnyPow</div>
+                            <div class="grid-item">70 NFTs</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/BUNNY3.png"><br>R SUNNY MINER</div>
+                            <div class="grid-item">2,888 BunnyPow</div>
+                            <div class="grid-item">20 NFTs</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/SR_BUNNY.png"><br>SR PINKKY MINER</div>
+                            <div class="grid-item">10,888 BunnyPow</div>
+                            <div class="grid-item">10 NFTs</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gashapon2" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
+                    <div style="border-radius: 15px; text-align: center; background-color: white; padding: 20px;">
+                        <div class="gasha-container center" style="display: flex;flex-wrap: wrap;">
+                            <h2>Gashapon Details 2 </h2>
+                            <div class="close-btn" onclick='closedPopup("gashapon2")'>X</div>
+                        </div>
+                        <div class="grid-container">
+                            <!-- HEADER -->
+                            <div class="grid-item header">Name</div>
+                            <div class="grid-item header">Power</div>
+                            <div class="grid-item header">Supply This Box</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/N_BUNNY2.png"><br>N BUNNY MINER</div>
+                            <div class="grid-item">128 BunnyPow</div>
+                            <div class="grid-item">40 NFTs</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/R_BUNNY.png"><br>R SUNNY MINER</div>
+                            <div class="grid-item">588 BunnyPow</div>
+                            <div class="grid-item">33 NFTs</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/MINIBUNNY.png"><br>SR PINKKY MINER</div>
+                            <div class="grid-item">888 BunnyPow</div>
+                            <div class="grid-item">25 NFTs</div>
+                            <!-- ROW 1 -->
+                            <div class="grid-item"><img src="./img/BigBro2.png"><br>SSR BigBro MINER</div>
+                            <div class="grid-item">5,888 BunnyPow</div>
+                            <div class="grid-item">2 NFTs</div>
+                        </div>
+                    </div>
                 </div>
             
         </div>
@@ -141,7 +198,7 @@
                 <p class="bubble bg-blue white">Pool: <span id="grPool">1,028 CMJ</span></p>
                 <p class="bubble bg-blue white">Fee: <span id="fee">5%</span></p>
             </div>
-            <p class="bubble bg-blue white btn">Convert !!</p>
+            <p class="bubble bg-blue white btn center">Convert !!</p>
         </div>
         <div id="Stake">
 
@@ -152,7 +209,6 @@
         const tooltip = document.getElementById('tooltip');
 
         function copy(text) {
-            // Create a temporary input to copy the text from
             var tempInput = document.createElement('input');
             tempInput.value = text; 
             document.body.appendChild(tempInput);
@@ -160,14 +216,11 @@
             document.execCommand('copy');
             document.body.removeChild(tempInput);
 
-            // Show the tooltip with the copied text message
             tooltip.innerHTML = 'Copied to clipboard: ' + text;
             tooltip.style.display = 'block';
 
-            // Position the tooltip at the mouse cursor
             document.addEventListener('mousemove', updateTooltipPosition);
 
-            // Hide the tooltip after 2 seconds
             setTimeout(function() {
                 tooltip.style.display = 'none';
                 document.removeEventListener('mousemove', updateTooltipPosition);
@@ -175,9 +228,55 @@
         }
 
         function updateTooltipPosition(e) {
-            tooltip.style.left = (e.pageX + 10) + 'px'; // Add offset to avoid pointer overlap
-            tooltip.style.top = (e.pageY + 10) + 'px'; // Add offset to avoid pointer overlap
+            tooltip.style.left = (e.pageX + 10) + 'px';
+            tooltip.style.top = (e.pageY + 10) + 'px'; 
         }
+
+        function showdPopup(popupId) {
+        document.getElementById(popupId).style.display = 'flex';
+    }
+        function closedPopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+    }
+    const inputs = document.querySelectorAll("#buy");
+
+    let debounceTimeout;
+    let count = 0;
+
+    inputs.forEach(input => {
+        input.addEventListener("input", function() {
+            clearTimeout(debounceTimeout); // Clear previous timeout
+
+            // Set a new timeout for 0.5 seconds
+            debounceTimeout = setTimeout(() => {
+                calPremint();
+                count = 0;
+            }, 100);
+            count++;
+            if (count === 2) {
+                calPremint();
+                clearTimeout(debounceTimeout); // Clear the timeout to prevent further execution
+                count = 0; // Reset count
+            }
+        });
+    });
+
+
+    function calPremint() {
+    const amountInput = document.getElementById("buy");
+    const amount = parseFloat(amountInput.value);
+    const rate = 7000;
+    const remainingQuota = 1000;
+
+    if (amount > remainingQuota * rate) {
+        amountInput.value = remainingQuota * rate; // Set input value to max allowed
+    }
+    const gainBB = amount / rate;
+
+    document.getElementById("get").value = gainBB;
+}
+
+
     </script>
 </body>
 </html>
