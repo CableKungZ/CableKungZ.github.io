@@ -247,7 +247,6 @@
         input.addEventListener("input", function() {
             clearTimeout(debounceTimeout); // Clear previous timeout
 
-            // Set a new timeout for 0.5 seconds
             debounceTimeout = setTimeout(() => {
                 calPremint();
                 count = 0;
@@ -262,19 +261,35 @@
     });
 
 
+    document.addEventListener("DOMContentLoaded", function() {
+        const amountInput = document.getElementById("buy");
+        const rate = 7000;
+        const remainingQuota = 1000;
+
+        // Set max attribute based on remaining quota
+        amountInput.max = remainingQuota * rate;
+
+        amountInput.addEventListener("input", function() {
+            const amount = parseFloat(amountInput.value);
+            if (amount > remainingQuota * rate) {
+                amountInput.value = remainingQuota * rate; // Set input value to max allowed
+            }
+            calPremint();
+        });
+    });
+
     function calPremint() {
-    const amountInput = document.getElementById("buy");
-    const amount = parseFloat(amountInput.value);
-    const rate = 7000;
-    const remainingQuota = 1000;
+        const amountInput = document.getElementById("buy");
+        const amount = parseFloat(amountInput.value);
+        const rate = 7000;
 
-    if (amount > remainingQuota * rate) {
-        amountInput.value = remainingQuota * rate; // Set input value to max allowed
+        if (!isNaN(amount)) {
+            const gainBB = amount / rate;
+            document.getElementById("get").value = gainBB;
+        } else {
+            document.getElementById("get").value = '';
+        }
     }
-    const gainBB = amount / rate;
-
-    document.getElementById("get").value = gainBB;
-}
 
 
     </script>

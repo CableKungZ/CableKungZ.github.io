@@ -1,8 +1,8 @@
 :root {
     --primary: #FFB6C1;
     --secondary: #90EE90;
-    --accent: #FFA500;
-    --background: #FFFDD0;
+    --accent: #ffbd43;
+    --background: #ffffff;
     --text: #333333;
 }
 
@@ -75,12 +75,14 @@ h1, h2, h3 {
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.stats {
+.stats, .presale-stats, .merchant-stats {
     display: flex;
     justify-content: space-around;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
 .stat-card {
@@ -90,6 +92,8 @@ h1, h2, h3 {
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    margin: 0.5rem;
+    flex: 1 1 200px;
 }
 
 .stat-card:hover {
@@ -98,6 +102,154 @@ h1, h2, h3 {
 
 .highlight {
     color: var(--primary);
+}
+
+.presale-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.grid-header {
+    font-weight: bold;
+    background-color: var(--secondary);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.grid-item {
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.status-active {
+    color: green;
+    font-weight: bold;
+}
+
+.swap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.swap-input {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+}
+
+.btn, .btn-buy {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+.gashapon-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.gashapon-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 1rem;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gashapon-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.btn-gasha {
+    background-color: var(--accent);
+    color: white;
+    width: calc(100% - 30px);
+    padding: 0.5rem 1rem;
+    margin: 15px auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.btn-gasha:hover {
+    background-color: darken(var(--accent), 10%);
+}
+
+.btn:hover, .btn-buy:hover {
+    background-color: darken(var(--accent), 10%);
+}
+
+.gashapon-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.gashapon-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 1rem;
+    flex: 1 1 300px;
+}
+
+.dungeon-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+ .dungeon-nft {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem;
+    flex: 1 1 300px;
+}
+
+.miner-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.convert-btn {
+    display: block;
+    margin: 2rem auto;
 }
 
 footer {
@@ -117,11 +269,180 @@ footer {
         margin-top: 1rem;
     }
 
-    .stats {
+    .swap {
         flex-direction: column;
     }
 
-    .stat-card {
-        margin-bottom: 1rem;
+    .swap-input {
+        margin: 1rem 0;
+    }
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 15px;
+    padding: 10px;
+    padding-bottom: 35px;
+}
+
+.grid-item {
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 15px;
+    text-align: center;
+    
+}
+.grid-item:hover {
+    padding: 5px;
+    background-color: #d3d2d2;
+    border-radius: 15px;
+    text-align: center;
+    transition-duration: 0.2s;
+}
+.grid-item img {
+    width: 100px;
+    transition: transform 0.3s ease-in-out; /* Optional: smooth transition */
+}
+
+.grid-item img:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.7); /* Adjust the color and intensity of the glow */
+    transform: scale(1.1); /* Optional: scale the image slightly on hover */
+}
+.nft-card {
+    display: block;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.082);
+    color: rgb(0, 0, 0);
+    text-align: center;
+    border-radius: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    width: calc(100% - 20px); 
+    margin-top: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+}
+.nft-card img{
+    width: 100px;
+    height: 100px;
+}
+.dungeon-content {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    height: 800px; /* Adjust this value based on your preferred height */
+}
+
+.dungeon-info {
+    width: 200px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 20px; /* Adjust this value to set the distance from the top of the viewport */
+    align-self: flex-start;
+    max-height: calc(100vh - 40px); /* Subtract twice the top value */
+    overflow-y: auto;
+}
+
+.dungeon-nft {
+    flex: 1;
+    min-width: 300px;
+}
+
+.miner-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-height: 600px; /* Adjust this value based on your preferred height */
+    overflow-y: auto;
+    padding-right: 10px; /* Add some padding for the scrollbar */
+}
+
+/* Styling the scrollbar */
+.miner-info::-webkit-scrollbar {
+    width: 8px;
+}
+
+.miner-info::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.miner-info::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 10px;
+}
+
+.miner-info::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+.nft-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.nft-card:hover {
+    transform: translateY(-5px);
+}
+
+.nft-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 1rem 0;
+}
+
+.nft-type {
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.status {
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.staked {
+    color: green;
+}
+
+.not-staked {
+    color: red;
+}
+
+.nft-card .btn {
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .dungeon-content {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .dungeon-info {
+        position: static;
+        width: 100%;
+        max-height: none;
+    }
+
+    .miner-info {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 800px; /* Adjust for mobile view */
+    }
+}
+
+@media (max-width: 768px) {
+    .miner-info {
+        grid-template-columns: 1fr;
     }
 }
