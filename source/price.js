@@ -119,6 +119,7 @@ async function price_jbc(){
     const EE = setContract(web3_jbc,price_contractABI, '0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
     const II = setContract(web3_jbc,price_contractABI, '0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
     const Gear = setContract(web3_jbc,price_contractABI,'0x0e2610730a3c42fd721b289bee092d9ad1c76890');
+    const Doijib = setContract(web3_jbc,price_contractABI,'0x7414e2D8Fb8466AfA4F85A240c57CB8615901FFB')
     const Ambassador_V03_ABI = [{"inputs":[{"internalType":"address","name":"_kyc","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"frenCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"kyc","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referalData","outputs":[{"internalType":"address","name":"fren","type":"address"},{"internalType":"address","name":"ambassador","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_ambassador","type":"address"}],"name":"regist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"registCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"registIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 
         // LP Address
@@ -147,6 +148,7 @@ async function price_jbc(){
     const MEOW_MICE = setContract(web3_jbc,price_contractABI,'0xcc59B348085384C1B8e4D310e53a4823aCd38653');
     const MEOW_MT = setContract(web3_jbc,price_contractABI,'0xb882C5Ec427De3085127C89De4fe3ceE12b345bb');
     const Ambassador_V03 = setContract(web3_jbc,Ambassador_V03_ABI, '0x467eF538C90434D4F69cF8A8F40cd71a96e8424e');
+    const WJBC_DOI = setContract(web3_jbc,price_contractABI,'0xF2c2A60F3Fcf8017fED0655F694B91a785fc170b');
 
     const JBC = '0x';
 
@@ -176,6 +178,8 @@ async function price_jbc(){
         { Name: "MEOW-TUNA",Contract: MEOW_TUNA, main:Meow , mainN: "MEOW" , pair: Tuna , pairN:"Tuna", mainUSD: 0, location:""},
         { Name: "MEOW-MICE",Contract: MEOW_MICE,main:Meow,mainN:"MEOW",pair:Mice,pairN:"Mice",mainUSD:0,location:""},
         { Name: "MEOW-MT",Contract: MEOW_MT,main:Meow,mainN:"MEOW",pair:Mt,pairN:"MT",mainUSD:0,location:""},
+        { Name: "WJBC-DoiJIB", Contract: WJBC_DOI, main: WJBC, mainN: "WJBC", pair: Doijib, pairN: "DOIJIB", mainUSD: jbcToUsd , location: "https://commudao.xyz/mall"},
+
     ]
 
 
@@ -361,6 +365,14 @@ async function price_jbc(){
         setPrice("B-jbcToSwar",priceData[15].swap1 * 1.05);
         setPrice("S-cmjToSwar",priceData[15].swap1/jbcToCmj * 0.95);
         setPrice("S-jbcToSwar",priceData[15].swap1 * 0.95);
+
+        setPrice("B_doijib_1",priceData[24].swap1 * 1.05);
+        setPrice("S_doijib_1",priceData[24].swap1 * 0.95);
+        setPrice("B_doijib_2",priceData[24].swap1/jbcToCmj * 1.05);
+        setPrice("S_doijib_2",priceData[24].swap1/jbcToCmj * 0.95);
+        setPrice("B_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 1.05);
+        setPrice("S_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 0.95);
+
 
         setLabFactory(jTaoToCmj,priceData[13].swap1,priceData[14].swap1,priceData[15].swap1/jbcToCmj,priceData[12].swap1,priceData[21].swap1,priceData[22].swap1,priceData[3].swap1,priceData[6].swap1,priceData[2].swap1,priceData[4].swap1,priceData[23].swap1,priceData[8].swap1,priceData[9].swap1,priceData[7].swap1,priceData[11].swap1,0,cmjToJbc,priceData[10].swap1,priceData[18].swap1 * jTaoToCmj * 1.05,priceData[16].swap1/jbcToCmj * 1.05,jTaoToCmj,priceData[17].swap1 * 1.05);
 
