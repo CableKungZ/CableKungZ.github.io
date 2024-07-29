@@ -374,13 +374,13 @@ async function price_jbc(){
         setPrice("S_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 0.95);
 
 
-        setLabFactory(jTaoToCmj,priceData[13].swap1,priceData[14].swap1,priceData[15].swap1/jbcToCmj,priceData[12].swap1,priceData[21].swap1,priceData[22].swap1,priceData[3].swap1,priceData[6].swap1,priceData[2].swap1,priceData[4].swap1,priceData[23].swap1,priceData[8].swap1,priceData[9].swap1,priceData[7].swap1,priceData[11].swap1,0,cmjToJbc,priceData[10].swap1,priceData[18].swap1 * jTaoToCmj * 1.05,priceData[16].swap1/jbcToCmj * 1.05,jTaoToCmj,priceData[17].swap1 * 1.05);
+        setLabFactory(priceData[24].swap1,jTaoToCmj,priceData[13].swap1,priceData[14].swap1,priceData[15].swap1/jbcToCmj,priceData[12].swap1,priceData[21].swap1,priceData[22].swap1,priceData[3].swap1,priceData[6].swap1,priceData[2].swap1,priceData[4].swap1,priceData[23].swap1,priceData[8].swap1,priceData[9].swap1,priceData[7].swap1,priceData[11].swap1,0,cmjToJbc,priceData[10].swap1,priceData[18].swap1 * jTaoToCmj * 1.05,priceData[16].swap1/jbcToCmj * 1.05,jTaoToCmj,priceData[17].swap1 * 1.05);
 
         function setLocal(number,maximumFractionDigits){
             return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
           }
           
-          async function setLabFactory(JTAOPrice,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price,Plat_Price,EE_Price,ANGB_in_CMJ,JTAO_to_CMJ,JTAO_to_II){
+          async function setLabFactory(DoiJib_to_WJBC,JTAOPrice,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price,Plat_Price,EE_Price,ANGB_in_CMJ,JTAO_to_CMJ,JTAO_to_II){
             showNotification("Setting Labs")
             showNotification("Dungeon Calculator is Ready")
           
@@ -464,6 +464,14 @@ async function price_jbc(){
             document.getElementById("PlatFactory2_COST1").innerHTML = setLocal(math1,6);
             document.getElementById("PlatFactory2_Product").innerHTML = setLocal(prod,6);
             document.getElementById("PlatFactory2_PNL").innerHTML = setLocal(pnl,6);
+            // Craft Pluto Factory
+                    math1 = Jasp_Price*100*1.05;
+                    math2 = 5;
+                    prod = Plat_Price*0*0.95;
+                    pnl = prod-(math1+math2);
+            document.getElementById("PlutoFactory_COST1").innerHTML = setLocal(math1,6);
+            document.getElementById("PlutoFactory_Product").innerHTML = setLocal(prod,6);
+            document.getElementById("PlutoFactory_PNL").innerHTML = setLocal(pnl,6);
             // Craft CTUNA Factory
                 math1 = Tuna_Price*50*1.05;
                 math2 = 10*1;
@@ -528,6 +536,12 @@ async function price_jbc(){
             document.getElementById("Lab_II2Factory_ProductSell").innerHTML = setLocal(prod,6);
             document.getElementById("Lab_II2Factory_PNL").innerHTML = setLocal(pnl,6);
             document.getElementById("II2_PNL2").innerHTML = setLocal(pnl2,4);
+            // DoiJib Field Calculation
+                prod = 1000000 * DoiJib_to_WJBC;
+                nftPrice = 500; // WJBC
+                pnl = prod-nftPrice;
+                document.getElementById("doiJIB-PNL").innerHTML = setLocal(pnl,6);
+                document.getElementById("doiJIB-Prod").innerHTML = setLocal(prod,6);
           
             // Dungeon Settings
                     CuGasDay = (Bbq_Price*500)*24;
@@ -811,13 +825,15 @@ async function price_op(){
     // Declare ERC 20 
     const WETH = setContract( web3_OP,price_contractABI, '0x4200000000000000000000000000000000000006');
     const CMD = setContract( web3_OP,price_contractABI, '0x399FE73Bb0Ee60670430FD92fE25A0Fdd308E142');
-
+    const CMM = setContract( web3_OP,price_contractABI, '0xd7ee783dfe4ba0ee3979c392f82e0a93d06fc27e');
 
         // LP Address
     const WETH_CMD = setContract( web3_OP,price_contractABI, '0xa41f70b283b8f097112ca3bb63cb2718ee662e49');
+    const CMD_CMM = setContract( web3_OP,price_contractABI, '0xa4df424cd74db4395215ee1258cf2705f04dda36');
 
     erc20Data = [
         { Name: "WETH-CMD",Contract: WETH_CMD, main: WETH, mainN: "WETH", pair: CMD, pairN: "CMD", mainUSD: usdToWeth , location: "https://commudao.xyz/gameswap"},
+        { Name: "CMD-CMM",Contract: CMD_CMM, main: CMD, mainN: "CMD", pair: CMM, pairN: "CMM", mainUSD: usdToWeth , location: "https://commudao.xyz/gameswap"},
     ]
 
 
@@ -910,17 +926,27 @@ async function price_op(){
         }
         console.table(priceDataOP);
 
+        let cmd_to_usd = priceDataOP[0].swap1*usdToWeth;
+        let cmd_to_thb = priceDataOP[0].swap1*usdToWeth*thbToUsd;
+
         setPrice("weth-priceUsd",usdToWeth);
         setPrice("weth-priceTHB",usdToWeth*thbToUsd);
+        
         setPrice("cmd-priceWeth",priceDataOP[0].swap1);
-        setPrice("cmd-priceUsd",priceDataOP[0].swap1*usdToWeth);
-        setPrice("cmd-priceTHB",priceDataOP[0].swap1*usdToWeth*thbToUsd);
+        setPrice("cmd-priceUsd",cmd_to_usd);
+        setPrice("cmd-priceTHB",cmd_to_thb);
+
         setPrice("cmd-priceWethx80",priceDataOP[0].swap1 *80);
-        setPrice("cmd-priceUsdx80",priceDataOP[0].swap1*usdToWeth *80);
-        setPrice("cmd-priceTHBx80",priceDataOP[0].swap1*usdToWeth*thbToUsd *80);
+        setPrice("cmd-priceUsdx80",cmd_to_usd *80);
+        setPrice("cmd-priceTHBx80",cmd_to_thb *80);
+
         setPrice("bbq_cmd-priceWeth",priceDataOP[0].swap1);
-        setPrice("bbq_cmd-priceUsd",priceDataOP[0].swap1*usdToWeth);
-        setPrice("bbq_cmd-priceTHB",priceDataOP[0].swap1*usdToWeth*thbToUsd);
+        setPrice("bbq_cmd-priceUsd",cmd_to_usd);
+        setPrice("bbq_cmd-priceTHB",cmd_to_thb);
+
+        setPrice("op-cmmToken-cmd",priceDataOP[1].swap1);
+        setPrice("op-cmmToken-usd",priceDataOP[1].swap1 * cmd_to_usd);
+        setPrice("op-cmmToken-thb",priceDataOP[1].swap1 * cmd_to_thb);
 
 
     }

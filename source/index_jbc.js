@@ -342,7 +342,10 @@ inputs.forEach(input => {
 
 }
 
-const powerInputs = document.querySelectorAll("#power, #input1, #input2, #input3, #input4,#input5");
+
+
+
+const powerInputs = document.querySelectorAll("#power,#bbqPower, #input1, #input2, #input3, #input4,#input5","#bbq-herominer-input1");
 
 powerInputs.forEach(input => {
     input.addEventListener("input", calculateProfit);
@@ -363,6 +366,8 @@ powerInputs.forEach(input => {
     var AngbPower = 0;
     var EEPower = 0;
     var OSPower = 0;
+    // BBQ CHAIN
+    var heroPower = document.getElementById("bbqPower").value ;
     
 
     if(isMultiple){
@@ -405,6 +410,8 @@ powerInputs.forEach(input => {
     const angbPrice = parseFloat(document.getElementById("S-cmjToAngb").textContent) ;
     const osPrice = parseFloat(document.getElementById("S-Os").textContent) ;
 
+    const gemPrice = 0;
+
     const noprice = 0;
 
     // คำนวณผลกำไร
@@ -414,13 +421,15 @@ powerInputs.forEach(input => {
     let angb = 0;
     let CrypticCog = 0;
     let Os = 0;
-     
+    
       OsDaily = RewardOs*OSPower; 
       copperMineHourly = 0.36 * CuPower;
       copperMineDaily = 0.36 * CuPower * 24;
       jasperCave = 0.0000864 * JaspPower;
       angb = ((14000000 * 86400 * 10) * 10 ** -18) * AngbPower;
       CrypticCog = (EEPower * 0.0767232);
+      bbqHeroCatProd = (heroPower * 0.00864);
+
 
     // คำนวณ PNL - GASFEE
     const copperMineGasFee = (copperMineDaily * cuPrice) - (cuMine * 24);
@@ -429,6 +438,8 @@ powerInputs.forEach(input => {
     const daemonWorldGasFee = (angb * angbPrice) - daemonWorld;
     const CrypticCogsGasFee = (CrypticCog* EEPrice) -gasDun5; // Reward in JTAO
     const HouseStakingGasFee = (OsDaily*osPrice); // reward in CMJ
+
+    const bbqHeroCatPNL = (bbqHeroCatProd*gemPrice);
 
     // คำนวนในมูลค่า JBC
 
@@ -452,7 +463,7 @@ powerInputs.forEach(input => {
     document.getElementById("DaemonWorld").innerHTML = `    ${setLocal(angb,8)} Angb/d `;
     document.getElementById("CrypticNight").innerHTML = `    ${setLocal(CrypticCog,8)} EE/d `;
     document.getElementById("HouseStaking").innerHTML = `    ${setLocal(OsDaily,8)} OS/d `;
-
+    document.getElementById("bbq-herominer-gems").innerHTML = `    ${setLocal(bbqHeroCatProd,8)} Gems/d`
     // Display PNL messages
     displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }

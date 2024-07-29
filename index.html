@@ -183,9 +183,13 @@
             <div class="token-price">
                 <h4><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2396.png" alt="" width="20" height="20"><a href="" target="_blank">WETH </a>  :
                     <br><span id="weth-priceUsd">..</span> USD , <span id="weth-priceTHB">..</span> THB<br>
+
                 <h4><img src="https://optimistic.etherscan.io/token/images/commudao_32.png" alt="" width="20" height="20"><a href="" target="_blank">CMD </a>*0.3%  :
                     <br><span id="cmd-priceWeth">..</span> WETH,<span id="cmd-priceUsd">..</span> USD , <span id="cmd-priceTHB">..</span> THB<br>
                     <br>x80<br><span id="cmd-priceWethx80">..</span> WETH,<span id="cmd-priceUsdx80">..</span> USD , <span id="cmd-priceTHBx80">..</span> THB<br>
+
+                <h4><img src="https://exchange.diamon.finance/images/coins/0x9B005000A10Ac871947D99001345b01C1cEf2790.png" alt="CMM" width="20" height="20"><a href="" target="_blank">CMM </a>*0.3%  :
+                    <br><span id="op-cmmToken-cmd">..</span> CMD,<span id="op-cmmToken-usd">..</span> USD , <span id="op-cmmToken-thb">..</span> THB<br>
             </div>
           </div>
               <!------------------------------ END PRICE BOARD OF OP         --------------------------------------------->
@@ -345,7 +349,23 @@
             </div>
           </div>
         </div>   
-      
+            <!-- Card Factory9 -->
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="card factory">
+            <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmbM9zQ2g1PmTnqn2nZznjCHzXSrpcc1Eey4rbawSNyayS" class="card-img-top" alt="BBQ img" width="290">
+            <div class="card-body">
+              <h5 class="card-title center">Pluto Factory</h5>
+              <p class="card-text">Cost: 
+              <p>  - 100 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASP" width="20" height="20"> GWEI JASP (<span id="PlutoFactory_COST1" class="low"></span> CMJ)</p>
+              <p>  - 5 <img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"> CMJ</p>
+              <p class="card-text">Receive: 5 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmSd6B1WnUtzVqJPmEXqFSEudrdqCAE3LPkU64tttYeFPw" alt="Pluto" width="20" height="20">
+       Pluto (<span id="PlutoFactory_Product" class="low"></span> CMJ)</p>
+              <p class="card-text">PNL: <span id="PlutoFactory_PNL" class="low"></span> CMJ</p>
+            </div>
+          </div>
+        </div>   
+
+
           <p class="factory header">Partner Labs & Factory</p>
               <!-- Card 4 -->
               <div class="col-lg-4 col-md-6 col-12">
@@ -513,6 +533,10 @@
     <div id="bkc_dun" style="display:none;">
       <h1 class="center">BKC's Dungeon</h1>
     </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------------------
+                                         END BKC CHAIN DUNGEON
+    -------------------------------------------------------------------------------------------------------------------------------------------->
+
     <div id="jbc_dun">
       <h1 class="center">JBC's Dungeon</h1>
       <div class="col-12">
@@ -659,6 +683,27 @@
             </div>
           </div>
         </div>
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-sm-6 col-12">
+          <div class="card dungeon">
+          <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmQWfYKHMAnaF4gEwpXia7ZBGNcpv9QLSQav7AmeLH2ViJ" class="card-img-top" alt=" img" width="290" >
+            <div class="card-body">
+              <h5 class="card-title center">[Dungeon] Memetic Orbit</h5>
+              <p class="card-text"><b>Eligible NFT Collection: <a class="nftcol">Variable (Multi NFT Collection)</a></b></p>
+              <p class="card-text">SS Product: ? <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="SIL" width="20" height="20">/Power<br>(<span id="MM-prod-cmj" class="low"></span> CMJ)(~<span id="MM-prod-jbc" class="low"></span> JBC)</p>
+              <p class="card-text">Gas Fee: ? <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafybeicfkse4uvkhhkrhfwtap4h3v5msef6lg3t3xvb2hspw3xd5wegzfi" alt="DoiJIB" width="20" height="20"> DoiJIB (<span id="MM-gas-cmj" class="low"></span> CMJ)</p>
+              <p class="card-text">Duration: 7 Days</p>
+              <p class="card-text">Active Total Power: <span id="activeMMPow" class="low">?</span> Power</p>
+              <p class="card-text">Active MainChar: <span id="activeMainMM" class="low">?</span> NFT(s)</p>
+              <p class="card-text">Minimum Power: <span id="minMM" class="low">?</span> HPower</p>
+              <p class="card-text">Profit 1 CMJ/Day : <span id="prof1MM" class="low">?</span> HPower</p>
+              <p class="card-text">Profit 5 CMJ/Day: <span id="prof5MM" class="low">?</span> HPower</p>
+              <p class="card-text">Profit 10 CMJ/Day: <span id="prof10MM" class="low">?</span> HPower</p>
+              <p class="card-text">Profit 100 CMJ/Day: <span id="prof100MM" class="low">?</span> HPower</p>
+              <a href="https://commudao.xyz/dungeon/memetic-orbit/" target="_blank"  class="join-btn">Join</a>
+            </div>
+          </div>
+        </div>
         <!-- Card 3 -->
         <div class="col-lg-4 col-sm-6 col-12">
           <div class="card dungeon">
@@ -757,6 +802,24 @@
       </div>
     </div>
       <!-- END CARD 6-->
+       <!-- Card 6 -->
+      <div class="col-lg-4 col-sm-6 col-12">
+        <div class="card dungeon">
+          <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmXzm6AiVShzsWfqxUdLMTrioaPef7fcjwqVrA5tmSHGyt" class="card-img-top" alt=" img" width="290px" >
+        <div class="card-body">
+          <h5 class="card-title center">[Fields] <strong>DoiJIB</strong></h5>
+          <p class="card-text"><b>Eligible NFT Collection: <a class="nftcol">DoiJIB : BB</a></b> </p>
+          <p class="card-text"><b>NFT PRICE : </b> 500 WJBC</p>
+          <p class="card-text">Max Mine : 500,000 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafybeicfkse4uvkhhkrhfwtap4h3v5msef6lg3t3xvb2hspw3xd5wegzfi" alt="DOIJIB" width="20" height="20"></p>
+          <p class="card-text">Burn : 500,000 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafybeicfkse4uvkhhkrhfwtap4h3v5msef6lg3t3xvb2hspw3xd5wegzfi" alt="DOIJIB" width="20" height="20"></p>
+          <p class="card-text">Total Mine And Burn : 1,000,000 DoiJIB (~ <span id="doiJIB-Prod">)</p>
+          <p class="card-text">PNL : (~ <span id="doiJIB-PNL"></span> WJBC)</p>
+          <p class="card-text low font-12">** Mine All DoiJIB Before Burning NFT more profitable **</p>
+          <a href="https://commudao.xyz/fields/doijib-mining" target="_blank"  class="join-btn">Join</a>
+        </div>
+      </div>
+    </div>
+      <!-- END CARD 6-->
       <!-- Card 7 -->
       <div class="col-lg-4 col-sm-6 col-12">
         <div class="card dungeon">
@@ -817,18 +880,119 @@
             </div>
         </div>
     </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------------------
+                                         END JBC CHAIN DUNGEON
+    -------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="op_dun" style="display:none;">
       <h1 class="center">OP's Dungeon</h1>
       <h1 class="center" style="margin-top: 200px;margin-bottom: 200px;color: red;">Stay Tuned!</h1>
     </div>
+    <!---------------------------------------------------------------------------------------------------------------------------------------------
+                                         END OP CHAIN DUNGEON
+    -------------------------------------------------------------------------------------------------------------------------------------------->
     <div id="bbq_dun" style="display:none;">
       <h1 class="center">BBQ's Dungeon</h1>
-      <h1 class="center" style="margin-top: 200px;margin-bottom: 200px;color: red;">Stay Tuned!</h1>
-    </div>
-    </div>
+      <div class="col-12">
+        <div class="card2 dungeon calc">
+          <div class="card-body">
+            <h5 class="card-title center">Mining Profit Calculator</h5>
+            <div style="margin-right:15px; margin-bottom:15px;">
+              <!-- <button id="multiPowerBtn">Multiple Power</button>
+              <button id="toggleInfoBtn">Calculate ROI</button> -->
+            </div>
+            <p id="powerBox">
+              <label for="bbqPower" class="center">Enter Power:</label>
+              <input type="number" class="center" id="bbqPower" min="0" placeholder="Insert Power Here">
+            </p>
+            <p id="input" style="display: none;">
+              <input type="text" class="center" id="wallet_power" placeholder="Get From Wallet Address">
+          </p>
+          <div id="infoDiv" style="display:none; flex-wrap: nowrap;">
+            <p style="margin-right: 10px;">Your Investment <input type="number" class="center" id="invest" min="0" placeholder="Your Invest(USD)"> </p>
+            <p style="margin-right: 10px;">Your Return <input type="number" class="center" id="return" min="0" placeholder="Your Return(USD)"> </p>
+            <p style="margin-right: 10px;"><span id="returnDate"></span></p>
+          </div>
+          <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
+          
+          
+            
+            <!-- <button onclick="calculateProfit()">Calculate Profit</button> -->
+            <table id="miningTable">
+              <thead>
+                <tr>
+                  <th style="width:140px;">Dungeon</th>
+                  <th style="font-size:12px; width:15px;">Duration <br></th>
+                  <th >GasFee/Day</th>
+                  <th style="width:15px;">Reward/Power</th>
+                  <th>Reward/Round<br></th>
+                  <th>Reward/Day </th>
+                </tr>
+              </thead>
+        <tbody>
+            <tr class="cryptic-cogs">
+              <tr>
+                <td>Hero Miner 
+                  <p id="bbq-herominer-input1" style="display: none;"><input type="number" class="center" id="bbq-herominer-power1" min="0" placeholder="Insert Power Here" width="250px"></p></td>
+                <td>1 Day</td>
+                <td><span id="bbq-herominer-gas"></span> CMM <br>(~<span id="bbq-herominer-usd"></span> USD)</td>
+                <td>0.00864 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmYLecZgsc6hgV931h3VDhvvXKeMjturKRKyGyTNDxX9JV" alt="GEMS" width="20" height="20"></td>
+                <td colspan="2"><span id="bbq-herominer-gems"></span></td>
+              </tr>
+          </tr>
 
+        </tbody>
+    </table>
+    
+          </div>
+        </div>
+      </div>
+<!------------------------------------------------------------------  MINING CALCULATE  ------------------------------------------------------------------>
     
     
+    <!-------------------------------------------------------- DUNGEON MENU ------------------------------------------------------->
+    <div class="container mt-5">
+      <div class="row">
+        <!-- Card 1 -->
+        <p class="dungeon header">Dungeon</p>
+        <div class="col-lg-4 col-sm-6 col-12">
+          <div class="card dungeon">
+            <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmddAUAigPUPoaAQg3F4jsRoidfjN5BMifwtmWfEdBrPzt" class="card-img-top" alt="BBQ img" width="50" >
+            <div class="card-body">
+              <h5 class="card-title center">[Dungeon] HERO MINER</h5>
+              <p class="card-text"><b>Eligible NFT Collection: <a class="nftcol">HERO CAT NFT</a></b></p>
+              <p class="card-text">Product: 0.00864 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmYLecZgsc6hgV931h3VDhvvXKeMjturKRKyGyTNDxX9JV" alt="GEMS" width="20" height="20">/Power<br>(<span id="OP-HeroCat-ProductToCMM" class="low">?</span> CMM)</p>
+              <p class="card-text">Gas Fee: 24 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/QmYyCnpA39K7F7iu9BR9YdPJTfXfzzFVhQuu4RT1y7XffB" alt="ENGY" width="20" height="20">(<span id="OP-HeroCat-GasToCMM" class="low"></span> CMM)</p>
+              <p class="card-text">Duration: 1 Day</p>
+              <p class="card-text">Active Total Power: <span id="OP-HeroCat-TotalPow" class="low"></span> Power</p>
+              <p class="card-text">Active MainChar: <span id="OP-HeroCat-ActiveMainChar" class="low"></span> NFT(s)</p>
+              <p class="card-text">Minimum Power: <span id="OP-HeroCat-MinPow" class="low">?</span> HPower</p>
+              <a href="https://commudao.xyz/dungeon/the-endless-tower/" target="_blank"  class="join-btn">Join</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  <!------------------------------------------------------------------ FIELD  ------------------------------------------------------------------>
+<!--         <div class="row">
+          <p class="dungeon header">Fields</p>        
+              FILED CARD 
+        <div class="col-lg-4 col-sm-6 col-12">
+          <div class="card dungeon">
+            <img src="https://nftstorage.link/ipfs/bafkreiaplfqhpcall6mr7swyaqyatfri7p4z56i7ttfvhjmootnett3f3m" class="card-img-top" alt=" img" width="290" >
+          <div class="card-body">
+            <h5 class="card-title center">[Fields] <strong>Soon</strong></h5>
+            <p class="card-text"><b>Eligible NFT Collection: <a class="nftcol">?</a></b> </p>
+            <p class="card-text"></p>
+             <a href="https://commudao.xyz/fields/old-warehouse" target="_blank"  class="join-btn">Join</a> 
+            </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+    </div>
+    </div>
+<!-------------------------------------------------------- DUNGEON MENU ------------------------------------------------------->
+
   <!-------------------------------------------------- Start Gashapon  --------------------------------------->
   <div id="gashapon" class="container mt-5" style="display:none;">
     <div class="col-12">
