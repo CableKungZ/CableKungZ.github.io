@@ -542,7 +542,15 @@ async function price_jbc(){
                 pnl = prod-nftPrice;
                 document.getElementById("doiJIB-PNL").innerHTML = setLocal(pnl,6);
                 document.getElementById("doiJIB-Prod").innerHTML = setLocal(prod,6);
-          
+            // bbq-craftBBQ-PNL 
+                prod = 50 * (Bbq_Price*0.95); // BBQ CRAFTED AMOUNT x BBQ PRICE
+                pnl = prod - 0.000125; // 0.00125 CMJ from ( 0.01 CMD / 80 CMD ) RATE 1 CMJ -> 80 CMD
+                document.getElementById("bbq-craftBBQ-PNL").innerHTML = setLocal(pnl,8);
+                document.getElementById("bbq-craftBBQ-PNL2").innerHTML = setLocal(pnl*1440,8);
+                document.getElementById("bbq-craftBBQ-PNL-percent").innerHTML = setLocal((pnl/0.000125)*100,2); // Prod - Cost / Cost *100
+
+
+
             // Dungeon Settings
                     CuGasDay = (Bbq_Price*500)*24;
                     JaspGasDay = (Pza_Price*500);
