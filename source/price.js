@@ -373,19 +373,21 @@ async function price_jbc(){
         setPrice("B_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 1.05);
         setPrice("S_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 0.95);
 
-        memeticGas = parseFloat(priceData[24].swap1 * 1.05) * 7000000; // GAS in WJBC
+        memeticGas = parseFloat(priceData[24].swap1 * 1.05) * 700000; // GAS in WJBC
         setPrice("memetic-gasfee",memeticGas);
         memeticGas2 = memeticGas/(jbcToCmj*0.998); // GAS in CMJ
         setPrice("memetic-gasfee2",memeticGas2);
         minimumPow = memeticGas2/(priceData[9].swap1 * 0.95)
-        Minimum_NoHouse = (memeticGas2/(priceData[9].swap1 * 0.95))/0.06048;
-        Minimum_C10House = (memeticGas2/(priceData[9].swap1 * 0.95))/0.6048;
-        Minimum_B10House = (memeticGas2/(priceData[9].swap1 * 0.95))/3.024;
-        Minimum_A10House = (memeticGas2/(priceData[9].swap1 * 0.95))/6.048;
-        setPrice("Minimum_NoHouse",Minimum_NoHouse);
-        setPrice("Minimum_C10House",Minimum_C10House);
-        setPrice("Minimum_B10House",Minimum_B10House);
-        setPrice("Minimum_A10House",Minimum_A10House);
+
+        mul = 1.03
+        Minimum_NoHouse = ((memeticGas2/(priceData[9].swap1 * 0.95))/0.06048 )* mul;
+        Minimum_C10House = ((memeticGas2/(priceData[9].swap1 * 0.95))/0.6048) * mul;
+        Minimum_B10House = ((memeticGas2/(priceData[9].swap1 * 0.95))/3.024) * mul;
+        Minimum_A10House = ((memeticGas2/(priceData[9].swap1 * 0.95))/6.048) * mul;
+        setPrice("Minimum_NoHouse",parseInt(Minimum_NoHouse));
+        setPrice("Minimum_C10House",parseInt(Minimum_C10House));
+        setPrice("Minimum_B10House",parseInt(Minimum_B10House));
+        setPrice("Minimum_A10House",parseInt(Minimum_A10House));
 
         
         setLabFactory(priceData[24].swap1,jTaoToCmj,priceData[13].swap1,priceData[14].swap1,priceData[15].swap1/jbcToCmj,priceData[12].swap1,priceData[21].swap1,priceData[22].swap1,priceData[3].swap1,priceData[6].swap1,priceData[2].swap1,priceData[4].swap1,priceData[23].swap1,priceData[8].swap1,priceData[9].swap1,priceData[7].swap1,priceData[11].swap1,0,cmjToJbc,priceData[10].swap1,priceData[18].swap1 * jTaoToCmj * 1.05,priceData[16].swap1/jbcToCmj * 1.05,jTaoToCmj,priceData[17].swap1 * 1.05);

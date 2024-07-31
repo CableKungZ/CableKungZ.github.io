@@ -402,7 +402,7 @@ powerInputs.forEach(input => {
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) ; // daemonWorld Gas
 
     //** MEMETIC ORBITS */
-    const DoiJib_Gas = parseFloat(document.getElementById("B_doijib_1").textContent) * 7000000; //Gas DOI JIB
+    const DoiJib_Gas = parseFloat(document.getElementById("B_doijib_1").textContent) * 700000; //Gas 700,000 DOI JIB
     const sellSilver = parseFloat(document.getElementById("S-Silver").textContent); // get SELL SIL PRICE (CMJ)
     const silver_inCMJ_toJBC = sellSilver * parseFloat(document.getElementById("S-jbcToCmj").textContent);
     const rewardPerPow = parseFloat(document.getElementById("rewardPerPow").textContent);
