@@ -42,7 +42,7 @@ const settings = [
     { "contract": "CrypticCogs", "contractStats": "nftStatus", "PowerIndex": 7, "fromBlock": 6000 ,"TotalPow":"activeEEPow","TotalMain":"activeMainEE"},
     { "contract": "Jasper Cave", "contractStats": "nftEquip", "PowerIndex": 7, "fromBlock": 6000 ,"TotalPow":"activeJaspPow","TotalMain":"activeMainJasp" },
     { "contract": "Copper Mine", "contractStats": "nftEquip", "PowerIndex": 3, "fromBlock": 600 ,"TotalPow":"activeCUPow","TotalMain":"activeMainCU" },
-    { "contract": "Daemon World", "contractStats": "nftEquip", "PowerIndex": 8, "fromBlock": 6000 ,"TotalPow":"activeAngbPow","TotalMain":"activeMainAngb" }
+    { "contract": "Daemon World", "contractStats": "nftEquip", "PowerIndex": 8, "fromBlock": 6000 ,"TotalPow":"activeAngbPow","TotalMain":"activeMainAngb" },
 ];
 
 const contracts = {

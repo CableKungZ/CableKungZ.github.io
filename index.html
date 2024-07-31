@@ -630,6 +630,28 @@
               <td colspan="2"><span id="HouseStaking"></span></td>
             </tr>
         </tr>
+        <tr class="houseStaking">
+          <tr>
+            <td>Memetic Orbit<span id="housemultiply"></span>
+                <p id="input6" style="display: none;"><input type="number" class="center" id="power6" min="0" placeholder="Insert Power Here" width="250px"></p>
+            </td>
+            <td colspan="3">
+                HOUSE : 
+                <span id="TotalPower"></span>
+                <select id="houseLevel" class="center">
+                    <option value="0">No Land</option>
+                    <option value="1">C Land</option>
+                    <option value="5">B Land</option>
+                    <option value="10">A Land</option>
+                </select>
+                <input type="number" class="center" min="1" value="1" id="numHouseLevel" placeholder="House Level" style="display: none;">
+                <p>Land Bonus : <span id="landBonus">0</span></p>
+                <p>Reward/Power : <span id="rewardPerPow">0.06048</span> <img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="SIL" width="20" height="20">/ 7Days</p>
+              </td>
+            <td colspan="2"><span id="Memetic"></span></td>
+        </tr>
+        
+      </tr>
         </tbody>
     </table>
     
@@ -692,16 +714,15 @@
             <div class="card-body">
               <h5 class="card-title center">[Dungeon] Memetic Orbit</h5>
               <p class="card-text"><b>Eligible NFT Collection: <a class="nftcol">Variable (Multi NFT Collection)</a></b></p>
-              <p class="card-text">SS Product: ? <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="SIL" width="20" height="20">/Power<br>(<span id="MM-prod-cmj" class="low"></span> CMJ)(~<span id="MM-prod-jbc" class="low"></span> JBC)</p>
-              <p class="card-text">Gas Fee: ? <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafybeicfkse4uvkhhkrhfwtap4h3v5msef6lg3t3xvb2hspw3xd5wegzfi" alt="DoiJIB" width="20" height="20"> DoiJIB (<span id="MM-gas-cmj" class="low"></span> CMJ)</p>
+              <p class="card-text">SS Product: 0.06048 - 6.048 <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="SIL" width="20" height="20">/Power</p>
+              <p class="card-text">Gas Fee: <span id="memetic-gasfee"></span> <img src="https://apricot-secure-ferret-190.mypinata.cloud/ipfs/bafybeicfkse4uvkhhkrhfwtap4h3v5msef6lg3t3xvb2hspw3xd5wegzfi" alt="DoiJIB" width="20" height="20"> DoiJIB (<span id="memetic-gasfee2" class="low"></span> CMJ)</p>
               <p class="card-text">Duration: 7 Days</p>
-              <p class="card-text">Active Total Power: <span id="activeMMPow" class="low">?</span> Power</p>
-              <p class="card-text">Active MainChar: <span id="activeMainMM" class="low">?</span> NFT(s)</p>
-              <p class="card-text">Minimum Power: <span id="minMM" class="low">?</span> HPower</p>
-              <p class="card-text">Profit 1 CMJ/Day : <span id="prof1MM" class="low">?</span> HPower</p>
-              <p class="card-text">Profit 5 CMJ/Day: <span id="prof5MM" class="low">?</span> HPower</p>
-              <p class="card-text">Profit 10 CMJ/Day: <span id="prof10MM" class="low">?</span> HPower</p>
-              <p class="card-text">Profit 100 CMJ/Day: <span id="prof100MM" class="low">?</span> HPower</p>
+              <p><strong>Minimum Power</strong></p>
+              <p class="card-text">NoHouse: <span id="Minimum_NoHouse" class="low">?</span> HPower</p>
+              <p class="card-text">C LV.10: <span id="Minimum_C10House" class="low">?</span> HPower</p>
+              <p class="card-text">B LV.10: <span id="Minimum_B10House" class="low">?</span> HPower</p>
+              <p class="card-text">A LV.10: <span id="Minimum_A10House" class="low">?</span> HPower</p>
+
               <a href="https://commudao.xyz/dungeon/memetic-orbit/" target="_blank"  class="join-btn">Join</a>
             </div>
           </div>
@@ -1410,6 +1431,48 @@
       }
     });
   });
+
+  document.getElementById('houseLevel').addEventListener('change', function() {
+    var selectedValue = this.value;
+    var numHouseLevel = document.getElementById('numHouseLevel');
+
+    // Show or hide the numeric input field based on selected land type
+    if (selectedValue === '0') {
+        numHouseLevel.style.display = 'none';
+        document.getElementById('landBonus').innerHTML = '0';
+        calculatePow()
+    } else {
+        numHouseLevel.style.display = 'inline';
+        calculateLandBonus(); // Update Land Bonus when the field is shown
+        calculatePow()
+    }
+});
+
+document.getElementById('numHouseLevel').addEventListener('input', calculateLandBonus);
+
+function calculateLandBonus() {
+    var houseValue = parseFloat(document.getElementById('houseLevel').value);
+    var numHouseLevel = parseFloat(document.getElementById('numHouseLevel').value) || 0;
+    document.getElementById('landBonus').innerHTML = houseValue * numHouseLevel;
+    calculatePow()
+}
+
+function calculatePow(){
+    var houseValue = parseFloat(document.getElementById('houseLevel').value);
+    var numHouseLevel = parseFloat(document.getElementById('numHouseLevel').value) || 0;
+    power = 1;
+    landBonus = houseValue * numHouseLevel;
+    if(landBonus == 0){
+      landBonus = 1;
+    }
+    gwei = 1000000000;
+    gasBonus = 100;
+    time = 604800;
+    rewardPerPow = power * landBonus * gwei * gasBonus * time;
+    document.getElementById("rewardPerPow").innerHTML = (rewardPerPow/(10**18));
+    calculateProfit()
+}
+
 </script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9195099699232258"
      crossorigin="anonymous"></script>

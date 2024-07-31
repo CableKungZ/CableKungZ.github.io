@@ -345,7 +345,7 @@ inputs.forEach(input => {
 
 
 
-const powerInputs = document.querySelectorAll("#power,#bbqPower, #input1, #input2, #input3, #input4,#input5","#bbq-herominer-input1");
+const powerInputs = document.querySelectorAll("#power,#bbqPower, #input1, #input2, #input3, #input4,#input5,#input6","#bbq-herominer-input1");
 
 powerInputs.forEach(input => {
     input.addEventListener("input", calculateProfit);
@@ -366,6 +366,7 @@ powerInputs.forEach(input => {
     var AngbPower = 0;
     var EEPower = 0;
     var OSPower = 0;
+    var MOPower =0;
     // BBQ CHAIN
     var heroPower = document.getElementById("bbqPower").value ;
     
@@ -376,6 +377,7 @@ powerInputs.forEach(input => {
       var AngbPower = document.getElementById("power3").value ;
       var EEPower = document.getElementById("power4").value ;
       var OSPower = document.getElementById("power5").value ;
+      var MOPower = document.getElementById("power6").value ;
       
     
     }else{
@@ -385,20 +387,31 @@ powerInputs.forEach(input => {
       var AngbPower = power
       var EEPower = power;
       var OSPower = power;
+      var MOPower = power;
     }
-    console.log("isMultiple : ",isMultiple);
+    /* console.log("isMultiple : ",isMultiple);
     console.log("CU POW : ",CuPower);
     console.log("JASP POW : ",JaspPower);
     console.log("ANGB POW : ",AngbPower);
     console.log("EE POW : ",EEPower);
-    console.log("OS POW : ",OSPower);
+    console.log("OS POW : ",OSPower); */
+
+
     const cuMine = parseFloat(document.getElementById("labR2").textContent) ; // Copper Mine Gas
     const jaspCave = parseFloat(document.getElementById("labR4").textContent) ; // Japser Cave Gas
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) ; // daemonWorld Gas
 
+    //** MEMETIC ORBITS */
+    const DoiJib_Gas = parseFloat(document.getElementById("B_doijib_1").textContent) * 7000000; //Gas DOI JIB
+    const sellSilver = parseFloat(document.getElementById("S-Silver").textContent); // get SELL SIL PRICE (CMJ)
+    const silver_inCMJ_toJBC = sellSilver * parseFloat(document.getElementById("S-jbcToCmj").textContent);
+    const rewardPerPow = parseFloat(document.getElementById("rewardPerPow").textContent);
+
+
+
     const labAB2 = parseFloat(document.getElementById("labAB2").textContent) ; // Price CU per POW (JBC)
     const labAB4 = parseFloat(document.getElementById("labEV4").textContent) ; // Price JASP Per Pow (JBC)
-    const cmj_to_JBC = parseFloat(document.getElementById("S-Cu").textContent) ; // Get Price of CMJ/JBC
+    const cmj_to_JBC = parseFloat(document.getElementById("B-cmjToJbc").textContent) ; // Get Price of CMJ/JBC
 
     const EEPrice = parseFloat(document.getElementById("S-taoToEE").textContent) ; // Get Price of EE/JTAO
     const IIPrice = parseFloat(document.getElementById("S-taoToII").textContent) ; // Get Price of II/JTAO
@@ -428,6 +441,8 @@ powerInputs.forEach(input => {
       jasperCave = 0.0000864 * JaspPower;
       angb = ((14000000 * 86400 * 10) * 10 ** -18) * AngbPower;
       CrypticCog = (EEPower * 0.0767232);
+      memeTic = (MOPower * rewardPerPow);
+
       bbqHeroCatProd = (heroPower * 0.00864);
 
 
@@ -438,6 +453,13 @@ powerInputs.forEach(input => {
     const daemonWorldGasFee = (angb * angbPrice) - daemonWorld;
     const CrypticCogsGasFee = (CrypticCog* EEPrice) -gasDun5; // Reward in JTAO
     const HouseStakingGasFee = (OsDaily*osPrice); // reward in CMJ
+    const MemeticPNL = (memeTic*silver_inCMJ_toJBC) - DoiJib_Gas; // MEMETIC REWARD(SIL) x SILVER (in JBC) - DOIJIB GAS IN JBC
+
+    console.log("DOIJIB GAS : ",DoiJib_Gas," WJBC");
+    console.log("MEMETIC REWARD : ",memeTic," SIL");
+    console.log("MEMETIC PNL : ",MemeticPNL," SIL");
+    console.log("SILVER CMJ : ",sellSilver);
+    console.log("SILVER WJBC : ",silver_inCMJ_toJBC);;
 
     const bbqHeroCatPNL = (bbqHeroCatProd*gemPrice);
 
@@ -463,27 +485,32 @@ powerInputs.forEach(input => {
     document.getElementById("DaemonWorld").innerHTML = `    ${setLocal(angb,8)} Angb/d `;
     document.getElementById("CrypticNight").innerHTML = `    ${setLocal(CrypticCog,8)} EE/d `;
     document.getElementById("HouseStaking").innerHTML = `    ${setLocal(OsDaily,8)} OS/d `;
+    document.getElementById("Memetic").innerHTML = `    ${setLocal(memeTic,8)} SIL/7d `;
     document.getElementById("bbq-herominer-gems").innerHTML = `    ${setLocal(bbqHeroCatProd,8)} Gems/d`
     // Display PNL messages
-    displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
+    displayPNLMessages(MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }
 
   // Function to display PNL messages
-  function displayPNLMessages(OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
+  function displayPNLMessages(MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
     const pnlCu = copperMineGasFee; // PNL for CopperMine (Cu)
     const pnlJasp = jasperCaveGasFee; // PNL for JasperCave (Jasp)
     const pnlCuh = copperMiner2GasFee;
     const pnlAngb = daemonWorldGasFee;
     const pnlCC = CrypticCogsGasFee;
     const pnlOS = HouseStakingGasFee;
+    const pnlMO = MemeticPNL;
 
     cmjToUsd = parseFloat(document.getElementById("S-usdToCmj").textContent) ;
+    wjbcToUsd = parseFloat(document.getElementById("S-usdToJbc").textContent) ;
+
     var usd_pnlCU = 0 ;
     var usd_pnlCUH = 0 ;
     var usd_pnlJasp = 0; 
     var usd_pnlAngb = 0;
     var usd_pnlCC = 0;
     var usd_pnlOS = 0;
+    var usd_pnlMO = 0;
   
     // convest PNL from CMJ to USD
     if((pnlCu * cmjToUsd) > 0 ){
@@ -498,10 +525,12 @@ powerInputs.forEach(input => {
       var usd_pnlOS = pnlOS * cmjToUsd;
     }if(pnlCuh * cmjToUsd > 0){
       var usd_pnlCUH = pnlCuh * cmjToUsd;
+    }if(pnlMO * wjbcToUsd > 0){
+      var usd_pnlMO = pnlMO * wjbcToUsd;
     }
 
 
-    calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS)
+    calculateROI(usd_pnlMO,usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS)
 
 
     // Display PNL messages
@@ -536,20 +565,28 @@ powerInputs.forEach(input => {
 
     }
     if(OSPower != 0){
-    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC , ~${setLocal(usd_pnlOS,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC , ~${setLocal(math.abs(usd_pnlOS),6)} USD`;
+    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC , ~${setLocal(usd_pnlOS,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlOS),6)} USD`;
     document.getElementById("HouseStaking").innerHTML += ` <br>(${pnlOSMessage})` ;
       }else{
         document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
   
       }
+
+if(MOPower != 0){
+    const pnlMOMessage = pnlMO >= 0 ? `<span class="profit">Profit</span>  ${setLocal((pnlMO*wjbcToUsd)/cmjToUsd,2)} CMJ , ~${setLocal(pnlMO,5)} JBC , ~${setLocal(pnlMO*wjbcToUsd,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs((pnlMO*wjbcToUsd)/cmjToUsd),2)} CMJ ,  ~${setLocal(Math.abs(pnlMO),5)} JBC , ~${setLocal(Math.abs(pnlMO*wjbcToUsd),6)} USD`;
+    document.getElementById("Memetic").innerHTML += ` <br>(${pnlMOMessage})` ;
+      }else{
+        document.getElementById("Memetic").innerHTML += ` <br>(No Power No Miner)` ;
+  
+      }
     }
 
-    function calculateROI(usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS){
+    function calculateROI(usd_pnlMO,usd_pnlCU,usd_pnlJasp,usd_pnlAngb,usd_pnlCC,usd_pnlOS){
       jbcToUsd = parseFloat(document.getElementById("S-usdToJbc").textContent) ;
       investment = parseFloat(document.getElementById("invest").value) ;
       returns = parseFloat(document.getElementById("return").value) ;
       console.log("InvestMent",investment,"Return : ",returns);
-      console.log("CU",usd_pnlCU," JASP",usd_pnlJasp," ANGB",usd_pnlAngb," CC",usd_pnlCC," usd_pnlOS",usd_pnlOS);
+      console.log("CU",usd_pnlCU," JASP",usd_pnlJasp," ANGB",usd_pnlAngb," CC",usd_pnlCC," usd_pnlOS",usd_pnlOS," usd_pnlMO",usd_pnlMO);
       
       sum = usd_pnlCU+usd_pnlJasp+usd_pnlAngb+usd_pnlCC+usd_pnlOS;
       sumJBC = sum/jbcToUsd;
