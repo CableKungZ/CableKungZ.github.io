@@ -1242,11 +1242,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
 <script src="source/index_jbc.js"></script>
 <script src="source/index_mining.js"></script>
-<script src="source/price.js"></script>
+    <script src="source/price_bkc.js"></script>
+    <script src="source/price_jbc.js"></script>
+    <script src="source/price_op.js"></script>
+
+
 <script src="source/notification.js"></script>
 
 
 <script>
+  async function main() {
+    showNotification("Loading Price Board........")
+    price_bkc();
+    price_jbc();
+    price_op();
+    showNotification("Updated Price");
+}
+
   showNotification("Loading Labs")
   showNotification("Loading Factory")
   showNotification("Loading Dungeon")
