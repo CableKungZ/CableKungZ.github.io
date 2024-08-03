@@ -160,24 +160,30 @@ async function batchTransfer() {
 
     // Ensure valid addresses and amounts
     const validAddresses = addresses.filter(address => /^0x[a-fA-F0-9]{40}$/.test(address));
-    const validAmounts = amounts.map(amount => parseFloat(amount));
+    const validAmounts = amounts.map(amount => amount.trim());
 
     // Calculate total amount in Wei
     let totalAmountInWei;
     try {
-        const totalAmount = validAmounts.reduce((acc, amount) => acc + amount, 0);
+        const totalAmount = validAmounts.reduce((acc, amount) => acc + parseFloat(amount), 0);
         totalAmountInWei = web3.utils.toWei(totalAmount.toString(), 'ether');
     } catch (error) {
         console.error('Invalid amount format for toWei conversion', error);
         return;
     }
 
+    // Convert amounts to Wei
+    const amountsInWei = validAmounts.map(amount => {
+        try {
+            return web3.utils.toWei(amount, 'ether');
+        } catch (error) {
+            console.error('Invalid amount format for toWei conversion', error);
+            return null;
+        }
+    }).filter(amount => amount !== null); // Remove any null values
+
     try {
         await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
-
-        // Convert amounts to Wei
-        const amountsInWei = validAmounts.map(amount => web3.utils.toWei(amount.toString(), 'ether'));
-
         await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
 
         await daoBuddyService.methods.batchTransfer(token, validAddresses, amountsInWei).send({ from: accounts[0] });
@@ -203,29 +209,41 @@ async function batchTransferWithFixAmount() {
     const amountPerRecipientString = document.getElementById('batchTransferWithFixAmount').value;
     const amountPerRecipient = parseFloat(amountPerRecipientString);
     
+    if (isNaN(amountPerRecipient) || amountPerRecipient <= 0) {
+        console.error('Invalid amount per recipient');
+        return;
+    }
+
     // Calculate total amount
     const totalAmount = amountPerRecipient * validAddresses.length;
     
-    // Convert to Wei and handle conversion errors
+    // Convert total amount to Wei
     let totalAmountInWei;
     try {
-        totalAmountInWei = web3.utils.toWei(totalAmount.toString(), 'ether');
+        totalAmountInWei = web3.utils.toWei(totalAmount.toFixed(18), 'ether'); // Convert to string with fixed precision
     } catch (error) {
         console.error('Invalid number format for toWei conversion', error);
         return;
     }
 
-    console.log(validAddresses);
+    console.log('Valid addresses:', validAddresses);
+    console.log('Total amount in Wei:', totalAmountInWei);
 
     try {
+        // Ensure allowance for both feeToken and token
         await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
         await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
-        await daoBuddyService.methods.batchTransferWithFixAmount(token, validAddresses, web3.utils.toWei(amountPerRecipientString, 'ether')).send({ from: accounts[0] });
+
+        // Convert amount per recipient to Wei and send transaction
+        const amountPerRecipientInWei = web3.utils.toWei(amountPerRecipientString, 'ether');
+        await daoBuddyService.methods.batchTransferWithFixAmount(token, validAddresses, amountPerRecipientInWei).send({ from: accounts[0] });
+        
         console.log('Transaction successful');
     } catch (error) {
         console.error('Transaction failed', error);
     }
 }
+
 
 
 
