@@ -79,9 +79,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
 function main(){
-    showSection('fieldtool'); 
     daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
-    field();
     
 async function loadContract(provider, contractAddress) {
     const response = await fetch(`https://exp-l1-ng.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
@@ -146,57 +144,86 @@ await feeTokenContract.methods.approve(contractAddress, approveFeeAmount).send({
 }
 
 async function batchTransfer() {
-const token = document.getElementById('batchTransferToken').value;
-const data = document.getElementById('batchTransferData').value;
-const rows = data.trim().split('\n'); // แยกแต่ละแถวด้วย "\n"
+    const token = document.getElementById('batchTransferToken').value;
+    const data = document.getElementById('batchTransferData').value;
+    const rows = data.trim().split('\n'); // Split each row by "\n"
 
-const addresses = [];
-const amounts = [];
+    const addresses = [];
+    const amounts = [];
 
-for (const row of rows) {
-    const [address, amount] = row.split(','); // แยก address และ amount ด้วย ","
-    addresses.push(address.trim()); // เพิ่ม address เข้าไปในอาร์เรย์ addresses
-    amounts.push(amount.trim()); // เพิ่ม amount เข้าไปในอาร์เรย์ amounts
-}
+    // Process each row
+    for (const row of rows) {
+        const [address, amount] = row.split(','); // Split address and amount by ","
+        addresses.push(address.trim()); // Add address to addresses array
+        amounts.push(amount.trim()); // Add amount to amounts array
+    }
+
+    // Ensure valid addresses and amounts
+    const validAddresses = addresses.filter(address => /^0x[a-fA-F0-9]{40}$/.test(address));
+    const validAmounts = amounts.map(amount => parseFloat(amount));
+
+    // Calculate total amount in Wei
+    let totalAmountInWei;
+    try {
+        const totalAmount = validAmounts.reduce((acc, amount) => acc + amount, 0);
+        totalAmountInWei = web3.utils.toWei(totalAmount.toString(), 'ether');
+    } catch (error) {
+        console.error('Invalid amount format for toWei conversion', error);
+        return;
+    }
 
     try {
-        await ensureAllowance(feeTokenAddress, feeAmount * addresses.length, feeTokenAddress, feeAmount);
-        const totalAmount = amounts.reduce((acc, amount) => acc + parseInt(amount), 0);
-        await ensureAllowance(token, totalAmount, feeTokenAddress, feeAmount);
+        await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
 
-        await daoBuddyService.methods.batchTransfer(token, addresses, amounts).send({ from: accounts[0] });
+        // Convert amounts to Wei
+        const amountsInWei = validAmounts.map(amount => web3.utils.toWei(amount.toString(), 'ether'));
+
+        await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
+
+        await daoBuddyService.methods.batchTransfer(token, validAddresses, amountsInWei).send({ from: accounts[0] });
         console.log('Transaction successful');
     } catch (error) {
-    console.error('Transaction failed', error);
+        console.error('Transaction failed', error);
     }
 }
+
 
 
 async function batchTransferWithFixAmount() {
     const token = document.getElementById('batchTransferWithFixAmountToken').value;
     const addressesInput = document.getElementById('batchTransferWithFixAmountAddresses').value;
-    
-    // แยกที่อยู่ Ethereum จากสตริงโดยใช้ขึ้นบรรทัดใหม่เป็นตัวแยกและลบช่องว่างทั้งหมดที่อาจเกิดขึ้น
+
+    // Split addresses and trim whitespace
     const addresses = addressesInput.split(/\n|,/).map(address => address.trim());
 
-    // ตรวจสอบความถูกต้องของที่อยู่ Ethereum
+    // Filter valid Ethereum addresses
     const validAddresses = addresses.filter(address => /^0x[a-fA-F0-9]{40}$/.test(address));
 
+    // Get amount per recipient and ensure it's a valid number
     const amountPerRecipientString = document.getElementById('batchTransferWithFixAmount').value;
+    const amountPerRecipient = parseFloat(amountPerRecipientString);
+    
+    // Calculate total amount
+    const totalAmount = amountPerRecipient * validAddresses.length;
+    
+    // Convert to Wei and handle conversion errors
+    let totalAmountInWei;
+    try {
+        totalAmountInWei = web3.utils.toWei(totalAmount.toString(), 'ether');
+    } catch (error) {
+        console.error('Invalid number format for toWei conversion', error);
+        return;
+    }
 
-    const totalAmount = amountPerRecipientString * validAddresses.length;
-    
-    
     console.log(validAddresses);
 
     try {
         await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
-        await ensureAllowance(token, totalAmount, feeTokenAddress, feeAmount);
+        await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
         await daoBuddyService.methods.batchTransferWithFixAmount(token, validAddresses, web3.utils.toWei(amountPerRecipientString, 'ether')).send({ from: accounts[0] });
         console.log('Transaction successful');
     } catch (error) {
         console.error('Transaction failed', error);
-        
     }
 }
 
@@ -432,5 +459,10 @@ async function batchUnstaking(tokenIDs, isMechHarvestZone, contract, accounts) {
     }
 }
 
+window.batchTransferWithFixAmount = batchTransferWithFixAmount;
+window.batchTransfer = batchTransfer;
+field();
+
 
 }
+document.addEventListener('DOMContentLoaded', main);
