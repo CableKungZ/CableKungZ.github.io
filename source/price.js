@@ -5,6 +5,7 @@ let price_contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"con
 require('./source/price_jbc.js');
 require('./source/price_op.js');
 require('./source/price_bkc.js');
+require('./source/price_bbq.js');
 
 
 let taoToUsd;
