@@ -231,8 +231,8 @@ async function batchTransferWithFixAmount() {
 
     try {
         // Ensure allowance for both feeToken and token
-        await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
-        await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
+        await ensureAllowance(feeTokenAddress, (feeAmount * validAddresses.length).toFixed(18), feeTokenAddress, (feeAmount).toFixed(18));
+        await ensureAllowance(token, totalAmountInWei, feeTokenAddress, (feeAmount).toFixed(18));
 
         // Convert amount per recipient to Wei and send transaction
         const amountPerRecipientInWei = web3.utils.toWei(amountPerRecipientString, 'ether');
@@ -243,6 +243,7 @@ async function batchTransferWithFixAmount() {
         console.error('Transaction failed', error);
     }
 }
+
 
 
 
