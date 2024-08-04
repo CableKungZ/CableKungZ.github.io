@@ -6,7 +6,7 @@ let web3;
 let daoBuddyService;
 let accounts;
 let feeTokenAddress = '0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b';
-let feeAmount = 0.2;
+let feeAmount = 0.01;
 
 let TunaField
 let MiceField
