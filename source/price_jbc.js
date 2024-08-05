@@ -639,7 +639,7 @@ async function price_jbc(){
           cellAddress.innerHTML = data[0];
         }
       }
-      
+      calculateProfit();
       loadKycData();
 
 

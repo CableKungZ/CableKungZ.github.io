@@ -78,23 +78,23 @@ async function price_bbq(){
     function setPrice(id,value){
         value = parseFloat(value)
         if(value < 0.0000000000099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 14 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 15 });
         }else if(value < 0.00000000099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 12 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 13 });
         }else if(value < 0.000000099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 10 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 11 });
         }else if(value < 0.00000099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 9 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 10 });
         }else if(value < 0.000099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 7 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 8 });
         }else if(value < 0.0099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 5 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 6 });
         }else if(value < 0.099){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 4 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 5 });
         }else if(value < 0.99){
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 3 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 4 });
         }else 
-            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 2 });
+            document.getElementById(id).innerHTML = (parseFloat(value)).toLocaleString(undefined, { maximumFractionDigits: 3 });
 
     }
     function getTextContentUntilNumber(id, callback) {
@@ -170,6 +170,10 @@ async function price_bbq(){
             setPrice("bbq_gem-priceCMM", gemToCMM);
             setPrice("bbq_gem-priceUSD", gemToCMM * cmmToUSD);
             setPrice("bbq_gem-priceTHB", gemToCMM * cmmToTHB);
+
+            setPrice("OP-HeroCat-ProductToCMM", 0.00864 * gemToCMM);
+            calculateProfit()
+
         } catch (error) {
             console.error(error);
         }

@@ -541,11 +541,11 @@ powerInputs.forEach(input => {
     document.getElementById("Memetic").innerHTML = `    ${setLocal(memeTic,8)} SIL/7d `;
     document.getElementById("bbq-herominer-gems").innerHTML = `    ${setLocal(bbqHeroCatProd,8)} Gems/d`
     // Display PNL messages
-    displayPNLMessages(MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
+    displayPNLMessages(bbqHeroCatProd,MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }
 
   // Function to display PNL messages
-  function displayPNLMessages(MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
+  function displayPNLMessages(bbqHeroCatProd,MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC) {
     const pnlCu = copperMineGasFee; // PNL for CopperMine (Cu)
     const pnlJasp = jasperCaveGasFee; // PNL for JasperCave (Jasp)
     const pnlCuh = copperMiner2GasFee;
@@ -556,6 +556,14 @@ powerInputs.forEach(input => {
 
     cmjToUsd = parseFloat(document.getElementById("S-usdToCmj").textContent) ;
     wjbcToUsd = parseFloat(document.getElementById("S-usdToJbc").textContent) ;
+
+    gemToCMM = parseFloat(document.getElementById("bbq_gem-priceCMM").textContent) ;
+    gemToUSD = parseFloat(document.getElementById("bbq_gem-priceUSD").textContent) ;
+    gemToTHB = parseFloat(document.getElementById("bbq_gem-priceTHB").textContent) ;
+
+    var usd_pnl_bbq_chain_herocat = bbqHeroCatProd * gemToUSD;
+    var cmm_pnl_bbq_chain_herocat = bbqHeroCatProd * gemToCMM;
+    var thb_pnl_bbq_chain_herocat = bbqHeroCatProd * gemToTHB;
 
     var usd_pnlCU = 0 ;
     var usd_pnlCUH = 0 ;
@@ -618,12 +626,18 @@ powerInputs.forEach(input => {
 
     }
     if(OSPower != 0){
-    const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC , ~${setLocal(usd_pnlOS,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlOS),6)} USD`;
-    document.getElementById("HouseStaking").innerHTML += ` <br>(${pnlOSMessage})` ;
+      const pnlOSMessage = pnlOS >= 0 ? `<span class="profit">Profit</span>  ${setLocal(pnlOS,2)} CMJ , ~${setLocal(HouseSTaking_inJBC,5)} JBC , ~${setLocal(usd_pnlOS,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs(pnlOS),2)} CMJ ,  ~${setLocal(Math.abs(HouseSTaking_inJBC),5)} JBC , ~${setLocal(Math.abs(usd_pnlOS),6)} USD`;
+      document.getElementById("HouseStaking").innerHTML += ` <br>(${pnlOSMessage})` ;
+    }else{
+      document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
+    }
+    if(bbqHeroCatProd != 0){
+        const pnlBBQMessage = `<span class="profit">Profit</span>  ${setLocal(cmm_pnl_bbq_chain_herocat,2)} CMM , ~${setLocal(usd_pnl_bbq_chain_herocat,5)} USD , ~${setLocal(thb_pnl_bbq_chain_herocat,6)} THB`;
+        /*  : `<span class="loss">Loss</span>  ${setLocal(Math.abs(cmm_pnl_bbq_chain_herocat),2)} CMM ,  ~${setLocal(Math.abs(usd_pnl_bbq_chain_herocat),5)} USD , ~${setLocal(Math.abs(thb_pnl_bbq_chain_herocat),6)} THB` */
+        document.getElementById("bbq-herominer-gems").innerHTML += ` <br>(${pnlBBQMessage})` ;
       }else{
-        document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
-  
-      }
+        document.getElementById("bbq-herominer-gems").innerHTML += ` <br>(No Power No Miner)` ;
+    }
 
 if(MOPower != 0){
     const pnlMOMessage = pnlMO >= 0 ? `<span class="profit">Profit</span>  ${setLocal((pnlMO*wjbcToUsd)/cmjToUsd,2)} CMJ , ~${setLocal(pnlMO,5)} JBC , ~${setLocal(pnlMO*wjbcToUsd,6)} USD` : `<span class="loss">Loss</span>  ${setLocal(Math.abs((pnlMO*wjbcToUsd)/cmjToUsd),2)} CMJ ,  ~${setLocal(Math.abs(pnlMO),5)} JBC , ~${setLocal(Math.abs(pnlMO*wjbcToUsd),6)} USD`;
