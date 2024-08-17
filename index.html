@@ -1377,6 +1377,7 @@
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 // Get all card elements
 var allCards = document.querySelectorAll('#priceBoard,#factory, #dungeon, #gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher,#kyc');
+var allowedCards = ['priceBoard', 'noti', 'logs', 'gashapon' ,'walletWatcher'];
 
 // Global variable to keep track of subscription status
 let isSubscription = false;
@@ -1400,7 +1401,6 @@ async function toggleCards(showType) {
     console.log("Call ", showType);
 
     // List of allowed cards if the user does not have a subscription
-    var allowedCards = ['priceBoard', 'noti', 'logs', 'gashapon', 'kyc'];
 
     // Hide all cards
     for (var i = 0; i < allCards.length; i++) {
@@ -1423,7 +1423,6 @@ async function toggleCards(showType) {
 
 // Function to validate card visibility based on subscription status
 function validateCardVisibility() {
-    var allowedCards = ['priceBoard', 'noti', 'logs', 'gashapon', 'kyc'];
 
     allCards.forEach(card => {
         const cardId = card.id;

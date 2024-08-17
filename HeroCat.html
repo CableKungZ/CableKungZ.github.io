@@ -255,6 +255,7 @@
             }
         }
     </style>
+  <link rel="stylesheet" href="source/notification.css">
 </head>
 
 <body>
@@ -264,6 +265,37 @@
         <!-- Updated to 'Calculate' -->
         <button class="nav-button" onclick="showSection('TokenPrice')">TokenPrice</button>
     </div>
+    <div id="notifications-container"></div>
+
+
+    <!-- POPUP -->
+<div id="Subscription_Only" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1500; justify-content: center; align-items: center;">
+    <div style="background-color: #ffffff; padding: 30px; width: 70%; max-width: 500px; border-radius: 15px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+        <h2 style="margin-top: 0; color: #333333;">This Function is for Subscribers Only</h2>
+        <p style="color: #666666; margin: 20px 0;">To access this function, please visit our shop and choose a subscription plan.</p>
+        <div style="margin-top: 20px;">
+            <button onclick='closedPopup("Subscription_Only")' style="padding: 12px 24px; margin-right: 10px; border: none; border-radius: 5px; background-color: #f44336; color: #ffffff; font-size: 16px; cursor: pointer;">Close</button>
+            <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')" style="padding: 12px 24px; border: none; border-radius: 5px; background-color: #4caf50; color: #ffffff; font-size: 16px; cursor: pointer;">Go to Subscription</button>
+        </div>
+    </div>
+  </div>
+  <!-- POPUP -->
+  <!-- POPUP -->
+  <div id="Subscription" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1500; justify-content: center; align-items: center;">
+    <div style="background-color: #ffffff; padding: 30px; width: 70%; max-width: 500px; border-radius: 15px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+        <h2 style="margin-top: 0; color: #333333;">DaoBuddy Shop</h2>
+        <p style="color: #666666; margin: 20px 0; ">Address <p id="connectwalletAddress" class="font-size: 16px;"></p></p>
+        <p style="color: #666666; margin: 20px 0;">Subscription : <span id="plan">FREE</span></p>
+        <p style="color: #666666; margin: 20px 0;"><span id="expire"></span></p>
+        <p style="color: #666666; margin: 20px 0;"><span id="detail"></span></p>
+        <p class="center">** The service quota for Free Plan will be limited on 20/08/2024. </p>
+  
+  
+        <div style="margin-top: 20px;">
+            <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')" style="padding: 12px 24px; border: none; border-radius: 5px; background-color: #4caf50; color: #ffffff; font-size: 16px; cursor: pointer;">Go to Subscription</button>
+        </div>
+    </div>
+  </div>
 
     <!------------------------------------------------------------ HERODATA CONTAINER --------------------------------------------------->
     <div id="HeroData" class="container" style="display: flex;"> <!-- Initially show HeroData -->
@@ -690,7 +722,80 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="source/notification.js"></script>
+<script src="source/getPlain.js"></script>
     <script>
+        showdPopup('Subscription')
+  
+        async function connectMetamask() {
+  if (window.ethereum) {
+      web3 = new Web3(window.ethereum);
+      try {
+          currentChainId = await web3.eth.getChainId();
+          console.log(currentChainId);
+          accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          console.log('Connected to MetaMask', accounts[0]);
+          showNotification(`Connected to Metamask ${accounts[0]}`);
+          document.getElementById("connectwalletAddress").innerHTML = `${accounts[0]}`;
+
+          isSubscription = await getPlan(accounts[0]);
+          if(isSubscription) {
+              showNotification(`You already have a subscription on BKC or JBC Chain.`);
+              document.getElementById("plan").innerHTML = `Already Subscribed`;
+
+              userData = await getData(accounts[0]);
+              console.log(userData);
+
+              const expirationDate = new Date(parseInt(userData[2]) * 1000); 
+              const formattedDate = expirationDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
+              const formattedTime = expirationDate.toLocaleTimeString('en-GB'); // HH:MM:SS
+              document.getElementById("expire").innerHTML = `Your Subscription will expire on: ${formattedDate} ${formattedTime}`;
+              showNotification(`Your Subscription will expire on: ${formattedDate} ${formattedTime}`);
+              document.getElementById("detail").innerHTML = `You can Access Every Function`;
+              closedPopup('Subscription');
+          } else {
+              showNotification(`You don't have a subscription plan.`);
+              document.getElementById("detail").innerHTML = `You can't access this page.`;
+              
+              // Block user interactions
+              document.body.style.overflow = 'hidden'; // Disable scrolling
+              
+              // Show a message or modal
+              const accessDeniedMessage = document.createElement('div');
+              accessDeniedMessage.innerHTML = `<h1>Access Denied</h1><p>You need a subscription to access this page.</p>`;
+              accessDeniedMessage.style.position = 'fixed';
+              accessDeniedMessage.style.top = '0';
+              accessDeniedMessage.style.left = '0';
+              accessDeniedMessage.style.width = '100%';
+              accessDeniedMessage.style.height = '100%';
+              accessDeniedMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+              accessDeniedMessage.style.color = '#fff';
+              accessDeniedMessage.style.display = 'flex';
+              accessDeniedMessage.style.justifyContent = 'center';
+              accessDeniedMessage.style.alignItems = 'center';
+              accessDeniedMessage.style.zIndex = '1000';
+              document.body.appendChild(accessDeniedMessage);
+          }
+
+      } catch (error) {
+          console.error('User denied account access', error);
+      }
+  } else {
+      console.error('MetaMask not detected');
+  }
+}
+
+  document.addEventListener('DOMContentLoaded', async function() {
+  await connectMetamask();
+  });
+        
+        function showdPopup(popupId) {
+            document.getElementById(popupId).style.display = 'flex';
+        }
+        function closedPopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+        
         // ทำ HTTP GET request เพื่อดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
         const exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
 
