@@ -142,6 +142,7 @@
 
     <div class="container">
         <h1>Subscription Plan</h1>
+        <span id="info"></span>
         <h2>Event : Early Subscription Discount Every Planing up to 50% </h2>
         <div>
             <div id="chain">
@@ -246,6 +247,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
     <script src="source/notification.js"></script>
+    <script src="source/getPlain.js"></script>
 
     <script>
         function toggleCards(showType) {
@@ -288,14 +290,35 @@
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
             console.log('Connected to MetaMask', accounts[0]);
             showNotification(`Connected to Metamask ${accounts[0]}`)
+            isSubscription = await getPlan(accounts[0])
+            if(isSubscription){
+                showNotification(`You Already Subscription on BKC or JBC Chain`)
+                userData = await getData(accounts[0])
+                console.log(userData);
+
+                const expirationDate = new Date(parseInt(userData[2]) * 1000); 
+                const formattedDate = expirationDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
+                const formattedTime = expirationDate.toLocaleTimeString('en-GB'); // HH:MM:SS
+                document.getElementById("info").innerHTML = `Your Subscription will expire on: ${formattedDate} ${formattedTime}`;
+                showNotification(`Your Subscription will expire on: ${formattedDate} ${formattedTime}`)
+
+            }else{
+                showNotification(`You didn't subscription any plan`)
+
+            }
+
         } catch (error) {
             console.error('User denied account access', error);
-            alert('User denied account access', error);
         }
     } else {
         console.error('MetaMask not detected');
     }
     }
+    document.addEventListener('DOMContentLoaded', async function() {
+    await connectMetamask();
+    });
+
+
     async function BKC_subscription(plan,priceKusdt){
         BKC_subscription_ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"addPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"addSubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"buySubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"checkUserSubscription","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"continueContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isSubscription","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"string","name":"planName","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"removePlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"},{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"setPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"name":"setTokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_walletAddress","type":"address"}],"name":"setWalletAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"subscribers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"subscriptions","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUserSubscription","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"walletAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
         BKC_subscription_Address = "0xffA4bD7EE5e36A19835439473466b2eCc49E572d";
@@ -350,9 +373,7 @@
         
     }
 
-    document.addEventListener('DOMContentLoaded', async function() {
-    await connectMetamask();
-    });
+    
 
 
 

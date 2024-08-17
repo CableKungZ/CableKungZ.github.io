@@ -1,0 +1,49 @@
+
+BKC_subscription_ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"addPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"addSubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"buySubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"checkUserSubscription","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"continueContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isSubscription","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"string","name":"planName","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"removePlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"},{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"setPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"name":"setTokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_walletAddress","type":"address"}],"name":"setWalletAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"subscribers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"subscriptions","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUserSubscription","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"walletAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+BKC_subscription_Address = "0xffA4bD7EE5e36A19835439473466b2eCc49E572d";
+
+JBC_subscription_ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"addPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"addSubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"buySubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"checkUserSubscription","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"continueContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isSubscription","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"string","name":"planName","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"removePlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"},{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"setPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"name":"setTokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_walletAddress","type":"address"}],"name":"setWalletAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"subscribers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"subscriptions","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUserSubscription","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"walletAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+JBC_subscription_Address = "0xbeC3450138778771aA0b4d4D4B5534810EdA9717";
+
+const plan_web3_jbc = new Web3("https://rpc-l1.jibchain.net");
+const plan_web3_bkc = new Web3("https://rpc.bitkubchain.io");
+
+const jbc_subscription = new plan_web3_jbc.eth.Contract(JBC_subscription_ABI, JBC_subscription_Address);
+const bkc_subscription = new plan_web3_bkc.eth.Contract(BKC_subscription_ABI, BKC_subscription_Address);
+
+
+async function getPlan(address) {
+    const jbc = await getPlanJBC(address);
+    const bkc = await getPlanBKC(address);
+    const any = bkc || jbc
+
+    return any;
+}
+
+async function getPlanJBC(address) {
+    const isSubscription = await jbc_subscription.methods.isSubscription(address).call();
+    return isSubscription;
+}
+
+async function getPlanBKC(address) {
+    const isSubscription = await bkc_subscription.methods.isSubscription(address).call();
+    return isSubscription;
+}
+
+async function getData(address){
+    const jbc_data = await fetchData(jbc_subscription,address);
+    const bkc_data = await fetchData(bkc_subscription,address);
+    console.table(jbc_data);
+    console.table(bkc_data);
+    if (jbc_data[2] > bkc_data[2]){
+        return jbc_data
+    }else
+        return bkc_data
+    
+}
+
+async function fetchData(contract,address){
+    result = await contract.methods.userInfo(address).call();
+    console.log(result)
+    return result
+}

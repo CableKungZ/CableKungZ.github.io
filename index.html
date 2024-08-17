@@ -51,21 +51,36 @@
       </div>
     </div>
           <!-- POPUP -->
-          <!-- POPUP -->
-          <div id="Subscription" style="display: none; position: fixed; top: 0; left: 0; align-items: baseline; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
-            <div style="background-color: white; padding: 20px; width: 80%; height: 50%; border-radius:25px; ">
-                <h2 class="center">DaoBuddy Shop</h2>
-                <p class="center">Wallet Address : <span id="user_walletAddress">0x......f1</p>
-                <p class="center">Subscription : <span id="plan">FREE</span></p>
-                <p class="center">You can only access to Price board</p>
-                <p class="center">** The service quota for Free Plan will be limited on 20/08/2024. </p>
-                <div class ="center  " style="flex-wrap: wrap; ">
-                  <button onclick='closedPopup("Subscription")'>Close</button>
-                  <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')">Subscription</button>
-                </div>
-            </div>
-          </div>
-                <!-- POPUP -->
+<!-- POPUP -->
+<div id="Subscription_Only" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1500; justify-content: center; align-items: center;">
+  <div style="background-color: #ffffff; padding: 30px; width: 70%; max-width: 500px; border-radius: 15px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+      <h2 style="margin-top: 0; color: #333333;">This Function is for Subscribers Only</h2>
+      <p style="color: #666666; margin: 20px 0;">To access this function, please visit our shop and choose a subscription plan.</p>
+      <div style="margin-top: 20px;">
+          <button onclick='closedPopup("Subscription_Only")' style="padding: 12px 24px; margin-right: 10px; border: none; border-radius: 5px; background-color: #f44336; color: #ffffff; font-size: 16px; cursor: pointer;">Close</button>
+          <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')" style="padding: 12px 24px; border: none; border-radius: 5px; background-color: #4caf50; color: #ffffff; font-size: 16px; cursor: pointer;">Go to Subscription</button>
+      </div>
+  </div>
+</div>
+<!-- POPUP -->
+<!-- POPUP -->
+<div id="Subscription" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1500; justify-content: center; align-items: center;">
+  <div style="background-color: #ffffff; padding: 30px; width: 70%; max-width: 500px; border-radius: 15px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+      <h2 style="margin-top: 0; color: #333333;">DaoBuddy Shop</h2>
+      <p style="color: #666666; margin: 20px 0;">Address <span id="connectwalletAddress"></span></p>
+      <p style="color: #666666; margin: 20px 0;">Subscription : <span id="plan">FREE</span></p>
+      <p style="color: #666666; margin: 20px 0;"><span id="expire"></span></p>
+      <p style="color: #666666; margin: 20px 0;"><span id="detail"></span></p>
+      <p class="center">** The service quota for Free Plan will be limited on 20/08/2024. </p>
+
+
+      <div style="margin-top: 20px;">
+          <button onclick='closedPopup("Subscription")' style="padding: 12px 24px; margin-right: 10px; border: none; border-radius: 5px; background-color: #f44336; color: #ffffff; font-size: 16px; cursor: pointer;">Close</button>
+          <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')" style="padding: 12px 24px; border: none; border-radius: 5px; background-color: #4caf50; color: #ffffff; font-size: 16px; cursor: pointer;">Go to Subscription</button>
+      </div>
+  </div>
+</div>
+<!-- POPUP -->
 <div>
     <!-------------------------------------------------- Start PriceBoard  --------------------------------------->
     <div  id="priceBoard" class="container mt-5" >
@@ -1268,10 +1283,56 @@
 
 
 <script src="source/notification.js"></script>
+<script src="source/getPlain.js"></script>
 
 
 <script>
+ 
+
+
   showdPopup('Subscription')
+  
+    async function connectMetamask() {
+    if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        try {
+            currentChainId = await web3.eth.getChainId();
+            console.log(currentChainId)
+            accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            console.log('Connected to MetaMask', accounts[0]);
+            showNotification(`Connected to Metamask ${accounts[0]}`)
+            document.getElementById("connectwalletAddress").innerHTML = `${accounts[0]}`;
+
+            isSubscription = await getPlan(accounts[0]);
+            if(isSubscription){
+                showNotification(`You Already Subscription on BKC or JBC Chain`)
+                document.getElementById("plan").innerHTML = `Already Subscription`;
+
+                userData = await getData(accounts[0])
+                console.log(userData);
+
+                const expirationDate = new Date(parseInt(userData[2]) * 1000); 
+                const formattedDate = expirationDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
+                const formattedTime = expirationDate.toLocaleTimeString('en-GB'); // HH:MM:SS
+                document.getElementById("expire").innerHTML = `Your Subscription will expire on: ${formattedDate} ${formattedTime}`;
+                showNotification(`Your Subscription will expire on: ${formattedDate} ${formattedTime}`)
+                document.getElementById("detail").innerHTML = `You can Access Every Function`;
+            }else{
+                showNotification(`You didn't subscription any plan`)
+                document.getElementById("detail").innerHTML = `You can access only PriceBoard`;
+
+            }
+
+        } catch (error) {
+            console.error('User denied account access', error);
+        }
+    } else {
+        console.error('MetaMask not detected');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', async function() {
+    await connectMetamask();
+    });
 
   async function main() {
     showNotification("Loading Price Board........")
@@ -1314,23 +1375,90 @@
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////// Show / Hide Card Board////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    document.addEventListener("DOMContentLoaded", function() {
-      var allCards = document.querySelectorAll('#factory,#dungeon,#gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher,#kyc');
-      for (var i = 0; i < allCards.length; i++) {
-        allCards[i].style.display = 'none';
-      }
-    });
-    function toggleCards(showType) {
-        console.log("Call ",showType);
-      var allCards = document.querySelectorAll('#priceBoard,#factory, #dungeon, #gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher,#kyc');
-      for (var i = 0; i < allCards.length; i++) {
-        allCards[i].style.display = 'none';
-      }
-      var showCards = document.querySelectorAll('#' + showType);
-      for (var i = 0; i < showCards.length; i++) {
-        showCards[i].style.display = 'block';
-      }
+// Get all card elements
+var allCards = document.querySelectorAll('#priceBoard,#factory, #dungeon, #gashapon, #pool, #upgrade, #noti, #logs,#walletWatcher,#kyc');
+
+// Global variable to keep track of subscription status
+let isSubscription = false;
+
+// Function to initialize the subscription status
+async function initializeSubscriptionStatus() {
+    try {
+        isSubscription = await getPlan(accounts[0]);
+        console.log("Wallet:", accounts[0], "isSub ? =>", isSubscription);
+    } catch (error) {
+        console.error("Error fetching subscription status:", error);
     }
+}
+
+// Call the function to set `isSubscription`
+initializeSubscriptionStatus();
+
+// Function to toggle cards based on subscription status
+async function toggleCards(showType) {
+    await initializeSubscriptionStatus();
+    console.log("Call ", showType);
+
+    // List of allowed cards if the user does not have a subscription
+    var allowedCards = ['priceBoard', 'noti', 'logs', 'gashapon', 'kyc'];
+
+    // Hide all cards
+    for (var i = 0; i < allCards.length; i++) {
+        allCards[i].style.display = 'none';
+    }
+
+    // Determine if the card can be shown
+    if (isSubscription || allowedCards.includes(showType)) {
+        var showCards = document.querySelectorAll('#' + showType);
+        for (var i = 0; i < showCards.length; i++) {
+            showCards[i].style.display = 'block';
+        }
+    } else {
+        showdPopup('Subscription_Only');
+    }
+
+    // Additional validation to ensure cards are correctly displayed based on subscription
+    validateCardVisibility();
+}
+
+// Function to validate card visibility based on subscription status
+function validateCardVisibility() {
+    var allowedCards = ['priceBoard', 'noti', 'logs', 'gashapon', 'kyc'];
+
+    allCards.forEach(card => {
+        const cardId = card.id;
+        const isVisible = card.style.display === 'block';
+
+        // Check if card should be visible based on subscription status
+        if (!isSubscription && !allowedCards.includes(cardId) && isVisible) {
+            card.style.display = 'none'; // Hide card if it shouldn't be visible
+            console.log(`Card ${cardId} has been hidden due to subscription status.`);
+        }
+    });
+}
+
+// Monitor changes to the DOM and validate card visibility
+function monitorDOMChanges() {
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                validateCardVisibility();
+                console.log("DOM change detected. Validating card visibility.");
+            }
+        });
+    });
+
+    // Start observing all cards for attribute changes
+    allCards.forEach(card => {
+        observer.observe(card, { attributes: true });
+    });
+}
+
+// Call the function to start monitoring DOM changes
+monitorDOMChanges();
+
+
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////// Show / Hide Popup////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
