@@ -37,6 +37,9 @@
             margin: 20px 0;
             padding: 20px;
             text-align: center;
+            width: 50%;
+            max-width: 350px;
+
         }
 
         .plan h1 {
@@ -72,10 +75,12 @@
         .plan .buy-btn:hover {
             background-color: #2980b9;
         }
-        .chain{
-            flex-wrap: wrap;
-            align-items: baseline;
+        .items{
             display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        #chain{
             text-align: center;
         }
         .chain_logo{
@@ -86,66 +91,161 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
+            cursor: pointer;
         }
+        table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+    thead {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #e0e0e0;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    th {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    td {
+        font-size: 14px;
+        color: #333;
+    }
     </style>
+  <link rel="stylesheet" href="source/notification.css">
+
 </head>
 <body>
+  <div id="notifications-container"></div>
+
     <div class="container">
         <h1>Subscription Plan</h1>
-        <div id="chain">
-            <div class="chain_logo" onclick="">
-                <img src="img\bkc.jpg" alt="#" onclick="toggleCards('bkc')" >
-                <img src="img\jbc.png" alt="#" onclick="toggleCards('jbc')" >
+        <h2>Event : Early Subscription Discount Every Planing up to 50% </h2>
+        <div>
+            <div id="chain">
+                <div class="chain_logo" onclick="">
+                    <img src="img\bkc.jpg" alt="#" onclick="toggleCards('bkc')" >
+                    <img src="img\jbc.png" alt="#" onclick="toggleCards('jbc')" >
+                </div>
+            </div>
+            <div id="bkc" style="display: block;">
+            <h5>Bitkub Chain</h5>
+                <div class="items">
+                    <div class="plan">
+                        <h1>30 Days</h1>
+                        <p class="price">Price: <del>1.00</del> 0.55 KUSDT</p>
+                        <a onclick="BKC_subscription(1,0.55)"class="buy-btn">BUY</a>
+                    </div>
+                    <div class="plan">
+                        <h1>90 Days  </h1>
+                        <p class="price">Price: <del>2.75</del> 1.6 KUSDT</p>
+                        <a onclick="BKC_subscription(2,1.6)"class="buy-btn">BUY</a>
+                    </div>
+                    <div class="plan">
+                        <h1>180 Days </h1>
+                        <p class="price">Price: <del>4.75</del> 3 KUSDT</p>
+                        <a onclick="BKC_subscription(3,3)"class="buy-btn">BUY</a>
+                    </div>
+                    <div class="plan">
+                        <h1>365 Days </h1>
+                        <p class="price">Price: <del>9.99</del> 5 KUSDT</p>
+                        <a onclick="BKC_subscription(4,5)"class="buy-btn">BUY</a>
+                    </div>
+                </div>
+            </div>
+            <div id="jbc" style="display: none;">
+                <h5>Jib Chain</h5>
+                <div class="items">
+                    <div class="plan">
+                        <h1>30 Days</h1>
+                        <p class="price">Price: <del>1.00</del> 0.55 JUSDT</p>
+                        <a onclick="JBC_subscription(1,0.55)"class="buy-btn">BUY</a>
+                    </div>
+                    <div class="plan">
+                        <h1>90 Days </h1>
+                        <p class="price">Price: <del>2.75</del> 1.6 JUSDT</p>
+                        <a onclick="JBC_subscription(2,1.6)"class="buy-btn">BUY</a>
+                    </div>
+                    <div class="plan">
+                        <h1>180 Days  </h1>
+                        <p class="price">Price: <del>4.75</del> 3 JUSDT</p>
+                        <a onclick="JBC_subscription(3,3)"class="buy-btn">BUY</a>
+                    </div>
+                    <div class="plan">
+                        <h1>365 Days</h1>
+                        <p class="price">Price: <del>9.99</del> 5 JUSDT</p>
+                        <a onclick="JBC_subscription(4,5)" class="buy-btn">BUY</a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="bkc" style="display: block;">
-        <h5>Bitkub Chain</h5>
-            <div class="plan">
-                <h1>1 Month</h1>
-                <p class="price">Price: 0.55 KUSDT</p>
-                <a href="#" class="buy-btn">BUY</a>
-            </div>
-            <div class="plan">
-                <h1>3 Months (Discount -3.03%)</h1>
-                <p class="price">Price: 1.6 KUSDT</p>
-                <a href="#" class="buy-btn">BUY</a>
-            </div>
-            <div class="plan">
-                <h1>6 Months (Discount -9.09%)</h1>
-                <p class="price">Price: 3 KUSDT</p>
-                <a href="#" class="buy-btn">BUY</a>
-            </div>
-            <div class="plan">
-                <h1>12 Months (Discount -24.24%)</h1>
-                <p class="price">Price: 5 KUSDT</p>
-                <a href="#" class="buy-btn">BUY</a>
-            </div>
-        </div>
-        <div id="jbc" style="display: none;">
-            <h5>Jib Chain</h5>
-                <div class="plan">
-                    <h1>1 Month</h1>
-                    <p class="price">Price: 0.55 JUSDT</p>
-                    <a href="#" class="buy-btn">BUY</a>
-                </div>
-                <div class="plan">
-                    <h1>3 Months (Discount -3.03%)</h1>
-                    <p class="price">Price: 1.6 JUSDT</p>
-                    <a href="#" class="buy-btn">BUY</a>
-                </div>
-                <div class="plan">
-                    <h1>6 Months (Discount -9.09%)</h1>
-                    <p class="price">Price: 3 JUSDT</p>
-                    <a href="#" class="buy-btn">BUY</a>
-                </div>
-                <div class="plan">
-                    <h1>12 Months (Discount -24.24%)</h1>
-                    <p class="price">Price: 5 JUSDT</p>
-                    <a href="#" class="buy-btn">BUY</a>
-                </div>
-            </div>
+        
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>FUNCTION</th>
+                    <th>FREE</th>
+                    <th>SUBSCRIPTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>(BKC) HeroCat All Function  </td>
+                    <td>❎</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>(JBC) DaoBuddy : Price</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>(JBC) DaoBuddy : All Function</td>
+                    <td>❎</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>(JBC) DaoBuddy Service : Claim Field</td>
+                    <td>5 JBC / Claims</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>(JBC) DaoBuddy Service : Transfer Helper</td>
+                    <td>0.01 CMJ per Target Address</td>
+                    <td>0.01 CMJ per Target Address</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
+    <script src="source/notification.js"></script>
 
     <script>
         function toggleCards(showType) {
@@ -159,6 +259,160 @@
         showCards[i].style.display = 'block';
       }
     }
+
+
+    async function switchToChain(chainId) {
+    if (window.ethereum) {
+        try {
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: `0x${chainId.toString(16)}` }],
+            });
+            console.log('Switched to chain with ID:', chainId);
+        } catch (error) {
+            console.error('Error switching chain:', error);
+            alert('Error switching chain:', error);
+        }
+    } else {
+        console.error('MetaMask not detected');
+        alert('MetaMask not detected');
+    }
+    window.location.reload();
+    }
+    async function connectMetamask() {
+    if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        try {
+            currentChainId = await web3.eth.getChainId();
+            console.log(currentChainId)
+            accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            console.log('Connected to MetaMask', accounts[0]);
+            showNotification(`Connected to Metamask ${accounts[0]}`)
+        } catch (error) {
+            console.error('User denied account access', error);
+            alert('User denied account access', error);
+        }
+    } else {
+        console.error('MetaMask not detected');
+    }
+    }
+    async function BKC_subscription(plan,priceKusdt){
+        BKC_subscription_ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"addPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"addSubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"buySubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"checkUserSubscription","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"continueContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isSubscription","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"string","name":"planName","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"removePlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"},{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"setPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"name":"setTokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_walletAddress","type":"address"}],"name":"setWalletAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"subscribers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"subscriptions","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUserSubscription","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"walletAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+        BKC_subscription_Address = "0xffA4bD7EE5e36A19835439473466b2eCc49E572d";
+
+        Kusdt_Address = "0x7d984C24d2499D840eB3b7016077164e15E5faA6";
+        Kusdt_ABI = [{"inputs":[{"internalType":"address","name":"admin","type":"address"},{"internalType":"address","name":"committee","type":"address"},{"internalType":"contract IKYCBitkubChain","name":"kyc","type":"address"},{"internalType":"uint256","name":"acceptedKycLevel","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"caller","type":"address"}],"name":"AddBlacklist","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Paused","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"caller","type":"address"}],"name":"RevokeBlacklist","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldAdmin","type":"address"},{"indexed":true,"internalType":"address","name":"newAdmin","type":"address"},{"indexed":true,"internalType":"address","name":"caller","type":"address"}],"name":"SetAdmin","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldCommittee","type":"address"},{"indexed":true,"internalType":"address","name":"newCommittee","type":"address"},{"indexed":true,"internalType":"address","name":"caller","type":"address"}],"name":"SetCommittee","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Unpaused","type":"event"},{"inputs":[],"name":"acceptedKycLevel","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"activateOnlyKycAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"addBlacklist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"adminTransfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowances","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"blacklist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"committee","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"externalTransfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"internalTransfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"isActivatedOnlyKycAddress","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"kyc","outputs":[{"internalType":"contract IKYCBitkubChain","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"revokeBlacklist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_kycLevel","type":"uint256"}],"name":"setAcceptedKycLevel","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_admin","type":"address"}],"name":"setAdmin","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_committee","type":"address"}],"name":"setCommittee","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"contract IKYCBitkubChain","name":"_kyc","type":"address"}],"name":"setKYC","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"unpause","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+
+        currentChainId = await web3.eth.getChainId();
+        if (currentChainId != 96) {
+                showNotification(`Detected Wrong Chain ID ..... please confirm change ChainID`);
+                await switchToChain(96);
+                return; 
+            }
+
+        accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        bkc_subscription = new web3.eth.Contract(BKC_subscription_ABI, BKC_subscription_Address);
+        Kusdt_Contract = new web3.eth.Contract(Kusdt_ABI, Kusdt_Address);
+        
+        await BKCensureAllowance(Kusdt_Contract,Kusdt_Address,parseFloat(priceKusdt),BKC_subscription_Address) // Check KUSDT Allowance Enough ? 
+
+        await bkc_subscription.methods.buySubscription(plan).send({
+            from: accounts[0] 
+        });
+        
+    }
+
+
+    async function JBC_subscription(plan,priceJusdt){
+        JBC_subscription_ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"addPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"},{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"addSubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"buySubscription","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"checkUserSubscription","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"continueContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"isSubscription","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"plans","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"string","name":"planName","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"uint256","name":"price","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"}],"name":"removePlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_planIndex","type":"uint256"},{"internalType":"string","name":"_planName","type":"string"},{"internalType":"uint256","name":"_duration","type":"uint256"},{"internalType":"uint256","name":"_price","type":"uint256"}],"name":"setPlan","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_tokenAddress","type":"address"}],"name":"setTokenAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_walletAddress","type":"address"}],"name":"setWalletAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"subscribers","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"subscriptions","outputs":[{"internalType":"uint256","name":"planIndex","type":"uint256"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"end","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalUserSubscription","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_user","type":"address"}],"name":"userInfo","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"walletAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+        JBC_subscription_Address = "0xbeC3450138778771aA0b4d4D4B5534810EdA9717";
+
+        Jusdt_Address = "0x24599b658b57f91E7643f4F154B16bcd2884f9ac";
+        Jusdt_Abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+
+        currentChainId = await web3.eth.getChainId();
+        if (currentChainId != 8899) {
+                showNotification(`Detected Wrong Chain ID ..... please confirm change ChainID`);
+                await switchToChain(8899);
+                return; 
+            }
+
+        accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        jbc_subscription = new web3.eth.Contract(JBC_subscription_ABI, JBC_subscription_Address);
+        Jusdt_Contract = new web3.eth.Contract(Jusdt_Abi, Jusdt_Address);
+        
+
+        await ensureAllowance(Jusdt_Contract,Jusdt_Address,parseFloat(priceJusdt),JBC_subscription_Address) // Check KUSDT Allowance Enough ? 
+
+        await jbc_subscription.methods.buySubscription(plan).send({
+            from: accounts[0] 
+        });
+        
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+    await connectMetamask();
+    });
+
+
+
+
+
+    async function ensureAllowance(tokenContract ,tokenAddress, requiredAmount , delegator) {
+    console.log("requiredAmount : ", requiredAmount);
+
+    // Convert requiredAmount to a string if it's a number
+    requiredAmount = requiredAmount.toString();
+
+    // Convert requiredAmount from ether to wei
+    const requiredAmountWei = web3.utils.toWei(requiredAmount, 'ether');
+    console.log("requiredAmount (wei) : ", requiredAmountWei);
+
+    // Fetch user balance and convert it to wei for comparison
+    const balance = await tokenContract.methods.balanceOf(accounts[0]).call();
+    const balanceWei = web3.utils.toWei(balance, 'ether');
+    console.log("User Balance (wei): ", balanceWei);
+
+    // Fetch allowance and convert it to wei for comparison
+    const allowance = await tokenContract.methods.allowance(accounts[0], delegator).call();
+    const allowanceWei = web3.utils.toWei(allowance, 'ether');
+    console.log("Allowance (wei) : ", allowanceWei);
+    console.log("Required Amount (wei) : ", requiredAmountWei);
+
+    // Check if allowance is less than required amount
+    if (parseInt(allowanceWei) < parseInt(requiredAmountWei)) {
+        await tokenContract.methods.approve(delegator, requiredAmountWei).send({ from: accounts[0] });
+    }
+}
+
+async function BKCensureAllowance(tokenContract ,tokenAddress, requiredAmount , delegator) {
+    console.log("requiredAmount : ", requiredAmount);
+
+    // Convert requiredAmount to a string if it's a number
+    requiredAmount = requiredAmount.toString();
+
+    // Convert requiredAmount from ether to wei
+    const requiredAmountWei = web3.utils.toWei(requiredAmount, 'ether');
+    console.log("requiredAmount (wei) : ", requiredAmountWei);
+
+    // Fetch user balance and convert it to wei for comparison
+    const balance = await tokenContract.methods.balanceOf(accounts[0]).call();
+    const balanceWei = web3.utils.toWei(balance, 'ether');
+    console.log("User Balance (wei): ", balanceWei);
+
+    // Fetch allowance and convert it to wei for comparison
+    const allowance = await tokenContract.methods.allowances(accounts[0], delegator).call();
+    const allowanceWei = web3.utils.toWei(allowance, 'ether');
+    console.log("Allowance (wei) : ", allowanceWei);
+    console.log("Required Amount (wei) : ", requiredAmountWei);
+
+    // Check if allowance is less than required amount
+    if (parseInt(allowanceWei) < parseInt(requiredAmountWei)) {
+        await tokenContract.methods.approve(delegator, requiredAmountWei).send({ from: accounts[0] });
+    }
+}
+
+
     </script>
 </body>
 </html>
