@@ -51,6 +51,20 @@
       </div>
     </div>
           <!-- POPUP -->
+          <!-- POPUP -->
+          <div id="Subscription" style="display: none; position: fixed; top: 0; left: 0; align-items: baseline; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
+            <div style="background-color: white; padding: 20px; width: 80%; height: 50%; border-radius:25px; ">
+                <h2 class="center">DaoBuddy Shop</h2>
+                <p class="center">Wallet Address : <span id="user_walletAddress">0x......f1</p>
+                <p class="center">Subscription : FREE</p>
+                <p class="center">You can only access to Price board</p>
+                <div class ="center  " style="flex-wrap: wrap; ">
+                  <button onclick='closedPopup("Subscription")'>Close</button>
+                  <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')">Subscription</button>
+                </div>
+            </div>
+          </div>
+                <!-- POPUP -->
 <div>
     <!-------------------------------------------------- Start PriceBoard  --------------------------------------->
     <div  id="priceBoard" class="container mt-5" >
@@ -1256,6 +1270,8 @@
 
 
 <script>
+  showdPopup('Subscription')
+
   async function main() {
     showNotification("Loading Price Board........")
     price_bkc();
