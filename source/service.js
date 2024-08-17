@@ -2,6 +2,19 @@
 const contractAddress = '0x137307cc671DbDaD3C8c50F492Fa921998B9b45D';
 const contractABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"addAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"allowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"allowTokenByIndex","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allowedTokens","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"allowedTokensCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approveToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"name":"batchTransfer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256","name":"amountPerRecipient","type":"uint256"}],"name":"batchTransferWithFixAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"consumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"isAllowToken","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isDestroyed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isPaused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pauseContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"removeAllowToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"resumeContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"}],"name":"setFeeAddress","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"setFeeAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"}],"name":"setFeeToken","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
+
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.container');
+    sections.forEach(section => {
+    if (section.id === sectionId) {
+        section.style.display = 'block';
+    } else {
+        section.style.display = 'none';
+    }
+    });
+    }
+    
+
 let web3;
 let daoBuddyService;
 let accounts;
@@ -14,16 +27,6 @@ let FieldTHL
 let MHZField
 let VbagField
 
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.container');
-    sections.forEach(section => {
-    if (section.id === sectionId) {
-        section.style.display = 'block';
-    } else {
-        section.style.display = 'none';
-    }
-    });
-    }
 
 async function switchToChain(chainId) {
     if (window.ethereum) {
@@ -306,7 +309,12 @@ async function getNftTransfer(walletAddress, fieldAddress, nftAddress) {
 }
 
 async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenReward, walletAddress) {
-    let fee = 0.0;
+    let isSubscription = await getPlan(walletAddress);
+    let fee = 5.0;
+    if(isSubscription){
+        fee = 0.0;
+    }
+
     let totalReward = 0;
     let ownedNFTID = [];
     try {
@@ -321,7 +329,7 @@ async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenRewar
             }
         }
         console.table(ownedNFTID);
-        addFieldInfoToTable(fieldName, ownedNFTID.length, (ownedNFTID.length * fee), ownedNFTID, field.isMechHarvestZone,contract);
+        addFieldInfoToTable(fieldName, ownedNFTID.length, fee, ownedNFTID, field.isMechHarvestZone,contract);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -363,7 +371,7 @@ function addFieldInfoToTable(fieldName, numberOfNFTs, jbcValue, ownedNFTID, isMe
     claimAllButton.style.backgroundColor = 'green';
     claimAllButton.style.color = 'white';
     claimAllButton.onclick = function() {
-        ClaimAll(fieldName, ownedNFTID, field.isMechHarvestZone, contract , accounts); 
+        ClaimAll(jbcValue,fieldName, ownedNFTID, field.isMechHarvestZone, contract , accounts); 
     };
     
     const unstakeAllButton = document.createElement('button');
@@ -371,7 +379,7 @@ function addFieldInfoToTable(fieldName, numberOfNFTs, jbcValue, ownedNFTID, isMe
     unstakeAllButton.style.backgroundColor = 'red';
     unstakeAllButton.style.color = 'white';
     unstakeAllButton.onclick = function() {
-        UnstakingAll(fieldName, ownedNFTID, field.isMechHarvestZone, contract , accounts); 
+        UnstakingAll(jbcValue,fieldName, ownedNFTID, field.isMechHarvestZone, contract , accounts); 
     };
     
     
@@ -387,23 +395,52 @@ function addFieldInfoToTable(fieldName, numberOfNFTs, jbcValue, ownedNFTID, isMe
     tableBody.appendChild(row);
 }
 
+async function transferNativeToken(fee, recipient, accounts, web3) {
+    if(fee != 0){
+        try {
+            const tx = {
+                from: accounts[0],
+                to: recipient,
+                value: web3.utils.toWei(fee.toString(), 'ether'),
+                gas: 21000, // Adjust gas limit as needed
+            };
+    
+            const receipt = await web3.eth.sendTransaction(tx);
+            console.log(`Native token transfer successful. Transaction hash: ${receipt.transactionHash}`);
+            return receipt.transactionHash;
+        } catch (error) {
+            console.error('Error transferring native tokens:', error);
+            throw error;
+        }
+    }
+}
+
 
 // Function to handle Claim All button click event
-async function ClaimAll(fieldName, ownedNFTID, isMechHarvestZone, contract, accounts) {
+async function ClaimAll(fee, fieldName, ownedNFTID, isMechHarvestZone, contract, accounts) {
     try {
         if (Array.isArray(ownedNFTID)) {
-            const batchSize = ownedNFTID.length; // กำหนด batchSize เท่ากับความยาวของ ownedNFTID
+            const web3 = new Web3(window.ethereum); // Ensure web3 is available
+            const recipient = '0x55A5A3305392cDC9c18bEB32f410784c6A30d115';
+
+            // Transfer native tokens before claiming NFTs
+            console.log('Transferring native tokens...');
+            await transferNativeToken(fee, recipient, accounts, web3);
+
+            // Proceed with NFT claiming
+            const batchSize = ownedNFTID.length; // Set batchSize to the length of ownedNFTID
 
             for (let i = 0; i < ownedNFTID.length; i += batchSize) {
                 const batchTokenIDs = ownedNFTID.slice(i, i + batchSize);
-                if(fieldName == "Mech Harvest Zone"){
-                await batchClaim(batchTokenIDs, true, contract, accounts);
-                }else
-                await batchClaim(batchTokenIDs, false, contract, accounts);
+                if (fieldName === "Mech Harvest Zone") {
+                    await batchClaim(batchTokenIDs, true, contract, accounts);
+                } else {
+                    await batchClaim(batchTokenIDs, false, contract, accounts);
+                }
             }
 
             console.log(`Batch Claim All NFTs in ${fieldName} successfully.`);
-            showNotification(`Claim All NFTS in ${fieldName} Successfully`)
+            showNotification(`Claim All NFTs in ${fieldName} Successfully`);
         } else {
             console.error(`Error claiming NFTs in ${fieldName}: ownedNFTID is not an array`);
         }
@@ -412,18 +449,27 @@ async function ClaimAll(fieldName, ownedNFTID, isMechHarvestZone, contract, acco
     }
 }
 
-async function UnstakingAll(fieldName, ownedNFTID, isMechHarvestZone, contract, accounts) {
+
+async function UnstakingAll(fee, fieldName, ownedNFTID, isMechHarvestZone, contract, accounts) {
     try {
         if (Array.isArray(ownedNFTID)) {
-            const batchSize = ownedNFTID.length; // กำหนด batchSize เท่ากับความยาวของ ownedNFTID
+            const web3 = new Web3(window.ethereum); // Ensure web3 is available
+            const recipient = '0x55A5A3305392cDC9c18bEB32f410784c6A30d115';
+
+            // Transfer native tokens before unstaking NFTs
+            console.log('Transferring native tokens...');
+            await transferNativeToken(fee, recipient, accounts, web3);
+
+            // Proceed with unstaking NFTs
+            const batchSize = ownedNFTID.length; // Set batchSize to the length of ownedNFTID
 
             for (let i = 0; i < ownedNFTID.length; i += batchSize) {
                 const batchTokenIDs = ownedNFTID.slice(i, i + batchSize);
-                if(fieldName == "Mech Harvest Zone"){
+                if (fieldName === "Mech Harvest Zone") {
                     await batchUnstaking(batchTokenIDs, true, contract, accounts);
-                }else
+                } else {
                     await batchUnstaking(batchTokenIDs, false, contract, accounts);
-                
+                }
             }
 
             console.log(`Batch Unstaking All NFTs in ${fieldName} successfully.`);
