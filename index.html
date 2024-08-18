@@ -1398,9 +1398,6 @@ initializeSubscriptionStatus();
 // Function to toggle cards based on subscription status
 async function toggleCards(showType) {
     await initializeSubscriptionStatus();
-    console.log("Call ", showType);
-
-    // List of allowed cards if the user does not have a subscription
 
     // Hide all cards
     for (var i = 0; i < allCards.length; i++) {

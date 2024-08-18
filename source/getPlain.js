@@ -12,7 +12,7 @@ const jbc_subscription = new plan_web3_jbc.eth.Contract(JBC_subscription_ABI, JB
 const bkc_subscription = new plan_web3_bkc.eth.Contract(BKC_subscription_ABI, BKC_subscription_Address);
 
 
-async function getPlan(address) {
+export async function getPlan(address) {
     const jbc = await getPlanJBC(address);
     const bkc = await getPlanBKC(address);
     const any = bkc || jbc
@@ -30,7 +30,7 @@ async function getPlanBKC(address) {
     return isSubscription;
 }
 
-async function getData(address){
+export async function getData(address){
     const jbc_data = await fetchData(jbc_subscription,address);
     const bkc_data = await fetchData(bkc_subscription,address);
     console.table(jbc_data);
