@@ -85,7 +85,7 @@ function main(){
     daoBuddyService = new web3.eth.Contract(contractABI, contractAddress);
     
 async function loadContract(provider, contractAddress) {
-    const response = await fetch(`https://exp-l1-ng.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
+    const response = await fetch(`https://exp.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
     const jsonResult = await response.json();
     if (jsonResult.status === '1') {
     const jsonABI = JSON.parse(jsonResult.result);
