@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMM TOKEN TRACKER</title>
+
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+    }
+    .holder, .lp {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    .details {
+        background-color: #ecf0f1;
+        border-radius: 8px;
+        padding: 20px;
+        width: 200px;
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+    .details:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .Header {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #2980b9;
+        margin-bottom: 10px;
+    }
+    .info {
+        margin: 5px 0;
+    }
+    @media (max-width: 768px) {
+        .holder, .lp {
+            flex-direction: column;
+            align-items: center;
+        }
+        .details {
+            width: 80%;
+        }
+    }
+</style>
+<body>
+  <div id="notifications-container"></div>
+  <div id="Subscription_Only" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1500; justify-content: center; align-items: center;">
+    <div style="background-color: #ffffff; padding: 30px; width: 70%; max-width: 500px; border-radius: 15px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+        <h2 style="margin-top: 0; color: #333333;">This Function is for Subscribers Only</h2>
+        <p style="color: #666666; margin: 20px 0;">To access this function, please visit our shop and choose a subscription plan.</p>
+        <div style="margin-top: 20px;">
+            <button onclick='closedPopup("Subscription_Only")' style="padding: 12px 24px; margin-right: 10px; border: none; border-radius: 5px; background-color: #f44336; color: #ffffff; font-size: 16px; cursor: pointer;">Close</button>
+            <button onclick="window.open('https://daobuddy.xyz/shop', '_blank')" style="padding: 12px 24px; border: none; border-radius: 5px; background-color: #4caf50; color: #ffffff; font-size: 16px; cursor: pointer;">Go to Subscription</button>
+        </div>
+    </div>
+  </div>
+    <div class="container">
+        <h1>HOLDER DETAILS</h1>
+        <div class="holder">
+            <div class="details">
+                <p class="Header">AGUA FACTORY</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="agua_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">CommuDao TBridge</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="tBridge_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">FRASER RIVER</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="fraserriver_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Community</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="community_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Company</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="company_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Admin</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="admin_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Invester</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="invester_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Airdrop</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="airdrop_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Buyback</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="buyback_cmm"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Dump CMM</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="dumphil"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">Convert CM to CMM</p>
+                <p class="info">Bitkub Chain</p>
+                <p class="info"><span id="burnCMtoCMM"></span> CMM</p>
+            </div>
+            <div class="details">
+                <p class="Header">LP</p>
+                <p class="info">ALL Chain</p>
+                <p class="info"><span id="lpCMM">0</span> CMM</p>
+            </div>
+        </div>
+        <h1>LP DETAILS</h1>
+        <div class="lp" id="lpContainer">
+<!--             <div class="details">
+                <p class="Header"></p>
+                <p class="info"></p>
+                <p class="info"><span></span> </p>
+                <p class="info"><span></span> </p>
+            </div> -->
+        </div>
+
+        
+    </div>
+</body>
+</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
+<script src="source/notification.js"></script>
+<script src="source/getPlain.js"></script>
+<link rel="stylesheet" href="source/notification.css">
+
+
+<script>
+    function showdPopup(popupId) {
+        document.getElementById(popupId).style.display = 'flex';
+    }
+    function closedPopup(popupId) {
+      document.getElementById(popupId).style.display = 'none';
+  }
+
+    async function connectMetamask() {
+        if (window.ethereum) {
+            web3 = new Web3(window.ethereum);
+            try {
+                currentChainId = await web3.eth.getChainId();
+                console.log(currentChainId)
+                accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                console.log('Connected to MetaMask', accounts[0]);
+                showNotification(`Connected to Metamask ${accounts[0]}`)
+    
+                isSubscription = await getPlan(accounts[0]);
+                if(isSubscription){
+                    showNotification(`You Already Subscription on BKC or JBC Chain`)
+    
+                    userData = await getData(accounts[0])
+                    console.log(userData);
+    
+                    const expirationDate = new Date(parseInt(userData[2]) * 1000); 
+                    const formattedDate = expirationDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
+                    const formattedTime = expirationDate.toLocaleTimeString('en-GB'); // HH:MM:SS
+                    showNotification(`Your Subscription will expire on: ${formattedDate} ${formattedTime}`)
+                    addresses.forEach(({ id, address }) => {
+                        getTokenBalanceViaAddress(BKCweb3, BKC_cmm, address)
+                            .then(balance => {
+                                document.getElementById(id).innerHTML = (balance / 10**18).toLocaleString();
+                            })
+                            .catch(error => {
+                                console.error(`Error fetching balance for ${id}:`, error);
+                            });
+                    });
+                    updateAllPools();
+                
+                }else{
+                    showNotification(`You didn't subscription any plan`)
+                    showdPopup('Subscription_Only');
+                }
+    
+            } catch (error) {
+                console.error('User denied account access', error);
+            }
+        } else {
+            console.error('MetaMask not detected');
+          }
+        }
+        document.addEventListener('DOMContentLoaded', async function() {
+        await connectMetamask();
+        });
+
+    ERC20ABI = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}];
+    
+    BKCweb3 = new Web3("https://rpc.bitkubchain.io");
+    BBQweb3 = new Web3("https://bbqchain-rpc.commudao.xyz");
+    OPweb3 = new Web3("https://optimism.meowrpc.com");
+    
+
+    BKC_kkub = "0x67eBD850304c70d983B2d1b93ea79c7CD6c3F6b5";
+    BKC_cmm = "0x9B005000A10Ac871947D99001345b01C1cEf2790";
+    BKC_jbc = "0x4D51Bb6a38EF573a38BE56566562Fb30464A40F9";
+    BKC_tao = "0x6527d3D38a7Ff4E62f98fE27dd9242a36227FE23";
+    BKC_hrc = "0x9F442fa2d4BbD8a183e1EF69f8A7C990465361fe";
+    BKC_gold = "0x794a7b0249eE38FCa6429DE90924113dc9566748";
+    BKC_dm = "0x8AB1fcBe9f65b86a52c34FeE9b29679f70D8f6fA";
+
+    OP_cmm = "0xd7ee783dfe4ba0ee3979c392f82e0a93d06fc27e";
+    OP_cmd = "0x399fe73bb0ee60670430fd92fe25a0fdd308e142";
+
+    BBQ_gem = "0x222B20bCBBa261DfaaEEe6395f672F15c4d7e88F";
+    BBQ_cmm = "0x45ed41ED4E0F48317f787Dc268779260b1Ca81f1";
+
+
+    aguaFactory = "0x43e4550A5c8E690511A5503eE030B552C582B74F";
+    tBridge = "0x2Ce7d537A30FAd10cB0E460604e45D9D2460D66A";
+    FraserRiver = "0xBc57A8D5456c145a09557e0aD0C5959948e0cf7E";
+
+
+
+    const BKCPOOL = [
+    { name: "JBC-CMM", address: "0xA4CEB16287A1645e3EC48c16Efc5126e23639917",pair:BKC_jbc},
+    { name: "KKUB-CMM", address: "0x5Cced24E580586841f326d5088D288e6Ddd201dA",pair:BKC_kkub},
+    { name: "TAO-CMM", address: "0xF8C3fFcB1069A1cF87797A24Dc956AF89C5AC6A1",pair:BKC_tao},
+    { name: "HRC-CMM", address: "0x65E71B51e1EA9725E3405ce29b6e5bF3b351b581",pair:BKC_hrc},
+    { name: "GOLD-CMM", address: "0xf37A6E92c9c905eFf314EDa1F35C48E7FB3Cd783",pair:BKC_gold},
+    { name: "DM-CMM", address: "0xb079F28bC07dc813D08c40AA0016a110eD393aeD",pair:BKC_dm},
+    ]
+    
+
+    let lpCMM = 0; // Initialize lpCMM
+
+    async function updatePool(provider, lpPool, cmm, chainName) {
+        for (let pool of lpPool) {
+            const currentCMM = parseFloat(document.getElementById("lpCMM").textContent.replace(/,/g, '')) || 0; // Handle commas in the number
+            console.log(`current CMM = ${currentCMM}`);
+            
+            const { name, address: poolAddress, pair } = pool;
+            const [token1, token2] = name.split("-");
+    
+            try {
+                // Fetch balances for each token
+                const balance1 = await getTokenBalanceViaAddress(provider, pair, poolAddress);
+                const balance2 = await getTokenBalanceViaAddress(provider, cmm, poolAddress);
+    
+                // Create HTML structure
+                const lpElement = document.createElement("div");
+                lpElement.className = "lp";
+    
+                lpElement.innerHTML = `
+                <div class="details">
+                    <p class="Header">${name}</p>
+                    <p class="info">${chainName}</p>
+                    <p class="info"><span>${(balance1 / 10 ** 18).toLocaleString()}</span> ${token1}</p>
+                    <p class="info"><span>${(balance2 / 10 ** 18).toLocaleString()}</span> CMM</p>
+                </div>
+                `;
+    
+                // Update lpCMM correctly
+                lpCMM = currentCMM + (balance2 / 10 ** 18);
+                document.getElementById("lpCMM").textContent = lpCMM.toLocaleString();
+    
+                // Append to a container in your document
+                document.querySelector("#lpContainer").appendChild(lpElement);
+            } catch (error) {
+                console.error(`Error fetching balance for pool ${name}:`, error);
+            }
+        }
+    }
+    
+
+
+    const OPPOOL = [
+    { name: "CMD-CMM", address: "0xa4df424cd74db4395215ee1258cf2705f04dda36",pair: OP_cmd}
+    ]
+
+
+
+    const BBQPOOL = [
+    { name: "GEM-CMM", address: "0xcd73B2268109c9984E9b62AAEEC7Fc65a8e4A277",pair: BBQ_gem}
+    ]
+
+
+    async function updateAllPools() {
+        try {
+          await updatePool(BKCweb3, BKCPOOL, BKC_cmm, "BITKUB CHAIN");
+          await updatePool(OPweb3, OPPOOL, OP_cmm, "OP CHAIN");
+          await updatePool(BBQweb3, BBQPOOL, BBQ_cmm, "BBQ CHAIN");
+      
+          console.log("All pools updated successfully!");
+        } catch (error) {
+          console.error("Error updating pools:", error);
+        }
+      }
+      
+
+
+
+    async function getTokenBalanceViaAddress(provider,tokenaddress,address){
+        const contract = new provider.eth.Contract(ERC20ABI, tokenaddress);
+        return contract.methods.balanceOf(address).call();
+    }
+
+
+    const addresses = [
+    { id: "agua_cmm", address: aguaFactory },
+    { id: "tBridge_cmm", address: tBridge },
+    { id: "fraserriver_cmm", address: FraserRiver },
+    { id: "community_cmm", address: "0x2c05e8E7661795684F137015f054BAA87F4a9aCe"},
+    { id: "company_cmm", address: "0x20869566c37Bd91dAe6D37E6A2474aE97f25Aa56"},
+    { id: "admin_cmm", address: "0x5BfE0E5736C49A1c6ecd941cE3953A9d956F04a1"},
+    { id: "invester_cmm", address: "0xF84e365eCbc4D6AAA629ddA80E152F917ea6F876"},
+    { id: "airdrop_cmm", address: "0x4938F5E1e759eA5D99C6F409bfb0887aad85138f"},
+    { id: "buyback_cmm", address: "0x9fD5742cB128d6d042Bf35B9670efFCa75524621"},
+    { id: "dumphil", address: "0x379DB4707f084A37447729DC3C48706CB4C3f8d9"},
+    { id: "burnCMtoCMM", address: "0x4e21a0Fa07085fC68c341619FF46944658F816A0"},
+    ];
+
+
+
+    
+      
+
+
+</script>
