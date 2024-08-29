@@ -598,7 +598,7 @@ async function price_jbc(){
           const Jtao_inUSDT = parseFloat(document.getElementById("usdToTao").textContent) ; //
           const CMJ_inUSDT = parseFloat(document.getElementById("B-usdToCmj").textContent) ; // 
           const gasType = II_Price;
-          const prodType = EE_PriceCost_CMJ_Dun4;
+          const prodType = EE_Price*0.95;
           const rewardPow = 0.0767232;
           const reJtaoPow = rewardPow / JTAOPrice;
           const gasFee = gasType * parseFloat(document.getElementById('gasTaoDum').value);
