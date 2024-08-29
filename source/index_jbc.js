@@ -469,7 +469,7 @@ powerInputs.forEach(input => {
     const EEPrice = parseFloat(document.getElementById("S-taoToEE").textContent) ; // Get Price of EE/JTAO
     const IIPrice = parseFloat(document.getElementById("S-taoToII").textContent) ; // Get Price of II/JTAO
     const TaoPriceUSDT = parseFloat(document.getElementById("usdToTao").textContent) ; // Get Price of EE/JTAO
-    const gasDun5 = parseFloat(document.getElementById("Cost_CMJ_Dun4").textContent) ; // CryoticCogs Gas
+    const gasDun5 = parseFloat(document.getElementById("Dun4_CMJ").textContent) ; // CryoticCogs Gas
 
     const cuPrice = parseFloat(document.getElementById("S-Cu").textContent) ;
     const jaspPrice = parseFloat(document.getElementById("S-Jasp").textContent) ;

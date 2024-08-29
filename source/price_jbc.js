@@ -594,30 +594,33 @@ async function price_jbc(){
           // Setting Cryptic Cogs Lab_IIFactory_PNL
           {
           const II_Price = parseFloat(document.getElementById("B-taoToII").textContent) ; // II in JTAO
-          const EE_Price = parseFloat(document.getElementById("B-taoToEE").textContent) ; // II in JTAO
+          const EE_Price = parseFloat(document.getElementById("S-taoToEE").textContent) ; // II in JTAO
           const Jtao_inUSDT = parseFloat(document.getElementById("usdToTao").textContent) ; //
           const CMJ_inUSDT = parseFloat(document.getElementById("B-usdToCmj").textContent) ; // 
           const gasType = II_Price;
-          const prodType = EE_Price;
+          const prodType = EE_PriceCost_CMJ_Dun4;
           const rewardPow = 0.0767232;
           const reJtaoPow = rewardPow / JTAOPrice;
-          const gasFee = gasType * 7;
+          const gasFee = gasType * parseFloat(document.getElementById('gasTaoDum').value);
           const minPow = gasFee / (prodType * rewardPow);
-          const prof1 = ((1000 + gasFee) / prodType) / rewardPow+3;
-          const prof5 = ((2000 + gasFee) / prodType) / rewardPow+3;
-          const prof10 = ((4000 + gasFee) / prodType) / rewardPow+3;
-          const prof100 = ((10000 + gasFee) / prodType) / rewardPow+3;
-          
+
+
+            // Fomular  ((II GAS PRICE) / EE_PRICE) / MINING RATE = Minimum Power
+          const nopfp = ((35 * II_Price) / EE_Price) / rewardPow;
+          const pfp_r1 = ((7 * II_Price) / EE_Price) / rewardPow;
+          const pfp_r2 = ((4 * II_Price) /  EE_Price) / rewardPow;
+          const pfp_r3 = ((1 * II_Price) / EE_Price) / rewardPow;
+
           document.getElementById("Dun4_CMJ").innerHTML = setLocal(gasFee,2); // Amount of TAO in Gas Fee
           document.getElementById("Dun4_JBC").innerHTML = setLocal((gasFee * Jtao_inUSDT),4); // Gass Fee in USDT
           
-          document.getElementById("Min_Dun4").innerHTML = setLocal(minPow*1.15,0);
-          document.getElementById("Cost_CMJ_Dun4").innerHTML = Math.abs(setLocal(gasFee,3));
-          document.getElementById("Reward_JTAO_Dun4").innerHTML = setLocal(rwJBCPow,2);
-          document.getElementById("Prof1_Dun4").innerHTML = setLocal(prof1,0);
-          document.getElementById("Prof2_Dun4").innerHTML = setLocal(prof5,0);
-          document.getElementById("Prof3_Dun4").innerHTML = setLocal(prof10,0);
-          document.getElementById("Prof4_Dun4").innerHTML = setLocal(prof100,0);
+          document.getElementById("Reward_JTAO_Dun4").innerHTML = setLocal(rewardPow*prodType,4);
+
+          document.getElementById("minpow_taodum_nopfp").innerHTML = setLocal(nopfp,0);
+          document.getElementById("minpow_taodum_rank1").innerHTML = setLocal(pfp_r1,0);
+          document.getElementById("minpow_taodum_rank2").innerHTML = setLocal(pfp_r2,0);
+          document.getElementById("minpow_taodum_rank3").innerHTML = setLocal(pfp_r3,0);
+
           }}
     }
     async function loadKycData() {

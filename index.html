@@ -649,7 +649,15 @@
                 <td>Cryptic Cogs 
                   <p id="input4" style="display: none;"><input type="number" class="center" id="power4" min="0" placeholder="Insert Power Here" width="250px"></p></td>
                 <td>1 Day</td>
-                <td><span id="Dun4_CMJ"></span> JTAO <br>(~<span id="Dun4_JBC"></span> USD)</td>
+                <td>
+                  <select id="gasTaoDum" class="center">
+                    <option value="35">No PFP [35 II]</option>
+                    <option value="7">N1-R4 [7 II]</option>
+                    <option value="4">SR1-UR3 [4 II]</option>
+                    <option value="1">UR4 [1 II]</option>
+                </select><br>
+                  <span id="Dun4_CMJ"></span> JTAO (~<span id="Dun4_JBC"></span> USD)
+                </td>
                 <td>0.0767232 <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="20" height="20"></td>
                 <td colspan="2"><span id="CrypticNight"></span></td>
               </tr>
@@ -790,15 +798,16 @@
               <h5 class="card-title center">[Dungeon] Cryptic Cogs</h5>
               <p class="card-text"><b>Eligible NFT Collection: <a class="nftcol">Commudao , Naruta NFTs</a></b></p>
               <p class="card-text">Product: 0.0767232 <img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="EE" width="20" height="20">/Power<br>(~<span id="Reward_JTAO_Dun4" class="low"></span> JTAO)</p>
-              <p class="card-text">Gas Fee: 7 <img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="II" width="20" height="20">(<span id="Cost_CMJ_Dun4" class="low"></span> JTAO)</p>
+              <p class="card-text">Gas Fee: Varies on PFP <img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="II" width="20" height="20"></p>
               <p class="card-text">Duration: 1 Day</p>
               <p class="card-text">Active Total Power: <span id="activeEEPow" class="low"></span> Power</p>
               <p class="card-text">Active MainChar: <span id="activeMainEE" class="low"></span> NFT(s)</p>
-              <p class="card-text">Minimum Power: <span id="Min_Dun4" class="low"></span> HPower</p>
-              <p class="card-text">Profit 1K JTAO/Day : <span id="Prof1_Dun4" class="low"></span> HPower</p>
-              <p class="card-text">Profit 2K JTAO/Day: <span id="Prof2_Dun4" class="low"></span> HPower</p>
-              <p class="card-text">Profit 4K JTAO/Day: <span id="Prof3_Dun4" class="low"></span> HPower</p>
-              <p class="card-text">Profit 10K JTAO/Day: <span id="Prof4_Dun4" class="low"></span> HPower</p>
+              <p class="card-text">Minimum Power:</p>
+              <p class="card-text">NO PFP (35 II): <span id="minpow_taodum_nopfp" class="low"></span> HPower</p>
+              <p class="card-text">PFP N1-R4 (7 II): <span id="minpow_taodum_rank1" class="low"></span> HPower</p>
+              <p class="card-text">PFP SR1-UR3 (4 II): <span id="minpow_taodum_rank2" class="low"></span> HPower</p>
+              <p class="card-text">PFP UR4 (1 II): <span id="minpow_taodum_rank3" class="low"></span> HPower</p>
+
               <a href="https://commudao.xyz/dungeon/cryptic-cogs/" target="_blank"  class="join-btn">Join</a>
             </div>
           </div>
@@ -1607,13 +1616,28 @@ monitorDOMChanges();
     }
 });
 
-document.getElementById('numHouseLevel').addEventListener('input', calculateLandBonus);
+document.getElementById('numHouseLevel').addEventListener('change', calculateLandBonus);
 
 function calculateLandBonus() {
     var houseValue = parseFloat(document.getElementById('houseLevel').value);
     var numHouseLevel = parseFloat(document.getElementById('numHouseLevel').value) || 0;
     document.getElementById('landBonus').innerHTML = houseValue * numHouseLevel;
     calculatePow()
+}
+
+
+document.getElementById('gasTaoDum').addEventListener('input', function(){
+  updateGasTaodum();
+  calculateProfit();
+});
+
+function updateGasTaodum(){
+  const II_price = parseFloat(document.getElementById('B-taoToII').textContent);
+  const II_amount = parseFloat(document.getElementById('gasTaoDum').value);
+  const Jtao_inUSDT = parseFloat(document.getElementById('usdToTao').textContent);
+  const gasFee = II_price * II_amount;
+  document.getElementById("Dun4_CMJ").innerHTML = setLocal(gasFee,2);
+  document.getElementById("Dun4_JBC").innerHTML = setLocal((gasFee * Jtao_inUSDT),4); // Gass Fee in USDT
 }
 
 function calculatePow(){
