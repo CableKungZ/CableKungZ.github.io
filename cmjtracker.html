@@ -226,7 +226,10 @@
     
                 lpElement.innerHTML = `
                 <div class="details">
-                    <p class="Header">${name}</p>
+                    <p class="Header"
+                    onclick="window.open('https://exp.jibchain.net/address/${poolAddress}', '_blank');"
+                    style="cursor: pointer;">${name}
+                    </p>
                     <p class="info">${chainName}</p>
                     <p class="info"><span>${(convertBal1).toLocaleString()}</span> ${token1}</p>
                     <p class="info"><span>${(balance2 / 10 ** 18).toLocaleString()}</span> CMJ</p>
@@ -250,13 +253,15 @@
             const currentCMM = parseFloat(document.getElementById("lpCMM").textContent.replace(/,/g, '')) || 0; // Handle commas in the number
             console.log(`current CMM = ${currentCMM}`);
             
-            const { name, address: poolAddress, pair } = pool;
+            const { name, address: poolAddress } = pool;
             const [token1, token2] = name.split("-");
     
             try {
                 // Fetch balances for each token
                 const balance1 = await getBalanceViaAddress(provider, poolAddress);
                 const balance2 = await getTokenBalanceViaAddress(provider, cmm, poolAddress);
+
+                console.log(`BALANCE : ${balance1} JBC \n ${balance2} CMJ`)
     
                 // Create HTML structure
                 const lpElement = document.createElement("div");
@@ -264,7 +269,10 @@
     
                 lpElement.innerHTML = `
                 <div class="details">
-                    <p class="Header">${name}</p>
+                    <p class="Header"
+                    onclick="window.open('https://exp.jibchain.net/address/${poolAddress}', '_blank');"
+                    style="cursor: pointer;">${name}
+                    </p>
                     <p class="info">${chainName}</p>
                     <p class="info"><span>${(balance1 / 10 ** 18).toLocaleString()}</span> JBC</p>
                     <p class="info"><span>${(balance2 / 10 ** 18).toLocaleString()}</span> CMJ</p>
@@ -285,7 +293,7 @@
     
 
     const JBCPOOL2 = [
-    { name: "JBC-CMJ", address: "0xA4CEB16287A1645e3EC48c16Efc5126e23639917"},
+    { name: "JBC-CMJ", address: "0x472d0e2E9839c140786D38110b3251d5ED08DF41"},
     { name: "JBC-CMJ_V1", address: "0xFF19990569739e79aFF8549d8dE087Ab79De8dc7"}
     ]
     const JBCPOOL = [
@@ -315,6 +323,7 @@
           //await updatePool(BKCweb3, BKCPOOL, BKC_cmm, "BITKUB CHAIN");
           //await updatePool(OPweb3, OPPOOL, OP_cmm, "OP CHAIN");
           //await updatePool(BBQweb3, BBQPOOL, BBQ_cmm, "BBQ CHAIN");
+          await updateNativeTokenPool(JBCweb3,JBCPOOL2,JBC_cmj,"JBC CHAIN")
           await updatePool(JBCweb3, JBCPOOL, JBC_cmj, "JBC CHAIN");
       
           console.log("All pools updated successfully!");
