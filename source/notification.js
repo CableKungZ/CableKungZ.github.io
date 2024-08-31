@@ -22,6 +22,14 @@ function showNotification(message, link) {
 
     container.appendChild(popup);
 
+    // เพิ่ม Event Listener เมื่อคลิกที่ popup
+    popup.addEventListener('click', function() {
+        if (popup.parentNode) {
+            clearInterval(interval); // หยุดแอนิเมชัน progress bar
+            container.removeChild(popup); // ลบ popup
+        }
+    });
+
     var duration = 5000;
     var step = 10;
     var decrement = 100 / (duration / step);
