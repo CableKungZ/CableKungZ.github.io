@@ -200,32 +200,36 @@
         <div class="token">
             <div class="content">
                 <div class="details">
-                    <p class="Header">KUSDT PRICE</p>
+                    <p class="Header">USD PRICE</p>
                     <p class="info"><span id="kusdt"></span> THB</p>
                 </div>
                 <div class="details">
-                    <p class="Header">KKUB PRICE</p>
+                    <p class="Header">KKUB PRICE(LP)</p>
                     <p class="info"><span id="kkub"></span> THB</p>
                 </div>
                 <div class="details">
-                    <p class="Header">TAOMEME PRICE</p>
+                    <p class="Header">TAOMEME PRICE(LP)</p>
                     <p class="info"><span id="tao"></span> THB</p>
                 </div>
                 <div class="details">
-                    <p class="Header">JBC PRICE</p>
+                    <p class="Header">JBC PRICE(EX)</p>
                     <p class="info"><span id="jbc"></span> THB</p>
                 </div>
                 <div class="details">
-                    <p class="Header">CMD PRICE</p>
+                    <p class="Header">CMD PRICE(LP)</p>
                     <p class="info"><span id="cmd"></span> THB</p>
                 </div>
                 <div class="details">
-                    <p class="Header">DM PRICE</p>
+                    <p class="Header">DM PRICE(LP)</p>
                     <p class="info"><span id="dm"></span> THB</p>
                 </div>
                 <div class="details">
-                    <p class="Header">GOLD PRICE</p>
+                    <p class="Header">GOLD PRICE(LP)</p>
                     <p class="info"><span id="gold"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">HRC PRICE(LP)</p>
+                    <p class="info"><span id="hrc"></span> THB</p>
                 </div>
             </div>
             <h1>SWAP DETAILS</h1>
@@ -402,16 +406,16 @@
             tokenPrice = parseFloat(document.getElementById('jbc').textContent);
         }else if(pairName === 'KKUB'){
             tokenPrice = parseFloat(document.getElementById('kkub').textContent);
-        }
-        else if(pairName === 'TAO'){
+        }else if(pairName === 'TAO'){
             tokenPrice = parseFloat(document.getElementById('tao').textContent);
-        }
-        else if(pairName === 'CMD'){
+        }else if(pairName === 'CMD'){
             tokenPrice = parseFloat(document.getElementById('cmd').textContent);
         }else if(pairName === 'GOLD'){
             tokenPrice = parseFloat(document.getElementById('gold').textContent);
         }else if(pairName === 'DM'){
             tokenPrice = parseFloat(document.getElementById('dm').textContent);
+        }else if(pairName === 'HRC'){
+            tokenPrice = parseFloat(document.getElementById('hrc').textContent);
         }
 
         lpElement.innerHTML = `
@@ -519,7 +523,23 @@
                     }
                 });
         
-                    document.getElementById("gold").innerText = `${(thbToUsd*goldToUsd).toLocaleString(undefined,{minimumFractionDigits:4})}`
+                document.getElementById("gold").innerText = `${(thbToUsd*goldToUsd).toLocaleString(undefined,{minimumFractionDigits:4})}`
+                ////////////////////////////
+
+                ///////////////////////////
+                const poolHRCResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x9f442fa2d4bbd8a183e1ef69f8a7c990465361fe/pools?include=base_token_price_usd&page=1');
+                const poolHRCData = await poolHRCResponse.json();
+                const poolHRC = poolHRCData.data;
+        
+                let hrcToUsd;
+                poolHRC.forEach(pool => {
+                    if (pool.id === 'bitkub_chain_0x65e71b51e1ea9725e3405ce29b6e5bf3b351b581') {
+                        hrcToUsd = parseFloat(pool.attributes.token_price_usd);
+                    }
+                });
+        
+                document.getElementById("hrc").innerText = `${(thbToUsd*hrcToUsd).toLocaleString(undefined,{minimumFractionDigits:4})}`
+
 
         }catch(error){
             console.error(`Error Fetch Data : ${error}`);
