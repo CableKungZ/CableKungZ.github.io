@@ -82,62 +82,98 @@
         <h1>HOLDER DETAILS</h1>
         <div class="holder">
             <div class="details">
-                <p class="Header">AGUA FACTORY</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x43e4550A5c8E690511A5503eE030B552C582B74F', '_blank');"
+                    style="cursor: pointer;">AGUA Factory
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="agua_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">CommuDao TBridge</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x2Ce7d537A30FAd10cB0E460604e45D9D2460D66A', '_blank');"
+                    style="cursor: pointer;">CommuDao TBridge
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="tBridge_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">FRASER RIVER</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0xBc57A8D5456c145a09557e0aD0C5959948e0cf7E', '_blank');"
+                    style="cursor: pointer;">Fraser River
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="fraserriver_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Community</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x2c05e8E7661795684F137015f054BAA87F4a9aCe', '_blank');"
+                    style="cursor: pointer;">Community
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="community_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Company</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x20869566c37Bd91dAe6D37E6A2474aE97f25Aa56', '_blank');"
+                    style="cursor: pointer;">Company Reserve
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="company_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Admin</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x5BfE0E5736C49A1c6ecd941cE3953A9d956F04a1', '_blank');"
+                    style="cursor: pointer;">Admin
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="admin_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Invester</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0xF84e365eCbc4D6AAA629ddA80E152F917ea6F876', '_blank');"
+                    style="cursor: pointer;">Investor
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="invester_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Airdrop</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x4938F5E1e759eA5D99C6F409bfb0887aad85138f', '_blank');"
+                    style="cursor: pointer;">Airdrop
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="airdrop_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Buyback</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x9fD5742cB128d6d042Bf35B9670efFCa75524621', '_blank');"
+                    style="cursor: pointer;">Buyback
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="buyback_cmm"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Dump CMM</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x379DB4707f084A37447729DC3C48706CB4C3f8d9', '_blank');"
+                    style="cursor: pointer;">Dump CMM
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="dumphil"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">Convert CM to CMM</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x4e21a0Fa07085fC68c341619FF46944658F816A0', '_blank');"
+                    style="cursor: pointer;">Convert CM to CMM
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="burnCMtoCMM"></span> CMM</p>
             </div>
             <div class="details">
-                <p class="Header">JBC Bridge</p>
+                <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/0x50040B2f285811e1eeEC1C016D6048d43E963058', '_blank');"
+                    style="cursor: pointer;">JBC Bridge
+                </p>
                 <p class="info">Bitkub Chain</p>
                 <p class="info"><span id="JBCBridge"></span> CMM</p>
             </div>
@@ -285,7 +321,10 @@
     
                 lpElement.innerHTML = `
                 <div class="details">
-                    <p class="Header">${name}</p>
+                    <p class="Header"
+                    onclick="window.open('https://www.bkcscan.com/address/${poolAddress}', '_blank');"
+                    style="cursor: pointer;">${name}
+                    </p>
                     <p class="info">${chainName}</p>
                     <p class="info"><span>${(balance1 / 10 ** 18).toLocaleString()}</span> ${token1}</p>
                     <p class="info"><span>${(balance2 / 10 ** 18).toLocaleString()}</span> CMM</p>
