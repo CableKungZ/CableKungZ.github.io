@@ -29,11 +29,14 @@
         border-bottom: 2px solid #3498db;
         padding-bottom: 10px;
     }
-    .holder, .lp {
+    .holder, .lp,.content {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
+    }
+    .content{
+        margin-top: 15px;
     }
     .details {
         background-color: #ecf0f1;
@@ -57,7 +60,7 @@
         margin: 5px 0;
     }
     @media (max-width: 768px) {
-        .holder, .lp {
+        .holder, .lp,.content {
             flex-direction: column;
             align-items: center;
         }
@@ -185,12 +188,53 @@
         </div>
         <h1>LP DETAILS</h1>
         <div class="lp" id="lpContainer">
+
 <!--             <div class="details">
                 <p class="Header"></p>
                 <p class="info"></p>
                 <p class="info"><span></span> </p>
                 <p class="info"><span></span> </p>
             </div> -->
+        </div>
+        <h1>MAIN TOKEN DETAILS</h1>
+        <div class="token">
+            <div class="content">
+                <div class="details">
+                    <p class="Header">KUSDT PRICE</p>
+                    <p class="info"><span id="kusdt"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">KKUB PRICE</p>
+                    <p class="info"><span id="kkub"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">TAOMEME PRICE</p>
+                    <p class="info"><span id="tao"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">JBC PRICE</p>
+                    <p class="info"><span id="jbc"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">CMD PRICE</p>
+                    <p class="info"><span id="cmd"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">DM PRICE</p>
+                    <p class="info"><span id="dm"></span> THB</p>
+                </div>
+                <div class="details">
+                    <p class="Header">GOLD PRICE</p>
+                    <p class="info"><span id="gold"></span> THB</p>
+                </div>
+            </div>
+            <h1>SWAP DETAILS</h1>
+
+            <div class="content" id="swapContent">
+
+            </div>
+                
+            
         </div>
 
         
@@ -207,6 +251,8 @@
 
 
 <script>
+    updateMainToken()
+
     function showdPopup(popupId) {
         document.getElementById(popupId).style.display = 'flex';
     }
@@ -337,9 +383,147 @@
     
                 // Append to a container in your document
                 document.querySelector("#lpContainer").appendChild(lpElement);
+
+                // Update Swap Rate
+                updateSwap((balance1 / 10 ** 18),(balance2 / 10 ** 18),token1,chainName,name);
+
+
             } catch (error) {
                 console.error(`Error fetching balance for pool ${name}:`, error);
             }
+        }
+    }
+
+    async function updateSwap(pair,cmm,pairName,chainName,headName){
+        const lpElement = document.createElement("div");
+
+        let tokenPrice = 0;
+        if(pairName === 'JBC'){
+            tokenPrice = parseFloat(document.getElementById('jbc').textContent);
+        }else if(pairName === 'KKUB'){
+            tokenPrice = parseFloat(document.getElementById('kkub').textContent);
+        }
+        else if(pairName === 'TAO'){
+            tokenPrice = parseFloat(document.getElementById('tao').textContent);
+        }
+        else if(pairName === 'CMD'){
+            tokenPrice = parseFloat(document.getElementById('cmd').textContent);
+        }else if(pairName === 'GOLD'){
+            tokenPrice = parseFloat(document.getElementById('gold').textContent);
+        }else if(pairName === 'DM'){
+            tokenPrice = parseFloat(document.getElementById('dm').textContent);
+        }
+
+        lpElement.innerHTML = `
+                <div class="details">
+                    <p class="Header">${headName}</p>
+                    <p class="info">${chainName}</p>
+                    <p class="info"><span>${(pair / cmm).toLocaleString(undefined,{minimumFractionDigits:5})}</span> ${pairName}/CMM</p>
+                    <p class="info"><span>${(cmm / pair).toLocaleString(undefined,{minimumFractionDigits:5})}</span> CMM/${pairName}</p>
+                    <p class="info"><span>CMM : ${((pair / cmm)*tokenPrice).toLocaleString(undefined,{minimumFractionDigits:5})}</span> THB</p>
+                </div>
+                `;
+
+        document.querySelector("#swapContent").appendChild(lpElement);
+
+    }
+
+    async function updateMainToken(){
+        try{
+            const exchangeRateResponse = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
+            const exchangeRateData = await exchangeRateResponse.json();
+            const thbToUsd = exchangeRateData.rates.THB;
+            document.getElementById("kusdt").innerText = `${thbToUsd}`
+                ////////////////////////////
+
+                ///////////////////////////
+        const poolsResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d3d38a7ff4e62f98fe27dd9242a36227fe23/pools?include=base_token_price_usd&page=1');
+        const poolsData = await poolsResponse.json();
+        const pools = poolsData.data;
+
+        let taoToUsd;
+        pools.forEach(pool => {
+            if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
+                taoToUsd = parseFloat(pool.attributes.token_price_usd);
+            }
+        });
+
+            document.getElementById("tao").innerText = `${(thbToUsd*taoToUsd).toLocaleString(undefined,{minimumFractionDigits:4})}`
+                ////////////////////////////
+
+                ///////////////////////////
+            const pools2Response = await fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x67eBD850304c70d983B2d1b93ea79c7CD6c3F6b5/pools?include=base_token_price_usd&page=1');
+            const pools2Data = await pools2Response.json();
+            const pools2 = pools2Data.data;
+            let kubToUsd;
+            pools2.forEach(pool => {
+                if (pool.id === 'bitkub_chain_0x286b67516b979a8271805660d3ac0c626f2d38e6') {
+                    kubToUsd = parseFloat(pool.attributes.token_price_usd);
+                }
+            });
+            document.getElementById("kkub").innerText = `${(thbToUsd*kubToUsd).toLocaleString(undefined,{minimumFractionDigits:2})}`
+                ////////////////////////////
+
+                ///////////////////////////
+            const coinstoreResponse = await fetch('https://api.coinstore.com/api/v1/market/tickers');
+            const coinstoreData = await coinstoreResponse.json();
+            const pools3 = coinstoreData.data;
+            let jbcToUsd;
+            pools3.forEach(pool =>{
+                if(pool.symbol === 'JBCUSDT'){
+                    jbcToUsd = parseFloat(pool.close);
+                }
+            });
+            document.getElementById("jbc").innerText = `${(thbToUsd*jbcToUsd).toLocaleString(undefined,{minimumFractionDigits:2})}`
+                ////////////////////////////
+
+                ///////////////////////////
+                const poolCMDResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/optimism/tokens/0x399fe73bb0ee60670430fd92fe25a0fdd308e142/pools?include=base_token_price_usd&page=1');
+                const poolCMDData = await poolCMDResponse.json();
+                const poolCMD = poolCMDData.data;
+                let cmdToUsd;
+                poolCMD.forEach(pool => {
+                    if (pool.id === 'optimism_0xa41f70b283b8f097112ca3bb63cb2718ee662e49') {
+                        cmdToUsd = parseFloat(pool.attributes.token_price_usd);
+                    }
+                });
+                document.getElementById("cmd").innerText = `${(thbToUsd*cmdToUsd).toLocaleString(undefined,{minimumFractionDigits:4})}`
+                
+                ////////////////////////////
+
+                ///////////////////////////
+                const poolDMResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x8ab1fcbe9f65b86a52c34fee9b29679f70d8f6fa/pools?include=base_token_price_usd&page=1');
+                const poolDMData = await poolDMResponse.json();
+                const poolDM = poolDMData.data;
+        
+                let dmToUSD;
+                poolDM.forEach(pool => {
+                    if (pool.id === 'bitkub_chain_0x5144a2858050a78b2a9c7641ccdcd5370dd550b3') {
+                        dmToUSD = parseFloat(pool.attributes.token_price_usd);
+                    }
+                });
+        
+                    document.getElementById("dm").innerText = `${(thbToUsd*dmToUSD).toLocaleString(undefined,{minimumFractionDigits:4})}`
+                
+                ////////////////////////////
+
+                ///////////////////////////
+                const poolGoldResponse = await fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x794a7b0249ee38fca6429de90924113dc9566748/pools?include=base_token_price_usd&page=1');
+                const poolGoldData = await poolGoldResponse.json();
+                const poolGold = poolGoldData.data;
+        
+                let goldToUsd;
+                poolGold.forEach(pool => {
+                    if (pool.id === 'bitkub_chain_0x5ca9718b857369ef5d581b20550781a59240e811') {
+                        goldToUsd = parseFloat(pool.attributes.token_price_usd);
+                    }
+                });
+        
+                    document.getElementById("gold").innerText = `${(thbToUsd*goldToUsd).toLocaleString(undefined,{minimumFractionDigits:4})}`
+
+        }catch(error){
+            console.error(`Error Fetch Data : ${error}`);
+            throw error;
         }
     }
     
