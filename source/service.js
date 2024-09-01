@@ -134,9 +134,12 @@ async function ensureAllowance(tokenAddress, requiredAmount, feeTokenAddress, fe
     const tokenContract = await loadContract(web3, tokenAddress);
     const allowance = await tokenContract.methods.allowance(accounts[0], contractAddress).call();
     console.log(`Token allowance : ${String(allowance)}`)
+    console.log(`Token allowance : ${web3.utils.fromWei(allowance,'ether')}`)
     if (parseInt(allowance) < requiredAmount) {
         console.log(`Allowance insufficant Request Approve Token`)
         const approveAmount = web3.utils.toWei(requiredAmount, 'ether');
+        console.log(`Requre : ${requiredAmount}`)
+        console.log(`Approve : ${approveAmount}`)
         await tokenContract.methods.approve(contractAddress, approveAmount).send({ from: accounts[0] });
     }
 
