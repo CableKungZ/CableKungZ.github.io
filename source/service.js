@@ -131,19 +131,24 @@ async function checkToken(tokenLocation) {
 }
 
 async function ensureAllowance(tokenAddress, requiredAmount, feeTokenAddress, feeAmount) {
-const tokenContract = await loadContract(web3, tokenAddress);
-const allowance = await tokenContract.methods.allowance(accounts[0], contractAddress).call();
-if (parseInt(allowance) < requiredAmount) {
-const approveAmount = web3.utils.toWei(requiredAmount, 'ether');
-await tokenContract.methods.approve(contractAddress, approveAmount).send({ from: accounts[0] });
-}
+    const tokenContract = await loadContract(web3, tokenAddress);
+    const allowance = await tokenContract.methods.allowance(accounts[0], contractAddress).call();
+    console.log(`Token allowance : ${String(allowance)}`)
+    if (parseInt(allowance) < requiredAmount) {
+        console.log(`Allowance insufficant Request Approve Token`)
+        const approveAmount = web3.utils.toWei(requiredAmount, 'ether');
+        await tokenContract.methods.approve(contractAddress, approveAmount).send({ from: accounts[0] });
+    }
 
-const feeTokenContract = await loadContract(web3, feeTokenAddress);
-const feeAllowance = await feeTokenContract.methods.allowance(accounts[0], contractAddress).call();
-if (parseInt(feeAllowance) < feeAmount) {
-const approveFeeAmount = web3.utils.toWei(feeAmount.toString(), 'ether');
-await feeTokenContract.methods.approve(contractAddress, approveFeeAmount).send({ from: accounts[0] });
-}
+    const feeTokenContract = await loadContract(web3, feeTokenAddress);
+    const feeAllowance = await feeTokenContract.methods.allowance(accounts[0], contractAddress).call();
+    console.log(`Fee allowance : ${String(feeTokenAddress)}`)
+
+    if (parseInt(feeAllowance) < feeAmount) {
+        console.log(`Allowance insufficant Request Approve Token`)
+        const approveFeeAmount = web3.utils.toWei(feeAmount.toString(), 'ether');
+        await feeTokenContract.methods.approve(contractAddress, approveFeeAmount).send({ from: accounts[0] });
+    }
 }
 
 async function batchTransfer() {
@@ -165,17 +170,19 @@ async function batchTransfer() {
     const validAddresses = addresses.filter(address => /^0x[a-fA-F0-9]{40}$/.test(address));
     const validAmounts = amounts.map(amount => amount.trim());
 
+    console.log("Address : ", validAddresses , " Amount :", validAmounts);
+
     // Calculate total amount in Wei
     let totalAmountInWei;
     try {
         const totalAmount = validAmounts.reduce((acc, amount) => acc + parseFloat(amount), 0);
         totalAmountInWei = web3.utils.toWei(totalAmount.toString(), 'ether');
+        console.log(`TOTAL AMOUNT : ${totalAmountInWei} Wei`)
     } catch (error) {
         console.error('Invalid amount format for toWei conversion', error);
         return;
     }
 
-    // Convert amounts to Wei
     const amountsInWei = validAmounts.map(amount => {
         try {
             return web3.utils.toWei(amount, 'ether');
