@@ -196,10 +196,22 @@ async function batchTransfer() {
     }).filter(amount => amount !== null); // Remove any null values
 
     try {
-        await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
-        await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
+        try{
+            await ensureAllowance(feeTokenAddress, feeAmount * validAddresses.length, feeTokenAddress, feeAmount);
+        }catch(error){
+            console.log('checkallowance Error',error);
+        }
+        try{
+            await ensureAllowance(token, totalAmountInWei, feeTokenAddress, feeAmount);
+        }catch(error){
+            console.log('checkallowance Error',error);
+        }
+        try{
+            await daoBuddyService.methods.batchTransfer(token, validAddresses, amountsInWei).send({ from: accounts[0] });
+        }catch(error){
+            console.log('SendTx ERROT',error);
+        }
 
-        await daoBuddyService.methods.batchTransfer(token, validAddresses, amountsInWei).send({ from: accounts[0] });
         console.log('Transaction successful');
     } catch (error) {
         console.error('Transaction failed', error);
