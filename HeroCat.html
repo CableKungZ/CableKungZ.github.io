@@ -863,6 +863,7 @@
                 isSubscription = await getPlan(accounts[0]);
 
                 if(isSubscription) {
+                    main();
                     showNotification(`You already have a subscription on BKC or JBC Chain.`);
                     document.getElementById("plan").innerHTML = `Already Subscribed`;
 
@@ -935,10 +936,6 @@
                         const priceThb = priceUsd * exchangeRate;
 
                         document.getElementById("KUBTHB").textContent = priceThb.toFixed(2);
-
-                        setTimeout(() => {
-                            main();
-                        }, 2000); // 2000 milliseconds = 2 วินาที
                     });
             })
             .catch(error => {
@@ -949,7 +946,7 @@
         async function main() {
             const web3 = new Web3('https://rpc.bitkubchain.io');
             console.log(" Access RPC Success")
-
+            console.log(" START APPS")
 
             const divider = 10 ** 18;
             const contractABI = [
@@ -1343,6 +1340,7 @@
                 document.getElementById('Farm_Pron_TotalPower').textContent = APPL_totalPower;
                 document.getElementById('Farm_Pron_TotalReward').textContent = setDecimal((((APPL_totalPower * APPL_rewardMultiply)) * 86400),4,4);
                 document.getElementById('status').innerHTML = "Ready";
+                calculateProfit();
 
                 kkub_to_hrc = (cmm_kkub * cmm_hrc);
                 /////////////// FARM PRONTERA /////////////////////
@@ -1456,6 +1454,10 @@
             }
         }
 
+        function format(value){
+            return value.toLocaleString(undefined,{minimumFractionDigits:6,maximumFractionDigits:6})
+        }
+
         function calculateProfit() {
             const power = document.getElementById("power").value;
             const hour = 3600;
@@ -1543,12 +1545,12 @@
             const Gain_ORI_inKKUB = Gain_ORI_inHRC * Hrc_inKKUB;
             const Gain_ELU_inKKUB = Gain_ELU_inHRC * Hrc_inKKUB;
             // Message For Display
-            const Farm_Pron_Message = `${Farm_Pron_Day} APPL/Day <br>(${Gain_APPL_inHRC} HRC)<br>(${Gain_APPL_inKKUB} KUB)`;
-            const Farm_Geff_Message = `${Farm_Geff_Day} CARR/Day <br>(${Gain_CARR_inHRC} HRC)<br>(${Gain_CARR_inKKUB} KUB)`;
-            const Dun_Pron_Message = `${Dun_Pron_Day} RORI/Day <br>(${Gain_RORI_inHRC} HRC)<br>(${Gain_RORI_inKKUB} KUB)`;
-            const Dun_Geff_Message = `${Dun_Geff_Day} RELU/Day <br>(${Gain_RELU_inHRC} HRC)<br>(${Gain_RELU_inKKUB} KUB)`;
-            const Fac_Pron_Message = `${Fac_Pron_Day} ORI/Day <br>(${Gain_ORI_inHRC} HRC)<br>(${Gain_ORI_inKKUB} KUB)`;
-            const Fac_Geff_Message = `${Fac_Geff_Day} ELU/Day <br>(${Gain_ELU_inHRC} HRC)<br>(${Gain_ELU_inKKUB} KUB)`;
+            const Farm_Pron_Message = `${format(Farm_Pron_Day)} APPL/Day <br>(${format(Gain_APPL_inHRC)} HRC)<br>(${format(Gain_APPL_inKKUB)} KUB)`;
+            const Farm_Geff_Message = `${format(Farm_Geff_Day)} CARR/Day <br>(${format(Gain_CARR_inHRC)} HRC)<br>(${format(Gain_CARR_inKKUB)} KUB)`;
+            const Dun_Pron_Message = `${format(Dun_Pron_Day)} RORI/Day <br>(${format(Gain_RORI_inHRC)} HRC)<br>(${format(Gain_RORI_inKKUB)} KUB)`;
+            const Dun_Geff_Message = `${format(Dun_Geff_Day)} RELU/Day <br>(${format(Gain_RELU_inHRC)} HRC)<br>(${format(Gain_RELU_inKKUB)} KUB)`;
+            const Fac_Pron_Message = `${format(Fac_Pron_Day)} ORI/Day <br>(${format(Gain_ORI_inHRC)} HRC)<br>(${format(Gain_ORI_inKKUB)} KUB)`;
+            const Fac_Geff_Message = `${format(Fac_Geff_Day)} ELU/Day <br>(${format(Gain_ELU_inHRC)} HRC)<br>(${format(Gain_ELU_inKKUB)} KUB)`;
 
             document.getElementById("Farm_Pron_GainDay").innerHTML = ` ${Farm_Pron_Message}`;
             document.getElementById("Farm_Geff_GainDay").innerHTML = ` ${Farm_Geff_Message}`;
