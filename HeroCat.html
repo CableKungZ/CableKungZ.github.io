@@ -1006,11 +1006,11 @@
                 let setPower = [];
     
                 for(let i = 1; i <= 20; i++){
-                    //console.log(i)
+                     //console.log(i)
                     result = await readToken(i);
-                    costMain.push(parseFloat(result[0]));
-                    costHRC.push(parseFloat(result[1]));
-                    costCMM.push(parseFloat(result[2]));
+                    costMain.push(parseFloat(result[2])); // 
+                    costHRC.push(parseFloat(result[0])); // 
+                    costCMM.push(parseFloat(result[1]));
                     setChance.push(parseFloat(result[3]));
                     setPower.push(parseFloat(result[4]));
                 } 
