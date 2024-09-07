@@ -355,11 +355,11 @@
                     <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple"> Farm
                     Apple <img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple">
                 </h5>
-                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection , HERO CAT Every Collection</b></p>
+                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection </b></p>
                 <p class="card-text">Reward/1,000 Pow/Day: <span id="F_PRD">Loading</span></p>
                 <p class="card-text">GasFee Approximately: ~<span id="F_PRGAS1">Loading</span> KKUB [~ <span
                         id="F_PRGAS2">Loading</span> HRC]</p>
-                <p class="card-text">Max Reward: 103.68 <img
+                <p class="card-text">Max Reward: <span id="app_max"></span> <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple"> [~ <span
                         id="F_PRSELL">Loading</span> HRC]</p>
                 <p class="card-text">Eliminate PNL: <span id="F_PRPNL1">Loading</span> HRC [~ <span
@@ -383,7 +383,7 @@
                 <p class="card-text">Reward/1,000 Pow/Day: <span id="F_GFD">Loading</span></p>
                 <p class="card-text">GasFee Approximately: ~<span id="F_GFGAS1">Loading</span> KKUB [~ <span
                         id="F_GFGAS2">Loading</span> HRC]</p>
-                <p class="card-text">Max Reward: 103.68 <img
+                <p class="card-text">Max Reward: <span id="carr_max"></span> <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Carrot.png" alt="Car"> [~ <span
                         id="F_GFSELL">Loading</span> HRC]</p>
                 <p class="card-text">Eliminate PNL: <span id="F_GFPNL1">Loading</span> HRC [~ <span
@@ -405,7 +405,7 @@
                     Dungeon Rough Oridecon <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png" alt="RORI">
                 </h5>
-                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection , HERO CAT Every Collection</b></p>
+                <p class="card-text">NFT AVAILABLE: <b>HERO KITTY Every Collection</b></p>
                 <p class="card-text">Reward/1,000 Pow/Day: <span id="D_PRD">Loading</span></p>
                 <p class="card-text">Need: 100 <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Apple.png" alt="Apple"> + 1 <img
@@ -413,7 +413,7 @@
                         id="D_PRCO">Loading</span> HRC)</p>
                 <p class="card-text">GasFee Approximately: ~<span id="D_PRGAS1">Loading</span> KKUB [~ <span
                         id="D_PRGAS2">Loading</span> HRC]</p>
-                <p class="card-text">Max Reward: 120 <img
+                <p class="card-text">Max Reward: <span id="rori_max"></span> <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Oridecon.png" alt="RORI">
                     [~ <span id="D_PRSELL">Loading</span> HRC]</p>
                 <p class="card-text">Eliminate PNL: <span id="D_PRPNL1">Loading</span> HRC [~ <span
@@ -442,7 +442,7 @@
                         id="D_GFCO">Loading</span> HRC)</p>
                 <p class="card-text">GasFee Approximately: ~<span id="D_GFGAS1">Loading</span> KKUB [~ <span
                         id="D_GFGAS2">Loading</span> HRC]</p>
-                <p class="card-text">Max Reward: 150 <img
+                <p class="card-text">Max Reward: <span id="relu_max"></span> <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Rough Elunium.png" alt="RELU"> [~
                     <span id="D_GFSELL">Loading</span> HRC]</p>
                 <p class="card-text">Eliminate PNL: <span id="D_GFPNL1">Loading</span> HRC [~ <span
@@ -471,7 +471,7 @@
                     (~ <span id="Fa_PRCO">Loading</span> HRC)</p>
                 <p class="card-text">GasFee Approximately: ~<span id="Fa_PRGAS1">Loading</span> KKUB [~ <span
                         id="Fa_PRGAS2">Loading</span> HRC]</p>
-                <p class="card-text">Max Reward: 30 <img
+                <p class="card-text">Max Reward: <span id="ori_max"></span> <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Oridecon.png" alt="ORI"> [~ <span
                         id="Fa_PRSELL">Loading</span> HRC]</p>
                 <p class="card-text">Eliminate PNL: <span id="Fa_PRPNL1">Loading</span> HRC [~ <span
@@ -498,7 +498,7 @@
                     <span id="Fa_GFCO">Loading</span> HRC)</p>
                 <p class="card-text">GasFee Approximately: ~<span id="Fa_GFGAS1">Loading</span> KKUB [~ <span
                         id="Fa_GFGAS2">Loading</span> HRC]</p>
-                <p class="card-text">Max Reward: 75 <img
+                <p class="card-text">Max Reward: <span id="elu_max"></span> <img
                         src="https://herocat-website.vercel.app/assets/erc20/new_icons/Elunium.png" alt="ELU"> [~ <span
                         id="Fa_GFSELL">Loading</span> HRC]</p>
                 <p class="card-text">Eliminate PNL: <span id="Fa_GFPNL1">Loading</span> HRC [~ <span
@@ -1275,6 +1275,7 @@
                 const ELU_totalFarm = Number(eluInfo[3]);
 
                 document.getElementById('Factory_Geff_MaxReward').textContent = ELU_rewardMax ;
+                document.getElementById('elu_max').textContent = ELU_rewardMax ;
                 document.getElementById('Factory_Geff_BlockReward').textContent = setDecimal(((ELU_rewardMultiply) * 5000),8,8);
                 document.getElementById('Fa_GFD').textContent = setDecimal(((ELU_rewardMultiply) * 86400000),4,4);
                 document.getElementById('Factory_Geff_TotalPower').textContent = ELU_totalPower;
@@ -1289,6 +1290,7 @@
                 const ORI_totalPower = Number(oriInfo[2]);
                 const ORI_totalFarm = Number(oriInfo[3]);
                 document.getElementById('Factory_Pron_MaxReward').textContent = ORI_rewardMax;
+                document.getElementById('ori_max').textContent = ORI_rewardMax;
                 document.getElementById('Fa_PRD').textContent = setDecimal(((ORI_rewardMultiply) * 86400000),8,8);
                 document.getElementById('Factory_Pron_BlockReward').textContent = setDecimal(((ORI_rewardMultiply) * 5000),8,8);
                 document.getElementById('Factory_Pron_TotalPower').textContent = ORI_totalPower;
@@ -1302,6 +1304,7 @@
                 const RELU_totalPower = reluInfo[2];
                 const RELU_totalFarm = reluInfo[3];
                 document.getElementById('Dungeon_Geff_MaxReward').textContent = RELU_rewardMax;
+                document.getElementById('relu_max').textContent = RELU_rewardMax;
                 document.getElementById('Dungeon_Geff_BlockReward').textContent = setDecimal(((RELU_rewardMultiply) * 5000),8,8);
                 document.getElementById('D_GFD').textContent = setDecimal(((RELU_rewardMultiply) * 86400000),8,8);
                 document.getElementById('Dungeon_Geff_TotalPower').textContent = RELU_totalPower;
@@ -1315,6 +1318,7 @@
                 const RORI_totalPower = roriInfo[2];
                 const RORI_totalFarm = roriInfo[3];
                 document.getElementById('Dungeon_Pron_MaxReward').textContent = RORI_rewardMax ;
+                document.getElementById('rori_max').textContent = RORI_rewardMax ;
                 document.getElementById('Dungeon_Pron_BlockReward').textContent = setDecimal(((RORI_rewardMultiply) * 5000),8,8);
                 document.getElementById('D_PRD').textContent = setDecimal(((    RORI_rewardMultiply) * 86400000),8,8);
                 document.getElementById('Dungeon_Pron_TotalPower').textContent = RORI_totalPower;
@@ -1329,6 +1333,7 @@
                 const CARR_totalPower = carrInfo[2];
                 const CARR_totalFarm = carrInfo[3];
                 document.getElementById('Farm_Geff_MaxReward').textContent = CARR_rewardMax;
+                document.getElementById('carr_max').textContent = CARR_rewardMax;
                 document.getElementById('F_GFD').textContent = setDecimal(((CARR_rewardMultiply) * 86400000),8,8);
                 document.getElementById('Farm_Geff_BlockReward').textContent = setDecimal(((CARR_rewardMultiply) * 5000),8,8);
                 document.getElementById('Farm_Geff_TotalPower').textContent = CARR_totalPower;
@@ -1343,6 +1348,7 @@
                 const APPL_totalFarm = appleInfo[3];
 
                 document.getElementById('Farm_Pron_MaxReward').textContent = APPL_rewardMax;
+                document.getElementById('app_max').textContent = APPL_rewardMax;
                 document.getElementById('Farm_Pron_BlockReward').textContent = setDecimal(((APPL_rewardMultiply) * 5000),8,8);
                 document.getElementById('F_PRD').textContent = setDecimal(((APPL_rewardMultiply) * 86400000),8,8);
                 document.getElementById('Farm_Pron_TotalPower').textContent = APPL_totalPower;
