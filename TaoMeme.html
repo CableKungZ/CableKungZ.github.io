@@ -304,14 +304,7 @@
     </div>
                 <div class="pricebox" style="width: 100%;"> <!-- กำหนดความกว้างเป็น 100% ในแถวที่ 1 -->
             <div class="Header"><img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="60px">Burning Tao Tx<img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="60px"> </div>
-            <ul>
-                <li><div>Officals Burn Round 1 <span class="tao">1,413,932.17</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50">  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x36acd4c9af907f93cfaf0e078c16762a3c1af36bea6899d20228205e742418ac', '_blank')">BKC Scan</button></div></li>
-                <li><div>Officals Burn Round 2 <span class="tao">484,991.887</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x7fead987f073cb6a6cf167bf6e4e99af54b104dfafba1a8c176388ad83928682', '_blank')">BKC Scan</button></div></li>
-                <li><div>Community Burn Round 1 <span class="tao">2,000,328.438</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0xd48fbecd36ed2e96eb729ed3babca19217b332fde80ca12d94ad5ef56239a9b0', '_blank')">BKC Scan</button></div></li>
-                <li><div>Community Burn Round 2 <span class="tao">3,550,725.087</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x495c27ecdfe761131bd0b70cab519f13d184630fd42704871a5e190d8b2a3c28', '_blank')">BKC Scan</button></div></li>
-                <li><div>Community Burn Round 3 <span class="tao">491,150.441</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0x2dd4cf5a966ec6f9339c7effcbbbe85773b2d2c60393c4467ba89f286f9cc60c', '_blank')">BKC Scan</button></div></li>
-                <li><div>Community Burn Round 4 <span class="tao">870,678.000</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0xf558bcd974b70e5dfc93d55e473a6d437665c8f867b4501c35a3419a1634e146', '_blank')">BKC Scan</button></div></li>
-                <li><div>Community Burn Round 5 <span class="tao">326,814.000</span> <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>  <button class="button" onclick="window.open('https://www.bkcscan.com/tx/0xe9475c50cf1c0200700d7cbacbde859fc3deed74cf37d3b11634e979a752449e', '_blank')">BKC Scan</button></div></li>
+            <ul id="taoBurned">
             </ul>
           <span id="countdown"></span>
     </div>
@@ -322,6 +315,74 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+
+    const BurnedList = [
+        {"Name":'Officials',"Round":"1","Amount":"1413932.17","TxHash":"https://www.bkcscan.com/tx/0x36acd4c9af907f93cfaf0e078c16762a3c1af36bea6899d20228205e742418ac"},
+        {"Name":'Officials',"Round":"2","Amount":"484991.887","TxHash":"https://www.bkcscan.com/tx/0x7fead987f073cb6a6cf167bf6e4e99af54b104dfafba1a8c176388ad83928682"},
+        {"Name":'Community',"Round":"1","Amount":"2000328.438","TxHash":"https://www.bkcscan.com/tx/0xd48fbecd36ed2e96eb729ed3babca19217b332fde80ca12d94ad5ef56239a9b0"},
+        {"Name":'Community',"Round":"2","Amount":"3550725.087","TxHash":"https://www.bkcscan.com/tx/0x495c27ecdfe761131bd0b70cab519f13d184630fd42704871a5e190d8b2a3c28"},
+        {"Name":'Community',"Round":"3","Amount":"491150.441","TxHash":"https://www.bkcscan.com/tx/0x2dd4cf5a966ec6f9339c7effcbbbe85773b2d2c60393c4467ba89f286f9cc60c"},
+        {"Name":'Community',"Round":"4","Amount":"870678.000","TxHash":"https://www.bkcscan.com/tx/0xf558bcd974b70e5dfc93d55e473a6d437665c8f867b4501c35a3419a1634e146"},
+        {"Name":'Community',"Round":"5","Amount":"326814.000","TxHash":"https://www.bkcscan.com/tx/0xe9475c50cf1c0200700d7cbacbde859fc3deed74cf37d3b11634e979a752449e"},
+        {"Name":'Community',"Round":"6","Amount":"344337.680","TxHash":"https://www.bkcscan.com/tx/0xe36dfadbc6ad589eb7d3338240381d4cd19e93822224ab3fd9d169ec9339f582"},
+        
+        ];
+
+    let totalBurned = 0 ;
+    let BurnOff = 0;
+    let BurnCmdao = 0;
+    for (let burned of BurnedList) {
+        const amount = parseFloat(burned.Amount) || 0;
+        console.log(`BurnName ${burned.name} : ${amount}`)
+
+        totalBurned += amount;
+
+        if (burned.Name === "Community") {
+            BurnCmdao += amount;
+        } else if (burned.Name === "Officials") {
+            BurnOff += amount;
+        }
+    }
+
+    // Update the HTML elements with formatted burn values
+    document.getElementById("Burn_Off").innerHTML = BurnOff.toLocaleString();
+    document.getElementById("Burn_CMD").innerHTML = BurnCmdao.toLocaleString();
+    document.getElementById("Total_Burn").innerHTML = totalBurned.toLocaleString();
+
+
+    function updateBurnedTao(){
+        for(let burnTx of BurnedList){
+            const contentElement = document.createElement("li");
+
+            if(burnTx.Name === "Community"){
+                contentElement.innerHTML = `
+                <li>
+                    <div>
+                        Community Burn Round ${burnTx.Round} 
+                        <span class="tao">${(parseFloat(burnTx.Amount)).toLocaleString()}</span> 
+                        <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>
+                        <button class="button" onclick="window.open('${burnTx.TxHash}', '_blank')">BKC Scan</button>
+                    </div>
+                </li>
+            `
+            }
+            if(burnTx.Name === "Officials"){
+                contentElement.innerHTML = `
+                <li>
+                    <div>
+                        Officials Burn Round ${burnTx.Round}
+                        <span class="tao">${(parseFloat(burnTx.Amount)).toLocaleString()}</span> 
+                        <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50">
+                        <button class="button" onclick="window.open('${burnTx.TxHash}', '_blank')">BKC Scan</button>
+                    </div>
+                </li>
+            `
+            }
+
+            document.querySelector("#taoBurned").appendChild(contentElement);
+        }
+    }
+    updateBurnedTao()
     // Your existing script for updating prices
 
 
@@ -558,13 +619,8 @@ const ERC721ABI = [
          const JBCLP = parseFloat(JBCLP_TEXT.replace(/,/g, "")); // ลบ comma และแปลงเป็นตัวเลข
          //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          // TOTAL TAO in ECO
-         BurnOff = 1898924.057;
-         BurnCmdao = 3550725.087+2000328.438+491150.441+870678;
-         TaoBurned = BurnOff+BurnCmdao;
-         document.getElementById("Burn_Off").innerHTML = BurnOff.toLocaleString();
-         document.getElementById("Burn_CMD").innerHTML = BurnCmdao.toLocaleString();
-         document.getElementById("Total_Burn").innerHTML = TaoBurned.toLocaleString();
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+         TaoBurned = parseFloat(document.getElementById('Total_Burn').textContent || 0);
+        /////////////////////////////////////       /////////////////////////////////////////////////////////////////////////////////
          Total_Tao_Remaining = 888888888-TaoBurned;
          Total_Tao_IN_ECO = 888888888-total_Tao_IN_LP-JBCLP-TaoBurned;
          F_Total_Tao_Remaining = Total_Tao_Remaining.toLocaleString(); // เพิ่มการใช้ toLocaleString()
