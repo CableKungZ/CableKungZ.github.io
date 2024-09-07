@@ -558,6 +558,7 @@
                         <th>Block Reward(5000Pow)</th>
                         <th>Max Reward</th>
                         <th>Gain/Day</th>
+                        <th>7 Days Product</th>
                         <th>Full Product Time</th>
                         <th>Total Power</th>
                         <th>Global Rw/Day</th>
@@ -569,6 +570,7 @@
                         <td><span id="Farm_Pron_BlockReward"></span></td>
                         <td><span id="Farm_Pron_MaxReward"></span></td>
                         <td><span id="Farm_Pron_GainDay"></span></td>
+                        <td><span id="Farm_Pron_Gain7Day"></span></td>
                         <td><span id="Farm_Pron_FullTime"></span></td>
                         <td><span id="Farm_Pron_TotalPower"></span></td>
                         <td><span id="Farm_Pron_TotalReward"></span></td>
@@ -578,6 +580,7 @@
                         <td><span id="Farm_Geff_BlockReward"></span></td>
                         <td><span id="Farm_Geff_MaxReward"></span></td>
                         <td><span id="Farm_Geff_GainDay"></span></td>
+                        <td><span id="Farm_Geff_Gain7Day"></span></td>
                         <td><span id="Farm_Geff_FullTime"></span></td>
                         <td><span id="Farm_Geff_TotalPower"></span></td>
                         <td><span id="Farm_Geff_TotalReward"></span></td>
@@ -587,6 +590,7 @@
                         <td><span id="Dungeon_Pron_BlockReward"></span></td>
                         <td><span id="Dungeon_Pron_MaxReward"></span></td>
                         <td><span id="Dungeon_Pron_GainDay"></span></td>
+                        <td><span id="Dungeon_Pron_Gain7Day"></span></td>
                         <td><span id="Dungeon_Pron_FullTime"></span></td>
                         <td><span id="Dungeon_Pron_TotalPower"></span></td>
                         <td><span id="Dungeon_Pron_TotalReward"></span></td>
@@ -596,6 +600,7 @@
                         <td><span id="Dungeon_Geff_BlockReward"></span></td>
                         <td><span id="Dungeon_Geff_MaxReward"></span></td>
                         <td><span id="Dungeon_Geff_GainDay"></span></td>
+                        <td><span id="Dungeon_Geff_Gain7Day"></span></td>
                         <td><span id="Dungeon_Geff_FullTime"></span></td>
                         <td><span id="Dungeon_Geff_TotalPower"></span></td>
                         <td><span id="Dungeon_Geff_TotalReward"></span></td>
@@ -605,6 +610,7 @@
                         <td><span id="Factory_Pron_BlockReward"></span></td>
                         <td><span id="Factory_Pron_MaxReward"></span></td>
                         <td><span id="Factory_Pron_GainDay"></span></td>
+                        <td><span id="Factory_Pron_Gain7Day"></span></td>
                         <td><span id="Factory_Pron_FullTime"></span></td>
                         <td><span id="Factory_Pron_TotalPower"></span></td>
                         <td><span id="Factory_Pron_TotalReward"></span></td>
@@ -614,6 +620,7 @@
                         <td><span id="Factory_Geff_BlockReward"></span></td>
                         <td><span id="Factory_Geff_MaxReward"></span></td>
                         <td><span id="Factory_Geff_GainDay"></span></td>
+                        <td><span id="Factory_Geff_Gain7Day"></span></td>
                         <td><span id="Factory_Geff_FullTime"></span></td>
                         <td><span id="Factory_Geff_TotalPower"></span></td>
                         <td><span id="Factory_Geff_TotalReward"></span></td>
@@ -988,9 +995,9 @@
             const BlackSmithHouse = [{"inputs":[{"internalType":"address","name":"_hrc","type":"address"},{"internalType":"address","name":"_cmm","type":"address"},{"internalType":"address","name":"_elm","type":"address"},{"internalType":"address","name":"_equipContract","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Upgrade","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"UpgradePlatformer","type":"event"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"}],"name":"checkRefinable","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"cmm","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"elm","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"equipContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"hrc","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"onERC721Received","outputs":[{"internalType":"bytes4","name":"","type":"bytes4"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_pause","type":"bool"}],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"projectAdmin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"refinable","outputs":[{"internalType":"uint256","name":"hrc","type":"uint256"},{"internalType":"uint256","name":"cmm","type":"uint256"},{"internalType":"uint256","name":"elem","type":"uint256"},{"internalType":"uint256","name":"rate","type":"uint256"},{"internalType":"uint256","name":"power","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setFeeTo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setProjectAdmin","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"},{"internalType":"uint256","name":"_hrc","type":"uint256"},{"internalType":"uint256","name":"_cmm","type":"uint256"},{"internalType":"uint256","name":"_elem","type":"uint256"},{"internalType":"uint256","name":"_rate","type":"uint256"},{"internalType":"uint256","name":"_power","type":"uint256"}],"name":"setRefinable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"upgrade","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}];
 
             async function readToken(level){
-                console.log("READ TOKEN ",level)
+                //console.log("READ TOKEN ",level)
                 const result = await Sc_BlackSmith.methods.checkRefinable(level).call();
-                console.log("CHECK :",level, result);
+                //console.log("CHECK :",level, result);
                 return result;
             }
 
@@ -1317,6 +1324,7 @@
                 let carrInfo = await farmInfo(Sc_Carr);
 
                 const CARR_rewardMax = carrInfo[0];
+                console.log(CARR_rewardMax)
                 const CARR_rewardMultiply = carrInfo[1];
                 const CARR_totalPower = carrInfo[2];
                 const CARR_totalFarm = carrInfo[3];
@@ -1493,13 +1501,13 @@
             const RELU_inHRC = parseFloat(document.getElementById("RELU_HRC").textContent.replace(/,/g, '')) || 0;
             const ORI_inHRC = parseFloat(document.getElementById("ORI_HRC").textContent.replace(/,/g, '')) || 0;
             const ELU_inHRC = parseFloat(document.getElementById("ELU_HRC").textContent.replace(/,/g, '')) || 0;
-            console.log(Hrc_inKKUB);
-            console.log(APPL_inHRC);
-            console.log(CARR_inHRC);
-            console.log(RORI_inHRC);
-            console.log(RELU_inHRC);
-            console.log(ORI_inHRC);
-            console.log(ELU_inHRC);
+            //console.log(Hrc_inKKUB);
+            //console.log(APPL_inHRC);
+            //console.log(CARR_inHRC);
+            //console.log(RORI_inHRC);
+            //console.log(RELU_inHRC);
+            //console.log(ORI_inHRC);
+            //console.log(ELU_inHRC);
 
             const FarmPron_Fullin = formatSeconds(Farm_Pron_MaxReward / (power * (Farm_Pron_Reward / 5000)));
             const FarmGeff_Fullin = formatSeconds(Farm_Geff_MaxReward / (power * (Farm_Geff_Reward / 5000)));
@@ -1551,6 +1559,13 @@
             const Dun_Geff_Message = `${format(Dun_Geff_Day)} RELU/Day <br>(${format(Gain_RELU_inHRC)} HRC)<br>(${format(Gain_RELU_inKKUB)} KUB)`;
             const Fac_Pron_Message = `${format(Fac_Pron_Day)} ORI/Day <br>(${format(Gain_ORI_inHRC)} HRC)<br>(${format(Gain_ORI_inKKUB)} KUB)`;
             const Fac_Geff_Message = `${format(Fac_Geff_Day)} ELU/Day <br>(${format(Gain_ELU_inHRC)} HRC)<br>(${format(Gain_ELU_inKKUB)} KUB)`;
+            // Message For Display 7 Day
+            const Farm7_Pron_Message = `${format(Farm_Pron_Day*7)} APPL/Day <br>(${format(Gain_APPL_inHRC*7)} HRC)<br>(${format(Gain_APPL_inKKUB*7)} KUB)`;
+            const Farm7_Geff_Message = `${format(Farm_Geff_Day*7)} CARR/Day <br>(${format(Gain_CARR_inHRC*7)} HRC)<br>(${format(Gain_CARR_inKKUB*7)} KUB)`;
+            const Dun7_Pron_Message = `${format(Dun_Pron_Day*7)} RORI/Day <br>(${format(Gain_RORI_inHRC*7)} HRC)<br>(${format(Gain_RORI_inKKUB*7)} KUB)`;
+            const Dun7_Geff_Message = `${format(Dun_Geff_Day*7)} RELU/Day <br>(${format(Gain_RELU_inHRC*7)} HRC)<br>(${format(Gain_RELU_inKKUB*7)} KUB)`;
+            const Fac7_Pron_Message = `${format(Fac_Pron_Day*7)} ORI/Day <br>(${format(Gain_ORI_inHRC*7)} HRC)<br>(${format(Gain_ORI_inKKUB*7)} KUB)`;
+            const Fac7_Geff_Message = `${format(Fac_Geff_Day*7)} ELU/Day <br>(${format(Gain_ELU_inHRC*7)} HRC)<br>(${format(Gain_ELU_inKKUB*7)} KUB)`;
 
             document.getElementById("Farm_Pron_GainDay").innerHTML = ` ${Farm_Pron_Message}`;
             document.getElementById("Farm_Geff_GainDay").innerHTML = ` ${Farm_Geff_Message}`;
@@ -1558,6 +1573,13 @@
             document.getElementById("Dungeon_Geff_GainDay").innerHTML = ` ${Dun_Geff_Message}`;
             document.getElementById("Factory_Pron_GainDay").innerHTML = ` ${Fac_Pron_Message}`;
             document.getElementById("Factory_Geff_GainDay").innerHTML = ` ${Fac_Geff_Message}`;
+
+            document.getElementById("Farm_Pron_Gain7Day").innerHTML = ` ${Farm7_Pron_Message}`;
+            document.getElementById("Farm_Geff_Gain7Day").innerHTML = ` ${Farm7_Geff_Message}`;
+            document.getElementById("Dungeon_Pron_Gain7Day").innerHTML = ` ${Dun7_Pron_Message}`;
+            document.getElementById("Dungeon_Geff_Gain7Day").innerHTML = ` ${Dun7_Geff_Message}`;
+            document.getElementById("Factory_Pron_Gain7Day").innerHTML = ` ${Fac7_Pron_Message}`;
+            document.getElementById("Factory_Geff_Gain7Day").innerHTML = ` ${Fac7_Geff_Message}`;
 
 
             // คำนวณจำนวน DM / GOLD
