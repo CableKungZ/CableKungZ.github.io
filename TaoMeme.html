@@ -77,6 +77,36 @@
         a,ul{
             font-size: 18px;
         }
+        .card{
+            width: 300px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            padding: 15px 20px 20px 15px;
+            margin: 0px 15px 15px 0px;
+            grid: 15px;
+
+        }
+        .card:hover {
+            background-color: #f0f0f0;
+            border-color: #58aee7;
+            cursor: pointer ;
+        }
+        #taoBurned2 {
+            display: flex;
+            flex-wrap: wrap; /* Allows items to wrap to the next row */
+            justify-content: space-between; /* Distributes space between the items */
+            align-items: center;
+            gap: 20px;
+        }
+        
+        #taoBurned2 > * {
+            flex: 1 1 calc(33.33% - 20px); /* Each item takes up 33.33% width minus the gap */
+            box-sizing: border-box; /* Includes padding and border in width calculations */
+        }
+        
+
     
         @media only screen and (max-width: 1024px) {
             .pricebox {
@@ -306,6 +336,9 @@
             <div class="Header"><img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="60px">Burning Tao Tx<img src="https://cdn-icons-png.freepik.com/512/599/599502.png" width="60px"> </div>
             <ul id="taoBurned">
             </ul>
+            <div id="taoBurned2">
+  
+            </div>
           <span id="countdown"></span>
     </div>
 
@@ -350,40 +383,43 @@
     document.getElementById("Total_Burn").innerHTML = totalBurned.toLocaleString();
 
 
-    function updateBurnedTao(){
-        for(let burnTx of BurnedList){
-            const contentElement = document.createElement("li");
-
-            if(burnTx.Name === "Community"){
-                contentElement.innerHTML = `
-                <li>
-                    <div>
-                        Community Burn Round ${burnTx.Round} 
-                        <span class="tao">${(parseFloat(burnTx.Amount)).toLocaleString()}</span> 
-                        <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50"> By <a href="https://www.facebook.com/commudaostory">CommuDao</a>
-                        <button class="button" onclick="window.open('${burnTx.TxHash}', '_blank')">BKC Scan</button>
-                    </div>
-                </li>
-            `
+    function updateBurnedTao() {
+        const container = document.querySelector("#taoBurned2");
+    
+        // Clear the existing content
+        container.innerHTML = "";
+    
+        for (let burnTx of BurnedList) {
+            const contentElement = document.createElement("div");
+            contentElement.className = "card";
+    
+            let imageSrc = "";
+            let linkText = "";
+    
+            if (burnTx.Name === "Community") {
+                imageSrc = "https://commudao.xyz/favicon.png";
+                linkText = "CommuDao";
+                url = 'https://www.facebook.com/commudaostory'
+            } else if (burnTx.Name === "Officials") {
+                imageSrc = "https://taomeme.xyz/images/taocoin_hero.svg";
+                linkText = "TaoMeme";
+                url = 'https://taomeme.xyz/'
             }
-            if(burnTx.Name === "Officials"){
-                contentElement.innerHTML = `
-                <li>
-                    <div>
-                        Officials Burn Round ${burnTx.Round}
-                        <span class="tao">${(parseFloat(burnTx.Amount)).toLocaleString()}</span> 
-                        <img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$TAO" width="50" height="50">
-                        <button class="button" onclick="window.open('${burnTx.TxHash}', '_blank')">BKC Scan</button>
-                    </div>
-                </li>
-            `
-            }
-
-            document.querySelector("#taoBurned").appendChild(contentElement);
+    
+            contentElement.innerHTML = `
+                <img src="${imageSrc}" width="25px" height="25px"><br>
+                <a>${burnTx.Name} #${burnTx.Round}</a><br>
+                <a>${parseFloat(burnTx.Amount).toLocaleString(undefined, { minimumFractionDigits: 3 })} TAO</a><br>
+                <a href="#" onclick="window.open('${burnTx.TxHash}', '_blank'); return false;">BKCScan</a><br>
+                <a href="#" onclick="window.open('${url}', '_blank'); return false;">${linkText}</a>
+            `;
+    
+            container.appendChild(contentElement);
         }
     }
-    updateBurnedTao()
-    // Your existing script for updating prices
+    
+    updateBurnedTao();
+    
 
 
     function updateData() {
