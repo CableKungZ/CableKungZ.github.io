@@ -355,7 +355,7 @@
     async function updatePool(provider, lpPool, cmm, chainName) {
         for (let pool of lpPool) {
             const currentCMM = parseFloat(document.getElementById("lpCMM").textContent.replace(/,/g, '')) || 0; // Handle commas in the number
-            console.log(`current CMM = ${currentCMM}`);
+            //console.log(`current CMM = ${currentCMM}`);
             
             const { name, address: poolAddress, pair } = pool;
             const [token1, token2] = name.split("-");
