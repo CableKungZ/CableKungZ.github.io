@@ -1443,7 +1443,7 @@
                 PNLHRC = sellReward - gasFeeHRC - COST;
                 PNLKUB = PNLHRC / kkub_to_hrc;
 
-                roriAmount = (COST/RORI_hrc);
+                roriAmount = ((COST+gasFeeHRC)/RORI_hrc);
                 minPow = roriAmount / (RORI_rewardMultiply * (86400*7));
                 document.getElementById('minPow_RORI').innerHTML = `${minPow.toFixed(0)} Power`;
 
@@ -1467,7 +1467,7 @@
                 PNLHRC = sellReward - gasFeeHRC - COST;
                 PNLKUB = PNLHRC / kkub_to_hrc;
 
-                reluAmount = (COST/RELU_hrc);
+                reluAmount = ((COST+gasFeeHRC)/RELU_hrc);
                 minPow = reluAmount / (RELU_rewardMultiply * (86400*7));
                 document.getElementById('minPow_RELU').innerHTML = `${minPow.toFixed(0)} Power`;
 
@@ -1491,7 +1491,7 @@
                 PNLHRC = sellReward - gasFeeHRC - COST;
                 PNLKUB = PNLHRC / kkub_to_hrc;
                 
-                oriAmount = (COST/ORI_hrc);
+                oriAmount = ((COST+gasFeeHRC)/ORI_hrc);
                 minPow = oriAmount / (ORI_rewardMultiply * (86400*7));
                 document.getElementById('minPow_ORI').innerHTML = `${minPow.toFixed(0)} Power`;
 
@@ -1514,7 +1514,7 @@
                 PNLHRC = sellReward - gasFeeHRC - COST;
                 PNLKUB = PNLHRC / kkub_to_hrc;
 
-                eluAmount = (COST/ELU_hrc);
+                eluAmount = ((COST+gasFeeHRC)/ELU_hrc);
                 minPow = eluAmount / (ELU_rewardMultiply * (86400*7));
                 document.getElementById('minPow_ELU').innerHTML = `${minPow.toFixed(0)} Power`;
 
