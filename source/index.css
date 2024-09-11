@@ -17,6 +17,19 @@
             margin-right: auto;
 
         }
+        .card-text img {
+          width: 20px;
+          height: 20px;
+        }
+        .card-body img{
+          width: 20px;
+          height: 20px;
+        }
+        .token-price img{
+          width: 20px;
+          height: 20px;
+        }
+
         .logo img{
             width: 40px;
             height: 40px;

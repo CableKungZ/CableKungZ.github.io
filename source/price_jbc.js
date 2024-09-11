@@ -511,8 +511,8 @@ async function price_jbc(){
 
 
             // Dungeon Settings
-                    CuGasDay = (Bbq_Price*500)*24;
-                    JaspGasDay = (Pza_Price*500);
+                    CuGasDay = (Bbq_Price*5000)*24;
+                    JaspGasDay = (Pza_Price*5000);
                     AngbGasDay = (Swar_Price*0.2);
             document.getElementById("labR3").innerHTML = setLocal(CuGasDay,2);
             document.getElementById("labR4").innerHTML = setLocal(JaspGasDay,2);
@@ -532,40 +532,32 @@ async function price_jbc(){
                 rewardPow = 0.0000864;
                 rwCMJPow = rewardPow*prodType;
                 rwJBCPow = rwCMJPow*Jbc_Price;
-                gasFee = gasType*500;
+                gasFee = gasType*5000;
                 minPow = gasFee/(prodType*rewardPow);
                 prof1 = ((1+gasFee)/prodType)/rewardPow;
                 prof5 = ((5+gasFee)/prodType)/rewardPow;
-                prof10 = ((10+gasFee)/prodType)/rewardPow;
-                prof100 = ((100+gasFee)/prodType)/rewardPow;
             document.getElementById("labU4").innerHTML = setLocal(minPow*1.1,0);
             document.getElementById("lab_R5").innerHTML = setLocal(gasFee,3);
             document.getElementById("labV4").innerHTML = setLocal(rwCMJPow,6);
             document.getElementById("labEV4").innerHTML = setLocal(rwJBCPow,6);
             document.getElementById("labW4").innerHTML = setLocal(prof1,0);
             document.getElementById("labX4").innerHTML = setLocal(prof5,0);
-            document.getElementById("labY4").innerHTML = setLocal(prof10,0);
-            document.getElementById("labZ4").innerHTML = setLocal(prof100,0);
             // Setting Copper
                 gasType = Bbq_Price*1;
                 prodType = Cu_Price*1;
                 rewardPow = 0.36;
                 rwCMJPow = rewardPow*prodType;
                 rwJBCPow = rwCMJPow*Jbc_Price;
-                gasFee = gasType*500;
+                gasFee = gasType*5000;
                 minPow = gasFee/(prodType*rewardPow);
                 prof1 = ((1+gasFee*24)/prodType)/rewardPow/24+1;
                 prof5 = ((5+gasFee*24)/prodType)/rewardPow/24+1;
-                prof10 = ((10+gasFee*24)/prodType)/rewardPow/24+1;
-                prof100 = ((100+gasFee*24)/prodType)/rewardPow/24+1;
             document.getElementById("labU2").innerHTML = setLocal(minPow*1.1,0);
             document.getElementById("labR2").innerHTML = setLocal(gasFee,3);
             document.getElementById("labV2").innerHTML = setLocal(rwCMJPow,6);
             document.getElementById("labAB2").innerHTML = setLocal(rwJBCPow,6);
             document.getElementById("labW2").innerHTML = setLocal(prof1,0);
             document.getElementById("labX2").innerHTML = setLocal(prof5,0);
-            document.getElementById("labY2").innerHTML = setLocal(prof10,0);
-            document.getElementById("labZ2").innerHTML = setLocal(prof100,0);
           }
           // Setting DaemonWorld
           {
@@ -578,8 +570,7 @@ async function price_jbc(){
           const minPow = gasFee / (prodType * rewardPow);
           const prof1 = ((1 + gasFee) / prodType) / rewardPow;
           const prof5 = ((5 + gasFee) / prodType) / rewardPow;
-          const prof10 = ((10 + gasFee) / prodType) / rewardPow;
-          const prof100 = ((100 + gasFee) / prodType) / rewardPow;
+
           
           document.getElementById("labU6").innerHTML = setLocal(minPow*1.1,0);
           document.getElementById("labR6").innerHTML = setLocal(gasFee,3);
@@ -587,8 +578,7 @@ async function price_jbc(){
           document.getElementById("labAB6").innerHTML = setLocal(rwJBCPow,6);
           document.getElementById("labW6").innerHTML = setLocal(prof1,0);
           document.getElementById("labX6").innerHTML = setLocal(prof5,0);
-          document.getElementById("labY6").innerHTML = setLocal(prof10,0);
-          document.getElementById("labZ6").innerHTML = setLocal(prof100,0);
+
           }
           
           // Setting Cryptic Cogs Lab_IIFactory_PNL
