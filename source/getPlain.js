@@ -33,7 +33,7 @@ async function getPlanBKC(address) {
 async function getData(address){
     const jbc_data = await fetchData(jbc_subscription,address);
     const bkc_data = await fetchData(bkc_subscription,address);
-    console.table(jbc_data);
+    console.log(jbc_data);
     console.table(bkc_data);
     if (jbc_data[2] > bkc_data[2]){
         return jbc_data
