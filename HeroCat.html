@@ -753,38 +753,32 @@
     </div>
     <div id="Upgrade" class="container">
         <div style="display:flex; flex-wrap:wrap; align-items:center;">
-            <img src="/img/herocat/weapon1.png" width="100px" height="100px" style="border-radius: 25%; margin-right: 25px;">
-            <h1>Upgrade Weapon</h1>
-            <img src="/img/herocat/weapon.png" width="100px" height="100px" style="border-radius: 25%; margin-left: 25px;">
+            <img src="/img/herocat/hero.png" width="100px" height="100px" style="border-radius: 25%; margin-right: 25px;">
+            <h1>Upgrade HEROCAT</h1>
+            <img src="/img/herocat/hero.png" width="100px" height="100px" style="border-radius: 25%; margin-left: 25px;">
         </div>
         <table id="Weapon" class="center">
             <tr>
-                <th colspan="6">Details</th>
-                <th colspan="4">Value In</th>
-                <th colspan="3">Total Cost</th>
-                <th colspan="4">Value In</th>
+                <th colspan="8">Details Each Upgrade</th>
+                <th colspan="5">Sumary</th>
             </tr>
             <tr>
                 <th>Level</th>
-                <th>Chance</th>
-                <th>ORI</th>
-                <th>HRC</th>
-                <th>CMM</th>
-                <th>Power</th>
+                <th>Inc.Power</th>
+                <th>Crit Power +%</th>
+                <th>Crit Chance %</th>
 
-                <th>HRC</th>
-                <th>CMM</th>
-                <th>KKUB</th>
-                <th>THB</th>
+                <th>Cost 1</th>
+                <th>Cost 2</th>
+                <th>Cost 3</th>
+                <th>Cost 4</th>
 
-                <th>ORI</th>
-                <th>HRC</th>
-                <th>CMM</th>
-
-                <th>HRC</th>
-                <th>CMM</th>
-                <th>KKUB</th>
-                <th>THB</th>
+                <th>Min Inc.Power</th>
+                <th>Total Cost 1</th>
+                <th>Total Cost 2</th>
+                <th>Total Cost 3</th>
+                <th>Total Cost 4</th>
+ 
             </tr>
             
         </table>
@@ -795,32 +789,25 @@
         </div>
         <table id="Eqiupment" class="center">
             <tr>
-                <th colspan="6">Details</th>
-                <th colspan="4">Value In</th>
-                <th colspan="3">Total Cost</th>
-                <th colspan="4">Value In</th>
+                <th colspan="8">Details Each Upgrade</th>
+                <th colspan="5">Sumary</th>
             </tr>
             <tr>
                 <th>Level</th>
-                <th>Chance</th>
-                <th>ELU</th>
-                <th>HRC</th>
-                <th>CMM</th>
-                <th>Power</th>
-                
-                <th>HRC</th>
-                <th>CMM</th>
-                <th>KKUB</th>
-                <th>THB</th>
-                
-                <th>ELU</th>
-                <th>HRC</th>
-                <th>CMM</th>
+                <th>Inc.Power</th>
+                <th>Crit Power +%</th>
+                <th>Crit Chance %</th>
 
-                <th>HRC</th>
-                <th>CMM</th>
-                <th>KKUB</th>
-                <th>THB</th>
+                <th>Cost 1</th>
+                <th>Cost 2</th>
+                <th>Cost 3</th>
+                <th>Cost 4</th>
+
+                <th>Min Inc.Power</th>
+                <th>Total Cost 1</th>
+                <th>Total Cost 2</th>
+                <th>Total Cost 3</th>
+                <th>Total Cost 4</th>
             </tr>
             
         </table>
@@ -1017,85 +1004,140 @@
             const CARR_ABI = [{ "type": "constructor", "stateMutability": "nonpayable", "inputs": [{ "type": "address", "name": "_rewardContract", "internalType": "address" }, { "type": "address", "name": "_platformerContract", "internalType": "address" }] }, { "type": "event", "name": "Farmed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "event", "name": "RewardClaimed", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }, { "type": "uint256", "name": "amount", "internalType": "uint256", "indexed": false }], "anonymous": false }, { "type": "event", "name": "Unfarmd", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address", "indexed": true }, { "type": "uint256", "name": "charId", "internalType": "uint256", "indexed": true }], "anonymous": false }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_DAY", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "REWARD_EXPIRE", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }], "name": "allowFarm", "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "calculateRewards", "inputs": [{ "type": "address", "name": "delegator", "internalType": "address" }, { "type": "uint256", "name": "charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOfOwnerByIndex", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_index", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "characterOwnerBalanceOf", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimReward", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "claimRewardAll", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "farm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }, { "type": "uint256", "name": "", "internalType": "uint256" }], "name": "farmInfo", "inputs": [{ "type": "address", "name": "_delegator", "internalType": "address" }, { "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "charId", "internalType": "uint256" }, { "type": "uint256", "name": "power", "internalType": "uint256" }, { "type": "uint256", "name": "lastUpdateTime", "internalType": "uint256" }], "name": "farms", "inputs": [{ "type": "address", "name": "", "internalType": "address" }, { "type": "uint256", "name": "", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "forceUnFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "platformerContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "projectAdmin", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "address", "name": "", "internalType": "address" }], "name": "rewardContract", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMax", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "rewardMultiply", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setAllowFarm", "inputs": [{ "type": "uint256", "name": "itemId", "internalType": "uint256" }, { "type": "bool", "name": "permission", "internalType": "bool" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setProjectAdmin", "inputs": [{ "type": "address", "name": "_address", "internalType": "address" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMax", "inputs": [{ "type": "uint256", "name": "amount", "internalType": "uint256" }, { "type": "uint256", "name": "day", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [], "name": "setRewardMultiply", "inputs": [{ "type": "uint256", "name": "rate", "internalType": "uint256" }] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalFarmed", "inputs": [] }, { "type": "function", "stateMutability": "view", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "totalPower", "inputs": [] }, { "type": "function", "stateMutability": "nonpayable", "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }], "name": "unFarm", "inputs": [{ "type": "uint256", "name": "_charId", "internalType": "uint256" }] }];
             const CARR_Address = '0x009b6A755eeb9dd38EE2D64D10285eBC62537eeE';
 
-            const BlackSmithHouseArmorAddress = "0x976422711313dD7607f531bC690dC29d748AB22C";
-            const BlackSmithHouse = [{"inputs":[{"internalType":"address","name":"_hrc","type":"address"},{"internalType":"address","name":"_cmm","type":"address"},{"internalType":"address","name":"_elm","type":"address"},{"internalType":"address","name":"_equipContract","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Upgrade","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"UpgradePlatformer","type":"event"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"}],"name":"checkRefinable","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"cmm","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"elm","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"equipContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"hrc","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"onERC721Received","outputs":[{"internalType":"bytes4","name":"","type":"bytes4"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_pause","type":"bool"}],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"projectAdmin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"refinable","outputs":[{"internalType":"uint256","name":"hrc","type":"uint256"},{"internalType":"uint256","name":"cmm","type":"uint256"},{"internalType":"uint256","name":"elem","type":"uint256"},{"internalType":"uint256","name":"rate","type":"uint256"},{"internalType":"uint256","name":"power","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setFeeTo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setProjectAdmin","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"},{"internalType":"uint256","name":"_hrc","type":"uint256"},{"internalType":"uint256","name":"_cmm","type":"uint256"},{"internalType":"uint256","name":"_elem","type":"uint256"},{"internalType":"uint256","name":"_rate","type":"uint256"},{"internalType":"uint256","name":"_power","type":"uint256"}],"name":"setRefinable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"upgrade","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"}];
+            const ItemBlackSmithHouseAddress = "0x42572D584cCEbC4AE0BAe58a67F605cb1A050Ea1";
+            const ItemBlackSmithHouse = [{"inputs":[{"internalType":"address","name":"_equipContract","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Upgrade","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"UpgradePlatformer","type":"event"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allowedItemSlots","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"}],"name":"checkRefinable","outputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"equipContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"getAllowedItemSlotByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMaxRefinable","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"limitWinStrike","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxRefinableLevel","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"onERC721Received","outputs":[{"internalType":"bytes4","name":"","type":"bytes4"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_pause","type":"bool"}],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"projectAdmin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"refinable","outputs":[{"internalType":"address","name":"token1Address","type":"address"},{"internalType":"uint256","name":"token1Amount","type":"uint256"},{"internalType":"address","name":"token2Address","type":"address"},{"internalType":"uint256","name":"token2Amount","type":"uint256"},{"internalType":"address","name":"token3Address","type":"address"},{"internalType":"uint256","name":"token3Amount","type":"uint256"},{"internalType":"address","name":"token4Address","type":"address"},{"internalType":"uint256","name":"token4Amount","type":"uint256"},{"internalType":"uint256","name":"bonusRate","type":"uint256"},{"internalType":"uint256","name":"basePower","type":"uint256"},{"internalType":"uint256","name":"bonusPower","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"_slots","type":"uint256[]"}],"name":"setAllowedItemSlots","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setFeeTo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_limit","type":"uint256"}],"name":"setLimitWinStrike","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_maxLevel","type":"uint256"}],"name":"setMaxRefinable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setProjectAdmin","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"},{"internalType":"address","name":"_token1Address","type":"address"},{"internalType":"uint256","name":"_token1Amount","type":"uint256"},{"internalType":"address","name":"_token2Address","type":"address"},{"internalType":"uint256","name":"_token2Amount","type":"uint256"},{"internalType":"address","name":"_token3Address","type":"address"},{"internalType":"uint256","name":"_token3Amount","type":"uint256"},{"internalType":"address","name":"_token4Address","type":"address"},{"internalType":"uint256","name":"_token4Amount","type":"uint256"},{"internalType":"uint256","name":"_bonusRate","type":"uint256"},{"internalType":"uint256","name":"_basePower","type":"uint256"},{"internalType":"uint256","name":"_bonusPower","type":"uint256"}],"name":"setRefinable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"upgrade","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userStatus","outputs":[{"internalType":"uint256","name":"totalUpgrade","type":"uint256"},{"internalType":"uint256","name":"winStrike","type":"uint256"}],"stateMutability":"view","type":"function"}];
 
-            async function readToken(level){
-                //console.log("READ TOKEN ",level)
-                const result = await Sc_BlackSmith.methods.checkRefinable(level).call();
-                //console.log("CHECK :",level, result);
+            const HeroBlackSmithHouseAddress = "0x00a1d2e04Eb7f3E2481990fa3563FBd6Ab00f16D";
+            const HeroBlackSmithHouse = [{"inputs":[{"internalType":"address","name":"_heroContract","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Upgrade","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"delegator","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"UpgradePlatformer","type":"event"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"allowedHeroTypeId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"}],"name":"checkRefinable","outputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"feeTo","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"getAllowedHeroTypeIdByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getMaxRefinable","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"heroContract","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"limitWinStrike","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maxRefinableLevel","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bytes","name":"","type":"bytes"}],"name":"onERC721Received","outputs":[{"internalType":"bytes4","name":"","type":"bytes4"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"_pause","type":"bool"}],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"projectAdmin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"refinable","outputs":[{"internalType":"address","name":"token1Address","type":"address"},{"internalType":"uint256","name":"token1Amount","type":"uint256"},{"internalType":"address","name":"token2Address","type":"address"},{"internalType":"uint256","name":"token2Amount","type":"uint256"},{"internalType":"address","name":"token3Address","type":"address"},{"internalType":"uint256","name":"token3Amount","type":"uint256"},{"internalType":"address","name":"token4Address","type":"address"},{"internalType":"uint256","name":"token4Amount","type":"uint256"},{"internalType":"uint256","name":"bonusRate","type":"uint256"},{"internalType":"uint256","name":"basePower","type":"uint256"},{"internalType":"uint256","name":"bonusPower","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"_slots","type":"uint256[]"}],"name":"setAllowedHeroTypeId","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setFeeTo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_limit","type":"uint256"}],"name":"setLimitWinStrike","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_maxLevel","type":"uint256"}],"name":"setMaxRefinable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"setProjectAdmin","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_level","type":"uint256"},{"internalType":"address","name":"_token1Address","type":"address"},{"internalType":"uint256","name":"_token1Amount","type":"uint256"},{"internalType":"address","name":"_token2Address","type":"address"},{"internalType":"uint256","name":"_token2Amount","type":"uint256"},{"internalType":"address","name":"_token3Address","type":"address"},{"internalType":"uint256","name":"_token3Amount","type":"uint256"},{"internalType":"address","name":"_token4Address","type":"address"},{"internalType":"uint256","name":"_token4Amount","type":"uint256"},{"internalType":"uint256","name":"_bonusRate","type":"uint256"},{"internalType":"uint256","name":"_basePower","type":"uint256"},{"internalType":"uint256","name":"_bonusPower","type":"uint256"}],"name":"setRefinable","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"upgrade","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userStatus","outputs":[{"internalType":"uint256","name":"totalUpgrade","type":"uint256"},{"internalType":"uint256","name":"winStrike","type":"uint256"}],"stateMutability":"view","type":"function"}];
+        
+            async function readToken(level,tableId) {
+                let result;
+                if(tableId === "Eqiupment"){
+                    result = await Sc_ItemBlackSmith.methods.checkRefinable(level).call();
+                }else{
+                    result = await Sc_HeroBlackSmith.methods.checkRefinable(level).call();
+
+                }
+
+                console.table("CHECK :", level, result);
                 return result;
             }
 
-            async function renderTable(tableId,Main, CMM_toHRC, hrc_kkub , hrc_thb) {
+            const tokenAddressList = [
+                {
+                    address: "0x9F442fa2d4BbD8a183e1EF69f8A7C990465361fe",
+                    name: "HRC",
+                    convertToHRC: 1
+                },
+                {
+                    address: "0xeE225Ef0647C503582321859E61FCFB4649C61Cf",
+                    name: "ELU",
+                    convertToHRC: 0
+                },
+                {
+                    address: "0xD0A7A4F8EF80b180b1da0aCd696312C6591ACbaF",
+                    name: "ORI",
+                    convertToHRC: 0
+                },
+                {
+                    address: "0x1cfB5851ecD325bE4138Dcd133eb9AA52BaB5111",
+                    name: "SOUL",
+                    convertToHRC: 0
+                },
+                {
+                    address: "0x9B005000A10Ac871947D99001345b01C1cEf2790",
+                    name: "CMM",
+                    convertToHRC: 0
+                }
+            ];
 
-                const HRCtoCMM = 1/CMM_toHRC;
-                //console.log(`Main : ${Main_toHRC} HRC \n CMM ${CMM_toHRC} HRC \n HRC ${HRCtoCMM} CMM \n HRC ${hrc_kkub} KKUB \n HRC ${hrc_thb} THB`)
-    
-                let costMain = [];
-                let costHRC = [];
-                let costCMM = [];
-                let setChance = [];
-                let setPower = [];
-    
-                for(let i = 1; i <= 20; i++){
-                     //console.log(i)
-                    result = await readToken(i);
-                    costMain.push(parseFloat(result[2])); // 
-                    costHRC.push(parseFloat(result[0])); // 
-                    costCMM.push(parseFloat(result[1]));
-                    setChance.push(parseFloat(result[3]));
-                    setPower.push(parseFloat(result[4]));
-                } 
-        
-                const table = document.getElementById(tableId); // 'Eqiupment' and 'Weqpon'
-                
-                var totalMain = 0;
-                var totalHRC = 0;
-                var totalCMM = 0;
-    
-                for (let i = 0; i < setPower.length; i++) {
-                    const MaintoHRC = Main * costMain[i];
-                    const CMMtoHRC = CMM_toHRC * costCMM[i];
-                    const sumHRC = costHRC[i] + MaintoHRC + CMMtoHRC;
-    
-                    totalMain += costMain[i];
-                    totalHRC += costHRC[i];
-                    totalCMM += costCMM[i];
-    
-                    totalMain_toHRC = totalMain * Main;
-                    totalCMM_toHRC = totalCMM * CMM_toHRC;
-                    totalCostHRC = totalHRC + totalMain_toHRC + totalCMM_toHRC ;
-    
-    
-                    // Create a new row and cells for the table
+
+            function getTokenInfoByAddress(address) {
+                const tokenInfo = tokenAddressList.find(token => token.address === address);
+
+                if (tokenInfo) {
+                    return {
+                        address: tokenInfo.address,
+                        name: tokenInfo.name,
+                        convertToHRC: tokenInfo.convertToHRC
+                    };
+                } else {
+                    return {
+                        name: 'Unknown',
+                        convertToHRC: 0
+                    }; // Handle unknown tokens
+                }
+            }
+
+            async function renderTable(tableId, Main, CMM_toHRC, hrc_kkub, hrc_thb) {
+                const HRCtoCMM = 1 / CMM_toHRC;
+                const table = document.getElementById(tableId);
+
+                let totalPower = 0;
+                let totalC1 = 0;
+                let totalC2 = 0;
+                let totalC3 = 0;
+                let totalC4 = 0;
+
+                for (let i = 1; i < 20; i++) {
+                    let data;
+                    if(tableId === "Eqiupment"){
+                        data = await readToken(i,tableId);
+                    }else{
+                        data = await readToken(i,tableId);
+
+                    }
+                    
+                    // Extract token data
+                    const basePower = data[9];
+                    const bonusIncrease = data[10];
+                    const rate = data[8];
+
+                    const token1 = getTokenInfoByAddress(data[0]);
+                    const token2 = getTokenInfoByAddress(data[2]);
+                    const token3 = getTokenInfoByAddress(data[4]); // Unused in the table, consider if needed
+                    const token4 = getTokenInfoByAddress(data[6]); // Unused in the table, consider if needed
+
+                    // Convert amounts from wei to human-readable format
+                    const amount1 = data[1] / 10**18;
+                    const amount2 = data[3] / 10**18;
+                    const amount3 = data[5] / 10**18; // Unused, but could be useful later
+                    const amount4 = data[7] / 10**18; // Unused, but could be useful later
+
+                    // Create a new row and populate cells
                     const row = table.insertRow();
                     row.insertCell().innerText = i + 1; // Level
-                    row.insertCell().innerText = `${setChance[i]/100} %`; // Chance
-                    row.insertCell().innerText = costMain[i].toLocaleString(); // Main
-                    row.insertCell().innerText = costHRC[i].toLocaleString(); // HRC
-                    row.insertCell().innerText = costCMM[i].toLocaleString(); // CMM
-                    row.insertCell().innerText = setPower[i].toLocaleString(); // Power
-                    // Value
-                    row.insertCell().innerText = sumHRC.toLocaleString(undefined,{maximumFractionDigits:2}); // Converted HRC
-                    row.insertCell().innerText = (sumHRC*HRCtoCMM).toLocaleString(undefined,{maximumFractionDigits:2}); // Converted CMM
-                    row.insertCell().innerText = (sumHRC*hrc_kkub).toLocaleString(undefined,{maximumFractionDigits:4}); // KKUB
-                    row.insertCell().innerText = (sumHRC*hrc_thb).toLocaleString(undefined,{maximumFractionDigits:4}); // THB
-                    // Total Cost
-                    row.insertCell().innerText = totalMain.toLocaleString(); 
-                    row.insertCell().innerText = totalHRC.toLocaleString();
-                    row.insertCell().innerText = totalCMM.toLocaleString();
-                    // Value
-                    row.insertCell().innerText = totalCostHRC.toLocaleString(undefined,{maximumFractionDigits:2}); // Converted HRC
-                    row.insertCell().innerText = (totalCostHRC*HRCtoCMM).toLocaleString(undefined,{maximumFractionDigits:2}); // Converted CMM
-                    row.insertCell().innerText = (totalCostHRC*hrc_kkub).toLocaleString(undefined,{maximumFractionDigits:4}); // KKUB
-                    row.insertCell().innerText = (totalCostHRC*hrc_thb).toLocaleString(undefined,{maximumFractionDigits:4}); // THB
+                    row.insertCell().innerText = `${basePower}`; // Base Power
+                    row.insertCell().innerText = `${(bonusIncrease / 100).toFixed(2)} %`; // Bonus increase percentage
+                    row.insertCell().innerText = `${(rate / 100).toFixed(2)} %`; // Rate percentage
+                    row.insertCell().innerText = `${amount1.toLocaleString({maximumFractionDigits:0})} ${token1.name}`;
+                    row.insertCell().innerText = `${amount2.toLocaleString({maximumFractionDigits:0})} ${token2.name}`; 
+                    row.insertCell().innerText = `${amount3.toLocaleString({maximumFractionDigits:0})} ${token3.name}`; 
+                    row.insertCell().innerText = `${amount4.toLocaleString({maximumFractionDigits:0})} ${token4.name}`;
+
+
+                    totalPower += parseFloat(basePower);
+                    totalC1 += amount1;
+                    totalC2 += amount2;
+                    totalC3 += amount3;
+                    totalC4 += amount4;
+
+                    row.insertCell().innerText = `+${totalPower.toLocaleString({maximumFractionDigits:0})}`;
+                    row.insertCell().innerText = `${totalC1.toLocaleString({maximumFractionDigits:0})} ${token1.name}`;
+                    row.insertCell().innerText = `${totalC2.toLocaleString({maximumFractionDigits:0})} ${token2.name}`; 
+                    row.insertCell().innerText = `${totalC3.toLocaleString({maximumFractionDigits:0})} ${token3.name}`; 
+                    row.insertCell().innerText = `${totalC4.toLocaleString({maximumFractionDigits:0})} ${token4.name}`;
+
+                    // You can add token3 and token4 if needed in the future
                 }
             }
     
 
             // สร้างออบเจ็กต์สัญญา
-            const Sc_BlackSmith = new web3.eth.Contract(BlackSmithHouse, BlackSmithHouseArmorAddress);
+            const Sc_ItemBlackSmith = new web3.eth.Contract(ItemBlackSmithHouse, ItemBlackSmithHouseAddress);
+            const Sc_HeroBlackSmith = new web3.eth.Contract(HeroBlackSmithHouse, HeroBlackSmithHouseAddress);
+
+
             const Sc_DmTower = new web3.eth.Contract(DMTower_ABI, DMTower_Address);
             const Sc_GoldTower = new web3.eth.Contract(GoldTower_ABI, GoldTower_Address);
             const Sc_EluFac = new web3.eth.Contract(ELU_ABI, ELU_Address);
