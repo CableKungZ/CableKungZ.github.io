@@ -757,27 +757,32 @@
             <h1>Upgrade HEROCAT</h1>
             <img src="/img/herocat/hero.png" width="100px" height="100px" style="border-radius: 25%; margin-left: 25px;">
         </div>
-        <table id="Weapon" class="center">
+        <table id="Hero" class="center">
             <tr>
-                <th colspan="8">Details Each Upgrade</th>
-                <th colspan="5">Sumary</th>
+                <th colspan="10">Details Each Upgrade</th>
+                <th colspan="8">Sumary</th>
             </tr>
             <tr>
                 <th>Level</th>
-                <th>Inc.Power</th>
-                <th>Crit Power +%</th>
-                <th>Crit Chance %</th>
+                <th>+Power</th>
+                <th>Crit Power +%<br>Crit Chance %</th>
 
                 <th>Cost 1</th>
                 <th>Cost 2</th>
                 <th>Cost 3</th>
                 <th>Cost 4</th>
+                <th>Cost HRC</th>
+                <th>Cost KKUB</th>
+                <th>Cost THB</th>
 
                 <th>Min Inc.Power</th>
                 <th>Total Cost 1</th>
                 <th>Total Cost 2</th>
                 <th>Total Cost 3</th>
                 <th>Total Cost 4</th>
+                <th>Total Cost HRC</th>
+                <th>Total Cost KKUB</th>
+                <th>Total Cost THB</th>
  
             </tr>
             
@@ -789,25 +794,30 @@
         </div>
         <table id="Eqiupment" class="center">
             <tr>
-                <th colspan="8">Details Each Upgrade</th>
-                <th colspan="5">Sumary</th>
+                <th colspan="10">Details Each Upgrade</th>
+                <th colspan="8">Sumary</th>
             </tr>
             <tr>
                 <th>Level</th>
-                <th>Inc.Power</th>
-                <th>Crit Power +%</th>
-                <th>Crit Chance %</th>
+                <th>+Power</th>
+                <th>Crit Power +%<br>Crit Chance %</th>
 
                 <th>Cost 1</th>
                 <th>Cost 2</th>
                 <th>Cost 3</th>
                 <th>Cost 4</th>
+                <th>Cost HRC</th>
+                <th>Cost KKUB</th>
+                <th>Cost THB</th>
 
                 <th>Min Inc.Power</th>
                 <th>Total Cost 1</th>
                 <th>Total Cost 2</th>
                 <th>Total Cost 3</th>
                 <th>Total Cost 4</th>
+                <th>Total Cost HRC</th>
+                <th>Total Cost KKUB</th>
+                <th>Total Cost THB</th>
             </tr>
             
         </table>
@@ -1027,27 +1037,32 @@
                 {
                     address: "0x9F442fa2d4BbD8a183e1EF69f8A7C990465361fe",
                     name: "HRC",
-                    convertToHRC: 1
+                    convertToHRC: 1,
+                    img: "/img/herocat/HRC.png",
                 },
                 {
                     address: "0xeE225Ef0647C503582321859E61FCFB4649C61Cf",
                     name: "ELU",
-                    convertToHRC: 0
+                    convertToHRC: 0,
+                    img: "/img/herocat/elunium.png",
                 },
                 {
                     address: "0xD0A7A4F8EF80b180b1da0aCd696312C6591ACbaF",
                     name: "ORI",
-                    convertToHRC: 0
+                    convertToHRC: 0,
+                    img: "/img/herocat/oridecon.png",
                 },
                 {
                     address: "0x1cfB5851ecD325bE4138Dcd133eb9AA52BaB5111",
                     name: "SOUL",
-                    convertToHRC: 0
+                    convertToHRC: 0,
+                    img: "/img/herocat/SOUL.png",
                 },
                 {
                     address: "0x9B005000A10Ac871947D99001345b01C1cEf2790",
                     name: "CMM",
-                    convertToHRC: 0
+                    convertToHRC: 0,
+                    img: "/img/herocat/CMM.png",
                 }
             ];
 
@@ -1059,7 +1074,8 @@
                     return {
                         address: tokenInfo.address,
                         name: tokenInfo.name,
-                        convertToHRC: tokenInfo.convertToHRC
+                        convertToHRC: tokenInfo.convertToHRC,
+                        img: tokenInfo.img
                     };
                 } else {
                     return {
@@ -1069,8 +1085,9 @@
                 }
             }
 
-            async function renderTable(tableId, Main, CMM_toHRC, hrc_kkub, hrc_thb) {
-                const HRCtoCMM = 1 / CMM_toHRC;
+            async function renderTable(tableId, CMMorHRC , ORI_toHRC, ELU_toHRC,SOUL_toHRC, hrc_kkub, hrc_thb) {
+                console.table(tableId,CMMorHRC,ORI_toHRC,ELU_toHRC,hrc_kkub,hrc_thb);
+
                 const table = document.getElementById(tableId);
 
                 let totalPower = 0;
@@ -1107,13 +1124,41 @@
                     // Create a new row and populate cells
                     const row = table.insertRow();
                     row.insertCell().innerText = i + 1; // Level
-                    row.insertCell().innerText = `${basePower}`; // Base Power
-                    row.insertCell().innerText = `${(bonusIncrease / 100).toFixed(2)} %`; // Bonus increase percentage
-                    row.insertCell().innerText = `${(rate / 100).toFixed(2)} %`; // Rate percentage
-                    row.insertCell().innerText = `${amount1.toLocaleString({maximumFractionDigits:0})} ${token1.name}`;
-                    row.insertCell().innerText = `${amount2.toLocaleString({maximumFractionDigits:0})} ${token2.name}`; 
-                    row.insertCell().innerText = `${amount3.toLocaleString({maximumFractionDigits:0})} ${token3.name}`; 
-                    row.insertCell().innerText = `${amount4.toLocaleString({maximumFractionDigits:0})} ${token4.name}`;
+                    row.insertCell().innerText = `+${basePower}`; // Base Power
+                    row.insertCell().innerText = `
+                        ${(bonusIncrease / 100).toFixed(2)} % 
+                        (${(rate/100).toFixed(2)}%)`
+                        ; 
+
+                    row.insertCell().innerHTML = `
+                        ${amount1.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token1.img}" style="width:15px;height:15px" alt="${token1.name}"> 
+                        <br> ~${(amount1 / CMMorHRC).toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    row.insertCell().innerHTML = `
+                        ${amount2.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token2.img}" style="width:15px;height:15px" alt="${token2.name}"> 
+                        <br> ~${(amount2 * ELU_toHRC).toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    row.insertCell().innerHTML = `
+                        ${amount3.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token3.img}" style="width:15px;height:15px" alt="${token3.name}"> 
+                        <br> ~${(amount3 * ORI_toHRC).toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    row.insertCell().innerHTML = `
+                        ${amount4.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token4.img}" style="width:15px;height:15px" alt="${token4.name}"> 
+                        <br> ~${amount4.toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    sumHrc = (amount1*CMMorHRC) + (amount2*ELU_toHRC) + (amount3*ORI_toHRC) + (amount4*SOUL_toHRC);
+                    row.insertCell().innerText = `~${(sumHrc).toLocaleString({maximumFractionDigits:0})} HRC`;
+                    row.insertCell().innerText = `~${(sumHrc*hrc_kkub).toLocaleString({maximumFractionDigits:0})} KKUB`;
+                    row.insertCell().innerText = `~${(sumHrc*hrc_thb).toLocaleString({maximumFractionDigits:0})} THB`;
+
 
 
                     totalPower += parseFloat(basePower);
@@ -1123,10 +1168,36 @@
                     totalC4 += amount4;
 
                     row.insertCell().innerText = `+${totalPower.toLocaleString({maximumFractionDigits:0})}`;
-                    row.insertCell().innerText = `${totalC1.toLocaleString({maximumFractionDigits:0})} ${token1.name}`;
-                    row.insertCell().innerText = `${totalC2.toLocaleString({maximumFractionDigits:0})} ${token2.name}`; 
-                    row.insertCell().innerText = `${totalC3.toLocaleString({maximumFractionDigits:0})} ${token3.name}`; 
-                    row.insertCell().innerText = `${totalC4.toLocaleString({maximumFractionDigits:0})} ${token4.name}`;
+                    
+                    row.insertCell().innerHTML = `
+                        ${totalC1.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token1.img}" style="width:15px;height:15px" alt="${token1.name}"> 
+                        <br> ~${(totalC1 / CMMorHRC).toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    row.insertCell().innerHTML = `
+                        ${totalC2.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token2.img}" style="width:15px;height:15px" alt="${token2.name}"> 
+                        <br> ~${(totalC2 * ELU_toHRC).toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    row.insertCell().innerHTML = `
+                        ${totalC3.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token3.img}" style="width:15px;height:15px" alt="${token3.name}"> 
+                        <br> ~${(totalC3 * ORI_toHRC).toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    row.insertCell().innerHTML = `
+                        ${totalC4.toLocaleString(undefined, { maximumFractionDigits: 0 })} 
+                        <img src="${token4.img}" style="width:15px;height:15px" alt="${token4.name}"> 
+                        <br> ~${totalC4.toLocaleString(undefined, { maximumFractionDigits: 0 })} <img src="/img/herocat/HRC.png" style="width:15px;height:15px" alt="HRC">
+                    `;
+
+                    sumTotalHrc = (totalC1*CMMorHRC) + (totalC2*ELU_toHRC) + (totalC3*ORI_toHRC) + (totalC4*SOUL_toHRC);
+                    row.insertCell().innerText = `~${(sumTotalHrc).toLocaleString({maximumFractionDigits:0})} HRC`;
+                    row.insertCell().innerText = `~${(sumTotalHrc*hrc_kkub).toLocaleString({maximumFractionDigits:0})} KKUB`;
+                    row.insertCell().innerText = `~${(sumTotalHrc*hrc_thb).toLocaleString({maximumFractionDigits:0})} THB`;
+
 
                     // You can add token3 and token4 if needed in the future
                 }
@@ -1236,8 +1307,10 @@
                 cmm_inHRC = hrc_cmm; // Swap HRC in to CMM
                 kkub_to_THB = parseFloat(document.getElementById("KUBTHB").textContent) || 0;
 
-                renderTable('Weapon',ORI_hrc,cmm_hrc,hrc_inKKUB,(hrc_inKKUB * kkub_to_THB))
-                renderTable('Eqiupment',ELU_hrc,cmm_hrc,hrc_inKKUB,(hrc_inKKUB * kkub_to_THB))
+                SOUL_toHRC = 1;
+
+                renderTable('Hero',cmm_inHRC,ORI_hrc,ELU_hrc,SOUL_toHRC,hrc_inKKUB,(hrc_inKKUB * kkub_to_THB))
+                renderTable('Eqiupment',1,ORI_hrc,ELU_hrc,SOUL_toHRC,hrc_inKKUB,(hrc_inKKUB * kkub_to_THB))
                 
                 // DISPLAY ALL
                 document.getElementById("KKUB_HRC").innerHTML = setDecimal((cmm_kkub * cmm_hrc),7,7); // Display result with 4 decimal places
