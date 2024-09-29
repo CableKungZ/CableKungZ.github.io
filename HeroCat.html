@@ -750,6 +750,20 @@
                 <td><span id="DM_THB">... Loading</span></td>
             </tr>
         </table>
+        <h1>SOUL EXCHANGE</h1>
+        <table id="soul">
+            <tr>
+                <th>Icon</th>
+                <th>Symbol</th>
+                <th>Token/SOUL</th>
+                <th>HRC/SOUL</th>
+                <th>CMM/SOUL</th>
+                <th>KKUB/SOUL</th>
+                <th>THB/SOUL</th>
+            </tr>
+
+
+        </table> 
     </div>
     <div id="Upgrade" class="container">
         <div style="display:flex; flex-wrap:wrap; align-items:center;">
@@ -1084,6 +1098,72 @@
                     }; // Handle unknown tokens
                 }
             }
+
+            async function waitForNumberElement(id) {
+                let element = document.getElementById(id);
+                while (!element || isNaN(parseFloat(element.textContent))) {
+                    await new Promise(resolve => setTimeout(resolve, 100)); // wait for 100 ms before checking again
+                    element = document.getElementById(id);
+                }
+                return parseFloat(element.textContent);
+            }
+            
+            async function renderSoulExchange() {
+                const tokenList = [
+                    {
+                        name: "DM",
+                        ratio: 0.02,
+                        priceHrc: "DM_HRC",
+                        img: "/img/herocat/Diamond.png",
+                    },
+                    {
+                        name: "GOLD",
+                        ratio: 0.2,
+                        priceHrc: "GOLD_HRC",
+                        img: "/img/herocat/GOLD.png",
+                    },
+                    {
+                        name: "ELU",
+                        ratio: 1,
+                        priceHrc: "ELU_HRC",
+                        img: "/img/herocat/Elunium.png",
+                    },
+                    {
+                        name: "ORI",
+                        ratio: 0.5,
+                        priceHrc: "ORI_HRC",
+                        img: "/img/herocat/Oridecon.png",
+                    },
+                ];
+            
+                const table = document.getElementById("soul");
+            
+                for (let i = 0; i < tokenList.length; i++) {
+                    const data = tokenList[i];
+            
+                    // Wait until the priceHrc value is a valid number
+                    const price = await waitForNumberElement(data.priceHrc);
+                    const priceCMM = await waitForNumberElement("HRC_CMM");
+                    const priceKKUB = await waitForNumberElement("HRC_KKUB");
+                    const priceTHB = await waitForNumberElement("HRC_THB");
+            
+                    const row = table.insertRow();
+                    const imgCell = row.insertCell();
+                    imgCell.innerHTML = `<img src="${data.img}" style="width:40px;height:40px" alt="${data.name}"> `;
+                    row.insertCell().innerText = `${data.name}`;
+                    row.insertCell().innerText = `${1/data.ratio}`;
+
+                    convert = 1/data.ratio;
+                    soulInHRC = price/convert;
+                    row.insertCell().innerText = `${soulInHRC} HRC/SOUL`;
+                    row.insertCell().innerText = `${(soulInHRC*priceCMM).toLocaleString({maximumFractionDigits:8})} CMM/SOUL`;
+                    row.insertCell().innerText = `${soulInHRC*priceKKUB} KKUB/SOUL`;
+                    row.insertCell().innerText = `${(soulInHRC*priceTHB).toLocaleString({maximumFractionDigits:8})}  THB/SOUL`;
+                }
+            }
+            
+
+            renderSoulExchange();
 
             async function renderTable(tableId, CMMorHRC , ORI_toHRC, ELU_toHRC,SOUL_toHRC, hrc_kkub, hrc_thb) {
                 console.table(tableId,CMMorHRC,ORI_toHRC,ELU_toHRC,hrc_kkub,hrc_thb);
