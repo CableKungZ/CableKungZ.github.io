@@ -1176,7 +1176,7 @@
                 let totalC3 = 0;
                 let totalC4 = 0;
 
-                for (let i = 1; i < 20; i++) {
+                for (let i = 1; i <= 20; i++) {
                     let data;
                     if(tableId === "Eqiupment"){
                         data = await readToken(i,tableId);
@@ -1203,7 +1203,7 @@
 
                     // Create a new row and populate cells
                     const row = table.insertRow();
-                    row.insertCell().innerText = i + 1; // Level
+                    row.insertCell().innerText = i; // Level
                     row.insertCell().innerText = `+${basePower}`; // Base Power
                     row.insertCell().innerText = `
                         ${(bonusIncrease / 100).toFixed(2)} % 
