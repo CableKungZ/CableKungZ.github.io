@@ -316,17 +316,17 @@ async function price_jbc(){
         setPrice("B_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 1.05);
         setPrice("S_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 0.95);
 
-        memeticGas = parseFloat(priceData[24].swap1 * 1.05) * 700000; // GAS in WJBC
+        memeticGas = parseFloat(priceData[24].swap1 * 1.05) * 500000; // GAS in WJBC
         setPrice("memetic-gasfee",memeticGas);
         memeticGas2 = memeticGas/(jbcToCmj*0.998); // GAS in CMJ
         setPrice("memetic-gasfee2",memeticGas2);
-        minimumPow = memeticGas2/(priceData[9].swap1 * 0.95)
+        minimumPow = memeticGas2/(priceData[8].swap1 * 0.95)
 
         mul = 1.03
-        Minimum_NoHouse = ((memeticGas2/(priceData[9].swap1 * 0.95))/0.06048 )* mul;
-        Minimum_C10House = ((memeticGas2/(priceData[9].swap1 * 0.95))/0.6048) * mul;
-        Minimum_B10House = ((memeticGas2/(priceData[9].swap1 * 0.95))/3.024) * mul;
-        Minimum_A10House = ((memeticGas2/(priceData[9].swap1 * 0.95))/6.048) * mul;
+        Minimum_NoHouse = ((memeticGas2/(priceData[8].swap1 * 0.95))/0.06048 )* mul;
+        Minimum_C10House = ((memeticGas2/(priceData[8].swap1 * 0.95))/0.6048) * mul;
+        Minimum_B10House = ((memeticGas2/(priceData[8].swap1 * 0.95))/3.024) * mul;
+        Minimum_A10House = ((memeticGas2/(priceData[8].swap1 * 0.95))/6.048) * mul;
         setPrice("Minimum_NoHouse",parseInt(Minimum_NoHouse));
         setPrice("Minimum_C10House",parseInt(Minimum_C10House));
         setPrice("Minimum_B10House",parseInt(Minimum_B10House));

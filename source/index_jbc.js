@@ -455,9 +455,9 @@ powerInputs.forEach(input => {
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) ; // daemonWorld Gas
 
     //** MEMETIC ORBITS */
-    const DoiJib_Gas = parseFloat(document.getElementById("B_doijib_1").textContent) * 700000; //Gas 700,000 DOI JIB
-    const sellSilver = parseFloat(document.getElementById("S-Silver").textContent); // get SELL SIL PRICE (CMJ)
-    const silver_inCMJ_toJBC = sellSilver * parseFloat(document.getElementById("S-jbcToCmj").textContent);
+    const DoiJib_Gas = parseFloat(document.getElementById("B_doijib_1").textContent) * 500000; //Gas 500,000 DOI JIB
+    const sell_dungeonMo_Product = parseFloat(document.getElementById("S-Gold").textContent); // get SELL GOLD PRICE (CMJ)
+    const silver_inCMJ_toJBC = sell_dungeonMo_Product * parseFloat(document.getElementById("S-jbcToCmj").textContent);
     const rewardPerPow = parseFloat(document.getElementById("rewardPerPow").textContent);
 
 
@@ -511,7 +511,7 @@ powerInputs.forEach(input => {
     console.log("DOIJIB GAS : ",DoiJib_Gas," WJBC");
     console.log("MEMETIC REWARD : ",memeTic," SIL");
     console.log("MEMETIC PNL : ",MemeticPNL," SIL");
-    console.log("SILVER CMJ : ",sellSilver);
+    console.log("SILVER CMJ : ",sell_dungeonMo_Product);
     console.log("SILVER WJBC : ",silver_inCMJ_toJBC);;
 
     const bbqHeroCatPNL = (bbqHeroCatProd*gemPrice);
