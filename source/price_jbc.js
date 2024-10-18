@@ -352,17 +352,7 @@ async function price_jbc(){
             document.getElementById("labG2").innerHTML = setLocal(math2,6);
             document.getElementById("BbqProd").innerHTML = setLocal(prod,6);
             document.getElementById("labM2").innerHTML = setLocal(pnl,6);
-          // Craft BBQ Factory
-          
-                    math1 = Wood_Price*100000000;
-                    math2 = Jdao_Price*1*1.05;
-                    prod = Bbq_Price*6000*0.95;
-                    claimCost = 0.01;
-                    pnl = prod-(math1+math2+claimCost);
-            document.getElementById("labD3").innerHTML = setLocal(math1,6);
-            document.getElementById("labG3").innerHTML = setLocal(math2,6);
-            document.getElementById("labK3").innerHTML = setLocal(prod,6);
-            document.getElementById("labM3").innerHTML = setLocal(pnl,6);
+
           // Craft Craft Pizza
                     math1 = Bbq_Price*10000*1.05;
                     math2 = stOPT_Price*1;
@@ -389,23 +379,7 @@ async function price_jbc(){
             document.getElementById("labG9").innerHTML = setLocal(math2,6);
             document.getElementById("labK9").innerHTML = setLocal(prod,6);
             document.getElementById("labM9").innerHTML = setLocal(pnl,6);
-          // Craft Gold Factory (BBQ And JBC)
-                    math1 = Bbq_Price*2000*1.05;
-                    math2 = Jbc_Price*1;
-                    prod = Gold_Price*6.25*0.95;
-                    pnl = prod-(math1+math2);
-            document.getElementById("labD10").innerHTML = setLocal(math1,6);
-            document.getElementById("labK10").innerHTML = setLocal(prod,6);
-            document.getElementById("labM10").innerHTML = setLocal(pnl,6);
-            // Craft Gold Factory (Wood And $MT)
-                    math1 = Wood_Price*100000000;
-                    math2 = Mt_Price*50;
-                    prod = Gold_Price*50*0.95;
-                    pnl = prod-(math1+math2);
-            document.getElementById("labD11").innerHTML = setLocal(math1,6);
-            document.getElementById("labG11").innerHTML = setLocal(math2,6);
-            document.getElementById("labK11").innerHTML = setLocal(prod,6);
-            document.getElementById("labM11").innerHTML = setLocal(pnl,6);
+
             // Craft Platinum Factory
                     math1 = Gold_Price*300*1.05;
                     math2 = Ctuna_Price*5*1.05;

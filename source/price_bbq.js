@@ -162,16 +162,16 @@ async function price_bbq(){
         console.table(priceDataBBQ);
     
         try {
-            let cmdToCMM = await getTextContentUntilNumber('op-cmmToken-cmd');
-            let cmmToUSD = await getTextContentUntilNumber('op-cmmToken-usd');
-            let cmmToTHB = await getTextContentUntilNumber('op-cmmToken-thb');
+            let cmdToCMM = 0; //await getTextContentUntilNumber('op-cmmToken-cmd');
+            let cmmToUSD = 0; //await getTextContentUntilNumber('op-cmmToken-usd');
+            let cmmToTHB = 0; //await getTextContentUntilNumber('op-cmmToken-thb');
             
-            let gemToCMM = priceDataBBQ[0].swap1 * 0.95;
+            let gemToCMM = 0 ;// priceDataBBQ[0].swap1 * 0.95;
             setPrice("bbq_gem-priceCMM", gemToCMM);
             setPrice("bbq_gem-priceUSD", gemToCMM * cmmToUSD);
             setPrice("bbq_gem-priceTHB", gemToCMM * cmmToTHB);
 
-            setPrice("OP-HeroCat-ProductToCMM", 0.00864 * gemToCMM);
+            //setPrice("OP-HeroCat-ProductToCMM", 0.00864 * gemToCMM);
             calculateProfit()
 
         } catch (error) {

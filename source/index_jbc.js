@@ -557,9 +557,9 @@ powerInputs.forEach(input => {
     cmjToUsd = parseFloat(document.getElementById("S-usdToCmj").textContent) ;
     wjbcToUsd = parseFloat(document.getElementById("S-usdToJbc").textContent) ;
 
-    gemToCMM = parseFloat(document.getElementById("bbq_gem-priceCMM").textContent) ;
-    gemToUSD = parseFloat(document.getElementById("bbq_gem-priceUSD").textContent) ;
-    gemToTHB = parseFloat(document.getElementById("bbq_gem-priceTHB").textContent) ;
+    gemToCMM = 0 ; //parseFloat(document.getElementById("bbq_gem-priceCMM").textContent)
+    gemToUSD = 0 ; //parseFloat(document.getElementById("bbq_gem-priceUSD").textContent) ;
+    gemToTHB = 0 ; // parseFloat(document.getElementById("bbq_gem-priceTHB").textContent) ;
 
     var usd_pnl_bbq_chain_herocat = bbqHeroCatProd * gemToUSD;
     var cmm_pnl_bbq_chain_herocat = bbqHeroCatProd * gemToCMM;
