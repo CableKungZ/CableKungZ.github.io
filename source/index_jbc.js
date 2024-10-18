@@ -632,7 +632,7 @@ powerInputs.forEach(input => {
       document.getElementById("HouseStaking").innerHTML += ` <br>(No Power No Miner)` ;
     }
     if(bbqHeroCatProd != 0){
-        const pnlBBQMessage = `<span class="profit">Profit</span>  ${setLocal(cmm_pnl_bbq_chain_herocat,2)} CMM , ~${setLocal(usd_pnl_bbq_chain_herocat,5)} USD , ~${setLocal(thb_pnl_bbq_chain_herocat,6)} THB`;
+        const pnlBBQMessage = `<span class="profit">Profit</span>  ${setLocal(cmm_pnl_bbq_chain_herocat,2)} CMD , ~${setLocal(usd_pnl_bbq_chain_herocat,5)} USD , ~${setLocal(thb_pnl_bbq_chain_herocat,6)} THB`;
         /*  : `<span class="loss">Loss</span>  ${setLocal(Math.abs(cmm_pnl_bbq_chain_herocat),2)} CMM ,  ~${setLocal(Math.abs(usd_pnl_bbq_chain_herocat),5)} USD , ~${setLocal(Math.abs(thb_pnl_bbq_chain_herocat),6)} THB` */
         document.getElementById("bbq-herominer-gems").innerHTML += ` <br>(${pnlBBQMessage})` ;
       }else{

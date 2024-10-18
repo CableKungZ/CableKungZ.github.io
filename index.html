@@ -517,8 +517,8 @@
                   <div class="card-body">
                 <h5 class="card-title center">Craft Infinity Power</h5>
                 <p class="card-text">Cost: 
-                      <p>  - 500 <img src="/img/commuDao/token/engy.png" alt="CMD" >(<span id="labG2" class="low">0.00</span> CMD)</p>
-                      <p>  - 1 <img src="/img/commuDao/token/cmd.png" alt="CMD" ></p>
+                      <p>  - 500 <img src="/img/commuDao/token/gem.png" alt="GEM" >(<span id="labG2" class="low">0.00</span> CMD)</p>
+                      <p>  - 1 <img src="https://optimistic.etherscan.io/token/images/commudao_32.png" alt="CMD" ></p>
                     <p class="card-text">Receive: 1 <img src="/img/commuDao/token/infPower.png" alt="InfinityPower" >(<span id="" class="low">?</span> CMD)</p>
                     <p class="card-text">PNL: <span id="" class="low">-1</span> CMD</p>
               </div>
@@ -923,10 +923,91 @@
     <!---------------------------------------------------------------------------------------------------------------------------------------------
                                          END JBC CHAIN DUNGEON
     -------------------------------------------------------------------------------------------------------------------------------------------->
-    <div id="op_dun" style="display:none;">
-      <h1 class="center">OP's Dungeon</h1>
-      <h1 class="center" style="margin-top: 200px;margin-bottom: 200px;color: red;">Stay Tuned!</h1>
+      <div id="op_dun" style="display:none;">
+        <h1 class="center">OP's Dungeon</h1>
+        <div class="col-12">
+          <div class="card2 dungeon calc">
+            <div class="card-body">
+              <h5 class="card-title center">Mining Profit Calculator</h5>
+              <div style="margin-right:15px; margin-bottom:15px;">
+              </div>
+              <p id="powerBox">
+                <label for="opPower" class="center">Enter Power:</label>
+                <input type="number" class="center" id="opPower" min="0" placeholder="Insert Power Here">
+              </p>
+              <!-- <button onclick="calculateProfit()">Calculate Profit</button> -->
+              <table id="miningTable">
+                <thead>
+                  <tr>
+                    <th style="width:140px;">Dungeon</th>
+                    <th style="font-size:12px; width:15px;">Duration <br></th>
+                    <th >GasFee/Day</th>
+                    <th style="width:15px;">Reward/Power</th>
+                    <th>Reward/Round<br></th>
+                    <th>Reward/Day </th>
+                  </tr>
+                </thead>
+          <tbody>
+              <tr class="cryptic-cogs">
+                <tr>
+                  <td>Abandoned Temple Vault
+                    <p id="op-atv-input1" style="display: none;">
+                      <input type="number" class="center" id="op-atv-power1" min="0" placeholder="Insert Power Here" width="250px">
+                    </p>
+                  </td>
+                  <td>None</td>
+                  <td>? <img src="/img/commuDao/token/infPower.png" alt="infPow" ></td>
+                  <td colspan="2"><span id="op-atv-inf"></span></td>
+                </tr>
+            </tr>
+  
+          </tbody>
+      </table>
+      
+            </div>
+          </div>
+        </div>
+  <!------------------------------------------------------------------  MINING CALCULATE  ------------------------------------------------------------------>
+      
+      
+      <!-------------------------------------------------------- DUNGEON MENU ------------------------------------------------------->
+      <div class="container mt-5">
+        <div class="row">
+          <!-- Card 1 -->
+          <p class="dungeon header">Dungeon</p>
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="card dungeon">
+              <!-- <img src="/img/commuDao/wallpaper/BBQChain-EndlessTower.png" class="card-img-top" alt="BBQ img" width="50" > -->
+              <div class="card-body">
+                <h5 class="card-title center">[Dungeon] Abandoned Temple Vault</h5>
+                <p class="card-text"><b> NFT Collection: </b>
+                  <p class="nftcol">Thai League NFTs</p>
+                  <p class="nftcol">CommuDao NFTs</p>
+                </p>
+                <a href="https://commudao.xyz/dungeon/abandoned-temple-vault/" target="_blank"  class="join-btn">Join</a>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+    <!------------------------------------------------------------------ FIELD  ------------------------------------------------------------------>
+  <!--         <div class="row">
+            <p class="dungeon header">Fields</p>        
+                FILED CARD 
+          <div class="col-lg-4 col-sm-6 col-12">
+            <div class="card dungeon">
+              <img src="https://nftstorage.link/ipfs/bafkreiaplfqhpcall6mr7swyaqyatfri7p4z56i7ttfvhjmootnett3f3m" class="card-img-top" alt=" img"  height="350vh" width="100%" >
+            <div class="card-body">
+              <h5 class="card-title center">[Fields] <strong>Soon</strong></h5>
+              <p class="card-text"><b> NFT Collection: <a class="nftcol">?</a></b> </p>
+              <p class="card-text"></p>
+               <a href="https://commudao.xyz/fields/old-warehouse" target="_blank"  class="join-btn">Join</a> 
+              </div>
+          </div>
+        </div>
+      </div> -->
     </div>
+      </div>
     <!---------------------------------------------------------------------------------------------------------------------------------------------
                                          END OP CHAIN DUNGEON
     -------------------------------------------------------------------------------------------------------------------------------------------->
