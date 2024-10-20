@@ -398,7 +398,7 @@ inputs.forEach(input => {
 
 
 
-const powerInputs = document.querySelectorAll("#power,#bbqPower, #input1, #input2, #input3, #input4,#input5,#input6","#bbq-herominer-input1");
+const powerInputs = document.querySelectorAll("#power,#bbqPower,#opPower, #input1, #input2, #input3, #input4,#input5,#input6","#bbq-herominer-input1");
 
 powerInputs.forEach(input => {
     input.addEventListener("input", calculateProfit);
@@ -422,6 +422,8 @@ powerInputs.forEach(input => {
     var MOPower =0;
     // BBQ CHAIN
     var heroPower = document.getElementById("bbqPower").value ;
+    // OP CHAIN
+    var opPower = document.getElementById("opPower").value ;
     
 
     if(isMultiple){
@@ -477,6 +479,7 @@ powerInputs.forEach(input => {
     const osPrice = parseFloat(document.getElementById("S-Os").textContent) ;
 
     const gemPrice = 0;
+    const InfPrice = 0;
 
     const noprice = 0;
 
@@ -495,8 +498,10 @@ powerInputs.forEach(input => {
       angb = ((14000000 * 86400 * 10) * 10 ** -18) * AngbPower;
       CrypticCog = (EEPower * 0.0767232);
       memeTic = (MOPower * rewardPerPow);
-
+      ///******************************************************* */
       bbqHeroCatProd = (heroPower * 0.00864);
+      ///******************************************************* */
+      atvProduct = (opPower * (1e9))/1e18 ; // Reward Inf. 1gwei * cmpow per sec
 
 
     // คำนวณ PNL - GASFEE
@@ -515,6 +520,8 @@ powerInputs.forEach(input => {
     console.log("SILVER WJBC : ",silver_inCMJ_toJBC);;
 
     const bbqHeroCatPNL = (bbqHeroCatProd*gemPrice);
+
+    const op_atvPNL = (atvProduct * InfPrice);
 
     // คำนวนในมูลค่า JBC
 
@@ -540,6 +547,7 @@ powerInputs.forEach(input => {
     document.getElementById("HouseStaking").innerHTML = `    ${setLocal(OsDaily,8)} OS/d `;
     document.getElementById("Memetic").innerHTML = `    ${setLocal(memeTic,8)} SIL/7d `;
     document.getElementById("bbq-herominer-gems").innerHTML = `    ${setLocal(bbqHeroCatProd,8)} Gems/d`
+    document.getElementById("op-atv-inf").innerHTML = `    ${setLocal((atvProduct*86400),8)} $INF.POW/d`
     // Display PNL messages
     displayPNLMessages(bbqHeroCatProd,MOPower,MemeticPNL,OSPower,HouseSTaking_inJBC,HouseStakingGasFee,CuPower,JaspPower,AngbPower,EEPower,CrypticCog_JTAO,CrypticCogsGasFee,CrypticCog_inJBC,copperMineGasFee, jasperCaveGasFee, copperMiner2GasFee, copperMineGasFee_inJBC, copperMiner2GasFee_inJBC, jasperCaveGasFee_inJBC, daemonWorldGasFee, daemonWorldGasFee_inJBC);
   }
