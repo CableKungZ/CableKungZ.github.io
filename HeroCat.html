@@ -791,22 +791,7 @@
                 <td><span id="ELU_KKUB">... Loading</span></td>
                 <td><span id="ELU_THB">... Loading</span></td>
             </tr>
-            <tr>
-                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Gold.png"></td>
-                <td>GOLD</td>
-                <td><span id="GOLD_HRC">... Loading</span></td>
-                <td><span id="GOLD_CMM">... Loading</span></td>
-                <td><span id="GOLD_KKUB">... Loading</span></td>
-                <td><span id="GOLD_THB">... Loading</span></td>
-            </tr>
-            <tr>
-                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Diamond.png"></td>
-                <td>DM</td>
-                <td><span id="DM_HRC">... Loading</span></td>
-                <td><span id="DM_CMM">... Loading</span></td>
-                <td><span id="DM_KKUB">... Loading</span></td>
-                <td><span id="DM_THB">... Loading</span></td>
-            </tr>
+
             <tr>
                 <td><img src="https://www.herocat.xyz/assets/erc20/cmos.png"></td>
                 <td>CMOS</td>
@@ -831,7 +816,38 @@
                 <td><span id="DT_KKUB">... Loading</span></td>
                 <td><span id="DT_THB">... Loading</span></td>
             </tr>
-            
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Gold.png"></td>
+                <td>GOLD/KKUB</td>
+                <td><span id="GOLD_HRC">... Loading</span></td>
+                <td><span id="GOLD_CMM">... Loading</span></td>
+                <td><span id="GOLD_KKUB">... Loading</span></td>
+                <td><span id="GOLD_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Diamond.png"></td>
+                <td>DM/KKUB</td>
+                <td><span id="DM_HRC">... Loading</span></td>
+                <td><span id="DM_CMM">... Loading</span></td>
+                <td><span id="DM_KKUB">... Loading</span></td>
+                <td><span id="DM_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Gold.png"></td>
+                <td>GOLD/CMM</td>
+                <td><span id="GOLD2_HRC">... Loading</span></td>
+                <td><span id="GOLD2_CMM">... Loading</span></td>
+                <td><span id="GOLD2_KKUB">... Loading</span></td>
+                <td><span id="GOLD2_THB">... Loading</span></td>
+            </tr>
+            <tr>
+                <td><img src="https://herocat-website.vercel.app/assets/erc20/new_icons/Diamond.png"></td>
+                <td>DM/CMM</td>
+                <td><span id="DM2_HRC">... Loading</span></td>
+                <td><span id="DM2_CMM">... Loading</span></td>
+                <td><span id="DM2_KKUB">... Loading</span></td>
+                <td><span id="DM2_THB">... Loading</span></td>
+            </tr>
         </table>
         <h1>SOUL EXCHANGE</h1>
         <table id="soul">
@@ -1498,6 +1514,18 @@
                 amount_t2 = Number(await call_SC(currentAddress, CMOS, 18)); // Convert to Number
                 const DT_CMOS = amount_t1 / amount_t2; // HRC in CARR
                 const CMOS_DT = amount_t2 / amount_t1; // Carr in HRC
+                // [GOLD/CMM]
+                currentAddress = '0xf37A6E92c9c905eFf314EDa1F35C48E7FB3Cd783'
+                amount_t1 = Number(await call_SC(currentAddress, GOLD, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, CMM, 18)); // Convert to Number
+                const GOLD_CMM = amount_t1 / amount_t2; // Amount GOLD / CMM
+                const CMM_GOLD = amount_t2 / amount_t1; // Amount CMM / GOLD
+                // [DM/CMM]
+                currentAddress = '0xb079F28bC07dc813D08c40AA0016a110eD393aeD'
+                amount_t1 = Number(await call_SC(currentAddress, DM, 18)); // Convert to Number
+                amount_t2 = Number(await call_SC(currentAddress, CMM, 18)); // Convert to Number
+                const DM_CMM = amount_t1 / amount_t2; // Amount DM / CMM
+                const CMM_DM = amount_t2 / amount_t1; // Amount CMM / DM
 
                 hrc_inKKUB = 1 / KKUB_equalHRC; // SWAP KKUB to HRC
                 cmm_inHRC = hrc_cmm; // Swap HRC in to CMM
@@ -1513,6 +1541,7 @@
                 document.getElementById("KKUB_CMM").innerHTML = setDecimal(cmm_kkub,7,7); // Display result with 4 decimal places
                 document.getElementById("CMM_KKUB").innerHTML = setDecimal(kkub_cmm,7,7); // VALUE CMM in KKUB
                 document.getElementById("CMM_THB").innerHTML = setDecimal((kkub_cmm * kkub_to_THB),7,7); // VALUE CMM in KKUB
+               
                 document.getElementById("HRC_CMM").innerHTML = setDecimal(hrc_cmm,7,7); // Display result with 4 decimal places
                 document.getElementById("CMM_HRC").innerHTML = setDecimal(cmm_hrc,7,7); // Display result with 4 decimal places
                 document.getElementById("HRC_KKUB").innerHTML = setDecimal(hrc_inKKUB,7,7); // Display result with 4 decimal places
@@ -1562,6 +1591,17 @@
                 document.getElementById("DM_CMM").innerHTML = setDecimal((KKUB_DM / kkub_cmm),7,7); // Display result with 4 decimal places
                 document.getElementById("DM_THB").innerHTML = setDecimal((KKUB_DM * kkub_to_THB),7,7); // Display result with 4 decimal places
                 document.getElementById("DM_HRC").innerHTML = setDecimal((KKUB_DM / hrc_inKKUB),7,7); // Display result with 4 decimal places
+
+                document.getElementById("GOLD2_KKUB").innerHTML = setDecimal((CMM_GOLD*kkub_cmm),7,7); // Display result with 4 decimal places
+                document.getElementById("GOLD2_HRC").innerHTML = setDecimal((CMM_GOLD*cmm_hrc),7,7); // Display result with 4 decimal places
+                document.getElementById("GOLD2_CMM").innerHTML = setDecimal(CMM_GOLD,7,7); // Display result with 4 decimal places
+                document.getElementById("GOLD2_THB").innerHTML = setDecimal((CMM_GOLD * (kkub_cmm * kkub_to_THB)),7,7); // Display result with 4 decimal places
+
+                document.getElementById("DM2_KKUB").innerHTML = setDecimal(CMM_DM*kkub_cmm,7,7); // Display result with 4 decimal places
+                document.getElementById("DM2_HRC").innerHTML = setDecimal((CMM_DM*cmm_hrc),7,7); // Display result with 4 decimal places
+                document.getElementById("DM2_CMM").innerHTML = setDecimal(CMM_DM,7,7); // Display result with 4 decimal places
+                document.getElementById("DM2_THB").innerHTML = setDecimal((CMM_DM * (kkub_cmm * kkub_to_THB)),7,7); // Display result with 4 decimal places
+
 
                 document.getElementById("CMOS_HRC").innerHTML = setDecimal(HRC_CMOS,7,7); // Display result with 4 decimal places
                 document.getElementById("CMOS_CMM").innerHTML = setDecimal((HRC_CMOS * cmm_inHRC),7,7); // Display result with 4 decimal places
