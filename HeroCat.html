@@ -979,6 +979,8 @@
         
         
     let isSubscription;
+
+    let web3 = new Web3('https://rpc.bitkubchain.io');
   
     async function connectMetamask() {
         if (window.ethereum) {
@@ -1085,7 +1087,6 @@
             return power // return power for 7 days
         }
 
-        let web3 = new Web3('https://rpc.bitkubchain.io');
         const divider = 10 ** 18;
         const contractABI = [
             {
