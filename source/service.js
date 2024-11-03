@@ -165,10 +165,14 @@ async function batchTransfer() {
     const amounts = [];
 
     // Process each row
-    for (const row of rows) {
-        const [address, amount] = row.split(','); // Split address and amount by ","
-        addresses.push(address.trim()); // Add address to addresses array
-        amounts.push(amount.trim()); // Add amount to amounts array
+    try {
+        for (const row of rows) {
+            const [address, amount] = row.split(','); // Split address and amount by ","
+            addresses.push(address.trim()); // Add address to addresses array
+            amounts.push(amount.trim()); // Add amount to amounts array
+        }
+    }catch{
+        showNotification(`address and amount not equal CHECK YOUR INPUT `);
     }
 
     // Ensure valid addresses and amounts
@@ -176,6 +180,11 @@ async function batchTransfer() {
     const validAmounts = amounts.map(amount => amount.trim());
 
     console.log("Address : ", validAddresses , " Amount :", validAmounts);
+
+    if(validAddresses.length != validAmounts.length){
+        showNotification(`address and amount not equal CHECK YOUR INPUT `);
+        return
+    }
 
     // Calculate total amount in Wei
     let totalAmountInWei;
