@@ -845,6 +845,7 @@
                 <p style="margin-right: 10px;"><span id="returnDate"></span></p>
               </div>
               <p style="margin-right: 10px;">Gain : ~ <span id="gain"></span> Daily</p>
+              <input type="checkbox" id="cs">Use Chō-Senjiryakketsu 2 USD (~ <span id="csPriceCMJ"></span> CMJ)
 
 
 
@@ -1004,7 +1005,8 @@
                   <p class="card-text">Minimum Power: <span id="labU4" class="low"></span> HPower</p>
                   <p class="card-text">Profit 1 CMJ/Day : <span id="labW4" class="low"></span> HPower</p>
                   <p class="card-text">Profit 5 CMJ/Day: <span id="labX4" class="low"></span> HPower</p>
-                  <p class="card-text">Use 1 CS <img src="/img/commuDao/cs.png"> Refuel Gas Fee 100 times</p>
+                  <p class="card-text">Use 1 CS <img src="/img/commuDao/cs.png"> Refuel Gas Fee 100 times  ( <span id="csForJasp"> </span> CMJ/time ) </p>
+                  <p class="card-text">MinPow CS :  <span id="csMinPowerForJasp"></span></p>
 
                   <a href="https://commudao.xyz/dungeon/jasper-cave/" target="_blank" class="join-btn">Join</a>
                 </div>
@@ -1031,7 +1033,8 @@
                   <p class="card-text">Minimum Power: <span id="labU2" class="low"></span> HPower</p>
                   <p class="card-text">Profit 1 CMJ/Day : <span id="labW2" class="low"></span> HPower</p>
                   <p class="card-text">Profit 5 CMJ/Day: <span id="labX2" class="low"></span> HPower</p>
-                  <p class="card-text">Use 1 CS <img src="/img/commuDao/cs.png"> Refuel Gas Fee 100 times</p>
+                  <p class="card-text">Use 1 CS <img src="/img/commuDao/cs.png"> Refuel Gas Fee 100 times ( <span id="csForCU"> </span> CMJ/time )</p>
+                  <p class="card-text">MinPow CS : <span id="csMinPowerForCu"></span> </p> 
                   <a href="https://commudao.xyz/dungeon/copper-mine/" target="_blank" class="join-btn">Join</a>
                 </div>
               </div>
@@ -2083,6 +2086,7 @@
   });
 
   document.getElementById('numHouseLevel').addEventListener('change', calculateLandBonus);
+  document.getElementById('cs').addEventListener('change', calculateProfit);
 
   function calculateLandBonus() {
     var houseValue = parseFloat(document.getElementById('houseLevel').value);

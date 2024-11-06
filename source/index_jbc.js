@@ -408,9 +408,11 @@ powerInputs.forEach(input => {
 
 
 
- function calculateProfit() {
+ async function calculateProfit() {
     // ดึงค่า Power จาก input
     var isMultiple = document.getElementById("multiPowerBtn").classList.contains('active');
+    const useCS = document.getElementById("cs").checked;
+    console.log(`CS : ${useCS}`)
     var RewardOs = parseFloat(document.getElementById("RewardPerPower").textContent) ;
     var OsPowerAll = parseFloat(document.getElementById("TotalPower").textContent) ;
     var power = 0;
@@ -452,8 +454,16 @@ powerInputs.forEach(input => {
     console.log("OS POW : ",OSPower); */
 
 
-    const cuMine = parseFloat(document.getElementById("labR2").textContent) ; // Copper Mine Gas
-    const jaspCave = parseFloat(document.getElementById("labR4").textContent) ; // Japser Cave Gas
+    let cuMine = parseFloat(document.getElementById("labR2").textContent); // Copper Mine Gas
+    let jaspCave = parseFloat(document.getElementById("labR4").textContent); // Jasper Cave Gas
+    
+    if (useCS) {
+        let csCost = parseFloat(document.getElementById("csPriceCMJ").textContent);
+        console.log(`USE CS : ${csCost} CMJ per UNIT, ${csCost / 100} Per Each`);
+        cuMine = csCost / 100;
+        jaspCave = csCost / 100;
+    }
+
     const daemonWorld = parseFloat(document.getElementById("labR6").textContent) ; // daemonWorld Gas
 
     //** MEMETIC ORBITS */

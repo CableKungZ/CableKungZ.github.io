@@ -260,6 +260,12 @@ async function price_jbc(){
         setPrice("S-jbcToCmj",jbcToCmj*0.998);
         setPrice("S-usdToCmj",usdToCmj*0.998);
         setPrice("S-thbToCmj",thbToCmj*0.998);
+            // CS
+            let csPrice = 2/(usdToCmj*1.012)
+        setPrice("csPriceCMJ",csPrice);
+        document.getElementById("csForCU").innerHTML = setLocal(csPrice/100,4);
+        document.getElementById("csForJasp").innerHTML = setLocal(csPrice/100,4);
+
             // USD
         setPrice("thbUsd",thbToUsd);
             // TAO
@@ -583,6 +589,10 @@ async function price_jbc(){
             document.getElementById("labEV4").innerHTML = setLocal(rwJBCPow,6);
             document.getElementById("labW4").innerHTML = setLocal(prof1,0);
             document.getElementById("labX4").innerHTML = setLocal(prof5,0);
+            let csCost = parseFloat(document.getElementById("csForJasp").textContent);
+            document.getElementById("csMinPowerForJasp").innerHTML = setLocal(csCost/(prodType*rewardPow*0.94),0);
+
+
             // Setting Copper
                 gasType = Bbq_Price*1;
                 prodType = Cu_Price*1;
@@ -599,6 +609,9 @@ async function price_jbc(){
             document.getElementById("labAB2").innerHTML = setLocal(rwJBCPow,6);
             document.getElementById("labW2").innerHTML = setLocal(prof1,0);
             document.getElementById("labX2").innerHTML = setLocal(prof5,0);
+            csCost = parseFloat(document.getElementById("csForCU").textContent);
+            document.getElementById("csMinPowerForCu").innerHTML = setLocal(csCost/(prodType*rewardPow*0.94),0);
+
           }
           // Setting DaemonWorld
           {
