@@ -63,6 +63,11 @@ async function price_jbc(){
     const II = setContract(web3_jbc,price_contractABI, '0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
     const Gear = setContract(web3_jbc,price_contractABI,'0x0e2610730a3c42fd721b289bee092d9ad1c76890');
     const Doijib = setContract(web3_jbc,price_contractABI,'0x7414e2D8Fb8466AfA4F85A240c57CB8615901FFB')
+    const PLUTO = setContract(web3_jbc,price_contractABI,'0x70A74EC50BccEaE43Dd16f48492552A8B25403ea');
+    const FBTC = setContract(web3_jbc,price_contractABI,'0x8656268C82cffda9062387F8F117166F01e8Ef2E');
+    const X4 = setContract(web3_jbc,price_contractABI,'0x0DF9D160489440D630a247fBC830DA74779928b1');
+    const INF = setContract(web3_jbc,price_contractABI,'0xCCbb477D6c28892d6311ebb729b4c242C92f70FD');
+
     const Ambassador_V03_ABI = [{"inputs":[{"internalType":"address","name":"_kyc","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"frenCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"kyc","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referalData","outputs":[{"internalType":"address","name":"fren","type":"address"},{"internalType":"address","name":"ambassador","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_ambassador","type":"address"}],"name":"regist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"registCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"registIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 
         // LP Address
@@ -92,6 +97,10 @@ async function price_jbc(){
     const MEOW_MT = setContract(web3_jbc,price_contractABI,'0xb882C5Ec427De3085127C89De4fe3ceE12b345bb');
     const Ambassador_V03 = setContract(web3_jbc,Ambassador_V03_ABI, '0x467eF538C90434D4F69cF8A8F40cd71a96e8424e');
     const WJBC_DOI = setContract(web3_jbc,price_contractABI,'0xF2c2A60F3Fcf8017fED0655F694B91a785fc170b');
+    const CMJ_PLUTO = setContract(web3_jbc,price_contractABI, '0xd3d493ac2c0dD08C814FbbFB5f8B4983a8a0921C');
+    const CMJ_FBTC = setContract(web3_jbc,price_contractABI, '0x4EF48881EFf572bBD636bcE736877881B9Ea17D5');
+    const CMJ_X4 = setContract(web3_jbc,price_contractABI, '0xA7e55e89d6B0E81cCDB034a04Eb65A7aF16b697C');
+    const CMJ_INF = setContract(web3_jbc,price_contractABI, '0x5E9C3A7E74a5865EC8eD3eaF6B1a4220D6E9A96b');
 
     const JBC = '0x';
 
@@ -123,6 +132,11 @@ async function price_jbc(){
         { Name: "MEOW-MT",Contract: MEOW_MT,main:Meow,mainN:"MEOW",pair:Mt,pairN:"MT",mainUSD:0,location:""},
         { Name: "WJBC-DoiJIB", Contract: WJBC_DOI, main: WJBC, mainN: "WJBC", pair: Doijib, pairN: "DOIJIB", mainUSD: jbcToUsd , location: "https://commudao.xyz/mall"},
 
+        { Name: "CMJ-PLUTO", Contract: CMJ_PLUTO, main: CMJ, mainN: "CMJ", pair: PLUTO, pairN: "PLUTO", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
+        { Name: "CMJ-F.BTC", Contract: CMJ_FBTC, main: CMJ, mainN: "CMJ", pair: FBTC, pairN: "F.BTC", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
+        { Name: "CMJ-X4", Contract: CMJ_X4, main: CMJ, mainN: "CMJ", pair: X4, pairN: "X4", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
+        { Name: "CMJ-INF", Contract: CMJ_INF, main: CMJ, mainN: "CMJ", pair: INF, pairN: "INF", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
+
     ]
 
 
@@ -152,12 +166,18 @@ async function price_jbc(){
         }
     
         mainTokenBalance = parseFloat(web3_jbc.utils.fromWei(mainTokenBalance, 'ether'));
-
-        if(pairN != "JASP"){
-            pairTokenBalance = parseFloat(web3_jbc.utils.fromWei(pairTokenBalance, 'ether')); 
-        }else
-            pairTokenBalance = parseFloat(web3_jbc.utils.fromWei(pairTokenBalance, 'gwei')); 
-    
+        
+        const pairGwei = ["JASP", "PLUTO"];
+        const pairWei = ["F.BTC"];
+        
+        if (pairGwei.includes(pairN)) {
+            pairTokenBalance = parseFloat(web3_jbc.utils.fromWei(pairTokenBalance, 'gwei'));
+        } else if (!pairWei.includes(pairN)) {
+            pairTokenBalance = parseFloat(web3_jbc.utils.fromWei(pairTokenBalance, 'ether'));
+        } else {
+            pairTokenBalance = pairTokenBalance; 
+        }
+        
         const swap1 = mainTokenBalance / pairTokenBalance;
         const swap2 = pairTokenBalance / mainTokenBalance;
 
@@ -316,6 +336,19 @@ async function price_jbc(){
         setPrice("B_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 1.05);
         setPrice("S_doijib_3",(priceData[24].swap1/jbcToCmj) * thbToCmj * 0.95);
 
+        setPrice("B-Pluto",priceData[25].swap1 * 1.05);
+        setPrice("S-Pluto",priceData[25].swap1 * 0.95);
+
+        setPrice("B-FBTC",priceData[26].swap1 * 1.05);
+        setPrice("S-FBTC",priceData[26].swap1 * 0.95);
+
+        setPrice("B-X4",priceData[27].swap1 * 1.05);
+        setPrice("S-X4",priceData[27].swap1 * 0.95);
+
+        setPrice("B-INF",priceData[28].swap1 * 1.05);
+        setPrice("S-INF",priceData[28].swap1 * 0.95);
+
+
         memeticGas = parseFloat(priceData[24].swap1 * 1.05) * 500000; // GAS in WJBC
         setPrice("memetic-gasfee",memeticGas);
         memeticGas2 = memeticGas/(jbcToCmj*0.998); // GAS in CMJ
@@ -333,15 +366,16 @@ async function price_jbc(){
         setPrice("Minimum_A10House",parseInt(Minimum_A10House));
 
         
-        setLabFactory(priceData[24].swap1,jTaoToCmj,priceData[13].swap1,priceData[14].swap1,priceData[15].swap1/jbcToCmj,priceData[12].swap1,priceData[21].swap1,priceData[22].swap1,priceData[3].swap1,priceData[6].swap1,priceData[2].swap1,priceData[4].swap1,priceData[23].swap1,priceData[8].swap1,priceData[9].swap1,priceData[7].swap1,priceData[11].swap1,0,cmjToJbc,priceData[10].swap1,priceData[18].swap1 * jTaoToCmj * 1.05,priceData[16].swap1/jbcToCmj * 1.05,jTaoToCmj,priceData[17].swap1 * 1.05);
+        setLabFactory((priceData[24].swap1/jbcToCmj),priceData[28].swap1,priceData[27].swap1,priceData[26].swap1,priceData[25].swap1,priceData[24].swap1,jTaoToCmj,priceData[13].swap1,priceData[14].swap1,priceData[15].swap1/jbcToCmj,priceData[12].swap1,priceData[21].swap1,priceData[22].swap1,priceData[3].swap1,priceData[6].swap1,priceData[2].swap1,priceData[4].swap1,priceData[23].swap1,priceData[8].swap1,priceData[9].swap1,priceData[7].swap1,priceData[11].swap1,0,cmjToJbc,priceData[10].swap1,priceData[18].swap1 * jTaoToCmj * 1.05,priceData[16].swap1/jbcToCmj * 1.05,jTaoToCmj,priceData[17].swap1 * 1.05);
 
         function setLocal(number,maximumFractionDigits){
             return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
           }
           
-          async function setLabFactory(DoiJib_to_WJBC,JTAOPrice,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price,Plat_Price,EE_Price,ANGB_in_CMJ,JTAO_to_CMJ,JTAO_to_II){
+          async function setLabFactory(DoiJib_Price,INF_Price,X4_Price,FBTC_Price,Pluto_Price,DoiJib_to_WJBC,JTAOPrice,Bbq_Price,Pza_Price,Swar_Price,Wood_Price,Tuna_Price,Mice_Price,Cu_Price,Jasp_Price,Os_Price,Jdao_Price,Mt_Price,Gold_Price,Silver_Price,Ctuna_Price,Sx31_Price,stOPT_Price,Jbc_Price,Plat_Price,EE_Price,ANGB_in_CMJ,JTAO_to_CMJ,JTAO_to_II){
             showNotification("Setting Labs")
             showNotification("Dungeon Calculator is Ready")
+            const starPrice = ((ANGB_in_CMJ*40*1.05));
           
           // Craft BBQ
                     math1 = Wood_Price*100;
@@ -400,11 +434,44 @@ async function price_jbc(){
             // Craft Pluto Factory
                     math1 = Jasp_Price*100*1.05;
                     math2 = 5;
-                    prod = Plat_Price*0*0.95;
+                    prod = Pluto_Price*5*0.95;
                     pnl = prod-(math1+math2);
             document.getElementById("PlutoFactory_COST1").innerHTML = setLocal(math1,6);
             document.getElementById("PlutoFactory_Product").innerHTML = setLocal(prod,6);
             document.getElementById("PlutoFactory_PNL").innerHTML = setLocal(pnl,6);
+
+            // Craft Doi Star ( Partner )
+            math1 = starPrice;
+            math2 = 100000*DoiJib_Price;
+            prod = 0;
+            pnl = prod-(math1+math2);
+            const Doistar_Price = Math.abs(pnl);
+    document.getElementById("DoiStarFactory_COST1").innerHTML = setLocal(math1,6);
+    document.getElementById("DoiStarFactory_COST2").innerHTML = setLocal(math2,6);
+    document.getElementById("DoiStarFactory_Product").innerHTML = setLocal(prod,6);
+    document.getElementById("DoiStarFactory_PNL").innerHTML = setLocal(pnl,6);
+
+
+            // Craft FBTC Factory
+            math1 = Pluto_Price*20*1.05;
+            math2 = Doistar_Price*10*1.05;
+            prod = FBTC_Price*0.95;
+            pnl = prod-(math1+math2);
+    document.getElementById("FBTCFactory_COST1").innerHTML = setLocal(math1,6);
+    document.getElementById("FBTCFactory_COST2").innerHTML = setLocal(math2,6);
+    document.getElementById("FBTCFactory_Product").innerHTML = setLocal(prod,6);
+    document.getElementById("FBTCFactory_PNL").innerHTML = setLocal(pnl,6);
+
+            // Craft FBTC Factory
+            math1 = FBTC_Price*10*1.05;
+            math2 = Plat_Price*1000*1.05;
+            prod = X4_Price*0.95;
+            pnl = prod-(math1+math2);
+    document.getElementById("X4Factory_COST1").innerHTML = setLocal(math1,6);
+    document.getElementById("X4Factory_COST2").innerHTML = setLocal(math2,6);
+    document.getElementById("X4Factory_Product").innerHTML = setLocal(prod,6);
+    document.getElementById("X4Factory_PNL").innerHTML = setLocal(pnl,6);
+
             // Craft CTUNA Factory
                 math1 = Tuna_Price*50*1.05;
                 math2 = 10*1;
