@@ -303,7 +303,7 @@
                 userData = await getData(accounts[0])
                 console.log(userData);
 
-                const expirationDate = new Date(parseInt(userData[2]) * 1000); 
+                const expirationDate = new Date(parseInt(userData) * 1000); 
                 const formattedDate = expirationDate.toLocaleDateString('en-GB'); // DD/MM/YYYY
                 const formattedTime = expirationDate.toLocaleTimeString('en-GB'); // HH:MM:SS
                 document.getElementById("info").innerHTML = `Your Subscription will expire on: ${formattedDate} ${formattedTime}`;
