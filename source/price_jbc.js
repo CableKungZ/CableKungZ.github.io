@@ -67,6 +67,7 @@ async function price_jbc(){
     const FBTC = setContract(web3_jbc,price_contractABI,'0x8656268C82cffda9062387F8F117166F01e8Ef2E');
     const X4 = setContract(web3_jbc,price_contractABI,'0x0DF9D160489440D630a247fBC830DA74779928b1');
     const INF = setContract(web3_jbc,price_contractABI,'0xCCbb477D6c28892d6311ebb729b4c242C92f70FD');
+    const BB = setContract(web3_jbc,price_contractABI,'0x8fcC6e3a23a0255057bfD9A97799b3a995Bf3D24');
 
     const Ambassador_V03_ABI = [{"inputs":[{"internalType":"address","name":"_kyc","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"frenCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"kyc","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"referalData","outputs":[{"internalType":"address","name":"fren","type":"address"},{"internalType":"address","name":"ambassador","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_ambassador","type":"address"}],"name":"regist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"registCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"registIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]
 
@@ -101,6 +102,7 @@ async function price_jbc(){
     const CMJ_FBTC = setContract(web3_jbc,price_contractABI, '0x4EF48881EFf572bBD636bcE736877881B9Ea17D5');
     const CMJ_X4 = setContract(web3_jbc,price_contractABI, '0xA7e55e89d6B0E81cCDB034a04Eb65A7aF16b697C');
     const CMJ_INF = setContract(web3_jbc,price_contractABI, '0x5E9C3A7E74a5865EC8eD3eaF6B1a4220D6E9A96b');
+    const CMJ_BB = setContract(web3_jbc,price_contractABI, '0x8cf701fCBe5DC3043D96e3fA7A398d3D08769DAB');
 
     const JBC = '0x';
 
@@ -136,6 +138,7 @@ async function price_jbc(){
         { Name: "CMJ-F.BTC", Contract: CMJ_FBTC, main: CMJ, mainN: "CMJ", pair: FBTC, pairN: "F.BTC", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
         { Name: "CMJ-X4", Contract: CMJ_X4, main: CMJ, mainN: "CMJ", pair: X4, pairN: "X4", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
         { Name: "CMJ-INF", Contract: CMJ_INF, main: CMJ, mainN: "CMJ", pair: INF, pairN: "INF", mainUSD: cmjToUSDT , location: "https://commudao.xyz/mall"},
+        { Name: "CMJ-BB", Contract: CMJ_BB, main: CMJ, mainN: "CMJ", pair: BB, pairN: "BB", mainUSD: cmjToUSDT , location: "https://bunnybuddy.vercel.app/swap"},
 
     ]
 
@@ -279,6 +282,13 @@ async function price_jbc(){
         setPrice("S-cmjToMeow",priceData[5].swap1 * 0.95);
         setPrice("S-usdToMeow",priceData[5].swap1 * usdToCmj * 0.95);
         setPrice("S-thbToMeow",priceData[5].swap1 * thbToCmj * 0.95);
+            // BB
+        setPrice("B-cmjToBB",priceData[29].swap1 * 1.06);
+        setPrice("B-usdToBB",priceData[29].swap1 * usdToCmj * 1.06);
+        setPrice("B-thbToBB",priceData[29].swap1 * thbToCmj * 1.06);
+        setPrice("S-cmjToBB",priceData[29].swap1 * 0.94);
+        setPrice("S-usdToBB",priceData[29].swap1 * usdToCmj * 0.94);
+        setPrice("S-thbToBB",priceData[29].swap1 * thbToCmj * 0.94);
         
         setPrice("B-Wood",priceData[12].swap1 * 1.05)
         setPrice("S-Wood",priceData[12].swap1 * 0.95)
