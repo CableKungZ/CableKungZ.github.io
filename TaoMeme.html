@@ -295,9 +295,9 @@
         <!-- Row 3: Remaining in Ecosystem, Tao in BKC Chain, Tao in Jib Chain -->
         <div class="pricebox">
             <div class="Header">Ecosystem</div>
-            <div class="Details">Remaining : <span id="Total_Tao_Remaining" class="low">..Loading</span> TAO</div>
+            <div class="Details">Circulating Supply : <span id="Total_Tao_Remaining" class="low">..Loading</span> TAO</div>
             <div class="Details">Except LP : <span id="Total_Tao_ExceptLP" class="low">..Loading</span> TAO</div>
-            <div class="Details">Remaining : <span id="Totao_TaoDum_Remaining" class="low">..Loading</span> NFTs</div>
+            <div class="Details">Circulating NFT Supply : <span id="Totao_TaoDum_Remaining" class="low">..Loading</span> NFTs</div>
         </div>
         <div class="pricebox">
             <div class="Header">BKC ECO</div>
@@ -521,7 +521,8 @@
                 { "Name": 'Officials', "Round": "2", "Amount": "484991.887286152973948128", "TxHash": "https://www.bkcscan.com/tx/0x7fead987f073cb6a6cf167bf6e4e99af54b104dfafba1a8c176388ad83928682" },
                 { "Name": 'Officials', "Round": "3", "Amount": "296685.05921540637114356", "TxHash": "https://www.bkcscan.com/tx/0x590c08f4350d298e24162e2ffc300d81779841d7ea63d5cf45c6f3c617485bdb" },
                 { "Name": 'Officials', "Round": "4", "Amount": "1046478.40838621133701447", "TxHash": "https://www.bkcscan.com/tx/0x482b07d972007e4114e64b5b4321891047b9c0a364c89f74112d82f20116a9ca" },
-                { "Name": 'Officials', "Round": "5", "Amount": "1409379.9361842877698786", "TxHash": "htthttps://www.bkcscan.com/tx/0xec2b32d81cf2c44ff8503343ede3c3fdae246576c544f120ffd112fb1c0c860a" },
+                { "Name": 'Officials', "Round": "5", "Amount": "1409379.9361842877698786", "TxHash": "https://www.bkcscan.com/tx/0xec2b32d81cf2c44ff8503343ede3c3fdae246576c544f120ffd112fb1c0c860a" },
+                { "Name": 'Officials', "Round": "6", "Amount": "1534597.77936080206926577", "TxHash": "https://www.bkcscan.com/tx/0x0161fb67693a12edffc2c5043044d6f8da81d8306c82ad9cd5c55a54ec8eda1b" },
 
                 { "Name": 'Community', "Round": "1", "Amount": "2000328.438", "TxHash": "https://www.bkcscan.com/tx/0xd48fbecd36ed2e96eb729ed3babca19217b332fde80ca12d94ad5ef56239a9b0" },
                 { "Name": 'Community', "Round": "2", "Amount": "3550725.087375343800233488", "TxHash": "https://www.bkcscan.com/tx/0x495c27ecdfe761131bd0b70cab519f13d184630fd42704871a5e190d8b2a3c28" },
@@ -553,7 +554,7 @@
             // Update the HTML elements with formatted burn values
             document.getElementById("Burn_Off").innerHTML = BurnOff.toLocaleString();
             document.getElementById("Burn_CMD").innerHTML = BurnCmdao.toLocaleString();
-            document.getElementById("Total_Burn").innerHTML = totalBurned.toLocaleString();
+            //document.getElementById("Total_Burn").innerHTML = totalBurned.toLocaleString();
 
 
             function updateBurnedTao() {
@@ -802,12 +803,18 @@
 
                 KUBPRICE = parseFloat(document.getElementById("KUBTHB").innerText); // แปลงข้อความจาก element เป็นตัวเลข
                 USDPRICE = parseFloat(document.getElementById("exchangeRate").innerText); // แปลงข้อความจาก element เป็นตัวเลข
+
+                try{
+                    const burnTao = await call_SC("0x000000000000000000000000000000000000dEaD", TAO, 18);
+                    const F_burnTao = burnTao.toLocaleString();
+                    document.getElementById("Total_Burn").innerHTML = F_burnTao;
+                    
+                }catch{}
                 try {
 
                     // TAO in Diamon LP
                     address = '0x4C70eb20e07f27627698b7e80cb4f56eD9A6365d';
                     address2 = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
-                    address3 = '0x0969C9d1786c8e570f5955eeD7ACb4C6aEbe2C08';
 
                     const Get_Amount_TAO = await call_SC(address, TAO, 18);
                     const Format_Get_Amount_TAO = Get_Amount_TAO.toLocaleString(); // เพิ่มการใช้ toLocaleString()
@@ -822,14 +829,8 @@
                     const Format_Get_Amount_KKUB2 = Get_Amount_KKUB2.toLocaleString();
                     console.log("Baryon LP : ", Format_Get_Amount_KKUB2, " KKUB , ", Format_Get_Amount_TAO2, " TAO");
 
-                    // TAO in CM LP
-                    Get_Amount_TAO3 = await call_SC(address3, TAO, 18);
-                    Get_Amount_CMM3 = await call_SC(address3, CMM, 18);
-                    const Format_Get_Amount_TAO3 = Get_Amount_TAO3.toLocaleString();
-                    const Format_Get_Amount_CMM3 = Get_Amount_CMM3.toLocaleString();
-                    console.log("CMM LP : ", Format_Get_Amount_CMM3, " CMM , ", Format_Get_Amount_TAO3, " TAO");
                     // TOTAL TAO in LP
-                    total_Tao_IN_LP = Get_Amount_TAO + Get_Amount_TAO2 + Get_Amount_TAO3;
+                    total_Tao_IN_LP = Get_Amount_TAO + Get_Amount_TAO2  ;
                     F_total_Tao_IN_LP = total_Tao_IN_LP.toLocaleString(); // เพิ่มการใช้ toLocaleString()
                     document.getElementById("Total_Tao_In_Liquidity").innerHTML = F_total_Tao_IN_LP;
                     JBCLP_TEXT = document.getElementById("Total_Tao_In_Liquidity_TAO").innerText;
