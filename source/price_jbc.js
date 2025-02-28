@@ -365,11 +365,11 @@ async function price_jbc(){
         setPrice("S-INF",priceData[28].swap1 * 0.95);
 
 
-        memeticGas = parseFloat(priceData[24].swap1 * 1.05) * 500000; // GAS in WJBC
+        memeticGas = parseFloat((priceData[3].swap1*1.05*10000000)*(jbcToCmj*1.012)); // GAS in WJBC
         setPrice("memetic-gasfee",memeticGas);
-        memeticGas2 = memeticGas/(jbcToCmj*0.998); // GAS in CMJ
+        memeticGas2 = (priceData[3].swap1*1.08*10000000); // GAS in CMJ
         setPrice("memetic-gasfee2",memeticGas2);
-        minimumPow = memeticGas2/(priceData[8].swap1 * 0.95)
+        minimumPow = memeticGas2/(priceData[10].swap1  * 1.05) // gasFEE in CMJ devid with Product in CMJ
 
         mul = 1.03
         Minimum_NoHouse = ((memeticGas2/(priceData[8].swap1 * 0.95))/0.06048 )* mul;
