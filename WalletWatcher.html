@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-adsense-account" content="ca-pub-9195099699232258">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaoBuddy - Portfolio</title>
+    <link rel="icon" type="image/png" href="/img/logo/logo.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #666;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #000;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f9f9f9;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .overview {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .overview-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            flex: 1;
+            margin: 0 10px 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .overview-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .overview-item h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .big-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2ecc71;
+        }
+
+        .small-values div {
+            color: #666;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .overview-item {
+                flex: 0 0 100%;
+                margin-right: 0;
+            }
+        }
+                /* CSS styles ยังคงเหมือนเดิม */
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 10px;
+                    font-size: 14px;
+                }
+        
+                th, td {
+                    padding: 12px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                }
+        
+                th {
+                    background-color: #f2f2f2;
+                }
+        
+                tr:hover {
+                    background-color: #f5f5f5;
+                }
+        
+                .overview-item table th:nth-child(2),
+                .overview-item table td:nth-child(2) {
+                    text-align: right;
+                }
+        
+                .overview-item table th:nth-child(3),
+                .overview-item table td:nth-child(3) {
+                    text-align: right;
+                }
+        
+                .overview-item table th:nth-child(4),
+                .overview-item table td:nth-child(4) {
+                    text-align: right;
+                }
+                .token-price h1, .token-price h2 {
+                    font-size: 24px;
+                    margin-bottom: 20px;
+                    grid-column: 1 / -1; /* Full width across all columns */
+                  }
+                  .token-price h4 {font-size: 16px;margin-bottom: 10px;}
+                  .token-price h6 {
+                    font-size: 12px;
+                    color: #777;
+                    margin-top: 15px;
+                    grid-column: 1 / -1; /* Full width across all columns */
+                  }
+                  .token-price a {color: #3498db;font-size: 12px;}
+                  .token-price img {margin-right: 5px;}
+                
+                  @media screen and (max-width: 1199.98px) {
+                    .token-price {grid-template-columns: repeat(4, 1fr);}}
+                  @media screen and (max-width: 991.98px) {
+                    .token-price {grid-template-columns: repeat(2, 1fr);}}
+                  @media screen and (max-width: 575.98px) {
+                    .token-price {grid-template-columns: repeat(1, 1fr);}}
+                    .token-price {
+                      margin: 20px;
+                      padding: 20px;
+                      border: 1px solid #ddd;
+                      border-radius: 10px;
+                      background-color: #f9f9f9;
+                      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                      display: grid;
+                      grid-template-columns: repeat(4, 1fr); /* 4 columns per row by default */
+                      gap: 20px;
+                    }
+                      /* สไตล์สำหรับจัดรูปแบบของ input text และปุ่ม */
+  .search-container {
+    display: flex;
+    align-items: center;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px;
+    width: 200px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+    /* สไตล์สำหรับจัดรูปแบบของ input text และปุ่ม */
+    .center {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    
+      input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 400px;
+      }
+      input[type="number"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 400px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    
+      button:hover {
+        background-color: #45a049;
+      }
+        /* Style the dropdown button */
+        .dropDown {
+        background-color: #f9f9f9;
+        color: #333;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    
+    /* Style the dropdown content (hidden by default) */
+    .dropDown .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    /* Style the dropdown links */
+    .dropDown .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropDown .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    
+    /* Show the dropdown menu on hover */
+    .dropDown:hover .dropdown-content {
+        display: block;
+    }
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropDown:hover {
+        background-color: #f1f1f1;
+    }
+  
+    </style>
+</head>
+<body>
+    <header>
+          <!-- POPUP -->
+    <div id="dpopup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1500; justify-content: center; align-items: center;">
+      <div style="background-color: white; padding: 20px;">
+          <h2>Choose Donation Method</h2>
+          <p>Thank your for a coffee !!</p>
+          <p>Metamask Wallet : 0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1 <img src="https://cdn-icons-png.freepik.com/512/54/54853.png?ga=GA1.1.1389809719.1710478416&" style="margin:auto;padding:auto;" width="25px" alt="Copy Icon" class="copy-icon" onclick="copyAddress('0x98e5CFBC115b01017Ed19101357Ab0a7664f38f1')"></p>
+          <p>Binance UserID : 132867186 <img src="https://cdn-icons-png.freepik.com/512/54/54853.png?ga=GA1.1.1389809719.1710478416&" style="margin:auto;padding:auto;" width="25px" alt="Copy Icon" class="copy-icon" onclick="copyAddress('132867186')"></p>
+          <br><button onclick='closedPopup("dpopup")'>Close</button>
+      </div>
+    </div>
+          <!-- POPUP -->
+          
+      </div>
+  </div>
+        <div class="logo">
+            <img src="https://i.ibb.co/xqW3n5T/Dao-Buddy-th-removebg-preview-nobg.png" alt="Company Logo" width="25px">
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick='showdPopup("dpopup")'>Donations</a></li>
+                <li><a onclick="toggleCards('dashboard')">Dashboard</a></li>
+                <li><a onclick="toggleCards('priceboard')">Price Board</a></li>
+                <li><a onclick="toggleCards('txhistory')">Transaction History [Beta]</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Tools</a>
+                    <div class="dropdown-content">
+                        <a href="https://daobuddy.xyz/index" target="_blank">CommuDao</a>
+                        <a href="https://daobuddy.xyz/TaoMeme" target="_blank">TaoMeme Status</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+<div class="c main-container" id="dashboard" style="display: block;">
+    <div class="center">
+        <div id="chainSelector">
+        <p>Choose chain</p>
+        <button onclick="selectChain('bitkubchain')">Bitkub Chain (..Soon)</button>
+        <button onclick="selectChain('jibchain')">Jib Chain</button>
+        </div>
+<div id="jibchain" class="chain">
+<!-- ข้อความและ input text -->
+  <h1>Jib Chain</h1>
+  <label for="wallet_address" class="center">Enter Wallet Address:</label>
+  <input type="text" class="center" id="wallet_address" placeholder="Enter Wallet Address">
+  <button onclick="getBalance()">Get Balance</button>
+  <section class="overview">
+    <div class="overview-item">
+        <h2>Total Networth</h2>
+        <div class="overview-details">
+            <div class="big-value"><span id="nw_usd">0</span> USD</div>
+            <div class="small-values">
+                <div>~<span id="nw_jbc">0</span> JBC</div>
+                <div>~<span id="nw_cmj">0</span> CMJ</div>
+                <div>~<span id="nw_thb">0</span> THB</div>
+            </div>
+        </div>
+    </div>
+    <div class="overview-item">
+        <h2>Pending Reward</h2>
+        <div class="overview-details">
+            <div class="big-value"><span id="pending_usd">0</span> USD</div>
+            <div class="small-values">
+                <div>~<span id="pending_jbc">0</span> JBC</div>
+                <div>~<span id="pending_cmj">0</span> CMJ</div>
+                <div>~<span id="pending_thb">0</span> THB</div>
+            </div>
+        </div>
+    </div>
+    <div class="overview-item">
+        <h2>Wallet Worth</h2>
+        <div class="overview-details">
+            <div class="big-value"><span id="wallet_usd">0</span> USD</div>
+            <div class="small-values">
+                <div>~<span id="wallet_jbc">0</span> JBC</div>
+                <div>~<span id="wallet_cmj">0</span> CMJ</div>
+                <div>~<span id="wallet_thb">0</span> THB</div>
+            </div>
+        </div>
+    </div>
+    <div class="overview-item">
+        <h2>Staking Worth</h2>
+        <div class="overview-details">
+            <div class="big-value"><span id="farm_usd">0</span> USD</div>
+            <div class="small-values">
+                <div>~<span id="farm_jbc">0</span> JBC</div>
+                <div>~<span id="farm_cmj">0</span> CMJ</div>
+                <div>~<span id="farm_thb">0</span> THB</div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="main-container">
+    <section class="overview">
+        <!-- เริ่มต้นแสดงข้อมูล Asset in Wallet -->
+        <div class="overview-item">
+            <h2>Asset in Wallet</h2>
+            <h6>Display only asset value greater than 1 CMJ</h6>
+            <table id="walletAsset">
+                <tr>
+                    <th>Name</th>
+                    <th>Balance</th>
+                    <th>Current Price</th>
+                    <th>Value</th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+        <!-- สิ้นสุดแสดงข้อมูล Asset in Wallet -->
+        <!-- เริ่มต้นแสดงข้อมูล Asset in farms/pool/staking -->
+        <div class="overview-item">
+            <h2>Asset in Farms/Pool/Staking <span id="Status"></span></h2>
+            <h6>Display only asset balance mininmum 1 </h6>
+            <table id="farmingAsset">
+                <tr>
+                    <th>Farm/Pool/Staking</th>
+                    <th>Balance</th>
+                    <th>Value</th>
+                    <th>Reward</th>
+                </tr>
+            </table>
+        </div>
+        <!-- สิ้นสุดแสดงข้อมูล Asset in farms/pool/staking -->
+    </section>
+    <section class="overview-item">
+        <h1>Dungeon</h1>
+        <table id="dungeon">
+            <tr>
+                <th>Dungeon Name</th>
+                <th>Status</th>
+                <th>Power</th>
+                <th>Reward/Day</th>
+                <th>Pending</th>
+                <th>End At</th>
+            </tr>
+        </table>
+    </section>
+    <section class="overview-item">
+        <h4>Worth Calculation</h4>
+        <h6>NFT Collection</h6>
+        <h6 style="margin-bottom: -25px;">TaoDum = 201.38 USD per Each <a href="https://ptb.discord.com/channels/1094541217615843369/1094544737131823106/1234774601859596328">ref</a></h6>
+        <h6 style="margin-bottom: -25px;">The Mythical Guardians = 20 USD per Each <a href="https://ptb.discord.com/channels/1094541217615843369/1094544737131823106/1234516042986819645">ref</a></h6>
+        <h6 style="margin-bottom: -25px;">CM Hexa Cat Meaw JIB JIB = 5 USD per Each <a href="https://ptb.discord.com/channels/1094541217615843369/1094544737131823106/1234516042986819645">ref</a></h6>
+        <h6 style="margin-bottom: -25px;">CM Hexa Cat Meaw ORY = 5 USD per Each <a href="https://ptb.discord.com/channels/1094541217615843369/1094544737131823106/1234516042986819645">ref</a>
+        <h4 style="margin-top: 30px; margin-bottom: -25">Dungeon</h4>
+        <h6 style="margin-bottom: -25px;">Core Dungeon -  worth 150 cmPow per $1</h6>
+        <h6 style="margin-bottom: -25px;">DaemonWorld Dungeon -  worth 25 cmPow per $1</h6>
+        <h6 style="margin-bottom: 5px;">CrypticCogs Dungeon -  worth 520 cmPow per $1</h6>
+    </section>
+    <h1>Tx History</h1>
+    <div id="totalRedeem" style="display:flex; ">Total Spent:</div>
+    <h4 onclick="downloadExcel()">Click here to download table.xlsx</h4>
+
+    <table id="purchaseTableBody">
+        
+        <tr>
+            <th>TxHash</th>
+            <th>Item Name</th>
+            <th>ID</th>
+            <th>Methods</th>
+            <th>Price</th>
+            <th>Symbol</th>
+        </tr>
+        
+    </table>
+</div>
+</div>
+<div id="bitkubchain" class="chain" style="display: none;">
+    <!-- ข้อความและ input text -->
+      <h1>Bitkub Chain (Not Avillable Yet)</h1>
+      <label for="wallet_address" class="center">Enter Wallet Address:</label>
+      <input type="text" class="center" id="wallet_address" placeholder="Enter Wallet Address">
+      <button onclick="getBalanceBKC()">Get Balance</button>
+      <section class="overview">
+        <div class="overview-item">
+            <h2>Total Networth</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="nw_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="nw_jbc">0</span> KUB</div>
+                    <div>~<span id="nw_cmj">0</span> CMM</div>
+                    <div>~<span id="nw_thb">0</span> THB</div>
+                </div>
+            </div>
+        </div>
+        <div class="overview-item">
+            <h2>Pending Reward</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="pending_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="pending_jbc">0</span> KUB</div>
+                    <div>~<span id="pending_cmj">0</span> CMM</div>
+                    <div>~<span id="pending_thb">0</span> THB</div>
+                </div>
+            </div>
+        </div>
+        <div class="overview-item">
+            <h2>Wallet Worth</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="wallet_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="wallet_jbc">0</span> KUB</div>
+                    <div>~<span id="wallet_cmj">0</span> CMM</div>
+                    <div>~<span id="wallet_thb">0</span> THB</div>
+                </div>
+            </div>
+        </div>
+        <div class="overview-item">
+            <h2>Staking Worth</h2>
+            <div class="overview-details">
+                <div class="big-value"><span id="farm_usd">0</span> USD</div>
+                <div class="small-values">
+                    <div>~<span id="farm_jbc">0</span> KUB</div>
+                    <div>~<span id="farm_cmj">0</span> CMM</div>
+                    <div>~<span id="farm_thb">0</span> THB</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="main-container">
+        <section class="overview">
+            <!-- เริ่มต้นแสดงข้อมูล Asset in Wallet -->
+            <div class="overview-item">
+                <h2>Asset in Wallet</h2>
+                <h6>Display only <span style="color:green;">listed</span> asset value</h6>
+                <table id="walletAsset">
+                    <tr>
+                        <th>Name</th>
+                        <th>Balance</th>
+                        <th>Current Price</th>
+                        <th>Value</th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
+            <!-- สิ้นสุดแสดงข้อมูล Asset in Wallet -->
+            <!-- เริ่มต้นแสดงข้อมูล Asset in farms/pool/staking -->
+            <div class="overview-item">
+                <h2>Asset in Farms/Pool/Staking <span id="Status"></span></h2>
+                <h6>Display only asset balance mininmum 1 </h6>
+                <table id="farmingAsset">
+                    <tr>
+                        <th>Farm/Pool/Staking</th>
+                        <th>Balance</th>
+                        <th>Value</th>
+                        <th>Reward</th>
+                    </tr>
+                </table>
+            </div>
+            <!-- สิ้นสุดแสดงข้อมูล Asset in farms/pool/staking -->
+        </section>
+
+    </div>
+    </div>
+</div>
+
+
+
+
+    </div>
+<div class="c main-container" id="priceboard" style="display: none;">
+    <div class="token-price">
+        <div id="countdown">Countdown</div>
+        <div id="updatedMessage" style="display:none;">Updated</div>
+        <h2>PROJECT TOKEN <span>[USD = <span id="THB"></span>THB</span>]</h2>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreiabbtn5pc6di4nwfgpqkk3ss6njgzkt2evilc5i2r754pgiru5x4u" alt="CMJ" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">CMJ </a>*1%  :
+          <br>Buy <span id="priceB2">..Loading</span> JBC , <span id="priceD2">..Loading</span> USD<br>
+          Sell  <span id="Sell_CMJinJBC">..Loading</span> JBC , <span id="Sell_CMJinUSD">..Loading</span> USD</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreih6o2px5oqockhsuer7wktcvoky36gpdhv7qjwn76enblpce6uokq" alt="JBC" width="20" height="20"><a href="https://commudao.xyz/gameswap/" target="_blank">JBC </a>*1%   : 
+          <br>Buy <span id="priceB3">..Loading</span> CMJ , <span id="priceD3">..Loading</span> USD<br>
+          Sell  <span id="Sell_JBCinCMJ">..Loading</span> CMJ , <span id="Sell_JBCinUSD">..Loading</span> USD</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreictvxugfipr3awpjv7kugj6i2xpmifmh6wp33ljcmwnvvw56zigdy" alt="MEOW" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">MEOW </a>*5%  : 
+          <br>Buy <span id="priceB14">..Loading</span> CMJ , <span id="priceD14">..Loading</span> USD<br>
+          Sell  <span id="Sell_MeowinCMJ">..Loading</span> CMJ , <span id="Sell_MeowinUSD">..Loading</span> USD</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreifydb6vy2dysudcg6x64p42enym3bhfneal62ctf33oapsmk6qjlm" alt="$JTAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JTAO </a>*0%  : 
+          <br>Buy/Sell <span id="priceB22">..Loading</span> CMJ , <span id="priceD22">..Loading</span> USD(BKC)<br>
+      
+        <h2>MATERIALS </h2>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidldk7skx44xwstwat2evjyp4u5oy5nmamnrhurqtjapnwqzwccd4" alt="Wood" width="20" height="20"><a href="https://meowneon.app/swapmeowwood"  target="_blank">Wood</a>*0%   : 
+          <br>Buy/Sell <span id="priceB4">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreifqroahbmxgnmsqdot5bzu3xbsa7y27mnlo6k45efgidmqxqrstbe" alt="Tuna" width="20" height="20"><a href="https://meowneon.app/swapmeowtuna"  target="_blank">Tuna</a>*0%  : 
+          <br>Buy/Sell <span id="priceB5">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidcakmgzpqytuzlvvok72r2hg2n5tqb25jfwecymelylaysdzkd6i" alt="Mice" width="20" height="20"><a href="https://meowneon.app/swapmeowmice"  target="_blank">Mice</a>*0%  : 
+          <br>Buy/Sell <span id="priceB6">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidau3s66zmqwtyp2oimumulxeuw7qm6apcornbvxbqmafvq3nstiq" alt="CU" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Copper</a>*5%  : 
+          <br>Buy <span id="priceB7">..Loading</span> CMJ<br>
+          Sell  <span id="Sell_CuinCMJ">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreidfl4mgyczqwl3gtunpherc5ri3qbfzm2vevdwcojmhpz3viubopy" alt="JASPER" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JASPER</a>*5%  : 
+          <br>Buy <span id="priceB17">..Loading</span> CMJ<br>
+          Sell  <span id="priceB17_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreico3y6ql5vudm35ttestwvffdacbp25h6t5ipbyncwr3qtzprrm5e" alt="OS" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">OS</a>*5%  : 
+          <br>Buy <span id="priceB18">..Loading</span> CMJ<br>
+          Sell  <span id="priceB18_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreia2bjrh7yw2vp23e5lnc6u75weg6nq7dzkyruggsnjxid6qtofeeq" alt="JDAO" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">JDAO</a>*5%  : 
+          <br>Buy <span id="priceB15">..Loading</span> CMJ<br>
+          Sell  <span id="priceB15_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreihqaivu4woi3ibymi4w5lrgv6dnylnuasa4qjkpgqmm655et2lpia" alt="MT" width="20" height="20"><a href="https://meowneon.app/swapmeowmt"  target="_blank">MT</a>*0%  : 
+          <br>Buy/Sell <span id="priceB16">..Loading</span> CMJ<br>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreiev2kbirflwhlqbwd6zh6trd7gx62tijviekwewd6zaogm4vzrh7m" alt="$ANGB" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">ANGB</a>*5%  : 
+          <br>Buy <span id="priceB23">..Loading</span> CMJ,<span id="priceD23">..Loading</span> WJBC<br>
+          Sell  <span id="priceB23_2">..Loading</span> CMJ,<span id="priceD23_2">..Loading</span> WJBC</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafybeiffepxbrj2zq2mrlik47tonb2mpp22ymvqmv7o5vpy57fjre4qn6q" alt="$II" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">II</a>*5%  : 
+          <br>Buy <span id="IIPrice_CMJ">..Loading</span> CMJ,<span id="IIPrice_JTAO">..Loading</span> JTAO<br>
+          Sell  <span id="IIPrice_CMJ_2">..Loading</span> CMJ,<span id="IIPrice_JTAO_2">..Loading</span> JTAO</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafybeihg7schl77eo7b4amo22htmuscipo4dfioxmajxr4feuqloz2dolm" alt="$EE" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">EE</a>*5%  : 
+          <br>Buy <span id="EEPrice_CMJ">..Loading</span> CMJ,<span id="EEPrice_JTAO">..Loading</span> JTAO<br>
+          Sell  <span id="EEPrice_CMJ_2">..Loading</span> CMJ,<span id="EEPrice_JTAO_2">..Loading</span> JTAO</h4>
+      
+        <h2>PRODUCT</h2>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreibs763pgx6caw3vaqtzv6b2fmkqpwwzvxwe647gywkn3fsydkjlyq" alt="BBQ" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">BBQ</a>*5%  : 
+          <br>Buy <span id="priceB8">..Loading</span> CMJ<br>
+          Sell  <span id="priceB8_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreifq5hc6oprfye7ha3q5lhly545rx6c4idua7v6mrpz5nqxcrefluu" alt="PZA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Pizza</a>*5%  : 
+          <br>Buy <span id="priceB9">..Loading</span> CMJ<br>
+          Sell  <span id="priceB9_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreieyk6odnkrmghee3sc3nfnwxg7jhmyk2tgima3jkdmiy2oap2jc4i" alt="CTUNA" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">CTUNA</a>*5%  : 
+          <br>Buy <span id="priceB10">..Loading</span> CMJ<br>
+          Sell  <span id="priceB10_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreicldm4vbw2ywy7dyrsjbwd5mk6hno3pxpwggdvxjlocbneg5webx4" alt="SX31" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SX31</a>*5%  : 
+          <br>Buy <span id="priceB11">..Loading</span> CMJ<br>
+          Sell  <span id="priceB11_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreigld4xmmrmu763t2vsju3tqhcodgxxsrmgvrlfhdjktgujgcmpmde" alt="Silver" width="20" height="20"><a href="https://meowneon.app/swapmeowsil"  target="_blank">Silver</a>*5%  : 
+          <br>Buy <span id="priceB12">..Loading</span> CMJ<br>
+          Sell  <span id="priceB12_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreia4zjqhbo4sbvbkvlgnit6yhhjmvo7ny4ybobuee74vqlmziskosm" alt="Gold" width="20" height="20"><a href="https://meowneon.app/swapmeowgold"  target="_blank">Gold</a>*5%  : 
+          <br>Buy <span id="priceB13">..Loading</span> CMJ<br>
+          Sell  <span id="priceB13_2">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreibf7vowyqjrcaeyslflrxxchel3b4qdpwxcxb34js2otg35vjkcaa" alt="Platinum" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">Platinum</a>*5%  :
+      <br>Buy <span id="platinumBuy">..Loading</span> CMJ<br>
+      Sell <span id="platinumSell">..Loading</span> CMJ</h4>
+        <h4><img src="https://nftstorage.link/ipfs/bafkreib4zlmwnydgolgzkfldaz2zsxh6pg3k4wemiigura7gbnj7i36ygi" alt="$SWAR" width="20" height="20"><a href="https://commudao.xyz/mall"  target="_blank">SWAR</a>*5%  : 
+          <br>Buy <span id="priceB21">..Loading</span> CMJ, <span id="priceD21">..Loading</span> JBC<br>
+          Sell  <span id="priceB21_2">..Loading</span> CMJ,<span id="priceD21_2">..Loading</span> JBC</h4>
+      
+        <h6>** At CommuDao Mall, there is a 5% tax on purchases. Therefore, the displayed price must be deducted by an additional 5% of the actual value due to taxation. **</h6>
+      </div>
+    </div>
+<div class="c main-container" class="center" id="txhistory" style="display: none;">
+    <div class="center">
+        <h1>Transaction History Finder [Beta]</h1>
+        <h4>คำเตือน มีการเรียกใช้ API จาก BlockScout หากข้อมูลเยอะเกินไป คุณอาจถูก block ชั่วคราวจากการดูข้อมูลบน https://exp-l1.jibchain.net/</h4>
+        <div style="margin-right:15px; margin-bottom:15px;">
+            <button id="toggleInfoBtn">From-To</button>
+          </div>
+        <div id="oneWay">
+            <label for="txhash_address" class="center">Interact With:</label>
+            <input type="text" class="center" id="txhash_address" placeholder="Type your wallet Address">
+            
+            <button style="text-align:center;" onclick="fetchTransaction()">Search Transaction</button>
+        </div>
+        
+    </div>
+    <div class="center" id="formTo" style="display: none;">
+        <label for="wallet_address" class="center">From:</label>
+        <input type="text" class="center" id="txhash_from" placeholder="Enter Wallet Address">
+        <label for="wallet_address" class="center">To:</label>
+        <input type="text" class="center" id="txhash_to" placeholder="Please field blank if to any Address">
+        <button style="text-align:center;" onclick="fetchTransaction2()">Search Transaction</button>
+        <button style="text-align:center;" onclick="swapFromTo()">Swap Address</button>
+    </div>
+    <div class="center">
+        <div>
+            <label for="token" class="center" >Token:</label>
+            <select class="dropDown" id="token">
+                <option value="0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b">CMJ</option>
+                <option value="0x24599b658b57f91E7643f4F154B16bcd2884f9ac">JUSDT</option>
+                <option value="0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd">JTAO</option>
+                <option value="0x523AA3aB2371A6360BeC4fEea7bE1293adb32241">II</option>
+                <option value="0xF663c756b6D57724C3B41c8839aB9c7Af83c9751">EE</option>
+                <option value="0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860">JASP</option>
+                <option value="0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88">JDAO</option>
+            </select>
+        </div>
+        <div>
+            <p>Block Period (ยิ่งห่างเยอะ ยิ่งมีสิทธิ์โดนบล็อกจาก API สูง)</p>
+            <label for="sortby" class="center">From Block: </label>
+            <input type="number" class="center" width="200px" id="fromBlock" placeholder="(ใส่ช่องว่างเพื่อแสดงผลตั้งแต่บล็อกที่ 0)">
+            <label for="sortby" class="center">To Block: </label>
+            <input type="number" class="center" width="200px" id="toBlock" placeholder="(ใส่ช่องว่างเพื่อแสดงผลจนถึงบล็อกล่าสุด)">
+
+        </div>
+        <div>
+            <label for="greaterthan" class="center">Minimum Token: </label>
+            <input type="number" class="center" width="150px" id="greaterthan" placeholder="แสดง txhash ที่มากกว่า">
+        </div>
+        <div>
+
+        </div>
+
+    <div>
+        <h1 id="txStatus"></h1>
+        <h1>Transaction</h1>
+        <span id="transactionResult"></span>
+        <h4>Download table.xlsx</h4>
+        <table id="transactionHistory">
+        
+            <tr>
+                <th>TxHash</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Amount</th>
+                <th>Symbol</th>
+            </tr>
+            
+        </table>
+    </div>
+</div>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.5.2/web3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function formatTimestamp(timestamp) {
+        timestamp = parseInt(timestamp*1000);
+         var date = new Date(timestamp);
+         var day = ('0' + date.getDate()).slice(-2);
+         var month = ('0' + (date.getMonth() + 1)).slice(-2);
+         var year = date.getFullYear();
+         var hours = ('0' + date.getHours()).slice(-2);
+         var minutes = ('0' + date.getMinutes()).slice(-2);
+        
+        // ตรวจสอบว่ามีค่าที่เป็น NaN หรือไม่ และแทนที่ด้วยข้อความ "00"
+         var formattedDay = isNaN(day) ? '00' : day;
+         var formattedMonth = isNaN(month) ? '00' : month;
+         var formattedYear = isNaN(year) ? '0000' : year;
+         var formattedHours = isNaN(hours) ? '00' : hours;
+         var formattedMinutes = isNaN(minutes) ? '00' : minutes;
+        
+        return `${formattedDay}/${formattedMonth}/${formattedYear} ${formattedHours}:${formattedMinutes}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var allCards = document.querySelectorAll('.c');
+        for (var i = 0; i < allCards.length; i++) {
+            if (allCards[i].id !== 'dashboard') {
+                allCards[i].style.display = 'none';
+            }
+        }
+    });
+    
+    function toggleCards(showType) {
+        // Hide all cards first
+        var allCards = document.querySelectorAll('.c');
+        for (var i = 0; i < allCards.length; i++) {
+            allCards[i].style.display = 'none';
+        }
+
+        // Show the selected card
+        var showCard = document.getElementById(showType);
+        if (showCard) {
+            showCard.style.display = 'block';
+        }
+    }
+    function selectChain(showType) {
+        // Hide all cards first
+        var allCards = document.querySelectorAll('#jibchain,#bitkubchain');
+        for (var i = 0; i < allCards.length; i++) {
+            allCards[i].style.display = 'none';
+        }
+
+        // Show the selected card
+        var showCard = document.getElementById(showType);
+        if (showCard) {
+            showCard.style.display = 'block';
+        }
+    }
+
+function setUSD(){
+ var exchangeRateUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+fetch(exchangeRateUrl)
+  .then(response => response.json())
+  .then(data => {
+    // ดึงข้อมูลอัตราแลกเปลี่ยน USD/THB
+     var exchangeRate = data.rates.THB;
+    document.getElementById("THB").textContent = exchangeRate.toFixed(2);
+
+  })
+  .catch(error => {
+    console.error('เกิดข้อผิดพลาด:', error);
+  
+  })
+
+  // เรียกใช้งาน API
+fetch('https://api.geckoterminal.com/api/v2/networks/bitkub_chain/tokens/0x6527d3d38a7ff4e62f98fe27dd9242a36227fe23/pools?include=base_token_price_usd&page=1')
+.then(response => response.json())
+.then(data => {
+  // ค้นหาข้อมูลที่ต้องการและแสดงผล
+   var pools = data.data;
+  pools.forEach(pool => {
+      if (pool.id === 'bitkub_chain_0x0969c9d1786c8e570f5955eed7acb4c6aebe2c08') {
+          TaoPrice = parseFloat(pool.attributes.token_price_usd)
+          document.getElementById('priceD22').innerText = `${TaoPrice.toFixed(8)}`;
+      }
+  });
+})
+.catch(error => console.error('Error fetching data:', error));
+  ;}
+  setUSD();
+
+
+ var web3 = new Web3('https://rpc-l1.jibchain.net');
+console.log("Connected")
+ var tokenABI = [
+  // ERC20 Token ABI
+  {" varant": true,"inputs": [{"name": "_owner", "type": "address"}],"name": "balanceOf","outputs": [{"name": "balance", "type": "uint256"}],"type": "function"}
+];
+function setContract(contractAddress){
+  return new web3.eth.Contract(tokenABI, contractAddress); 
+}
+async function loadContract(contractAddress) {
+  try {
+     var response = await fetch(`https://exp-l1.jibchain.net/api?module=contract&action=getabi&address=${contractAddress}`);
+     var data = await response.json();
+     var abi = JSON.parse(data.result);
+    return new web3.eth.Contract(abi, contractAddress);
+  } catch (error) {
+    console.error('Error loading contract:', error);
+    alert("ไม่สามารถ Loading Contract ได้กรุณา รีเฟรช หรือ ลองใหม่อีกครั้งในอีก 1 ชั่วโมง")
+  }
+}
+    var JBC_inJCLP,CMJ_inJCLP,JBC_inJULP,JDUST_inJULP,BBQ_inBBQCMJ,CMJ_inBBQCMJ,Cu_inCuCMJ,CMJ_inCuCMJ,Jasp_inJaspCMJ,CMJ_inJaspCMJ,Jdao_inJdaoCMJ,CMJ_inJdaoCMJ,Pza_inPzaCMJ,CMJ_inPzaCMJ,Sx31_inSx31CMJ,CMJ_inSx31CMJ,Ctuna_inCtunaCMJ,CMJ_inCtunaCMJ,Gold_inGoldCMJ,CMJ_inGoldCMJ,Os_inOsCMJ,CMJ_inOsCMJ,SIL_inSILCMJ,CMJ_inSILCMJ,JBC_to_CMJ,CMJ_inPlatCMJ;
+    
+async function main() {
+   var divider = 10 ** 18;
+   var jaspdivider = 10 **9;
+
+   var web3 = new Web3('https://rpc-l1.jibchain.net	');
+  console.log(" Access RPC Success")
+
+   var contractABI = [
+  // ABI ของ contract ERC-20
+  {
+      " varant": true,
+      "inputs": [{"name": "_owner", "type": "address"}],
+      "name": "balanceOf",
+      "outputs": [{"name": "balance", "type": "uint256"}],
+      "type": "function"
+  }
+];
+ var ERC721ABI = [
+// ABI ของ balanceOf function
+{
+" varant": true,
+"inputs": [{"name": "_owner", "type": "address"}],
+"name": "balanceOf",
+"outputs": [{"name": "", "type": "uint256"}],
+"payable": false,
+"stateMutability": "view",
+"type": "function"
+}
+];
+
+  // สร้างออบเจ็กต์สัญญา
+   var CMJ = new web3.eth.Contract(contractABI,'0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+   var WJBC = new web3.eth.Contract(contractABI,'0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+   var Jib_WJBC = new web3.eth.Contract(contractABI,'0x99999999990FC47611b74827486218f3398A4abD');
+   var Meow = new web3.eth.Contract(contractABI,'0x04052384166fC30D03929eE328805eC084776843');
+   var Wood = new web3.eth.Contract(contractABI,'0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+   var Tuna = new web3.eth.Contract(contractABI,'0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+   var Mice = new web3.eth.Contract(contractABI,'0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+   var Cu = new web3.eth.Contract(contractABI,'0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+   var Jasp = new web3.eth.Contract(contractABI,'0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+   var Os = new web3.eth.Contract(contractABI,'0xAc5299D92373E9352636559cca497d7683A47655');
+   var Jdao = new web3.eth.Contract(contractABI,'0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+   var Mt = new web3.eth.Contract(contractABI,'0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+   var Vabag = new web3.eth.Contract(contractABI,'0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+   var Bbq = new web3.eth.Contract(contractABI,'0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+   var Pza = new web3.eth.Contract(contractABI,'0x09DcdCFc6C48803681a3422997c679E773656763');
+   var Ctuna = new web3.eth.Contract(contractABI,'0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+   var Sx31 = new web3.eth.Contract(contractABI,'0xd431d826d7a4380b9259612176f00528b88840a7');
+   var Sil = new web3.eth.Contract(contractABI,'0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+   var Gold = new web3.eth.Contract(contractABI,'0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+   var Plat = new web3.eth.Contract(contractABI,'0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+   var Swar = new web3.eth.Contract(contractABI,'0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+   var Jusdt = new web3.eth.Contract(contractABI,'0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+   var stOPT = new web3.eth.Contract(contractABI,'0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+   var Jtao = new web3.eth.Contract(contractABI,'0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+   var Angb = new web3.eth.Contract(contractABI,'0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+   var Taodum = new web3.eth.Contract(ERC721ABI,'0x2036186F6d5287FcB05C56C38374AC5236d8A61d');
+   var EE = new web3.eth.Contract(contractABI,'0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+   var II = new web3.eth.Contract(contractABI,'0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+   var CMJ_inUSDT = parseFloat(document.getElementById("priceD2").textContent) || 0; 
+  JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0; 
+
+  try {
+      
+      
+      // Bal of JC-LP  , JBC/  0x472d0e2E9839c140786D38110b3251d5ED08DF41
+      address = '0x472d0e2E9839c140786D38110b3251d5ED08DF41';
+       var JBC_inJCLP = await web3.eth.getBalance(address) / divider; 
+       var CMJ_inJCLP = await call_SC(address, CMJ, 18);
+       var JBC_to_CMJ = (CMJ_inJCLP/JBC_inJCLP).toFixed(4);
+       var CMJ_to_JBC = (JBC_inJCLP/CMJ_inJCLP).toFixed(4);
+      // Bal of JU-LP  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0x280608DD7712a5675041b95d0000B9089903B569';
+       var JBC_inJULP = await web3.eth.getBalance(address) / divider; 
+       var JDUST_inJULP = await call_SC(address, Jusdt, 18);
+       var JBC_to_JUSDT = (JDUST_inJULP/JBC_inJULP).toFixed(4);
+       var JUSDT_to_JBC = (JBC_inJULP/JDUST_inJULP).toFixed(4);
+
+      // Bal of Meow-CMJ
+      address = '0xdB16eCc5d2c27F67B4a4dc1e25f1e6e20BAcAFD0';
+       var Meow_inMeowCMJ = await call_SC(address, Meow, 18);
+       var CMJ_inMeowCMJ = await call_SC(address, CMJ, 18);
+       var Meow_to_CMJ = (Meow_inMeowCMJ/CMJ_inMeowCMJ).toFixed(4);
+       var CMJ_to_Meow = (CMJ_inMeowCMJ/Meow_inMeowCMJ).toFixed(10);
+       var CMJ_to_Meowmes = (CMJ_inMeowCMJ/Meow_inMeowCMJ).toFixed(6);
+
+       var Meow_inJUST = (CMJ_to_Meowmes*CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+       var CMJ_inJUST = (CMJ_to_JBC*JBC_to_JUSDT).toFixed(6);
+       var JBC_inJUST = (JBC_to_JUSDT*1).toFixed(6);
+      console.log("CMJ PRICE : ",CMJ_to_JBC, "JBC" , CMJ_inJUST, "JUSDT");
+      console.log("JBC PRICE : ",JBC_to_CMJ, "CMJ" , JBC_inJUST, "JUSDT");
+      console.log("MEOW PRICE : ",CMJ_to_Meowmes, "CMJ" , Meow_inJUST, "JUSDT");
+      // Buy Token
+      document.getElementById("priceB2").innerHTML = (CMJ_to_JBC*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("priceD2").innerHTML = (CMJ_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
+      document.getElementById("priceB3").innerHTML = (JBC_to_CMJ*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("priceD3").innerHTML = (JBC_inJUST*1.013).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("priceB14").innerHTML = (CMJ_to_Meowmes*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("priceD14").innerHTML = (Meow_inJUST*1.05).toLocaleString(undefined,{maximumFractionDigits:8});
+
+      // Sell Token
+      document.getElementById("Sell_CMJinJBC").innerHTML = (CMJ_to_JBC*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("Sell_CMJinUSD").innerHTML = (CMJ_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});  // CMJ_to_JUSDT
+      document.getElementById("Sell_JBCinCMJ").innerHTML = (JBC_to_CMJ*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("Sell_JBCinUSD").innerHTML = (JBC_inJUST*0.99).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("Sell_MeowinCMJ").innerHTML = (CMJ_to_Meowmes*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+      document.getElementById("Sell_MeowinUSD").innerHTML = (Meow_inJUST*0.95).toLocaleString(undefined,{maximumFractionDigits:8});
+       var TAOPriceUSD = parseFloat(document.getElementById("priceD22").textContent) || 0;
+       var CMJPriceUSD = parseFloat(document.getElementById("priceD2").textContent) || 0;
+      
+
+      // Bal of BBQ  , JBC/  0x6F93F16cF86205C5BB9145078d584c354758D6DB
+      address = '0x6F93F16cF86205C5BB9145078d584c354758D6DB';
+       var BBQ_inBBQCMJ = await call_SC(address, Bbq, 18);
+       var CMJ_inBBQCMJ = await call_SC(address, CMJ, 18);
+       var BBQ_to_CMJ = (BBQ_inBBQCMJ/CMJ_inBBQCMJ).toFixed(4);
+       var CMJ_to_BBQ = (CMJ_inBBQCMJ/BBQ_inBBQCMJ).toFixed(10);
+              document.getElementById("priceB8").innerHTML = (CMJ_to_BBQ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB8_2").innerHTML = (CMJ_to_BBQ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+      // Bal of Cu  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0x1b70c95fD4EbF8920A624bd2ce22b6905eFBdF60';
+       var Cu_inCuCMJ = await call_SC(address, Cu, 18);
+       var CMJ_inCuCMJ = await call_SC(address, CMJ, 18);
+       var Cu_to_CMJ = (Cu_inCuCMJ/CMJ_inCuCMJ).toFixed(4);
+       var CMJ_to_Cu = (CMJ_inCuCMJ/Cu_inCuCMJ).toFixed(10);
+              document.getElementById("priceB7").innerHTML = (CMJ_to_Cu*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("Sell_CuinCMJ").innerHTML = (CMJ_to_Cu*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+      // Bal of Jasp CMJ
+      address = '0xc19DE37d5e14b387BCda8e62aB4934591315901D';
+       var Jasp_inJaspCMJ = await call_SC(address, Jasp, 9);
+       var CMJ_inJaspCMJ = await call_SC(address, CMJ, 18);
+       var Jasp_to_CMJ = (Jasp_inJaspCMJ/CMJ_inJaspCMJ).toFixed(4);
+       var CMJ_to_Jasp = (CMJ_inJaspCMJ/Jasp_inJaspCMJ).toFixed(10);
+              document.getElementById("priceB17").innerHTML = (CMJ_to_Jasp*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB17_2").innerHTML = (CMJ_to_Jasp*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+
+      // Bal of Jdao  , JBC/  0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0
+      address = '0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0';
+       var Jdao_inJdaoCMJ = await call_SC(address, Jdao, 18);
+       var CMJ_inJdaoCMJ = await call_SC(address, CMJ, 18);
+       var Jdao_to_CMJ = (Jdao_inJdaoCMJ/CMJ_inJdaoCMJ).toFixed(4);
+       var CMJ_to_Jdao = (CMJ_inJdaoCMJ/Jdao_inJdaoCMJ).toFixed(10);
+              // display 
+              document.getElementById("priceB15").innerHTML = (CMJ_to_Jdao*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB15_2").innerHTML = (CMJ_to_Jdao*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+      // Bal of Pizza(Pza)  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70';
+       var Pza_inPzaCMJ = await call_SC(address, Pza, 18);
+       var CMJ_inPzaCMJ = await call_SC(address, CMJ, 18);
+       var Pza_to_CMJ = (Pza_inPzaCMJ/CMJ_inPzaCMJ).toFixed(4);
+       var CMJ_to_Pza = (CMJ_inPzaCMJ/Pza_inPzaCMJ).toFixed(10);
+              document.getElementById("priceB9").innerHTML = (CMJ_to_Pza*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB9_2").innerHTML = (CMJ_to_Pza*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+      // Bal of Sx31  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0xda558EE93B466aEb4F59fBf95D25d410318be43A';
+       var Sx31_inSx31CMJ = await call_SC(address, Sx31, 18);
+       var CMJ_inSx31CMJ = await call_SC(address, CMJ, 18);
+       var Sx31_to_CMJ = (Sx31_inSx31CMJ/CMJ_inSx31CMJ).toFixed(4);
+       var CMJ_to_Sx31 = (CMJ_inSx31CMJ/Sx31_inSx31CMJ).toFixed(10);
+              document.getElementById("priceB11").innerHTML = (CMJ_to_Sx31*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+              document.getElementById("priceB11_2").innerHTML = (CMJ_to_Sx31*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+      // Bal of Ctuna  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0x7801F8cdBABE6999331d1Bf37d74aAf713C3722F';
+       var Ctuna_inCtunaCMJ = await call_SC(address, Ctuna, 18);
+       var CMJ_inCtunaCMJ = await call_SC(address, CMJ, 18);
+       var Ctuna_to_CMJ = (Ctuna_inCtunaCMJ/CMJ_inCtunaCMJ).toFixed(4);
+       var CMJ_to_Ctuna = (CMJ_inCtunaCMJ/Ctuna_inCtunaCMJ).toFixed(10);
+          document.getElementById("priceB10").innerHTML = (CMJ_to_Ctuna*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+          document.getElementById("priceB10_2").innerHTML = (CMJ_to_Ctuna*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+      // Bal of Gold  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0x7086EC7ED5D94ef503bE324B0aE8A3748A15fAE5';
+       var Gold_inGoldCMJ = await call_SC(address, Gold, 18);
+       var CMJ_inGoldCMJ = await call_SC(address, CMJ, 18);
+       var Gold_to_CMJ = (Gold_inGoldCMJ/CMJ_inGoldCMJ).toFixed(4);
+       var CMJ_to_Gold = (CMJ_inGoldCMJ/Gold_inGoldCMJ).toFixed(10);
+          document.getElementById("priceB13").innerHTML = (CMJ_to_Gold*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+          document.getElementById("priceB13_2").innerHTML = (CMJ_to_Gold*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+      
+
+      // Bal of Os  , JBC/  0x329889325A555b217C41A4c2EADD529a0CfA4231
+      address = '0x329889325A555b217C41A4c2EADD529a0CfA4231';
+       var Os_inOsCMJ = await call_SC(address, Os, 18);
+       var CMJ_inOsCMJ = await call_SC(address, CMJ, 18);
+       var Os_to_CMJ = (Os_inOsCMJ/CMJ_inOsCMJ).toFixed(4);
+       var CMJ_to_Os = (CMJ_inOsCMJ/Os_inOsCMJ).toFixed(10);
+          document.getElementById("priceB18").innerHTML = (CMJ_to_Os*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+          document.getElementById("priceB18_2").innerHTML = (CMJ_to_Os*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+
+
+
+      // Bal of Swar  , JBC/  0x280608DD7712a5675041b95d0000B9089903B569
+      address = '0x5a9E35fC4Afc21B9Fc74bE18015D4D3B002A83A3';
+       var Swar_inSwarWJBC = await call_SC(address, Swar, 18);
+       var WJBC_inSwarWJBC = await call_SC(address, WJBC, 18);
+       var Swar_to_WJBC = (Swar_inSwarWJBC/WJBC_inSwarWJBC).toFixed(4);
+       var WJBC_to_Swar = (WJBC_inSwarWJBC/Swar_inSwarWJBC).toFixed(10);
+       var SWAR_in_CMJ = (WJBC_to_Swar*JBC_to_CMJ).toFixed(6)
+          document.getElementById("priceB21").innerHTML = (SWAR_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+          document.getElementById("priceD21").innerHTML = (WJBC_to_Swar*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+          document.getElementById("priceB21_2").innerHTML = (SWAR_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+          document.getElementById("priceD21_2").innerHTML = (WJBC_to_Swar*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+
+      // Bal of ANGB , WJBC 
+      address = '0xDd35db1a731CD86C01d74A8a4bA4354ca1CDE24d';
+       var ANGB_inANGBWJBC = await call_SC(address, Angb, 18);
+       var WJBC_inANGBWJBC = await call_SC(address, WJBC, 18);
+       var ANGB_to_WJBC = (ANGB_inANGBWJBC/WJBC_inANGBWJBC).toFixed(4);
+       var WJBC_to_ANGB = (WJBC_inANGBWJBC/ANGB_inANGBWJBC).toFixed(4);
+       var ANGB_in_CMJ = (WJBC_to_ANGB*JBC_to_CMJ).toFixed(6)
+          document.getElementById("priceB23").innerHTML = (ANGB_in_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+          document.getElementById("priceD23").innerHTML = (WJBC_to_ANGB*1.05).toLocaleString(undefined,{maximumFractionDigits:7});
+          document.getElementById("priceB23_2").innerHTML = (ANGB_in_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+          document.getElementById("priceD23_2").innerHTML = (WJBC_to_ANGB*0.95).toLocaleString(undefined,{maximumFractionDigits:7});
+
+      // Bal of CMJ , SIL 
+      address = '0xf189c5B03694b70e5DFD8e8CAE84118Ed7616F19';
+       var SIL_inSILCMJ = await call_SC(address, Sil, 18);
+       var CMJ_inSILCMJ = await call_SC(address, CMJ, 18);
+       var SIL_to_CMJ = (SIL_inSILCMJ/CMJ_inSILCMJ).toFixed(6);
+       var CMJ_to_SIL = (CMJ_inSILCMJ/SIL_inSILCMJ).toFixed(10);
+          document.getElementById("priceB12").innerHTML = (CMJ_to_SIL*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+          document.getElementById("priceB12_2").innerHTML = (CMJ_to_SIL*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+      
+          Tao_CMJ = TAOPriceUSD/CMJPriceUSD;
+      document.getElementById('priceB22').innerText = `${Tao_CMJ.toFixed(8)}`;
+      
+
+      // BAL of II , JTAO
+      address = '0xbD5bFF1fBbD83FECD749a328D98F860f7F343c10';
+       var II_inIIJTAO = await call_SC(address,II,18);
+       var JTAO_inIIJTAO = await call_SC(address,Jtao,18);
+       var II_to_JTAO = setLocal((II_inIIJTAO/JTAO_inIIJTAO),4);
+       var JTAO_to_II = (JTAO_inIIJTAO/II_inIIJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
+      JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+      CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
+      document.getElementById("IIPrice_JTAO").innerHTML = (JTAO_to_II*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+      document.getElementById("IIPrice_JTAO_2").innerHTML = (JTAO_to_II*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+      JTAO_to_CMJ = (JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2;
+      II_to_CMJ = ((JTAO_to_II*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
+      document.getElementById("IIPrice_CMJ").innerHTML = (II_to_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+      document.getElementById("IIPrice_CMJ_2").innerHTML = (II_to_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+      
+      // BAL of EE , JTAO
+      address = '0x3822b065E9980F6cd62Fd8Fa60b3fFB36866CA60';
+       var EE_inEEJTAO = await call_SC(address,EE,18);
+       var JTAO_inEEJTAO = await call_SC(address,Jtao,18);
+       var EE_to_JTAO = setLocal((EE_inEEJTAO/JTAO_inEEJTAO),4);
+       var JTAO_to_EE = (JTAO_inEEJTAO/EE_inEEJTAO).toLocaleString(undefined,{maximumFractionDigits:4});
+      JTAO_inUSDT = parseFloat(document.getElementById("priceD22").textContent) || 0;
+      CMJ_inUSDT2 = parseFloat(document.getElementById("priceD2").textContent) || 0;
+      document.getElementById("EEPrice_JTAO").innerHTML = (JTAO_to_EE*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+      document.getElementById("EEPrice_JTAO_2").innerHTML = (JTAO_to_EE*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+      JTAO_to_CMJ = (JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2;
+      EEPrice_CMJ = ((JTAO_to_EE*JTAO_inUSDT)/CMJ_inUSDT2).toFixed(8)
+      document.getElementById("EEPrice_CMJ").innerHTML = (EEPrice_CMJ*1.05).toLocaleString(undefined,{maximumFractionDigits:14});
+      document.getElementById("EEPrice_CMJ_2").innerHTML = (EEPrice_CMJ*0.95).toLocaleString(undefined,{maximumFractionDigits:14});
+      
+
+////////////////////////////////////////////////////////////////////////////////////// MEOW NEON////////////////////////////////////////////////////////////////////////////////
+      // Bal of Meow-BBQ
+      address = '0xd332E9387dC0CbC4A850F23418fC98a47bBE8739';
+       var BBQ_inBBQMEOW = await call_SC(address, Bbq, 18);
+       var MEOW_inBBQMEOW = await call_SC(address, Meow, 18);
+       var BBQ_to_Meow = (BBQ_inBBQMEOW/MEOW_inBBQMEOW).toFixed(4);
+       var Meow_to_BBQ = (MEOW_inBBQMEOW/BBQ_inBBQMEOW).toFixed(10);
+       var BBQ_in_CMJ = (Meow_to_BBQ*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-Wood
+      address = '0x538AE35F6618fc5Ac6d42c781d6Bd6C9E977866D';
+       var Wood_inWoodMEOW = await call_SC(address, Wood, 18);
+       var MEOW_inWoodMEOW = await call_SC(address, Meow, 18);
+       var Wood_to_Meow = (Wood_inWoodMEOW/MEOW_inWoodMEOW).toFixed(4);
+       var Meow_to_Wood = (MEOW_inWoodMEOW/Wood_inWoodMEOW).toFixed(10);
+       var Wood_in_CMJ = (Meow_to_Wood*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-Mt
+      address = '0x6314939709ae79E66a2dD9810202448e27afD70E';
+       var Mt_inMtMEOW = await call_SC(address, Mt, 18);
+       var MEOW_inMtMEOW = await call_SC(address, Meow, 18);
+       var Mt_to_Meow = (Mt_inMtMEOW/MEOW_inMtMEOW).toFixed(4);
+       var Meow_to_Mt = (MEOW_inMtMEOW/Mt_inMtMEOW).toFixed(10);
+       var Mt_in_CMJ = (Meow_to_Mt*CMJ_to_Meow).toFixed(10);
+
+
+      // Bal of Meow-Gold
+      address = '0xCf3b8D974A68dFE026b91C3664B8c7d9Da569924';
+       var Gold_inGoldMEOW = await call_SC(address, Gold, 18);
+       var MEOW_inGoldMEOW = await call_SC(address, Meow, 18);
+       var Gold_to_Meow = (Gold_inGoldMEOW/MEOW_inGoldMEOW).toFixed(4);
+       var Meow_to_Gold = (MEOW_inGoldMEOW/Gold_inGoldMEOW).toFixed(10);
+       var Gold_in_CMJ = (Meow_to_Gold*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-WJBC
+      address = '0xc8B5DB8c8D6707c8F7e565cDfF9a61fd6e7427B6';
+       var WJBC_inWJBCMEOW = await call_SC(address, WJBC, 18);
+       var MEOW_inWJBCMEOW = await call_SC(address, Meow, 18);
+       var WJBC_to_Meow = (WJBC_inWJBCMEOW/MEOW_inWJBCMEOW).toFixed(4);
+       var Meow_to_WJBC = (MEOW_inWJBCMEOW/WJBC_inWJBCMEOW).toFixed(10);
+       var WJBC_in_CMJ = (Meow_to_WJBC*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-Mice
+      address = '0xd21fb03ae67958ce28600350e1Df84Ef90196107';
+       var Mice_inMiceMEOW = await call_SC(address, Mice, 18);
+       var MEOW_inMiceMEOW = await call_SC(address, Meow, 18);
+       var Mice_to_Meow = (Mice_inMiceMEOW/MEOW_inMiceMEOW).toFixed(4);
+       var Meow_to_Mice = (MEOW_inMiceMEOW/Mice_inMiceMEOW).toFixed(10);
+       var Mice_in_CMJ = (Meow_to_Mice*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-Tuna
+      address = '0xA86c548E4eB41c4b7752213c8f8dCf94c50354B0';
+       var Tuna_inTunaMEOW = await call_SC(address, Tuna, 18);
+       var MEOW_inTunaMEOW = await call_SC(address, Meow, 18);
+       var Tuna_to_Meow = (Tuna_inTunaMEOW/MEOW_inTunaMEOW).toFixed(4);
+       var Meow_to_Tuna = (MEOW_inTunaMEOW/Tuna_inTunaMEOW).toFixed(10);
+       var Tuna_in_CMJ = (Meow_to_Tuna*CMJ_to_Meow).toFixed(10);
+              document.getElementById("priceB5").innerHTML = Tuna_in_CMJ;
+
+      // Bal of Meow-Jusdt
+      address = '0x8F04C3d6eb9E744b56f5D89d75Be5e9B466aCE25';
+       var Jusdt_inJusdtMEOW = await call_SC(address, Jusdt, 18);
+       var MEOW_inJusdtMEOW = await call_SC(address, Meow, 18);
+       var Jusdt_to_Meow = (Jusdt_inJusdtMEOW/MEOW_inJusdtMEOW).toFixed(4);
+       var Meow_to_Jusdt = (MEOW_inJusdtMEOW/Jusdt_inJusdtMEOW).toFixed(10);
+       var Jusdt_in_CMJ = (Meow_to_Jusdt*CMJ_to_Meow).toFixed(10);
+     // Bal of Meow-SIL
+      address = '0xacb0465e3dedb9333ae9ddd6fafa95d5b6fa4c49';
+       var SIL_inSILMEOW = await call_SC(address, Sil, 18);
+       var MEOW_inSILMEOW = await call_SC(address, Meow, 18);
+       var SIL_to_Meow = (SIL_inSILMEOW/MEOW_inSILMEOW).toFixed(4);
+       var Meow_to_SIL = (MEOW_inSILMEOW/SIL_inSILMEOW).toFixed(10);
+       var SIL_in_CMJ = (Meow_to_SIL*CMJ_to_Meow).toFixed(10);
+      // Bal of Meow-MT
+      address = '0x6314939709ae79e66a2dd9810202448e27afd70e';
+       var MT_inMTMEOW = await call_SC(address, Mt, 18);
+       var MEOW_inMTMEOW = await call_SC(address, Meow, 18);
+       var MT_to_Meow = (MT_inMTMEOW/MEOW_inMTMEOW).toFixed(4);
+       var Meow_to_MT = (MEOW_inMTMEOW/MT_inMTMEOW).toFixed(10);
+       var MT_in_CMJ = (Meow_to_MT*CMJ_to_Meow).toFixed(10);
+
+/////////////////////////////////////////////////////////////////////////////////// JIBSWAP /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      // Bal of Meow-WJBC
+      address = '0x04C106B2E51a307D3c69d2a72c5A24dcF7c35731';
+       var Jib_WJBC_inWJBCMEOW = await call_SC(address, Jib_WJBC, 18);
+       var Jib_MEOW_inWJBCMEOW = await call_SC(address, Meow, 18);
+       var Jib_WJBC_to_Meow = (Jib_WJBC_inWJBCMEOW/Jib_MEOW_inWJBCMEOW).toFixed(4);
+       var Jib_Meow_to_WJBC = (Jib_MEOW_inWJBCMEOW/Jib_WJBC_inWJBCMEOW).toFixed(10);
+       var Jib_WJBC_in_CMJ = (Jib_Meow_to_WJBC*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-SIL
+      address = '0x2038F97Fe5199a473726016c6B755C71A1d02fa0';
+       var Jib_SIL_inSILMEOW = await call_SC(address, Sil, 18);
+       var Jib_MEOW_inSILMEOW = await call_SC(address, Meow, 18);
+       var Jib_SIL_to_Meow = (Jib_SIL_inSILMEOW/Jib_MEOW_inSILMEOW).toFixed(4);
+       var Jib_Meow_to_SIL = (Jib_MEOW_inSILMEOW/Jib_SIL_inSILMEOW).toFixed(10);
+       var Jib_SIL_in_CMJ = (Jib_Meow_to_SIL*CMJ_to_Meow).toFixed(10);
+          
+      // Bal of Meow-Gold
+      address = '0x1a2a8039c4b685d47B9ef6e2C9D3aCB5aB83BCAC';
+       var Jib_Gold_inGoldMEOW = await call_SC(address, Gold, 18);
+       var Jib_MEOW_inGoldMEOW = await call_SC(address, Meow, 18);
+       var Jib_Gold_to_Meow = (Jib_Gold_inGoldMEOW/Jib_MEOW_inGoldMEOW).toFixed(4);
+       var Jib_Meow_to_Gold = (Jib_MEOW_inGoldMEOW/Jib_Gold_inGoldMEOW).toFixed(10);
+       var Jib_Gold_in_CMJ = (Jib_Meow_to_Gold*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-Wood
+      address = '0x0E2302D286778B70F59451036207Aec484C15198';
+       var Jib_Wood_inWoodMEOW = await call_SC(address, Wood, 18);
+       var Jib_MEOW_inWoodMEOW = await call_SC(address, Meow, 18);
+       var Jib_Wood_to_Meow = (Jib_Wood_inWoodMEOW/Jib_MEOW_inWoodMEOW).toFixed(4);
+       var Jib_Meow_to_Wood = (Jib_MEOW_inWoodMEOW/Jib_Wood_inWoodMEOW).toFixed(10);
+       var Jib_Wood_in_CMJ = (Jib_Meow_to_Wood*CMJ_to_Meow).toFixed(10);
+              document.getElementById("priceB4").innerHTML = Jib_Wood_in_CMJ;
+
+     // Bal of Meow-Mice
+      address = '0xcc59B348085384C1B8e4D310e53a4823aCd38653';
+       var Jib_Mice_inMiceMEOW = await call_SC(address, Mice, 18);
+       var Jib_MEOW_inMiceMEOW = await call_SC(address, Meow, 18);
+       var Jib_Mice_to_Meow = (Jib_Mice_inMiceMEOW/Jib_MEOW_inMiceMEOW).toFixed(4);
+       var Jib_Meow_to_Mice = (Jib_MEOW_inMiceMEOW/Jib_Mice_inMiceMEOW).toFixed(10);
+       var Jib_Mice_in_CMJ = (Jib_Meow_to_Mice*CMJ_to_Meow).toFixed(10);
+              document.getElementById("priceB6").innerHTML = Jib_Mice_in_CMJ;
+      // Bal of Meow-Tuna
+      address = '0xF9C16D28E8113D0966cE060a4F8c4cFad6D87467';
+       var Jib_Tuna_inTunaMEOW = await call_SC(address, Tuna, 18);
+       var Jib_MEOW_inTunaMEOW = await call_SC(address, Meow, 18);
+       var Jib_Tuna_to_Meow = (Jib_Tuna_inTunaMEOW/Jib_MEOW_inTunaMEOW).toFixed(4);
+       var Jib_Meow_to_Tuna = (Jib_MEOW_inTunaMEOW/Jib_Tuna_inTunaMEOW).toFixed(10);
+       var Jib_Tuna_in_CMJ = (Jib_Meow_to_Tuna*CMJ_to_Meow).toFixed(10);
+      // Bal of Meow-Os
+      address = '0x7400281C02259436CA6bbf2bcD6624E7E497ee96';
+       var Jib_Os_inOsMEOW = await call_SC(address, Os, 18);
+       var Jib_MEOW_inOsMEOW = await call_SC(address, Meow, 18);
+       var Jib_Os_to_Meow = (Jib_Os_inOsMEOW/Jib_MEOW_inOsMEOW).toFixed(4);
+       var Jib_Meow_to_Os = (Jib_MEOW_inOsMEOW/Jib_Os_inOsMEOW).toFixed(10);
+       var Jib_Os_in_CMJ = (Jib_Meow_to_Os*CMJ_to_Meow).toFixed(10);
+
+      // Bal of Meow-Mt
+      address = '0xb882C5Ec427De3085127C89De4fe3ceE12b345bb';
+       var Jib_Mt_inMtMEOW = await call_SC(address, Mt, 18);
+       var Jib_MEOW_inMtMEOW = await call_SC(address, Meow, 18);
+       var Jib_Mt_to_Meow = (Jib_Mt_inMtMEOW/Jib_MEOW_inMtMEOW).toFixed(4);
+       var Jib_Meow_to_Mt = (Jib_MEOW_inMtMEOW/Jib_Mt_inMtMEOW).toFixed(10);
+       var Jib_Mt_in_CMJ = (Jib_Meow_to_Mt*CMJ_to_Meow).toFixed(10);
+      document.getElementById("priceB16").innerHTML = Jib_Mt_in_CMJ;
+
+      // Bal of Meow-stOPT
+      address = '0xc33ED5700B34DF55c925b4ca1791Aa0F61c6bcEd';
+       var Jib_stOPT_instOPTMEOW = await call_SC(address, stOPT, 18);
+       var Jib_MEOW_instOPTMEOW = await call_SC(address, Meow, 18);
+       var Jib_stOPT_to_Meow = (Jib_stOPT_instOPTMEOW/Jib_MEOW_instOPTMEOW).toFixed(4);
+       var Jib_Meow_to_stOPT = (Jib_MEOW_instOPTMEOW/Jib_stOPT_instOPTMEOW).toFixed(10);
+       var Jib_stOPT_in_CMJ = (Jib_Meow_to_stOPT*CMJ_to_Meow).toFixed(10);
+// Bal of CMJ , PLAT 
+            address = '0x78Ff63F4f91Ce56f72882ef9dbE3Be79fBF15044';
+             var Plat_inPlatCMJ = await call_SC(address, Plat, 18);
+             var CMJ_inPlatCMJ = await call_SC(address, CMJ, 18);
+             var Plat_to_CMJ = (Plat_inPlatCMJ/CMJ_inPlatCMJ).toFixed(6);
+             var CMJ_to_Plat = (CMJ_inPlatCMJ/Plat_inPlatCMJ).toFixed(10);
+            if(CMJ_to_Plat != 0){
+              document.getElementById("platinumBuy").innerHTML = (CMJ_to_Plat*1.05).toLocaleString(undefined,{maximumFractionDigits:6});
+              document.getElementById("platinumSell").innerHTML = (CMJ_to_Plat*0.95).toLocaleString(undefined,{maximumFractionDigits:6});
+            }
+          // Token Value in CMJ
+       var Bbq_Price = CMJ_to_BBQ;
+       var Pza_Price = CMJ_to_Pza;
+       var Swar_Price = SWAR_in_CMJ;
+       var Wood_Price = Jib_Wood_in_CMJ;
+       var Tuna_Price = Tuna_in_CMJ;
+       var Mice_Price = Jib_Mice_in_CMJ;
+       var Cu_Price = CMJ_to_Cu;
+       var Jasp_Price = CMJ_to_Jasp;
+       var Os_Price = CMJ_to_Os;
+       var Jdao_Price = CMJ_to_Jdao;
+       var Mt_Price = Jib_Mt_in_CMJ;
+       var Gold_Price = CMJ_to_Gold;
+       var Silver_Price = Jib_SIL_in_CMJ;
+       var Ctuna_Price = CMJ_to_Ctuna;
+       var Sx31_Price = CMJ_to_Sx31;
+       var stOPT_Price = Jib_stOPT_in_CMJ;
+       var Jbc_Price = JBC_to_CMJ;
+       var Plat_Price = CMJ_to_Plat;
+
+  } catch (error) {
+      console.error('Error:', error);
+      console.log('An error occurred while fetching contract information.');
+  }
+}
+main();
+function setLocal(number,maximumFractionDigits){
+return number.toLocaleString(undefined, { maximumFractionDigits : maximumFractionDigits })
+}
+  
+async function call_SC(address, contract, divider) {
+  try {
+     var result = await contract.methods.balanceOf(address).call();
+    return result / (10 ** divider); // เลื่อนการหารออกจากการเรียกใช้เพื่อความชัดเจน
+  } catch (error) {
+    console.error("Error calling contract method:", error);
+    return null;
+  }
+}
+function resetNetworth(){
+    document.getElementById("wallet_cmj").innerHTML = 0;
+    document.getElementById("farm_cmj").textContent = 0;
+    document.getElementById("pending_cmj").textContent = 0;
+}
+
+async function getBalance() {
+    document.getElementById("Status").innerHTML = `<img width="32px" src="https://s12.gifyu.com/images/SavRL.gif">`
+  resetPurchaseTable()
+  resetNetworth();
+  
+  THB_to_USD = parseFloat(document.getElementById("THB").textContent) || 36.5;
+  console.log("THB / USD : "+THB_to_USD);
+  CMJ_to_JBC = parseFloat(document.getElementById("Sell_CMJinJBC").textContent) || 0;
+  JBC_to_CMJ = parseFloat(document.getElementById("Sell_JBCinCMJ").textContent) || 0;
+  CMJ_to_USD = parseFloat(document.getElementById("Sell_CMJinUSD").textContent) || 0;
+  USD_to_CMJ = (1/parseFloat(document.getElementById("priceD2").textContent)) || 0;
+  Meow_to_CMJ = parseFloat(document.getElementById("Sell_MeowinCMJ").textContent) || 0;
+  Jtao_to_CMJ = parseFloat(document.getElementById("priceB22").textContent) || 0;
+  Wood_to_CMJ = parseFloat(document.getElementById("priceB4").textContent) || 0;
+  Tuna_to_CMJ = parseFloat(document.getElementById("priceB5").textContent) || 0;
+  Mice_to_CMJ = parseFloat(document.getElementById("priceB6").textContent) || 0;
+  Cu_to_CMJ = parseFloat(document.getElementById("priceB7").textContent) || 0;
+  Jasper_to_CMJ = parseFloat(document.getElementById("priceB17").textContent) || 0;
+  Os_to_CMJ = parseFloat(document.getElementById("priceB18").textContent) || 0;
+  Jdao_to_CMJ = parseFloat(document.getElementById("priceB15").textContent) || 0;
+  Mt_to_CMJ = parseFloat(document.getElementById("priceB16").textContent) || 0;
+  Angb_to_CMJ = parseFloat(document.getElementById("priceB23").textContent) || 0;
+  II_to_CMJ = parseFloat(document.getElementById("IIPrice_CMJ").textContent) || 0;
+  EE_to_CMJ = parseFloat(document.getElementById("EEPrice_CMJ").textContent) || 0;
+  Bbq_to_CMJ = parseFloat(document.getElementById("priceB8").textContent) || 0;
+  Pza_to_CMJ = parseFloat(document.getElementById("priceB9").textContent) || 0;
+  Ctuna_to_CMJ = parseFloat(document.getElementById("priceB10").textContent) || 0;
+  Sx31_to_CMJ = parseFloat(document.getElementById("priceB11").textContent) || 0;
+  Silver_to_CMJ = parseFloat(document.getElementById("priceB12").textContent) || 0;
+  Gold_to_CMJ = parseFloat(document.getElementById("priceB13").textContent) || 0;
+  Platinum_to_CMJ = parseFloat(document.getElementById("platinumBuy").textContent) || 0;
+  Swar_to_CMJ = parseFloat(document.getElementById("priceB21").textContent) || 0;
+  Gear_to_CMJ = 0;
+  Vabag_to_CMJ = 0;
+  
+   var walletAddress = document.getElementById("wallet_address").value;
+   var CMJ_ERC20 = setContract('0xE67E280f5a354B4AcA15fA7f0ccbF667CF74F97b');
+   var Wood_ERC20 = setContract('0xc2744Ff255518a736505cF9aC1996D9adDec69Bd');
+   var WJBC_ERC20 = setContract('0xC4B7C87510675167643e3DE6EEeD4D2c06A9e747');
+   var WJBCJIB_ERC20 = setContract('0x99999999990FC47611b74827486218f3398A4abD');
+   var Meow_ERC20 = setContract('0x04052384166fC30D03929eE328805eC084776843');
+   var Tuna_ERC20 = setContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381');
+   var Mice_ERC20 = setContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df');
+   var Cu_ERC20 = setContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+   var Jasp_ERC20 = setContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+   var Os_ERC20 = setContract('0xAc5299D92373E9352636559cca497d7683A47655');
+   var Jdao_ERC20 = setContract('0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88');
+   var Mt_ERC20 = setContract('0x169816800f1eA9C5735937388aeb9C2A3bAca11F');
+   var Vabag_ERC20 = setContract('0x495d66c9Fd7c63807114d06802A48BdAA60a0426');
+   var Bbq_ERC20 = setContract('0x7004757e595409568Bd728736e1b0c79FDc94e1c');
+   var Pza_ERC20 = setContract('0x09DcdCFc6C48803681a3422997c679E773656763');
+   var Ctuna_ERC20 = setContract('0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0');
+   var Sx31_ERC20 = setContract('0xd431d826d7a4380b9259612176f00528b88840a7');
+   var Sil_ERC20 = setContract('0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f');
+   var Gold_ERC20 = setContract('0x7d5346E33889580528e6F79f48BdEE94D8A9E144');
+   var Plat_ERC20 = setContract('0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD');
+   var Swar_ERC20 = setContract('0x5e18a8B78d5395371308C54719fead810Ce2aCd2');
+   var Jusdt_ERC20 = setContract('0x24599b658b57f91E7643f4F154B16bcd2884f9ac');
+   var stOPT_ERC20 = setContract('0x435BeAF4B83A6dc57927E9dB194a3Ccf54100F7a');
+   var Jtao_ERC20 = setContract('0xdbCCc9F8920e7274eeC62e695084D3bCe443c3dd');
+   var Angb_ERC20 = setContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+   var GEAR_ERC20 = setContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+   var II_ERC20 = setContract('0x523AA3aB2371A6360BeC4fEea7bE1293adb32241');
+   var EE_ERC20 = setContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+   var MHZ = loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890');
+   var CU = loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+   var JASP = loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+  
+
+   var CMDAO_NFT = loadContract('0x20724DC1D37E67B7B69B52300fDbA85E558d8F9A');
+   var NRT_NFT = loadContract('0x5E620D8980335167d9eF36cEf5d9A6Ea6607a8Cb');
+
+  try {
+     var jbcBalWei = await web3.eth.getBalance(walletAddress) / (10**18);
+     var cmjBalWei = await CMJ_ERC20.methods.balanceOf(walletAddress).call();
+     var cmjBal = web3.utils.fromWei(cmjBalWei, 'ether');
+     var jusdtBalWei = await Jusdt_ERC20.methods.balanceOf(walletAddress).call();
+     var jusdtBal = web3.utils.fromWei(jusdtBalWei,'ether');
+     var WoodBalWei = await Wood_ERC20.methods.balanceOf(walletAddress).call();
+     var WoodBal = web3.utils.fromWei(WoodBalWei, 'ether');
+     var WJBCBalWei = await WJBC_ERC20.methods.balanceOf(walletAddress).call();
+     var WJBCBal = web3.utils.fromWei(WJBCBalWei, 'ether');
+     var WJBCJIBBalWei = await WJBCJIB_ERC20.methods.balanceOf(walletAddress).call();
+     var WJBCJIBBal = web3.utils.fromWei(WJBCJIBBalWei, 'ether');
+     var MeowBalWei = await Meow_ERC20.methods.balanceOf(walletAddress).call();
+     var MeowBal = web3.utils.fromWei(MeowBalWei, 'ether');
+     var TunaBalWei = await Tuna_ERC20.methods.balanceOf(walletAddress).call();
+     var TunaBal = web3.utils.fromWei(TunaBalWei, 'ether');
+     var MiceBalWei = await Mice_ERC20.methods.balanceOf(walletAddress).call();
+     var MiceBal = web3.utils.fromWei(MiceBalWei, 'ether');
+     var CuBalWei = await Cu_ERC20.methods.balanceOf(walletAddress).call();
+     var CuBal = web3.utils.fromWei(CuBalWei, 'ether');
+     var JdaoBalWei = await Jdao_ERC20.methods.balanceOf(walletAddress).call();
+     var JdaoBal = web3.utils.fromWei(JdaoBalWei, 'ether');
+     var MtBalWei = await Mt_ERC20.methods.balanceOf(walletAddress).call();
+     var MtBal = web3.utils.fromWei(MtBalWei, 'ether');
+     var VabagBalWei = await Vabag_ERC20.methods.balanceOf(walletAddress).call();
+     var VabagBal = web3.utils.fromWei(VabagBalWei, 'ether');
+     var BbqBalWei = await Bbq_ERC20.methods.balanceOf(walletAddress).call();
+     var BbqBal = web3.utils.fromWei(BbqBalWei, 'ether');
+     var PzaBalWei = await Pza_ERC20.methods.balanceOf(walletAddress).call();
+     var PzaBal = web3.utils.fromWei(PzaBalWei, 'ether');
+     var CtunaBalWei = await Ctuna_ERC20.methods.balanceOf(walletAddress).call();
+     var CtunaBal = web3.utils.fromWei(CtunaBalWei, 'ether');
+     var Sx31BalWei = await Sx31_ERC20.methods.balanceOf(walletAddress).call();
+     var Sx31Bal = web3.utils.fromWei(Sx31BalWei, 'ether');
+     var SilBalWei = await Sil_ERC20.methods.balanceOf(walletAddress).call();
+     var SilBal = web3.utils.fromWei(SilBalWei, 'ether');
+     var GoldBalWei = await Gold_ERC20.methods.balanceOf(walletAddress).call();
+     var GoldBal = web3.utils.fromWei(GoldBalWei, 'ether');
+     var PlatBalWei = await Plat_ERC20.methods.balanceOf(walletAddress).call();
+     var PlatBal = web3.utils.fromWei(PlatBalWei, 'ether');
+     var SwarBalWei = await Swar_ERC20.methods.balanceOf(walletAddress).call();
+     var SwarBal = web3.utils.fromWei(SwarBalWei, 'ether');
+     var JtaoBalWei = await Jtao_ERC20.methods.balanceOf(walletAddress).call();
+     var JtaoBal = web3.utils.fromWei(JtaoBalWei, 'ether');
+     var AngbBalWei = await Angb_ERC20.methods.balanceOf(walletAddress).call();
+     var AngbBal = web3.utils.fromWei(AngbBalWei, 'ether');
+     var GearBalWei = await GEAR_ERC20.methods.balanceOf(walletAddress).call();
+     var GearBal = web3.utils.fromWei(GearBalWei, 'ether');
+     var IIBalWei = await II_ERC20.methods.balanceOf(walletAddress).call();
+     var IIBal = web3.utils.fromWei(IIBalWei, 'ether');
+     var EEBalWei = await EE_ERC20.methods.balanceOf(walletAddress).call();
+     var EEBal = web3.utils.fromWei(EEBalWei, 'ether');
+     var JaspBalWei = await Jasp_ERC20.methods.balanceOf(walletAddress).call();
+     var JaspBal = web3.utils.fromWei(JaspBalWei, 'gwei');
+     var OsBalWei = await Os_ERC20.methods.balanceOf(walletAddress).call();
+     var OsBal = web3.utils.fromWei(OsBalWei, 'ether');
+     var CUContract = await loadContract('0x42F5213C7b6281FC6fb2d6F10576F70DB0a4C841');
+     var JASPContract = await loadContract('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860');
+     var DWContract = await loadContract('0x59c1C2f5FA76DB933B97b7c54223129e2A398534');
+     var CCContract = await loadContract('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751');
+     var LPFarming = await loadContract('0x6B25033c2B4F5594809cBEf9F625771a2574C1a6'); // Game Swap Contract
+     var TunaField = await loadContract('0x09676315DC0c85F6bd5e866C5f1363A00Eec4381'); // Tuna field
+     var MiceField = await loadContract('0x09DE640ecd50e1c81bCB266279e3ffC2719873df'); // Old warehouse field
+     var FieldTHL = await loadContract('0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9'); // The Heaven Land
+     var MHZField = await loadContract('0x0E2610730A3c42fd721B289BEe092D9AD1C76890'); // Mech Harvest Zone
+     var VbagField = await loadContract('0x495d66c9Fd7c63807114d06802A48BdAA60a0426'); // Eastern (Vabag)
+     var JCLP = await loadContract('0x472d0e2E9839c140786D38110b3251d5ED08DF41'); // JCLP
+     var JULP = await loadContract('0x280608DD7712a5675041b95d0000B9089903B569'); // JULP
+     var JASPCMJ = await loadContract('0xc19DE37d5e14b387BCda8e62aB4934591315901D');
+     var JDAOCMJ = await loadContract('0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0');
+     var OSCMJ = await loadContract('0x329889325A555b217C41A4c2EADD529a0CfA4231');
+     var CUCMJ = await loadContract('0x1b70c95fd4ebf8920a624bd2ce22b6905efbdf60');
+     var SILCMJ = await loadContract('0xf189c5b03694b70e5dfd8e8cae84118ed7616f19');
+     var GOLDCMJ = await loadContract('0x7086ec7ed5d94ef503be324b0ae8a3748a15fae5');
+     var PLATCMJ = await loadContract('0x78ff63f4f91ce56f72882ef9dbe3be79fbf15044');
+     var CTUNACMJ = await loadContract('0x7801f8cdbabe6999331d1bf37d74aaf713c3722f');
+     var SX31CMJ = await loadContract('0xda558ee93b466aeb4f59fbf95d25d410318be43a');
+     var BBQCMJ = await loadContract('0x6f93f16cf86205c5bb9145078d584c354758d6db');
+     var PZACMJ = await loadContract('0x3161EE630bF36d2AB6333a9CfD22ebaa3e2D7C70');
+    
+    function calculateWorth(balance, conversionRate) {
+      return parseFloat(balance * conversionRate);
+  }
+  
+  function addToTable(tokenName, tokenAmount, tokenPrice) {
+    // หา DOM element ของตารางโดยใช้ ID
+    var table = document.getElementById("walletAsset");
+    var tokenValue = calculateWorth(tokenAmount,tokenPrice);
+    //console.log(tokenValue)
+    // สร้าง row ใหม่
+    if (tokenValue > 1){
+        var newRow = table.insertRow(-1);
+        // เพิ่มข้อมูลในแต่ละ column
+        var nameCell = newRow.insertCell(0);
+        var amountCell = newRow.insertCell(1);
+        var priceCell = newRow.insertCell(2);
+        var valueCell = newRow.insertCell(3);
+        var worthCell = newRow.insertCell(4);
+    
+        // กำหนดข้อมูลให้กับแต่ละ cell
+        nameCell.innerHTML = tokenName;
+        amountCell.innerHTML = (parseFloat(tokenAmount)).toLocaleString(undefined,{maximumFractionDigits:3});
+        priceCell.innerHTML = tokenPrice.toLocaleString(undefined,{maximumFractionDigits:8})+' CMJ';
+        valueCell.innerHTML = tokenValue.toLocaleString(undefined,{maximumFractionDigits:3});
+        worthCell.innerHTML = 'CMJ';
+        console.log("Add : token Name",tokenName," amount : ",tokenAmount,"\tprice:",tokenPrice,"\tValue:",tokenValue);
+    }
+}
+// เก็บข้อมูลไว้ในอาร์เรย์
+    var tokensData = [
+        { name: "JBC", amount: jbcBalWei, price: JBC_to_CMJ },
+        { name: "CMJ", amount: cmjBal, price: 1 },
+        { name: "MEOW", amount: MeowBal, price: Meow_to_CMJ },
+        { name: "WJBC", amount: WJBCBal, price: JBC_to_CMJ },
+        { name: "WJBC(JIB)", amount: WJBCJIBBal, price: JBC_to_CMJ },
+        { name: "JTAO", amount: JtaoBal, price: Jtao_to_CMJ },
+        { name: "WOOD", amount: WoodBal, price: Wood_to_CMJ },
+        { name: "TUNA", amount: TunaBal, price: Tuna_to_CMJ },
+        { name: "MICE", amount: MiceBal, price: Mice_to_CMJ },
+        { name: "CU", amount: CuBal, price: Cu_to_CMJ },
+        { name: "JASP", amount: JaspBal, price: Jasper_to_CMJ },
+        { name: "OS", amount: OsBal, price: Os_to_CMJ },
+        { name: "JDAO", amount: JdaoBal, price: Jtao_to_CMJ },
+        { name: "MT", amount: MtBal, price: Mt_to_CMJ },
+        { name: "VABAG", amount: VabagBal, price: ((1/3)*USD_to_CMJ) },
+        { name: "BBQ", amount: BbqBal, price: Bbq_to_CMJ },
+        { name: "PZA", amount: PzaBal, price: Pza_to_CMJ },
+        { name: "CTUNA", amount: CtunaBal, price: Ctuna_to_CMJ },
+        { name: "SX31", amount: Sx31Bal, price: Sx31_to_CMJ },
+        { name: "SILVER", amount: SilBal, price: Silver_to_CMJ },
+        { name: "GOLD", amount: GoldBal, price: Gold_to_CMJ },
+        { name: "PLATINUM", amount: PlatBal, price: Platinum_to_CMJ },
+        { name: "SWAR", amount: SwarBal, price: Swar_to_CMJ },
+        { name: "ANGB", amount: AngbBal, price: Angb_to_CMJ },
+        { name: "GEAR", amount: GearBal, price: ((2/30000000)*USD_to_CMJ) },
+        { name: "II", amount: IIBal, price: II_to_CMJ },
+        { name: "EE", amount: EEBal, price: EE_to_CMJ },
+        { name: "JUSDT", amount: jusdtBal, price: USD_to_CMJ },
+    ];
+
+
+    // จัดเรียงอาร์เรย์ตาม tokenValue จากมากไปน้อย
+    tokensData.sort(function(a, b) {
+        return calculateWorth(b.amount, b.price) - calculateWorth(a.amount, a.price);
+    });
+
+    // วนลูปเพื่อแทรกรายการลงในตาราง
+    tokensData.forEach(function(token) {
+        addToTable(token.name, token.amount, token.price);
+    });
+
+
+    // Display Worth and total worth
+    CMJtotalworth = 0;
+    worth = []
+    worth.push(calculateWorth(jbcBalWei,JBC_to_CMJ));
+    worth.push(calculateWorth(cmjBal,1));
+    worth.push(calculateWorth(MeowBal,Meow_to_CMJ))
+    worth.push(calculateWorth(WJBCBal,JBC_to_CMJ));
+    worth.push(calculateWorth(WJBCJIBBal,JBC_to_CMJ));
+    worth.push(calculateWorth(JtaoBal, Jtao_to_CMJ));
+    worth.push(calculateWorth(WoodBal, Wood_to_CMJ));
+    worth.push(calculateWorth(TunaBal, Tuna_to_CMJ));
+    worth.push(calculateWorth(MiceBal, Mice_to_CMJ));
+    worth.push(calculateWorth(CuBal, Cu_to_CMJ));
+    worth.push(calculateWorth(JaspBal, Jasper_to_CMJ));
+    worth.push(calculateWorth(OsBal, Os_to_CMJ));
+    worth.push(calculateWorth(JdaoBal, Jdao_to_CMJ));
+    worth.push(calculateWorth(MtBal, Mt_to_CMJ));
+    worth.push(calculateWorth(VabagBal, ((1/3)*USD_to_CMJ)));
+    worth.push(calculateWorth(BbqBal, Bbq_to_CMJ));
+    worth.push(calculateWorth(PzaBal, Pza_to_CMJ));
+    worth.push(calculateWorth(CtunaBal, Ctuna_to_CMJ));
+    worth.push(calculateWorth(Sx31Bal, Sx31_to_CMJ));
+    worth.push(calculateWorth(SilBal, Silver_to_CMJ));
+    worth.push(calculateWorth(GoldBal, Gold_to_CMJ));
+    worth.push(calculateWorth(PlatBal, Platinum_to_CMJ));
+    worth.push(calculateWorth(SwarBal, Swar_to_CMJ));
+    worth.push(calculateWorth(AngbBal, Angb_to_CMJ));
+    worth.push(calculateWorth(GearBal, ((2/30000000)*USD_to_CMJ)));
+    worth.push(calculateWorth(IIBal, II_to_CMJ));
+    worth.push(calculateWorth(EEBal, EE_to_CMJ));
+    worth.push(calculateWorth(jusdtBal, USD_to_CMJ));
+    
+    tokenWorth = 0;
+    for (let i = 0; i < worth.length; i++) {
+        tokenWorth += parseFloat(worth[i]);
+  }
+  addWalletWorth(tokenWorth);
+
+
+    async function getFarming(){
+      console.log('Get Farming Details');
+      try{
+          // LP JBC-CMJ
+         var liqValue1 = (await CMJ_ERC20.methods.balanceOf('0x472d0e2E9839c140786D38110b3251d5ED08DF41').call()/10**18)*2; // Value in CMJ
+         var totalSupplyLP1 = await JCLP.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue1 = liqValue1/totalSupplyLP1;
+         var Info1 = await LPFarming.methods.userInfo(1,walletAddress).call();
+         var Pending1 = await LPFarming.methods.pendingCake(1,walletAddress).call();
+        console.log("liqValue1 :",liqValue1," totalSupplyLP1:",totalSupplyLP1," calculateLPTokenValue1:",calculateLPTokenValue1,"Info1 : ",Info1);
+          // LP CMJ
+         var liqValueCMJ = ((await CMJ_ERC20.methods.balanceOf('0x6B25033c2B4F5594809cBEf9F625771a2574C1a6').call()/10**18)*2);
+         var Info2 = await LPFarming.methods.userInfo(parseInt(2),String(walletAddress)).call();
+         var Pending2 = await LPFarming.methods.pendingCake(parseInt(2),String(walletAddress)).call();
+        console.log("Info2 : ",Info1);
+          // LP JBC-JUSDT
+          var amountOfJBC_JUCP = await web3.eth.getBalance('0x280608DD7712a5675041b95d0000B9089903B569') / (10**18);
+          var amountOfJUSDT_JULP = await Jusdt_ERC20.methods.balanceOf('0x280608DD7712a5675041b95d0000B9089903B569').call() / (10**18);
+                  var JbcJusdtSwap = amountOfJUSDT_JULP/amountOfJBC_JUCP;
+          var amountOfJBC_JCLP = await web3.eth.getBalance('0x472d0e2E9839c140786D38110b3251d5ED08DF41') / (10**18);
+          var amountOfCMJ_JCLP = await CMJ_ERC20.methods.balanceOf('0x472d0e2E9839c140786D38110b3251d5ED08DF41').call() / (10**18);
+                  var JbcCmjSwap = amountOfCMJ_JCLP/amountOfJBC_JCLP;
+         var liqValue2 = (amountOfJBC_JUCP*2)*JbcCmjSwap;
+         var totalSupplyLP2 = await JULP.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue2 = liqValue2/totalSupplyLP2;
+         var Info3 = await LPFarming.methods.userInfo(parseInt(3),String(walletAddress)).call();
+         var Pending3 = await LPFarming.methods.pendingCake(parseInt(3),String(walletAddress)).call();
+        console.log("liqValue2 :",liqValue2," totalSupplyLP2:",totalSupplyLP2," calculateLPTokenValue2:",calculateLPTokenValue2,"Info3 : ",Info3);
+          // LP JASP-CMJ
+         var liqValue3 = ((await CMJ_ERC20.methods.balanceOf('0xc19DE37d5e14b387BCda8e62aB4934591315901D').call()/10**18)*2);
+         var totalSupplyLP3 = await JASPCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue3 = liqValue3/totalSupplyLP3;
+         var Info4 = await LPFarming.methods.userInfo(parseInt(4),String(walletAddress)).call();
+         var Pending4 = await LPFarming.methods.pendingCake(parseInt(4),String(walletAddress)).call();
+          // LP JDAO-CMJ
+         var liqValue4 = ((await CMJ_ERC20.methods.balanceOf('0x3C061eEce15C539CaE99FbE75B3044236Fa2eff0').call()/10**18)*2);
+         var totalSupplyLP4 = await JDAOCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue4 = liqValue4/totalSupplyLP4;
+         var Info5 = await LPFarming.methods.userInfo(parseInt(5),String(walletAddress)).call();
+         var Pending5 = await LPFarming.methods.pendingCake(parseInt(5),String(walletAddress)).call();
+          // LP OS-CMJ
+         var liqValue5 = ((await CMJ_ERC20.methods.balanceOf('0x329889325A555b217C41A4c2EADD529a0CfA4231').call()/10**18)*2);
+         var totalSupplyLP5 = await OSCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue5 = liqValue5/totalSupplyLP5;
+         var Info6 = await LPFarming.methods.userInfo(parseInt(6),String(walletAddress)).call();
+         var Pending6 = await LPFarming.methods.pendingCake(parseInt(6),String(walletAddress)).call();
+             // LP CU-CMJ
+         var liqValue6 = ((await CMJ_ERC20.methods.balanceOf('0x1b70c95fd4ebf8920a624bd2ce22b6905efbdf60').call()/10**18)*2);
+         var totalSupplyLP6 = await CUCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue6 = liqValue6/totalSupplyLP6;
+         var Info7 = await LPFarming.methods.userInfo(parseInt(7),String(walletAddress)).call();
+         var Pending7 = await LPFarming.methods.pendingCake(parseInt(7),String(walletAddress)).call();
+             // LP SIL-CMJ
+         var liqValue7 = ((await CMJ_ERC20.methods.balanceOf('0xf189c5b03694b70e5dfd8e8cae84118ed7616f19').call()/10**18)*2);
+         var totalSupplyLP7 = await SILCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue7 = liqValue7/totalSupplyLP7;
+         var Info8 = await LPFarming.methods.userInfo(parseInt(8),String(walletAddress)).call();
+         var Pending8 = await LPFarming.methods.pendingCake(parseInt(8),String(walletAddress)).call();
+             // LP GOLD-CMJ
+         var liqValue8 = ((await CMJ_ERC20.methods.balanceOf('0x7086ec7ed5d94ef503be324b0ae8a3748a15fae5').call()/10**18)*2);
+         var totalSupplyLP8 = await GOLDCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue8 = liqValue8/totalSupplyLP8;
+         var Info9 = await LPFarming.methods.userInfo(parseInt(9),String(walletAddress)).call();
+         var Pending9 = await LPFarming.methods.pendingCake(parseInt(9),String(walletAddress)).call();
+             // LP PLAT-CMJ
+         var liqValue9 = ((await CMJ_ERC20.methods.balanceOf('0x78ff63f4f91ce56f72882ef9dbe3be79fbf15044').call()/10**18)*2);
+         var totalSupplyLP9 = await PLATCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue9 = liqValue9/totalSupplyLP9;
+         var Info10 = await LPFarming.methods.userInfo(parseInt(10),String(walletAddress)).call();
+         var Pending10 = await LPFarming.methods.pendingCake(parseInt(10),String(walletAddress)).call();
+            // LP CTUNA-CMJ
+         var liqValue10 = ((await CMJ_ERC20.methods.balanceOf('0x7801f8cdbabe6999331d1bf37d74aaf713c3722f').call()/10**18)*2);
+         var totalSupplyLP10 = await CTUNACMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue10 = liqValue10/totalSupplyLP10;
+         var Info11 = await LPFarming.methods.userInfo(parseInt(12),String(walletAddress)).call();
+         var Pending11 = await LPFarming.methods.pendingCake(parseInt(12),String(walletAddress)).call();
+            // LP SX31-CMJ
+         var liqValue11 = ((await CMJ_ERC20.methods.balanceOf('0xda558ee93b466aeb4f59fbf95d25d410318be43a').call()/10**18)*2);
+         var totalSupplyLP11 = await SX31CMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue11 = liqValue11/totalSupplyLP11;
+         var Info12 = await LPFarming.methods.userInfo(parseInt(13),String(walletAddress)).call();
+         var Pending12 = await LPFarming.methods.pendingCake(parseInt(13),String(walletAddress)).call();
+            // LP BBQ-CMJ
+         var liqValue12 = ((await CMJ_ERC20.methods.balanceOf('0x6f93f16cf86205c5bb9145078d584c354758d6db').call()/10**18)*2);
+         var totalSupplyLP12 = await BBQCMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue12 = liqValue12/totalSupplyLP12;
+         var Info13 = await LPFarming.methods.userInfo(parseInt(14),String(walletAddress)).call();
+         var Pending13 = await LPFarming.methods.pendingCake(parseInt(14),String(walletAddress)).call();
+            // LP PZA-CMJ
+         var liqValue13 = ((await CMJ_ERC20.methods.balanceOf('0x3161ee630bf36d2ab6333a9cfd22ebaa3e2d7c70').call()/10**18)*2);
+         var totalSupplyLP13 = await PZACMJ.methods.totalSupply().call() /(10**18); 
+         var calculateLPTokenValue13 = liqValue13/totalSupplyLP13;
+         var Info14 = await LPFarming.methods.userInfo(parseInt(15),String(walletAddress)).call();
+         var Pending14 = await LPFarming.methods.pendingCake(parseInt(15),String(walletAddress)).call();
+
+
+        addtoStaking("Farming LP JBC-CMJ",(Info1[0]/10**18),calculateLPTokenValue1,(Pending1/10**18),Jdao_to_CMJ,"JDAO",(Info1[0]/10**18/totalSupplyLP1));
+        addtoStaking("Staking CMJ",(Info2[0]/10**18),1,Pending2/10**18,Jdao_to_CMJ,"JDAO",(Info2[0]/10**18/liqValueCMJ));
+        addtoStaking("Farming LP JBC-JUSDT",(Info3[0]/10**18),calculateLPTokenValue2,(Pending3/10**18),Jdao_to_CMJ,"JDAO",(Info3[0]/10**18/totalSupplyLP2));
+        addtoStaking("Farming LP JASP-CMJ",(Info4[0]/10**18),calculateLPTokenValue3,(Pending4/10**18),Jdao_to_CMJ,"JDAO",(Info4[0]/10**18/totalSupplyLP3));
+        addtoStaking("Farming LP JDAO-CMJ",(Info5[0]/10**18),calculateLPTokenValue4,(Pending5/10**18),Jdao_to_CMJ,"JDAO",(Info5[0]/10**18/totalSupplyLP4));
+        addtoStaking("Farming LP OS-CMJ",(Info6[0]/10**18),calculateLPTokenValue5,(Pending6/10**18),Jdao_to_CMJ,"JDAO",(Info6[0]/10**18/totalSupplyLP5));
+        addtoStaking("Farming LP CU-CMJ",(Info7[0]/10**18),calculateLPTokenValue6,(Pending7/10**18),Jdao_to_CMJ,"JDAO",(Info7[0]/10**18/totalSupplyLP6));
+        addtoStaking("Farming LP SIL-CMJ",(Info8[0]/10**18),calculateLPTokenValue7,(Pending8/10**18),Jdao_to_CMJ,"JDAO",(Info8[0]/10**18/totalSupplyLP7));
+        addtoStaking("Farming LP GOLD-CMJ",(Info9[0]/10**18),calculateLPTokenValue8,(Pending9/10**18),Jdao_to_CMJ,"JDAO",(Info9[0]/10**18/totalSupplyLP8));
+        addtoStaking("Farming LP PLAT-CMJ",(Info10[0]/10**18),calculateLPTokenValue9,(Pending10/10**18),Jdao_to_CMJ,"JDAO",(Info10[0]/10**18/totalSupplyLP9));
+        addtoStaking("Farming LP CTUNA-CMJ",(Info11[0]/10**18),calculateLPTokenValue10,(Pending11/10**18),Jdao_to_CMJ,"JDAO",(Info11[0]/10**18/totalSupplyLP10));
+        addtoStaking("Farming LP SX31-CMJ",(Info12[0]/10**18),calculateLPTokenValue11,(Pending12/10**18),Jdao_to_CMJ,"JDAO",((Info12[0]/10**18/totalSupplyLP11)));
+        addtoStaking("Farming LP BBQ-CMJ",(Info13[0]/10**18),calculateLPTokenValue12,(Pending13/10**18),Jdao_to_CMJ,"JDAO",(Info13[0]/10**18/totalSupplyLP12));
+        addtoStaking("Farming LP PZA-CMJ",(Info14[0]/10**18),calculateLPTokenValue13,(Pending14/10**18),Jdao_to_CMJ,"JDAO",(Info14[0]/10**18/totalSupplyLP13));
+
+
+        function addtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken,percentShare){
+            var table = document.getElementById("farmingAsset");
+            var stakingValue = calculateWorth(tokenAmount,tokenPrice);
+            var pendingValue = calculateWorth(Pending,pendingPrice);
+            if (stakingValue > 1){
+                var newRow = table.insertRow(-1);
+                var nameCell = newRow.insertCell(0);
+                var amountCell = newRow.insertCell(1);
+                var valueCell = newRow.insertCell(2);
+                var rewardCell = newRow.insertCell(3);
+                
+            
+                // กำหนดข้อมูลให้กับแต่ละ cell
+                nameCell.innerHTML = `${stakingName} (Share ${(percentShare*100).toLocaleString({maximumFractionDigits:2})}%)`;
+                amountCell.innerHTML = (tokenAmount).toLocaleString();
+                valueCell.innerHTML = `${(stakingValue).toLocaleString()} CMJ`;
+                rewardCell.innerHTML = `${Pending.toLocaleString()} ${pendingToken} <br>(~${(pendingValue).toLocaleString({maximumFractionDigits:4})} CMJ)`;
+                addFarmingWorth(stakingValue,pendingValue);
+                console.log("Add : Staking LP ",stakingName," amount : ",tokenAmount,"\tValue:",stakingValue,"\Reward:",Pending);
+            }
+            }
+
+            }catch (error){
+        console.error('Error:', error);
+      }
+    }
+
+
+    var DungeonList = [ // Note 1 = nftStatus , 2 = nftEqiup 
+    // Power Worth = Amount Power per USD
+        { name: "Cryptic Cogs", contract: CCContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0767232,finishTimeStamp: 86400, rewardToken: "EE", methodsCall: 1,divider:18,powerWorth: 520,rewardPrice: EE_to_CMJ},
+        { name: "Daemon World", contract: DWContract, indexOfTimestamp: 9,indexOfPower: 8,rewardPerTimestamp: 0.000012096,finishTimeStamp: 86400, rewardToken: "ANGB", methodsCall: 2,divider:18,powerWorth: 25,rewardPrice: Angb_to_CMJ},
+        { name: "Jasper Cave",contract: JASPContract, indexOfTimestamp: 8,indexOfPower: 7,rewardPerTimestamp: 0.0000864,finishTimeStamp: 86400, rewardToken: "JASP",methodsCall: 2,divider:9,powerWorth: 150,rewardPrice: Jasper_to_CMJ},
+        { name: "Copper Mine",contract: CUContract, indexOfTimestamp: 4,indexOfPower: 3,rewardPerTimestamp:0.36*24,finishTimeStamp:3600,rewardToken:"CU", methodsCall: 2,divider:18,powerWorth:150,rewardPrice: Cu_to_CMJ},
+    ]
+    DungeonList.forEach(function(dun) {
+        dungeonData(dun.name,dun.contract,dun.indexOfTimestamp,dun.indexOfPower,dun.rewardPerTimestamp,dun.finishTimeStamp,dun.rewardToken,dun.methodsCall,dun.divider,dun.powerWorth,dun.rewardPrice);
+    });
+
+    async function dungeonData(dungeonName,contract,indexOfTimestamp,indexOfPower,rewardPerTimestamp,finishTimeStamp,rewardToken,methodsCall,divider,powerWorth,rewardPrice){
+        console.log(" Access Dungeon Data Function")
+        try{
+            var getData = []; 
+            var Power = 0;
+            var MaxReward =0;
+            var Status = '';
+            var endTimestamp = 0;
+            var getPending = 0;
+            var date = new Date();
+
+             var block = await web3.eth.getBlock('latest');
+             var TimeStamp = block.timestamp;
+            if (methodsCall == 1){
+                var getData = await contract.methods.nftStatus(walletAddress).call();
+            }else if(methodsCall == 2){
+                var getData = await contract.methods.nftEquip(walletAddress).call();
+            }
+            //console.log("data Table of ",dungeonName," ",getData);
+            if(parseFloat(getData[0]) != 0){
+                var getPending = await contract.methods.calculateRewards(walletAddress).call() / (10**divider);
+                var endTimestamp = parseFloat(getData[indexOfTimestamp]) + finishTimeStamp ;
+
+                if(parseFloat(getData[indexOfTimestamp]) + 86400 < TimeStamp){
+                    Status = `<span style='color: red;'>Out of Gas</span>`
+                }else if(parseFloat(getData[indexOfTimestamp]) + 86400 > TimeStamp){
+                    Status = `<span style='color: green;'>On Staking</span>`;
+                }
+                    Power = parseFloat(getData[indexOfPower]);
+                    MaxReward = getData[indexOfPower] * rewardPerTimestamp;
+            }else if(parseFloat[getData[0]] == 0){
+                Status = `<span style='color: red;'>No MainChar</span>`;
+            }
+            console.log(dungeonName," | Pendding =  ",getPending,"| Start ",getData[indexOfTimestamp]," END" ,getData[indexOfTimestamp] + finishTimeStamp);
+            addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending,rewardPrice,powerWorth)
+
+            function addDungeonToTable(dungeonName, Status, Power , MaxReward,  rewardToken, endTimestamp,getPending,rewardPrice,powerWorth){
+                powerWorth = powerWorth*(1/USD_to_CMJ);
+                //console.log(powerWorth)
+                var table = document.getElementById("dungeon");
+                if (parseFloat(Power) > 0){
+                    var newRow = table.insertRow(-1);
+                    // เพิ่มข้อมูลในแต่ละ column
+                    var nameCell = newRow.insertCell(0);
+                    var StatusCell = newRow.insertCell(1);
+                    var PowerCell = newRow.insertCell(2);
+                    var MaxRewardCell = newRow.insertCell(3);
+                    var getPendingCell = newRow.insertCell(4);
+                    var dungeonEndCell = newRow.insertCell(5);
+
+                    nameCell.innerHTML = dungeonName;
+                    StatusCell.innerHTML = Status;
+                    PowerCell.innerHTML = `${(Power).toLocaleString()} CmPow<br>~${(Power/powerWorth).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ`;
+                    MaxRewardCell.innerHTML = `${(MaxReward).toLocaleString()} ${rewardToken} /day`;
+                    getPendingCell.innerHTML = `${getPending.toLocaleString()} ${rewardToken}<br>~${(getPending*rewardPrice).toLocaleString(undefined,{maximumFractionDigits:0})} CMJ`;
+                    addFarmingWorth((Power/powerWorth),(getPending*rewardPrice))
+                    //console.log(endTimestamp);
+                    dungeonEndCell.innerHTML = formatTimestamp(endTimestamp);
+                }
+            }
+        }catch(error){
+            console.error('Error: ',error);
+        }
+    }
+
+
+
+
+    // Staking Field
+    function addFieldtoStaking(stakingName,tokenAmount,tokenPrice,Pending,pendingPrice,pendingToken){
+        // หา DOM element ของตารางโดยใช้ ID
+        var table = document.getElementById("farmingAsset");
+        var stakingValue = calculateWorth(tokenAmount,tokenPrice);
+        var pendingValue = calculateWorth(Pending,pendingPrice);
+        // สร้าง row ใหม่
+        if (Pending > 1){
+            var newRow = table.insertRow(-1);
+            // เพิ่มข้อมูลในแต่ละ column
+            var nameCell = newRow.insertCell(0);
+            var amountCell = newRow.insertCell(1);
+            var valueCell = newRow.insertCell(2);
+            var rewardCell = newRow.insertCell(3);
+            
+        
+            // กำหนดข้อมูลให้กับแต่ละ cell
+            nameCell.innerHTML = stakingName;
+            amountCell.innerHTML = (tokenAmount).toLocaleString();
+            valueCell.innerHTML = `${(stakingValue).toLocaleString()} CMJ`;
+            rewardCell.innerHTML = `${Pending.toLocaleString()} ${pendingToken} <br>(~${(pendingValue).toLocaleString({maximumFractionDigits:4})} CMJ)`;
+            addFarmingWorth(stakingValue,pendingValue);
+            console.log("Add : Staking LP ",stakingName," amount : ",tokenAmount,"\tValue:",stakingValue,"\Reward:",Pending);
+            }
+        }
+
+    
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //
+    //                                              FIELD SETTING                           
+    //
+
+    getFarming();
+    getGear();
+
+    fieldInfo = [
+    {fieldName:"Tuna Lake", contract: TunaField, fieldAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",nftAddress:"0x09676315DC0c85F6bd5e866C5f1363A00Eec4381",tokenReward:"TUNA",tokenPrice:Tuna_to_CMJ,nftValue:(5*USD_to_CMJ)},
+    {fieldName:"Old Ware House", contract: MiceField, fieldAddress:"0x09DE640ecd50e1c81bCB266279e3ffC2719873df", nftAddress:"0xd492e20ecf3ae85fe3e3159bb064442b86d6dc02", tokenReward:"MICE", tokenPrice: Mice_to_CMJ, nftValue:(5*USD_to_CMJ)},
+    {fieldName:"Eastern Front", contract: VbagField, fieldAddress:"0x495d66c9Fd7c63807114d06802A48BdAA60a0426", nftAddress:"0x526A70be985EB234c3f2c4933aCB59F6EB595Ed7", tokenReward:"VABAG", tokenPrice: (1/3)*USD_to_CMJ , nftValue:(10*USD_to_CMJ)},
+    {fieldName:"Mech Harvest Zone", contract: MHZField, fieldAddress:"0x0E2610730A3c42fd721B289BEe092D9AD1C76890", nftAddress:"0x2036186F6d5287FcB05C56C38374AC5236d8A61d", tokenReward:"GEAR", tokenPrice: (1/15000000)*USD_to_CMJ , nftValue:(201.38*USD_to_CMJ)},
+    {fieldName:"The Heaven Land", contract: FieldTHL, fieldAddress:"0xdBC6e0928e49f22Ca448fEF2fEb9de526d6A65B9", nftAddress:"0xA6f8cE1425E0fC4b74f3b1c2f9804e9968f90e17", tokenReward:"GOLD", tokenPrice: Gold_to_CMJ, nftValue:(20*USD_to_CMJ)},
+    //{fieldName:"", fieldAddress:"", nftAddress:"", tokenReward:"", tokenPrice: , nftValue:},
+    ]
+
+    for ( var field of fieldInfo) {
+        console.log("Call ",field.fieldName);
+        await dungeon(field.fieldName, field.contract, field.fieldAddress, field.nftAddress, field.tokenReward, field.tokenPrice, field.nftValue);
+    }
+    document.getElementById('Status').innerHTML = '✅';
+
+    async function getNftTransfer(walletAddress, fieldAddress, nftAddress) {
+        var event_filter = {
+            'fromBlock': 'earliest',
+            'toBlock': 'latest',
+            'address': nftAddress,
+            'topics': [
+                web3.utils.keccak256('Transfer(address,address,uint256)'),
+                '0x000000000000000000000000' + walletAddress.slice(2).toLowerCase(),
+                '0x000000000000000000000000' + fieldAddress.slice(2).toLowerCase()
+            ]
+        };
+      
+        return await web3.eth.getPastLogs(event_filter);
+    }
+    
+    async function dungeon(fieldName, contract, fieldAddress, nftAddress, tokenReward, tokenPrice, nftValue) {
+        let totalReward = 0;
+        let ownedNFTID = [];
+        try {
+            let transfer_tx = await getNftTransfer(walletAddress, fieldAddress, nftAddress); // ดึงข้อมูล transfer
+            console.log(transfer_tx)
+            for ( var log of transfer_tx) { // ใช้ for...of เพื่อวนลูป logsArray
+                const tokenId = web3.utils.hexToNumber(log.topics[3]);
+                var checkOwner = await contract.methods.nftStake(parseInt(tokenId)).call();
+                console.log("Token ",tokenId," OWNER : ",checkOwner[0])
+                if (checkOwner[0] == walletAddress) {
+                    ownedNFTID.push(tokenId); // เพิ่มเจ้าของ
+                    var getReward = 0;
+                    if (fieldName === "The Heaven Land") {
+                        var getReward = await contract.methods.calculateRewards1(tokenId).call() / 10 ** 18;
+                    } else if (fieldName === "Mech Harvest Zone") { 
+                        var getReward = await contract.methods.calculateRewards(tokenId, walletAddress, "true").call() / 10 ** 18;
+                    } else {
+                        var getReward = await contract.methods.calculateRewards(tokenId).call() / 10 ** 18;
+                    }
+                    totalReward += parseInt(getReward);
+                }
+            }
+            console.table(ownedNFTID);
+            fieldName = "Field | " + fieldName;
+            addFieldtoStaking(fieldName, ownedNFTID.length, nftValue, totalReward, tokenPrice, tokenReward);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    async function getGear(){
+        pendingWorth = 0;
+        stakeValue = 0;
+        penndingGear1 =0;
+        penndingGear =0;
+      
+        try {
+          let stakeJTAO = await MHZField.methods.tokenStake(walletAddress).call();
+          stakeJTAO = stakeJTAO[0]/10**18;
+          var stakeValue = parseFloat(calculateWorth(stakeJTAO,Jtao_to_CMJ));
+          if(stakeJTAO > 0){
+            penndingGear1 = await MHZField.methods.calculateRewards(0, walletAddress, false).call() /10**18;
+          addFieldtoStaking("Field | Mech Harvest Zone (JTAO)",stakeJTAO,(JTAO_to_CMJ),(penndingGear1),((2/30000000)*USD_to_CMJ),"GEAR")
+          }
+        } catch(error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    
+    function addWalletWorth(TokenValue){
+        var currentCMJ = parseFloat(document.getElementById("wallet_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+        var newCMJ = parseFloat(TokenValue)+parseFloat(currentCMJ);
+        document.getElementById("wallet_cmj").innerHTML = newCMJ.toLocaleString();
+        updateValue();
+    }
+    function addFarmingWorth(FarmValue,PendingValue){
+        var current_stakingCMJ = parseFloat(document.getElementById("farm_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+        var current_pendingCMJ = parseFloat(document.getElementById("pending_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+        var new_stakingCMJ = parseFloat(FarmValue) + parseFloat(current_stakingCMJ);
+        var new_pendingCMJ = parseFloat(PendingValue) + parseFloat(current_pendingCMJ);
+        document.getElementById("farm_cmj").textContent = new_stakingCMJ.toLocaleString();
+        document.getElementById("pending_cmj").textContent = new_pendingCMJ.toLocaleString();
+
+        updateValue();
+    }
+
+    function updateValue(){
+        var current_walletCMJ = parseFloat(document.getElementById("wallet_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+        var current_stakingCMJ = parseFloat(document.getElementById("farm_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+        var current_pendingCMJ = parseFloat(document.getElementById("pending_cmj").innerHTML.replace(/,/g, '')).toFixed(0); // get Current CMJ
+        
+        // Start Update Wallet Value
+        document.getElementById("wallet_jbc").innerHTML = (calculateWorth(current_walletCMJ, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+        document.getElementById("wallet_usd").innerHTML = (calculateWorth(current_walletCMJ, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+        document.getElementById("wallet_thb").innerHTML = (calculateWorth(current_walletCMJ, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+        // Start Update Staking Value
+        document.getElementById("farm_jbc").innerHTML = (calculateWorth(current_stakingCMJ, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+        document.getElementById("farm_usd").innerHTML = (calculateWorth(current_stakingCMJ, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+        document.getElementById("farm_thb").innerHTML = (calculateWorth(current_stakingCMJ, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+        // Start Update Pending Value
+        document.getElementById("pending_jbc").innerHTML = (calculateWorth(current_pendingCMJ, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+        document.getElementById("pending_usd").innerHTML = (calculateWorth(current_pendingCMJ, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+        document.getElementById("pending_thb").innerHTML = (calculateWorth(current_pendingCMJ, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+        // Start Update Total NetWorth Value
+        var total_networth = parseFloat(current_walletCMJ)+parseFloat(current_stakingCMJ)+parseFloat(current_pendingCMJ)
+        document.getElementById("nw_cmj").innerHTML = total_networth.toLocaleString(); // Convert CMJ to JBC
+        document.getElementById("nw_jbc").innerHTML = (calculateWorth(total_networth, CMJ_to_JBC)).toLocaleString(); // Convert CMJ to JBC
+        document.getElementById("nw_usd").innerHTML = (calculateWorth(total_networth, CMJ_to_USD)).toLocaleString(); // Convert CMJ to USD
+        document.getElementById("nw_thb").innerHTML = (calculateWorth(total_networth, (CMJ_to_USD*THB_to_USD))).toLocaleString(); // Convert CMJ to JBC
+    startHistory();
+    }
+
+
+  } catch (error) {
+    console.error('Error:', error);
+}
+
+  };
+
+
+
+function startHistory(){
+  var from_address = document.getElementById("wallet_address").value;
+  var Merchant1 = '0xa4b53A4DD8277Dd2E506cb8692A492B1Dc6b255D';
+  var Marchant2 = '0x87BAC0BCBaadF9B7d24385b1AaaEbeDEb60a1A0a';
+  var Gashapon1 = '0x39C623C4B3f11D38f06Adca9B794CFb2d37581e3';
+  var Gashapon2 = '0x87A612709b36b575103C65a90cB3B16Cac2BC898';
+  var Naruta = '0x09e6a0A03afa27438c3f507de82b5f6061Ae1643';
+  var Redeem_TDM = '0x010EbE14315F976967E6aE408Af5881617b86E09';
+  var Market = '0xb8Cc909AD8245eD551bC359b721f3748dA814A33'
+  var token_address = [];
+  token_address.push('0x24599b658b57f91E7643f4F154B16bcd2884f9ac'); // JUSDT
+  token_address.push('0xF663c756b6D57724C3B41c8839aB9c7Af83c9751'); // EE
+  token_address.push('0x523AA3aB2371A6360BeC4fEea7bE1293adb32241'); // II
+  token_address.push('0x0E2610730A3c42fd721B289BEe092D9AD1C76890'); // II
+  token_address.push('0xAc5299D92373E9352636559cca497d7683A47655'); // OS
+  token_address.push('0x09bD3F5BFD9fA7dE25F7A2A75e1C317E4Df7Ef88'); // JDAO
+  token_address.push('0xe83567Cd0f3Ed2cca21BcE05DBab51707aff2860'); // JASP
+  token_address.push('0x7004757e595409568Bd728736e1b0c79FDc94e1c'); // BBQ
+  token_address.push('0x09DcdCFc6C48803681a3422997c679E773656763'); // PZA
+  token_address.push('0x7d5346E33889580528e6F79f48BdEE94D8A9E144'); // Gold
+  token_address.push('0x3Bd00B6cd18281E3Ef13Ba348ad2783794dcb2bD'); // Plat
+  token_address.push('0x2a081667587c35956d34A4cC3bf92b9CA0ef2C6f'); // Sil
+  token_address.push('0xD9Be0e64053c8E0A0F868577F379C0ced5A28aF0'); // Ctuna
+
+  var token_transfers = [];
+
+  for ( var address of token_address) {
+      token_transfers.push(get_token_transfers(from_address, Merchant1, address));
+      token_transfers.push(get_token_transfers(from_address, Marchant2, address));
+      token_transfers.push(get_token_transfers(from_address, Gashapon1, address));
+      token_transfers.push(get_token_transfers(from_address, Gashapon2, address));
+      token_transfers.push(get_token_transfers(from_address, Naruta, address));
+      token_transfers.push(get_token_transfers(from_address, Redeem_TDM, address));
+      token_transfers.push(get_token_transfers(from_address, Market, address));
+  }
+
+  Promise.all(token_transfers)
+      .then(function(logsArray) {
+          var symbolSums = {}; // เลื่อนตัวแปร symbolSums ไปยังภายใน Promise.all เพื่อให้สามารถเข้าถึงได้
+          logsArray.forEach(function(logs) {
+              logs.forEach(function(log) {
+                  var tx_hash = log.transactionHash;
+                  var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                  console.log(transaction_url)
+                  fetch(transaction_url)
+                      .then(response => response.json())
+                      .then(data => process_token_transfers(data, tx_hash,'purchaseTableBody', symbolSums)) // ส่ง symbolSums เป็นอาร์กิวเมนต์ให้กับฟังก์ชั่น process_token_transfers
+                      .catch(error => console.error("Error fetching transaction data:", error));
+              });
+          });
+      })
+      .catch(function(error) {
+          console.error("Error fetching logs:", error);
+      });
+}
+
+function get_token_transfers(from_address, to_address, token_address) {
+  var event_filter = {
+      'fromBlock': 'earliest',
+      'toBlock': 'latest',
+      'address': token_address,
+      'topics': [
+          web3.utils.keccak256('Transfer(address,address,uint256)'),
+          '0x000000000000000000000000' + from_address.slice(2).toLowerCase(),
+          '0x000000000000000000000000' + to_address.slice(2).toLowerCase()
+      ]
+  };
+
+  return web3.eth.getPastLogs(event_filter);
+}
+
+symbolSums = [];
+function process_token_transfers(data, tx_hash, tableid, symbolSums) {
+  if (data.items) {
+      // รีเซ็ตค่าผลรวมของสัญลักษณ์ทุกครั้งที่เริ่มต้นประมวลผลข้อมูลใหม่
+    //console.log(data)
+      data.items.forEach(function(item) {
+          if (item.token.type === "ERC-721") {
+              var itemName = item.token.name;
+              var itemID = item.total.token_id || 'Unknown';
+              var price = 0;
+              var symbol = 'Unknown';
+              var shop = 'Unknown'
+              data.items.forEach(function(subItem) {
+                  if (subItem.token.type === "ERC-20") {
+                      symbol = String(subItem.token.symbol);
+                      var shop = String(subItem.to.name);
+                      if(shop == "COMMUDAO_MKP"){
+                        //console.log(shop);
+                      }
+                      var value = parseInt(subItem.total.value);
+                      var decimals = parseInt(subItem.token.decimals);
+                      if (symbol != "JASP") {
+                          price += value / 10 ** decimals;
+                      } else {
+                          price += value / 10 ** 9;
+                      };
+
+                      // เพิ่มค่าของเหรียญที่ใช้ในผลรวม
+                      // ภายในลูปด้านใน
+                      if (symbolSums[symbol]) {
+                          symbolSums[symbol] += price;
+                      } else {
+                          symbolSums[symbol] = price;
+                      }
+                  }
+              });
+              if (symbol != "JUSDT") {
+                  type = "Redeem"
+              }else{
+                type = "Buy/Roll"
+              }
+              if(shop == "COMMUDAO_MKP"){
+                type = "Market"
+              }
+              
+              
+              // แสดงผลเฉพาะค่าที่มากกว่า 0
+              if (price > 0) {
+                  var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
+                  var newRow = `<tr><td style="font-size:10px;">${txHashLink}</td><td>${itemName}</td><td>${"'"+itemID+"'"}</td><td>${type}</td><td>${price.toLocaleString()} </td><td>${symbol}</td></tr>`;
+                  document.getElementById(tableid).insertAdjacentHTML('beforeend', newRow);
+              }
+          }
+      });
+
+
+      // แสดงผลรวมของค่าของแต่ละสัญลักษณ์ในส่วนที่คุณต้องการของ HTML
+    displaySymbolSums(symbolSums);
+      
+  } else {
+      console.error("Invalid data structure:", data);
+  }
+}
+
+function displaySymbolSums(symbolSums) {
+Object.keys(symbolSums).forEach(function(symbol) {
+    if (symbolSums[symbol] > 0) {
+        var totalRow = `<p style='margin-right:40px;'>${symbolSums[symbol].toLocaleString(undefined)} ${symbol} </p>`;
+        var elementId = `sum${symbol}`;
+        var element = document.getElementById(elementId);
+        if (element) {
+            element.innerHTML = totalRow;
+        } else {
+            // สร้างองค์ประกอบใหม่หากไม่พบองค์ประกอบที่มี ID ที่กำหนด
+            var newElement = document.createElement('div');
+            newElement.id = elementId;
+            newElement.innerHTML = totalRow;
+            document.getElementById("totalRedeem").appendChild(newElement);
+        }
+    }
+});
+}
+
+
+function downloadCSV() {
+var table = document.getElementById("purchaseTable");
+var rows = table.getElementsByTagName("tr");
+var csv = [];
+
+for (var i = 0; i < rows.length; i++) {
+    var row = [], cols = rows[i].getElementsByTagName("td");
+    for (var j = 0; j < cols.length; j++) {
+        row.push(cols[j].innerText);
+    }
+    csv.push(row.join(","));
+}
+
+// Join rows with newline character
+var csvContent = csv.join("\n");
+
+// Create a blob object with the CSV content
+var blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+// Create a temporary anchor element to download the CSV file
+var link = document.createElement("a");
+if (link.download !== undefined) { // Feature detection
+    // Set URL for the anchor element
+    var url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    // Set filename for the downloaded file
+    link.setAttribute("download", "purchase_data.csv");
+    // Append the anchor element to the body
+    document.body.appendChild(link);
+    // Click the link to trigger the download
+    link.click();
+    // Remove the anchor element from the body
+    document.body.removeChild(link);
+} else {
+    console.log("Your browser does not support automatic download. Please right-click and save the link instead.");
+}
+}
+
+function downloadExcel() {
+// Initialize workbook
+var wb = XLSX.utils.book_new();
+
+// Get data from table2 and convert it to a worksheet
+var table2Data = XLSX.utils.table_to_sheet(document.getElementById("purchaseTableBody"));
+
+// Convert columns to string format
+table2Data = convertColumnsToString(table2Data, [0, 2]);
+
+// Add worksheet to workbook
+XLSX.utils.book_append_sheet(wb, table2Data, "Purchase Data");
+
+// Save workbook as Excel file
+XLSX.writeFile(wb, "purchase_data.xlsx");
+}
+
+// Function to merge data from two worksheets into one
+function mergeData(sheet1, sheet2) {
+var result = XLSX.utils.book_new();
+XLSX.utils.sheet_add_json(result, XLSX.utils.sheet_to_json(sheet1), { origin: -1 });
+return result;
+}
+
+// Function to convert specific columns to string format
+function convertColumnsToString(sheet, columns, excludeColumns) {
+for (var i = 0; i < columns.length; i++) {
+  var colIndex = columns[i];
+  // Check if excludeColumns is defined and not empty
+  if (excludeColumns && excludeColumns.length > 0 && excludeColumns.includes(colIndex)) {
+    continue; // Skip this column if it's in the exclude list
+  }
+  var range = XLSX.utils.decode_range(sheet['!ref']);
+  for (var rowIndex = range.s.r + 1; rowIndex <= range.e.r; rowIndex++) {
+    var cellAddress = XLSX.utils.encode_cell({ r: rowIndex, c: colIndex });
+    var cell = sheet[cellAddress];
+    if (cell) {
+      if (colIndex === 0) {
+        // Convert numeric value to string and wrap with double quotes
+        cell.t = 's'; // Set cell type to string
+        cell.v = '"' + cell.v.toString() + '"';
+      } else if (cell.t !== 's' && isNaN(cell.v)) {
+        cell.t = 's'; // Set cell type to string
+        // Convert numeric value to string
+        cell.v = cell.v.toString();
+      }
+    }
+  }
+}
+return sheet;
+}
+
+
+
+function resetPurchaseTable() {
+document.getElementById("purchaseTableBody").innerHTML = '<tr><th>TxHash</th><th>Item Name</th><th>ID</th><th>Methods</th><th>Price</th><th>Symbol</th></tr>';
+document.getElementById("totalRedeem").innerHTML = 'Total Spent:';
+
+document.getElementById("walletAsset").innerHTML = '<tr><th>Name</th><th>Balance</th><th>Current Price</th><th>Value</th><th></th></tr>';
+document.getElementById("farmingAsset").innerHTML = '<tr><th>Farm/Pool/Staking</th><th>Balance</th><th>Value</th><th>Reward</th></tr>';
+document.getElementById("dungeon").innerHTML = '<tr><th>Dungeon Name</th><th>Status</th><th>Power</th><th>Reward/Day</th><th>Pending</th><th>End At</th></tr>';
+var current_walletCMJ = 0; // get Current CMJ
+var current_stakingCMJ = 0; // get Current CMJ
+var current_pendingCMJ = 0; // get Current CMJ
+// Start Update Wallet Value
+document.getElementById("wallet_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+document.getElementById("wallet_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+document.getElementById("wallet_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+// Start Update Staking Value
+document.getElementById("farm_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+document.getElementById("farm_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+document.getElementById("farm_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+// Start Update Pending Value
+document.getElementById("pending_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+document.getElementById("pending_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+document.getElementById("pending_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+// Start Update Total NetWorth Value
+var total_networth = 0;
+document.getElementById("nw_cmj").innerHTML = total_networth.toLocaleString(); // Convert CMJ to JBC
+document.getElementById("nw_jbc").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+document.getElementById("nw_usd").innerHTML = (0).toLocaleString(); // Convert CMJ to USD
+document.getElementById("nw_thb").innerHTML = (0).toLocaleString(); // Convert CMJ to JBC
+
+}
+
+
+function updateData(data) {
+
+  // Show the updated message
+  document.getElementById('updatedMessage').style.display = 'block';
+  setTimeout(function() {
+    // Hide the updated message after 3 seconds
+    document.getElementById('updatedMessage').style.display = 'none';
+  }, 200); // 3000 milliseconds = 3 seconds
+}
+
+// Countdown Timer
+var countdownElement = document.getElementById('countdown');
+var countdownTime = 300; // seconds
+ 
+
+function updateCountdown() {
+  countdownElement.textContent = 'Price refreshing in ' + countdownTime + ' seconds';
+  countdownTime--;
+
+  if (countdownTime < 0) {
+    // Call the updateData function when the countdown reaches 0
+     
+    main();
+    countdownTime = 300; // Reset the countdown time
+  }
+}
+
+// Initial call to start the countdown
+updateCountdown();
+
+// Update the countdown every second
+setInterval(updateCountdown, 1000);
+
+
+
+function showdPopup(popupId) {
+    document.getElementById(popupId).style.display = 'flex';
+}
+function closedPopup(popupId) {
+  document.getElementById(popupId).style.display = 'none';
+}
+function showQR(method) {
+    if (method === 'PromptPay') {
+        document.getElementById('qrImage').src = 'promptpay_qr_code.png'; // ใส่ URL รูปภาพ QR Code ของ PromptPay ที่คุณมี
+    } else if (method === 'Crypto') {
+        document.getElementById('qrImage').src = 'https://i.ibb.co/q5Z3K9P/Metamask-Main-Wallet-Address.png'; // ใส่ URL รูปภาพ QR Code ของ Crypto Wallet ที่คุณมี
+    }
+    document.getElementById('qrCode').style.display = 'block';
+}
+function copyAddress(text) {
+    var tempInput = document.createElement('input');
+    tempInput.value = text; // ใส่ค่าข้อความที่ได้รับเข้าไปโดยตรง
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    alert('Copied to clipboard: ' + text);
+}
+
+function fetchTransaction(){
+    resetTable();
+    
+    console.log("fetch Data Wallet : ",wallet_address," Token : ",token_address," from Block ",fromBlock," to Block ",toBlock)
+    var wallet_address = document.getElementById("txhash_address").value;
+    var token_address = document.getElementById("token").value;
+    var fromBlock = document.getElementById("fromBlock").value;
+    var toBlock = document.getElementById("toBlock").value;
+
+    // ถ้าช่อง From Block หรือ To Block ว่างเปล่า ให้ใช้ค่าเริ่มต้น 'earliest' และ 'latest' ตามลำดับ
+    if (!fromBlock) fromBlock = 'earliest';
+    if (!toBlock) toBlock = 'latest';
+
+    getTokenTransfer(wallet_address, token_address, fromBlock, toBlock)
+    .then(function(logsArray) {
+        logsArray.forEach(function(logs) {
+            logs.forEach(function(log) {
+                var tx_hash = log.transactionHash;
+                var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                console.log(transaction_url)
+                fetch(transaction_url)
+                    .then(response => response.json())
+                    .then(data => processTxhash(wallet_address,token_address,data, tx_hash))
+                    .catch(error => console.error("Error fetching transaction data:", error));
+            });
+        });
+    })
+    .catch(function(error) {
+        console.error("Error fetching logs:", error);
+    });
+}
+function fetchTransaction2() {
+    resetTable();
+
+    var fromAddress = document.getElementById("txhash_from").value || "Any";
+    var toAddress = document.getElementById("txhash_to").value || "Any";
+    var token_address = document.getElementById("token").value;
+    var fromBlock = document.getElementById("fromBlock").value || 'earliest';
+    var toBlock = document.getElementById("toBlock").value || 'latest';
+
+    console.log("fetch Data from : ", fromAddress, " to ", toAddress, " Token : ", token_address, " from Block ", fromBlock, " to Block ", toBlock);
+
+    getTokenTransfer2(fromAddress, toAddress, token_address, fromBlock, toBlock)
+        .then(function(logsArray) {
+            logsArray.forEach(function(logs) {
+                logs.forEach(function(log) {
+                    var tx_hash = log.transactionHash;
+                    var transaction_url = `https://exp-l1-ng.jibchain.net/api/v2/transactions/${tx_hash}/token-transfers?type=ERC-20%2CERC-721%2CERC-1155`;
+                    console.log(transaction_url)
+                    fetch(transaction_url)
+                        .then(response => response.json())
+                        .then(data => processTxhash2(fromAddress, toAddress, token_address, data, tx_hash))
+                        .catch(error => console.error("Error fetching transaction data:", error));
+                });
+            });
+        })
+        .catch(function(error) {
+            console.error("Error fetching logs:", error);
+        });
+}
+function getTokenTransfer(wallet_address , token_address, fromBlock, toBlock) {
+    var from_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
+    var to_topic = '0x000000000000000000000000' + wallet_address.slice(2).toLowerCase();
+
+    var event_filter_from = {
+        'fromBlock': fromBlock,
+        'toBlock': toBlock,
+        'address': token_address,
+        'topics': [
+            web3.utils.keccak256('Transfer(address,address,uint256)'),
+            from_topic
+        ]
+    };
+
+    var event_filter_to = {
+        'fromBlock': fromBlock,
+        'toBlock': toBlock,
+        'address': token_address,
+        'topics': [
+            web3.utils.keccak256('Transfer(address,address,uint256)'),
+            to_topic
+        ]
+    };
+  
+    return Promise.all([
+        web3.eth.getPastLogs(event_filter_from),
+        web3.eth.getPastLogs(event_filter_to)
+    ]);
+}
+function getTokenTransfer2(fromAddress, toAddress, token_address, fromBlock, toBlock) {
+    console.log("INPUT From", fromAddress, " INPUT to ", toAddress);
+
+    var from_topic = (fromAddress !== "Any") ? '0x000000000000000000000000' + fromAddress.slice(2).toLowerCase() : "";
+    var to_topic = (toAddress !== "Any") ? '0x000000000000000000000000' + toAddress.slice(2).toLowerCase() : "";
+
+    var topics = [web3.utils.keccak256('Transfer(address,address,uint256)')];
+    if (fromAddress !== "Any") topics.push(from_topic);
+    if (toAddress !== "Any") topics.push(to_topic);
+
+    var event_filter = {
+        'fromBlock': fromBlock,
+        'toBlock': toBlock,
+        'address': token_address,
+        'topics': topics
+    };
+
+    return Promise.all([
+    web3.eth.getPastLogs(event_filter)
+    ]);
+}
+
+
+
+function processTxhash(wallet_address,token_address,data, tx_hash) {
+    var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
+    if(data.items){
+        data.items.forEach(function(item){
+            from = item.from.hash;
+            if(from === wallet_address){
+                to = item.to.hash;
+                name = item.to.name || 'unknowed';
+                symbol = item.token.symbol;
+                address = item.token.address;
+                value = 0;
+                if (symbol === "JASP"){
+                    value = item.total.value / (10**9);
+                }else{
+                    value = item.total.value / (10**18);
+                }
+            }
+            if (to === "0x0000000000000000000000000000000000000001"){
+                name = "Burned";
+            }
+            txhash = item.txhash;
+            if ((from === wallet_address || to === wallet_address) && value != 0 && token_address === address && value > greaterthan){
+                var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
+                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value.toLocaleString()} </td><td>${symbol}</td></tr>`;
+                document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
+                console.log(data);
+            }
+            updateTransactionResult()
+        });
+    }
+}
+function processTxhash2(fromAddress, toAddress, token_address, data, tx_hash) {
+    var greaterthan = parseFloat(document.getElementById("greaterthan").value) || 0;
+
+    if (data.items) {
+        data.items.forEach(function(item) {
+            var from = item.from.hash;
+            var to = ""; // Define 'to' variable within the block
+            if (from === fromAddress) {
+                to = item.to.hash;
+                var name = item.to.name || 'unknown';
+                var symbol = item.token.symbol;
+                var address = item.token.address;
+                var value = 0;
+                if (symbol === "JASP") {
+                    value = item.total.value / (10 ** 9);
+                } else {
+                    value = item.total.value / (10 ** 18);
+                }
+            }
+            var txhash = item.txhash;
+            if (to === "0x0000000000000000000000000000000000000001") {
+                name = "Burned";
+            }
+            if ((value != 0) && (token_address === address) && (value > greaterthan)) {
+                var txHashLink = `<a href="https://exp-l1.jibchain.net/tx/${tx_hash}" target="_blank">${"https://exp-l1.jibchain.net/tx/"+tx_hash}</a>`;
+                var newRow = `<tr style="font-size:10px;"><td>${txHashLink}</td><td >${from}</td><td>${to}<br>${name}</td><td>${value.toLocaleString()} </td><td>${symbol}</td></tr>`;
+                document.getElementById("transactionHistory").insertAdjacentHTML('beforeend', newRow);
+                console.log(data);
+            }
+            updateTransactionResult();
+        });
+    }
+}
+
+function resetTable(){
+    document.getElementById("transactionHistory").innerHTML = `<tr><th>TxHash</th><th>From</th><th>To</th><th>Amount</th><th>Symbol</th></tr>`;
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var toggleInfoButton = document.getElementById('toggleInfoBtn');
+    var infoDiv = document.getElementById('formTo');
+    var addressInput = document.getElementById("oneWay");
+    var txhashFromInput = document.getElementById("txhash_from");
+    var txhashToInput = document.getElementById("txhash_to");
+    var txhashAddressInput = document.getElementById("txhash_address");
+
+    toggleInfoButton.addEventListener('click', function() {
+        // เมื่อคลิกที่ปุ่ม Toggle Info
+        if (infoDiv.style.display === 'none') {
+            infoDiv.style.display = 'block'; // แสดง div ถ้ามันถูกซ่อนอยู่
+            infoDiv.classList.add('center'); // เพิ่มคลาส Center
+            addressInput.style.display = 'none';
+            // เซ็ตค่าให้กับฟิลด์ที่ต้องการเป็นช่องว่าง
+            txhashFromInput.value = '';
+            txhashToInput.value = '';
+            txhashAddressInput.value = '';
+        } else {
+            infoDiv.style.display = 'none'; // ซ่อน div ถ้ามันถูกแสดงอยู่
+            addressInput.style.display = 'block';
+        }
+    });
+});
+
+function countTransactions() {
+    var table = document.getElementById("transactionHistory");
+    var rowCount = table.getElementsByTagName("td").length;
+    return rowCount/5;
+}
+
+function sumAmounts() {
+    var table = document.getElementById("transactionHistory");
+    var rows = table.getElementsByTagName("tr");
+    var sum = 0;
+
+    for (var i = 1; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName("td");
+        sum += parseFloat(cells[3].innerText.replace(/,/g, ''));
+    }
+
+    return sum;
+}
+
+
+function getSymbol() {
+    var table = document.getElementById("transactionHistory");
+    var lastRow = table.rows[table.rows.length - 1];
+    var symbol = lastRow.cells[4].innerText;
+    return symbol;
+}
+
+function updateTransactionResult() {
+    var transactionCount = countTransactions();
+    var transactionSum = sumAmounts();
+    var transactionSymbol = getSymbol();
+
+    var transactionResult = document.getElementById("transactionResult");
+    transactionResult.innerText = "Totally Transaction: " + transactionCount.toLocaleString() + " Transfer " + transactionSum.toLocaleString() + " " + transactionSymbol;
+}
+
+// เรียกใช้งานฟังก์ชันเพื่อแสดงผลลัพธ์เริ่มต้น
+updateTransactionResult();
+
+function swapFromTo() {
+    var wallet_from = document.getElementById("txhash_from").value;
+    var wallet_to = document.getElementById("txhash_to").value;
+    document.getElementById("txhash_from").value = wallet_to;
+    document.getElementById("txhash_to").value = wallet_from;
+}
+
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9195099699232258"
+     crossorigin="anonymous"></script>
+
+
+</html>
